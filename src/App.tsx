@@ -23,6 +23,19 @@ function App() {
             return setCurrentWordIndex(prev => prev + 1)
         }
 
+        const extraSymbols: TSymbol[] =
+            typedValue
+                .slice(currentWord.word.length, typedValue.length)
+                .split('')
+                .map((symbol, index) => ({
+                    symbol: "",
+                    symbolId: `extra-${index}`,
+                    extraSymbol: symbol,
+                    symbolIndex: currentWord.word.length + index
+
+                }))
+
+
         // if (typedValue.length > currentWord.word.length) {
         //     const symbolsLength = currentTextTemp[currentWordIndex].symbols.length
         //
@@ -76,13 +89,20 @@ function App() {
         //     });
         // });
         currentTextTemp[currentWordIndex].symbols =
-            currentTextTemp[currentWordIndex].symbols
-                .map((symbol, index) => {
-                    console.log(index)
-                    if (symbol.symbol === typedValue[index] && typedValue.includes(symbol.symbol)) return symbol
+            [
+                ...currentTextTemp[currentWordIndex].symbols
+                    .slice(0, currentWord.word.length)
+                    .map((symbol, index) => {
+                        if (symbol.symbol === typedValue[index] && typedValue.includes(symbol.symbol)) return symbol
 
-                    return {...symbol, overrideSymbol: typedValue[symbol.symbolIndex]}
-                })
+                        return {...symbol, overrideSymbol: typedValue[symbol.symbolIndex]}
+                    }),
+                ...extraSymbols
+            ]
+
+        console.log(typedValue.slice(currentWord.word.length, typedValue.length))
+        console.log(currentTextTemp[currentWordIndex])
+        console.log(extraSymbols)
 
         setCurrentText(currentTextTemp)
     }
@@ -100,41 +120,10 @@ function App() {
                         isSpaceBeforeWord={
                             currentWord
                             && wordIndex === currentWord.wordIndex + 1
-                            && currentWord.word === typingValue
+                            && currentWord.word.length <= typingValue.length
                         }
                         currentSymbolIndex={currentSymbolIndex}
                     />
-                    // <Text as="span" key={wordId}>
-                    //     <Text
-                    //         as="span"
-                    //         bgColor={currentWord
-                    //         && wordIndex === currentWord.wordIndex + 1
-                    //         && currentWord.word === typingValue
-                    //             ? "blackAlpha.400" : undefined}
-                    //     >
-                    //         {" "}
-                    //     </Text>
-                    //     {symbols.map(({symbol, symbolId, overrideSymbol, symbolIndex}) => (
-                    //         overrideSymbol ?
-                    //             <Text
-                    //                 key={symbolId}
-                    //                 as="span"
-                    //                 color="red"
-                    //                 borderBottom={overrideSymbol === " " ? "1px solid red" : undefined}
-                    //                 bgColor={currentWordIndex === wordIndex && symbolIndex === currentSymbolIndex ? "blackAlpha.400" : undefined}
-                    //             >
-                    //                 {overrideSymbol === " " ? symbol : overrideSymbol}
-                    //             </Text>
-                    //             :
-                    //             <Text
-                    //                 key={symbolId}
-                    //                 as="span"
-                    //                 bgColor={currentWordIndex === wordIndex && symbolIndex === currentSymbolIndex ? "blackAlpha.400" : undefined}
-                    //             >
-                    //                 {symbol}
-                    //             </Text>
-                    //     ))}
-                    // </Text>
                 ))}
             </Text>
 

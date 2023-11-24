@@ -3,15 +3,14 @@ import {SymbolProps, TSymbolStatus} from "./Symbol.interface.ts";
 import {memo, ReactElement, ReactNode} from "react";
 
 
-export const Symbol = memo(({symbolId, symbol, status}: SymbolProps) => {
+export const Symbol = memo(({symbolId, symbol, status, isPrinting}: SymbolProps) => {
     const commonProps: Partial<TextProps> = {
         key: symbolId,
         fontSize: "xxx-large",
-        children:
-            symbol === " " && status === "override"
-                ? <>{" "}</>
-                : symbol,
-        as: "span"
+        children: symbol,
+        as: "span",
+        borderLeft: "1px solid",
+        borderLeftColor: isPrinting ? "red" : "transparent",
     }
 
     const symbolByStatus: Record<TSymbolStatus, ReactElement> = {
@@ -26,18 +25,16 @@ export const Symbol = memo(({symbolId, symbol, status}: SymbolProps) => {
                 key={symbolId}
                 color='red'
             />,
-        printing:
-            <Text
-                {...commonProps}
-                borderLeft="1px solid red"
-                // bgColor="blackAlpha.400"
-            />
-        ,
         override:
             <Text
                 {...commonProps}
                 borderBottom="1px solid red"
-            />
+            />,
+        extra:
+            <Text
+                {...commonProps}
+                color='red.200'
+            />,
     }
     return symbolByStatus[status]
 })

@@ -12,6 +12,7 @@ export type TSymbol = {
     symbolIndex: number
     symbol: string
     overrideSymbol?: string
+    extraSymbol?: string
 }
 
 export type TTypingStatus = "already-printed" | "now-printing" | "not-printing"
