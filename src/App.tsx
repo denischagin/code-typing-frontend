@@ -1,5 +1,5 @@
 import {Input, Text} from "@chakra-ui/react";
-import {textMock, TSymbol, TText, TWord} from "./entities/text";
+import {textMock, TSymbol, TText, TWord, Word} from "./entities/text";
 import {ChangeEventHandler, useState} from "react";
 
 function App() {
@@ -58,66 +58,83 @@ function App() {
         //     setTypingValue("")
         //     return
         // }
-        setCurrentText((prevCurrentText) => {
-            return prevCurrentText.map((word, index) => {
-                if (index !== currentWordIndex) {
-                    return word;
-                }
-
-                const updatedSymbols = word.symbols.map((symbol, symbolIndex) => {
-                    if (symbol.symbol === typedValue[symbolIndex] && typedValue.includes(symbol.symbol)) {
-                        return symbol;
-                    }
-
-                    return {...symbol, overrideSymbol: typedValue[symbol.symbolIndex]};
-                });
-
-                return {...word, symbols: updatedSymbols};
-            });
-        });
-        // currentTextTemp[currentWordIndex].symbols =
-        //     currentTextTemp[currentWordIndex].symbols
-        //         .map((symbol, index) => {
-        //             if (index < typedValue.length && typedValue.includes(symbol.symbol)) return symbol
+        // setCurrentText((prevCurrentText) => {
+        //     return prevCurrentText.map((word, index) => {
+        //         if (index !== currentWordIndex) {
+        //             return word;
+        //         }
         //
-        //             return {...symbol, overrideSymbol: typedValue[symbol.symbolIndex]}
-        //         })
+        //         const updatedSymbols = word.symbols.map((symbol, symbolIndex) => {
+        //             if (symbol.symbol === typedValue[symbolIndex] && typedValue.includes(symbol.symbol)) {
+        //                 return symbol;
+        //             }
         //
-        // setCurrentText(currentTextTemp)
+        //             return {...symbol, overrideSymbol: typedValue[symbol.symbolIndex]};
+        //         });
+        //
+        //         return {...word, symbols: updatedSymbols};
+        //     });
+        // });
+        currentTextTemp[currentWordIndex].symbols =
+            currentTextTemp[currentWordIndex].symbols
+                .map((symbol, index) => {
+                    console.log(index)
+                    if (symbol.symbol === typedValue[index] && typedValue.includes(symbol.symbol)) return symbol
+
+                    return {...symbol, overrideSymbol: typedValue[symbol.symbolIndex]}
+                })
+
+        setCurrentText(currentTextTemp)
     }
 
     return (
         <div>
             <Text fontSize="x-large">
                 {currentText.map(({wordId, symbols, wordIndex}) => (
-                    <Text as="span" key={wordId}>
-                        <Text
-                            as="span"
-                            bgColor={currentWord && wordIndex === currentWord.wordIndex + 1 && currentWord.word === typingValue ? "blackAlpha.400" : undefined}
-                        >
-                            {" "}
-                        </Text>
-                        {symbols.map(({symbol, symbolId, overrideSymbol, symbolIndex}) => (
-                            overrideSymbol ?
-                                <Text
-                                    key={symbolId}
-                                    as="span"
-                                    color="red"
-                                    borderBottom={overrideSymbol === " " ? "1px solid red" : undefined}
-                                    bgColor={currentWordIndex === wordIndex && symbolIndex === currentSymbolIndex ? "blackAlpha.400" : undefined}
-                                >
-                                    {overrideSymbol === " " ? symbol : overrideSymbol}
-                                </Text>
-                                :
-                                <Text
-                                    key={symbolId}
-                                    as="span"
-                                    bgColor={currentWordIndex === wordIndex && symbolIndex === currentSymbolIndex ? "blackAlpha.400" : undefined}
-                                >
-                                    {symbol}
-                                </Text>
-                        ))}
-                    </Text>
+                    <Word
+                        key={wordId}
+                        wordId={wordId}
+                        symbols={symbols}
+                        currentWordIndex={currentWordIndex}
+                        wordIndex={wordIndex}
+                        isSpaceBeforeWord={
+                            currentWord
+                            && wordIndex === currentWord.wordIndex + 1
+                            && currentWord.word === typingValue
+                        }
+                        currentSymbolIndex={currentSymbolIndex}
+                    />
+                    // <Text as="span" key={wordId}>
+                    //     <Text
+                    //         as="span"
+                    //         bgColor={currentWord
+                    //         && wordIndex === currentWord.wordIndex + 1
+                    //         && currentWord.word === typingValue
+                    //             ? "blackAlpha.400" : undefined}
+                    //     >
+                    //         {" "}
+                    //     </Text>
+                    //     {symbols.map(({symbol, symbolId, overrideSymbol, symbolIndex}) => (
+                    //         overrideSymbol ?
+                    //             <Text
+                    //                 key={symbolId}
+                    //                 as="span"
+                    //                 color="red"
+                    //                 borderBottom={overrideSymbol === " " ? "1px solid red" : undefined}
+                    //                 bgColor={currentWordIndex === wordIndex && symbolIndex === currentSymbolIndex ? "blackAlpha.400" : undefined}
+                    //             >
+                    //                 {overrideSymbol === " " ? symbol : overrideSymbol}
+                    //             </Text>
+                    //             :
+                    //             <Text
+                    //                 key={symbolId}
+                    //                 as="span"
+                    //                 bgColor={currentWordIndex === wordIndex && symbolIndex === currentSymbolIndex ? "blackAlpha.400" : undefined}
+                    //             >
+                    //                 {symbol}
+                    //             </Text>
+                    //     ))}
+                    // </Text>
                 ))}
             </Text>
 
