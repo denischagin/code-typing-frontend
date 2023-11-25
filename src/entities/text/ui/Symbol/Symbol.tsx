@@ -3,7 +3,9 @@ import {SymbolProps, TSymbolStatus} from "./Symbol.interface.ts";
 import {memo, ReactElement, ReactNode} from "react";
 
 
-export const Symbol = memo(({symbolId, symbol, status, isPrinting}: SymbolProps) => {
+export const Symbol = memo(({
+                                symbolId, symbol, status, isPrinting,
+                            }: SymbolProps) => {
     const commonProps: Partial<TextProps> = {
         key: symbolId,
         fontSize: "xxx-large",
@@ -17,12 +19,10 @@ export const Symbol = memo(({symbolId, symbol, status, isPrinting}: SymbolProps)
         default:
             <Text
                 {...commonProps}
-                key={symbolId}
             />,
         error:
             <Text
                 {...commonProps}
-                key={symbolId}
                 color='red'
             />,
         override:
@@ -34,6 +34,11 @@ export const Symbol = memo(({symbolId, symbol, status, isPrinting}: SymbolProps)
             <Text
                 {...commonProps}
                 color='red.200'
+            />,
+        printed:
+            <Text
+                {...commonProps}
+                color='gray.400'
             />,
     }
     return symbolByStatus[status]

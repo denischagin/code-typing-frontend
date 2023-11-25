@@ -5,4 +5,4 @@ export interface SymbolProps {
     isPrinting?: boolean
 }
 
-export type TSymbolStatus = 'error' | 'default' | 'override' | 'extra'
+export type TSymbolStatus = 'error' | 'default' | 'override' | 'extra' | 'printed'
