@@ -1,5 +1,5 @@
 import {forwardRef} from "react";
-import {TypingFieldProps} from "@features/typing/ui/TypingField.interface.ts";
+import {TypingFieldProps} from "@features/typing/ui/TypingField/TypingField.interface.ts";
 import css from './TypingField.module.scss'
 
 export const TypingField =

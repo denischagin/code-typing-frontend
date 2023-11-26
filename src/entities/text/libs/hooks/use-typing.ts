@@ -1,4 +1,4 @@
-import {ChangeEventHandler, useMemo, useState} from "react";
+import {ChangeEventHandler, useEffect, useState} from "react";
 import {
     getExtraSymbols,
     getSymbolsWordWithOverridesAndPrinting,
@@ -9,9 +9,13 @@ import {
 
 export const useTyping = () => {
 
-    const textMock: TText = useMemo(() => mappingStringToTextObject(text), [])
+    const [textString, setTextString] = useState(text)
 
-    const [currentText, setCurrentText] = useState(textMock)
+    const [currentText, setCurrentText] = useState<TText>([])
+
+    useEffect(() => {
+        setCurrentText(mappingStringToTextObject(textString))
+    }, [textString]);
 
     const [typingValue, setTypingValue] = useState('')
     const [currentWordIndex, setCurrentWordIndex] = useState(0)
@@ -19,7 +23,10 @@ export const useTyping = () => {
     const currentWord = currentText[currentWordIndex]
 
     const handleEndText = () => {
-        alert('Текст окончен')
+        setCurrentWordIndex(0)
+        setTypingValue('')
+        const newText = "hello world, regex!!! ".repeat(Math.random() * 4 + 1)
+        setTextString(newText)
     }
 
     const handleNextWord = (currentTextTemp: TText) => {
@@ -39,14 +46,27 @@ export const useTyping = () => {
 
     const handleChangeTypingField: ChangeEventHandler<HTMLInputElement> = (e) => {
         const typedValue = e.target.value
+        const maxInputLength = currentWord.word.length + 5
+        if (typedValue.length > maxInputLength)
+            return setTypingValue(typedValue.slice(0, maxInputLength))
+
         setTypingValue(typedValue)
 
         const currentTextTemp: TText = JSON.parse(JSON.stringify(currentText))
         const spaceCount = typedValue.split(" ").length - 1;
 
+        if (currentWord.word === "") {
+            currentTextTemp[currentWordIndex].symbols[0] = {
+                ...currentTextTemp[currentWordIndex].symbols[0],
+                isPrinting: false
+            }
+
+            return handleNextWord(currentTextTemp)
+        }
+
         if (spaceCount === 1
             && typedValue.endsWith(' ')
-            && currentTextTemp[currentWordIndex].word === typedValue.trimEnd()
+            && currentTextTemp[currentWordIndex].word === typedValue.slice(0, typedValue.length - 1)
         )
             return handleNextWord(currentTextTemp)
 
