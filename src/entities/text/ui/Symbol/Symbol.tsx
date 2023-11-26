@@ -1,45 +1,31 @@
 import {Text, TextProps} from "@chakra-ui/react";
-import {SymbolProps, TSymbolStatus} from "./Symbol.interface.ts";
-import {memo, ReactElement, ReactNode} from "react";
+import {SymbolProps} from "./Symbol.interface.ts";
+import {memo} from "react";
+import {TSymbolStatus} from "@entities/text";
 
 
 export const Symbol = memo(({
-                                symbolId, symbol, status, isPrinting,
+                                symbol, status, isPrinting,
                             }: SymbolProps) => {
     const commonProps: Partial<TextProps> = {
-        key: symbolId,
-        fontSize: "xxx-large",
         children: symbol,
         as: "span",
-        borderLeft: "1px solid",
-        borderLeftColor: isPrinting ? "red" : "transparent",
+        borderLeft: "2px solid",
+        borderLeftColor: isPrinting ? "yellow.500" : "transparent",
     }
 
-    const symbolByStatus: Record<TSymbolStatus, ReactElement> = {
-        default:
-            <Text
-                {...commonProps}
-            />,
-        error:
-            <Text
-                {...commonProps}
-                color='red'
-            />,
-        override:
-            <Text
-                {...commonProps}
-                borderBottom="1px solid red"
-            />,
-        extra:
-            <Text
-                {...commonProps}
-                color='red.200'
-            />,
-        printed:
-            <Text
-                {...commonProps}
-                color='gray.400'
-            />,
+    const symbolPropsByStatus: Record<TSymbolStatus, Partial<TextProps>> = {
+        default: {...commonProps},
+        error: {...commonProps, color: 'red.500'},
+        override: {...commonProps, borderBottom: "1px solid red"},
+        extra: {...commonProps, color: 'red.200'},
+        printed: {...commonProps, color: "gray.400"},
     }
-    return symbolByStatus[status]
+
+    return (
+        <Text
+            {...commonProps}
+            {...symbolPropsByStatus[status]}
+        />
+    )
 })
