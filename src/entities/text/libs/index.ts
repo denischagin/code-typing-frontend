@@ -1,5 +1,6 @@
 export {
     getExtraSymbols,
     getSymbolsWordWithOverridesAndPrinting,
-    getSymbolStatus
+    getSymbolStatus,
 } from './helpers'
+export {useTyping} from "./hooks";
