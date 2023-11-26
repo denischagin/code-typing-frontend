@@ -1,18 +1,38 @@
 import {Text, TextProps} from "@chakra-ui/react";
 import {SymbolProps} from "./Symbol.interface.ts";
-import {memo} from "react";
+import {memo, useContext, useEffect, useRef} from "react";
 import {TSymbolStatus} from "@entities/text";
+import {CursorPositionContext} from "@app/ui/App.tsx";
 
 
 export const Symbol = memo(({
                                 symbol, status, isPrinting,
                             }: SymbolProps) => {
+    const {handleChangePosition} = useContext(CursorPositionContext)
     const commonProps: Partial<TextProps> = {
         children: symbol === " " || symbol === "" ? <>&nbsp;</> : symbol,
+        display: "inline-flex",
+        textAlign: "center",
+        justifyContent: "center",
+        h: "100%",
+        px: "2px",
         as: "span",
-        borderLeft: "2px solid",
-        borderLeftColor: isPrinting ? "yellow.500" : "transparent",
     }
+
+    const textRef = useRef<HTMLSpanElement>(null)
+
+    useEffect(() => {
+        if (isPrinting) {
+            const rect = textRef.current?.getBoundingClientRect()
+            if (!rect) return
+
+            const centerX = (rect.left + rect.right) / 2 - rect.width / 2 - 5;
+            const centerY = (rect.top + rect.bottom) / 2 - rect.height / 2
+
+            handleChangePosition(centerY, centerX)
+        }
+    }, [isPrinting,]);
+
 
     const symbolPropsByStatus: Record<TSymbolStatus, Partial<TextProps>> = {
         default: {...commonProps},
@@ -27,9 +47,12 @@ export const Symbol = memo(({
     }
 
     return (
-        <Text
-            {...commonProps}
-            {...symbolPropsByStatus[status]}
-        />
+        <>
+            <Text
+                {...commonProps}
+                {...symbolPropsByStatus[status]}
+                ref={textRef}
+            />
+        </>
     )
 })

@@ -1,4 +1,4 @@
-import {useRef} from "react";
+import {useContext, useRef} from "react";
 import {Text} from "@chakra-ui/react";
 import css from './Typing.module.scss'
 import {TypingField} from "@features/typing";
@@ -7,8 +7,10 @@ import {
     useTyping,
     Word
 } from "@entities/text";
+import {CursorPositionContext} from "@app/ui/App.tsx";
 
 export const Typing = () => {
+    const {left, top} = useContext(CursorPositionContext)
     const typingFieldRef = useRef<HTMLInputElement>(null)
 
     const {
@@ -24,8 +26,26 @@ export const Typing = () => {
 
     return (
         <div className={css.typing} onClick={handleFocus}>
-            <Text fontSize="xxx-large" display="inline-flex" flexWrap="wrap" justifyContent="left"
-                  wordBreak="break-all">
+            <Text
+                pos="relative"
+                fontSize="xxx-large"
+                display="inline-flex"
+                flexWrap="wrap"
+                justifyContent="left"
+                wordBreak="break-all"
+            >
+                <Text
+                    as="span"
+                    display="flex"
+                    alignItems="center"
+                    pos="fixed"
+                    transition="all 0.1s"
+                    top={`${top - 2}px`}
+                    left={`${left}px`}
+                    color="green.600"
+                >
+                    |
+                </Text>
                 {currentText.map(({wordId, symbols, wordIndex}) => (
                     <>
                         <Word
