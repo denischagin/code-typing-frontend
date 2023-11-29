@@ -1,4 +1,4 @@
-import {TWordStatus} from "@entities/text/ui/Word/Word.interface.ts";
+import {TWordStatus} from "@entities/text";
 
 export interface GetWordStatusArgs {
     wordIndex: number

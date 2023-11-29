@@ -9,6 +9,7 @@ export const Word =
               wordIndex,
               expectedWord,
               printedWord,
+              onChangeCursorPosition,
               wordStatus = "default"
           }: WordProps) => {
 
@@ -40,6 +41,7 @@ export const Word =
                                             expectedWord
                                         })
                                 }
+                                onChangeCursorPosition={onChangeCursorPosition}
                             />
                         ))}
                 </Text>

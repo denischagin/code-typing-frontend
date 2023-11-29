@@ -1,1 +1,2 @@
-export { Cursor } from './Cursor'
+export {Cursor} from './Cursor'
+export type {CursorProps} from './Cursor.interface.ts'

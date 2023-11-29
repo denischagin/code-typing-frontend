@@ -1,15 +1,18 @@
 import {forwardRef} from "react";
-import {TypingFieldProps} from "@features/typing/ui/TypingField/TypingField.interface.ts";
-import css from './TypingField.module.scss'
+import {TypingFieldProps} from "@features/typing";
+import {Input} from "@chakra-ui/react";
 
 export const TypingField =
     forwardRef<HTMLInputElement, TypingFieldProps>((props, ref) => {
+
         return (
-            <input
+            <Input
                 {...props}
-                autoFocus
-                className={css['typing-field']}
+                pos="absolute"
+                left={0}
                 ref={ref}
+                opacity={0}
+                autoFocus
             />
         )
     })

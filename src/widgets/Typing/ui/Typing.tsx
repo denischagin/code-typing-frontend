@@ -3,10 +3,10 @@ import {Text} from "@chakra-ui/react";
 import css from './Typing.module.scss'
 import {Cursor, TypingField} from "@features/typing";
 import {
+    getWordStatus,
     useTyping,
     Word
 } from "@entities/text";
-import {getWordStatus} from "@entities/text/libs/helpers";
 import {useCursorPosition} from "@entities/cursor";
 
 export const Typing = () => {
@@ -14,7 +14,10 @@ export const Typing = () => {
     const parentRef = useRef<HTMLParagraphElement>(null)
     const parentRect = parentRef.current?.getBoundingClientRect()
 
-    const {top, left} = useCursorPosition()
+    const {top, left, handleChangePosition} = useCursorPosition()
+
+    const cursorRelativePositionTop = top - (parentRect?.top ?? 0)
+    const cursorRelativePositionLeft = left - (parentRect?.left ?? 0)
 
     const {
         currentText,
@@ -28,19 +31,17 @@ export const Typing = () => {
     }
 
     return (
-        <div className={css.typing} onClick={handleFocus}>
+        <div className={css.typing} onClick={handleFocus} ref={parentRef}>
             <Text
-                pos="relative"
                 fontSize="xxx-large"
                 display="inline-flex"
                 flexWrap="wrap"
                 justifyContent="left"
                 wordBreak="break-all"
-                ref={parentRef}
             >
                 <Cursor
-                    top={top - (parentRect?.top ?? 0)}
-                    left={left - (parentRect?.left ?? 0)}
+                    top={cursorRelativePositionTop}
+                    left={cursorRelativePositionLeft}
                 />
 
                 {currentText.map((word, wordIndex) => (
@@ -49,6 +50,7 @@ export const Typing = () => {
                         wordIndex={wordIndex}
                         expectedWord={word + " "}
                         printedWord={wordIndex === currentWordIndex ? typingValue : undefined}
+                        onChangeCursorPosition={handleChangePosition}
                         wordStatus={
                             getWordStatus({
                                 currentWordIndex,
@@ -63,6 +65,7 @@ export const Typing = () => {
                 value={typingValue}
                 onChange={handleChangeTypingField}
                 ref={typingFieldRef}
+                top={`${cursorRelativePositionTop}px`}
             />
         </div>
     )
