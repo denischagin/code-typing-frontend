@@ -1,16 +1,14 @@
-import {useContext, useRef} from "react";
+import {useRef} from "react";
 import {Text} from "@chakra-ui/react";
 import css from './Typing.module.scss'
-import {TypingField} from "@features/typing";
+import {Cursor, TypingField} from "@features/typing";
 import {
     Symbol,
     useTyping,
     Word
 } from "@entities/text";
-import {CursorPositionContext} from "@app/ui/App.tsx";
 
 export const Typing = () => {
-    const {left, top} = useContext(CursorPositionContext)
     const typingFieldRef = useRef<HTMLInputElement>(null)
 
     const {
@@ -34,18 +32,8 @@ export const Typing = () => {
                 justifyContent="left"
                 wordBreak="break-all"
             >
-                <Text
-                    as="span"
-                    display="flex"
-                    alignItems="center"
-                    pos="fixed"
-                    transition="all 0.1s"
-                    top={`${top - 2}px`}
-                    left={`${left}px`}
-                    color="green.600"
-                >
-                    |
-                </Text>
+                <Cursor />
+
                 {currentText.map(({wordId, symbols, wordIndex}) => (
                     <>
                         <Word
@@ -57,8 +45,8 @@ export const Typing = () => {
                         />
 
                         <Symbol
-                            key={`space-${wordId}`}
-                            symbolId={`space-${wordId}`}
+                            key={`space-${typingValue}`}
+                            symbolId={`space-${typingValue}`}
                             symbol={" "}
                             isPrinting={currentWordIndex === wordIndex
                                 && (symbols[symbols.length - 1]?.isPrinted

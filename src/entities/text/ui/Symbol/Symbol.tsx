@@ -1,14 +1,15 @@
-import {Text, TextProps} from "@chakra-ui/react";
-import {SymbolProps} from "./Symbol.interface.ts";
-import {memo, useContext, useEffect, useRef} from "react";
-import {TSymbolStatus} from "@entities/text";
-import {CursorPositionContext} from "@app/ui/App.tsx";
+import { Text, TextProps } from "@chakra-ui/react";
+import { SymbolProps } from "./Symbol.interface.ts";
+import { memo, useContext, useEffect, useRef } from "react";
+import { TSymbolStatus } from "@entities/text";
+import { useCursorPosition } from "@entities/cursor/index.ts";
 
 
 export const Symbol = memo(({
-                                symbol, status, isPrinting,
-                            }: SymbolProps) => {
-    const {handleChangePosition} = useContext(CursorPositionContext)
+    symbol, status, isPrinting, symbolId,
+}: SymbolProps) => {
+    const { handleChangePosition } = useCursorPosition()
+       
     const commonProps: Partial<TextProps> = {
         children: symbol === " " || symbol === "" ? <>&nbsp;</> : symbol,
         display: "inline-flex",
@@ -21,6 +22,8 @@ export const Symbol = memo(({
 
     const textRef = useRef<HTMLSpanElement>(null)
 
+    console.log('render symbol', symbol)
+
     useEffect(() => {
         if (isPrinting) {
             const rect = textRef.current?.getBoundingClientRect()
@@ -29,21 +32,21 @@ export const Symbol = memo(({
             const centerX = (rect.left + rect.right) / 2 - rect.width / 2 - 5;
             const centerY = (rect.top + rect.bottom) / 2 - rect.height / 2
 
-            handleChangePosition(centerY, centerX)
+            handleChangePosition({left: centerX, top: centerY})
         }
-    }, [isPrinting,]);
+    }, [isPrinting, symbolId]);
 
 
     const symbolPropsByStatus: Record<TSymbolStatus, Partial<TextProps>> = {
-        default: {...commonProps},
-        error: {...commonProps, color: 'red.500'},
-        override: {...commonProps, borderBottom: "1px solid red"},
+        default: { ...commonProps },
+        error: { ...commonProps, color: 'red.500' },
+        override: { ...commonProps, borderBottom: "1px solid red" },
         extra: {
             ...commonProps,
             color: 'red.200',
             borderBottom: symbol === " " ? "1px solid rgba(255, 120, 120, 0.4)" : undefined
         },
-        printed: {...commonProps, color: "gray.400"},
+        printed: { ...commonProps, color: "gray.400" },
     }
 
     return (
