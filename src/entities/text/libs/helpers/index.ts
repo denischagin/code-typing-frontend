@@ -1,4 +1,5 @@
-export {getExtraSymbols} from "./get-extra-symbols.ts";
-export {getSymbolsWordWithOverridesAndPrinting} from './get-symbols-word-with-overrides-and-printing.ts'
 export {getSymbolStatus} from "./get-symbol-status.ts";
+export {getWordStatus} from "./get-word-status.ts";
+export type {GetWordStatusArgs} from "./get-word-status.ts";
+
 

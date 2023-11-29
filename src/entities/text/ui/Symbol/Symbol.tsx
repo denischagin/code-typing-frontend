@@ -1,15 +1,15 @@
-import { Text, TextProps } from "@chakra-ui/react";
-import { SymbolProps } from "./Symbol.interface.ts";
-import { memo, useContext, useEffect, useRef } from "react";
-import { TSymbolStatus } from "@entities/text";
-import { useCursorPosition } from "@entities/cursor/index.ts";
+import {Text, TextProps} from "@chakra-ui/react";
+import {SymbolProps} from "./Symbol.interface.ts";
+import {memo, useEffect, useRef} from "react";
+import {TSymbolStatus} from "@entities/text";
+import {useCursorPosition} from "@entities/cursor/index.ts";
 
 
 export const Symbol = memo(({
-    symbol, status, isPrinting, symbolId,
-}: SymbolProps) => {
-    const { handleChangePosition } = useCursorPosition()
-       
+                                symbol, status, isPrinting,
+                            }: SymbolProps) => {
+    const {handleChangePosition} = useCursorPosition()
+
     const commonProps: Partial<TextProps> = {
         children: symbol === " " || symbol === "" ? <>&nbsp;</> : symbol,
         display: "inline-flex",
@@ -22,8 +22,6 @@ export const Symbol = memo(({
 
     const textRef = useRef<HTMLSpanElement>(null)
 
-    console.log('render symbol', symbol)
-
     useEffect(() => {
         if (isPrinting) {
             const rect = textRef.current?.getBoundingClientRect()
@@ -34,19 +32,18 @@ export const Symbol = memo(({
 
             handleChangePosition({left: centerX, top: centerY})
         }
-    }, [isPrinting, symbolId]);
-
+    }, [handleChangePosition, isPrinting]);
 
     const symbolPropsByStatus: Record<TSymbolStatus, Partial<TextProps>> = {
-        default: { ...commonProps },
-        error: { ...commonProps, color: 'red.500' },
-        override: { ...commonProps, borderBottom: "1px solid red" },
+        default: {...commonProps},
+        error: {...commonProps, color: 'red.500'},
+        override: {...commonProps, borderBottom: "1px solid red"},
         extra: {
             ...commonProps,
             color: 'red.200',
             borderBottom: symbol === " " ? "1px solid rgba(255, 120, 120, 0.4)" : undefined
         },
-        printed: { ...commonProps, color: "gray.400" },
+        printed: {...commonProps, color: "gray.400"},
     }
 
     return (
@@ -54,6 +51,7 @@ export const Symbol = memo(({
             <Text
                 {...commonProps}
                 {...symbolPropsByStatus[status]}
+
                 ref={textRef}
             />
         </>

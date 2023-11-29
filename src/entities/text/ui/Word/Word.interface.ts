@@ -1,11 +1,8 @@
-import {TSymbol} from "../../model";
-
 export interface WordProps {
-    wordId: string
-    symbols: TSymbol[]
-    currentWordIndex: number
     wordIndex: number
+    expectedWord: string
+    printedWord?: string
+    wordStatus?: TWordStatus
 }
 
-//TODO добавить word статус
-export type wordStatus = 'current' | 'default' | 'error' | 'printed'
+export type TWordStatus = 'current' | 'default' | 'error' | 'printed'

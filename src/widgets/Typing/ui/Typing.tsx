@@ -3,19 +3,24 @@ import {Text} from "@chakra-ui/react";
 import css from './Typing.module.scss'
 import {Cursor, TypingField} from "@features/typing";
 import {
-    Symbol,
     useTyping,
     Word
 } from "@entities/text";
+import {getWordStatus} from "@entities/text/libs/helpers";
+import {useCursorPosition} from "@entities/cursor";
 
 export const Typing = () => {
     const typingFieldRef = useRef<HTMLInputElement>(null)
+    const parentRef = useRef<HTMLParagraphElement>(null)
+    const parentRect = parentRef.current?.getBoundingClientRect()
+
+    const {top, left} = useCursorPosition()
 
     const {
         currentText,
         currentWordIndex,
         typingValue,
-        handleChangeTypingField
+        handleChangeTypingField,
     } = useTyping()
 
     const handleFocus = () => {
@@ -31,29 +36,26 @@ export const Typing = () => {
                 flexWrap="wrap"
                 justifyContent="left"
                 wordBreak="break-all"
+                ref={parentRef}
             >
-                <Cursor />
+                <Cursor
+                    top={top - (parentRect?.top ?? 0)}
+                    left={left - (parentRect?.left ?? 0)}
+                />
 
-                {currentText.map(({wordId, symbols, wordIndex}) => (
-                    <>
-                        <Word
-                            key={wordId}
-                            wordId={wordId}
-                            symbols={symbols}
-                            currentWordIndex={currentWordIndex}
-                            wordIndex={wordIndex}
-                        />
-
-                        <Symbol
-                            key={`space-${typingValue}`}
-                            symbolId={`space-${typingValue}`}
-                            symbol={" "}
-                            isPrinting={currentWordIndex === wordIndex
-                                && (symbols[symbols.length - 1]?.isPrinted
-                                    || !!symbols[symbols.length - 1]?.extraSymbol)}
-                            status={"default"}
-                        />
-                    </>
+                {currentText.map((word, wordIndex) => (
+                    <Word
+                        key={wordIndex}
+                        wordIndex={wordIndex}
+                        expectedWord={word + " "}
+                        printedWord={wordIndex === currentWordIndex ? typingValue : undefined}
+                        wordStatus={
+                            getWordStatus({
+                                currentWordIndex,
+                                wordIndex
+                            })
+                        }
+                    />
                 ))}
             </Text>
 

@@ -1,15 +1,14 @@
-import { Text } from "@chakra-ui/react"
-import { useCursorPosition } from "@entities/cursor"
+import {Text} from "@chakra-ui/react"
+import {CursorProps} from "@features/typing/ui/Cursor/Cursor.interface.ts";
 
-export const Cursor = () => {
-    const { top, left} = useCursorPosition()
+export const Cursor = ({top, left}: CursorProps) => {
 
     return (
         <Text
             as="span"
             display="flex"
             alignItems="center"
-            pos="fixed"
+            pos="absolute"
             transition="all 0.1s"
             top={`${top - 2}px`}
             left={`${left}px`}

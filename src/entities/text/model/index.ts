@@ -1,4 +1,2 @@
-export * from "./interfaces";
 export * from "./mocks";
-export * from "./mappings.ts";
-
+export type {TSymbolStatus} from './status.ts'

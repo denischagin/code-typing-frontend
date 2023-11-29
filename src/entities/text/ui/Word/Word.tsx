@@ -1,29 +1,48 @@
-import { WordProps } from "./Word.interface.ts";
-import { Text } from "@chakra-ui/react";
-import { memo } from "react";
-import { Symbol } from "../Symbol";
-import { getSymbolStatus } from "@entities/text";
+import {WordProps} from "./Word.interface.ts";
+import {Text} from "@chakra-ui/react";
+import {memo} from "react";
+import {Symbol} from "../Symbol";
+import {getSymbolStatus} from "@entities/text";
 
 export const Word =
     memo(({
-        symbols
-    }: WordProps) => {
+              wordIndex,
+              expectedWord,
+              printedWord,
+              wordStatus = "default"
+          }: WordProps) => {
 
-        return (
-            <Text as="span">
-                {symbols.map((symbolObject) =>
-                (
-                    <Symbol
-                        key={symbolObject.symbolId}
-                        symbolId={symbolObject.symbolId}
-                        symbol={symbolObject.extraSymbol ?? symbolObject.symbol}
-                        isPrinting={symbolObject.isPrinting}
-                        status={getSymbolStatus(symbolObject)}
-                    />
-                ))}
-            </Text>
-        )
-    }, (prevProps, nextProps) =>
-        prevProps.wordId === nextProps.wordId &&
-        JSON.stringify(prevProps.symbols) === JSON.stringify(nextProps.symbols)
+            const expectedWordWithoutSpace = expectedWord.trimEnd()
+
+            const isWordWithExtra =
+                printedWord && printedWord?.length > expectedWordWithoutSpace.length
+
+
+            const wordWithExtra =
+                isWordWithExtra
+                    ? expectedWordWithoutSpace + printedWord.slice(expectedWordWithoutSpace.length, printedWord.length) + " "
+                    : expectedWord
+
+            return (
+                <Text as="span">
+                    {wordWithExtra.split("").map((symbol, symbolIndex) =>
+                        (
+                            <Symbol
+                                key={`${wordIndex}-${symbolIndex}`}
+                                symbol={symbol}
+                                isPrinting={symbolIndex === printedWord?.length}
+                                status={
+                                    wordStatus === "printed"
+                                        ? "printed"
+                                        : getSymbolStatus({
+                                            printedWord,
+                                            symbolIndex,
+                                            expectedWord
+                                        })
+                                }
+                            />
+                        ))}
+                </Text>
+            )
+        }
     )
