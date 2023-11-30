@@ -1,13 +1,16 @@
 import { ChakraProvider, theme } from "@chakra-ui/react"
-import { CursorPositionProvider } from "@entities/cursor"
+import { fork } from "effector"
+import { Provider } from "effector-react"
 import { ReactNode } from "react"
 
 export const Providers = ({ children }: { children: ReactNode }) => {
+    const scope = fork()
+
     return (
-        <ChakraProvider theme={theme}>
-            <CursorPositionProvider>
+        <Provider value={scope}>
+            <ChakraProvider theme={theme}>
                 {children}
-            </CursorPositionProvider>
-        </ChakraProvider>
+            </ChakraProvider>
+        </Provider>
     )
 }

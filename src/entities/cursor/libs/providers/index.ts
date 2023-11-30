@@ -1,1 +1,0 @@
-export { CursorPositionProvider } from './cursor-position'

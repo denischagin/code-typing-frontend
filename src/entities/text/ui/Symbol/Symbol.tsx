@@ -1,11 +1,15 @@
-import {Text, TextProps} from "@chakra-ui/react";
-import {SymbolProps} from "./Symbol.interface.ts";
-import {memo, useEffect, useRef} from "react";
-import {TSymbolStatus} from "@entities/text";
+import { Text, TextProps } from "@chakra-ui/react";
+import { SymbolProps } from "./Symbol.interface.ts";
+import { memo, useEffect, useRef } from "react";
+import { TSymbolStatus } from "@entities/text";
+import { useUnit } from 'effector-react'
+import { eventChangePosition } from "@entities/cursor";
 
 export const Symbol = memo(({
-                                symbol, status, isPrinting, onChangeCursorPosition
-                            }: SymbolProps) => {
+    symbol, status, isPrinting,
+}: SymbolProps) => {
+
+    const changePosition = useUnit(eventChangePosition)
 
     const commonProps: Partial<TextProps> = {
         children: symbol === " " || symbol === "" ? <>&nbsp;</> : symbol,
@@ -26,20 +30,20 @@ export const Symbol = memo(({
             const centerX = (rect.left + rect.right) / 2 - rect.width / 2 - 5;
             const centerY = (rect.top + rect.bottom) / 2 - rect.height / 2
 
-            onChangeCursorPosition({left: centerX, top: centerY})
+            changePosition({ left: centerX, top: centerY })
         }
-    }, [onChangeCursorPosition, isPrinting]);
+    }, [isPrinting]);
 
     const symbolPropsByStatus: Record<TSymbolStatus, Partial<TextProps>> = {
-        default: {...commonProps},
-        error: {...commonProps, color: 'red.500'},
-        override: {...commonProps, borderBottom: "1px solid red"},
+        default: { ...commonProps },
+        error: { ...commonProps, color: 'red.500' },
+        override: { ...commonProps, borderBottom: "1px solid red" },
         extra: {
             ...commonProps,
             color: 'red.200',
             borderBottom: symbol === " " ? "1px solid rgba(255, 120, 120, 0.4)" : undefined
         },
-        printed: {...commonProps, color: "gray.400"},
+        printed: { ...commonProps, color: "gray.400" },
     }
 
     return (

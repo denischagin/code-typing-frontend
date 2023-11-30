@@ -1,20 +1,21 @@
-import {useRef} from "react";
-import {Text} from "@chakra-ui/react";
+import { useRef } from "react";
+import { Text } from "@chakra-ui/react";
 import css from './Typing.module.scss'
-import {Cursor, TypingField} from "@features/typing";
+import { Cursor, TypingField } from "@features/typing";
 import {
     getWordStatus,
     useTyping,
     Word
 } from "@entities/text";
-import {useCursorPosition} from "@entities/cursor";
+import { useUnit } from "effector-react";
+import { $storeCursorPosition } from "@entities/cursor";
 
 export const Typing = () => {
     const typingFieldRef = useRef<HTMLInputElement>(null)
     const parentRef = useRef<HTMLParagraphElement>(null)
     const parentRect = parentRef.current?.getBoundingClientRect()
 
-    const {top, left, handleChangePosition} = useCursorPosition()
+    const { left, top } = useUnit($storeCursorPosition)
 
     const cursorRelativePositionTop = top - (parentRect?.top ?? 0)
     const cursorRelativePositionLeft = left - (parentRect?.left ?? 0)
@@ -50,7 +51,6 @@ export const Typing = () => {
                         wordIndex={wordIndex}
                         expectedWord={word + " "}
                         printedWord={wordIndex === currentWordIndex ? typingValue : undefined}
-                        onChangeCursorPosition={handleChangePosition}
                         wordStatus={
                             getWordStatus({
                                 currentWordIndex,
