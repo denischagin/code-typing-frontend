@@ -2,7 +2,7 @@ import { createStore } from "effector";
 import { ICursorPosition } from "..";
 import { createEvent } from "effector/compat";
 
-export const eventChangePosition = createEvent<{ top: number, left: number }>()
+export const eventChangePosition = createEvent<ICursorPosition>()
 
 export const $storeCursorPosition = createStore<ICursorPosition>({
     left: 0,

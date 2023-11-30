@@ -32,42 +32,46 @@ export const Typing = () => {
     }
 
     return (
-        <div className={css.typing} onClick={handleFocus} ref={parentRef}>
-            <Text
-                fontSize="xxx-large"
-                display="inline-flex"
-                flexWrap="wrap"
-                justifyContent="left"
-                wordBreak="break-all"
-            >
-                <Cursor
-                    top={cursorRelativePositionTop}
-                    left={cursorRelativePositionLeft}
-                />
+        <>
 
-                {currentText.map((word, wordIndex) => (
-                    <Word
-                        key={wordIndex}
-                        wordIndex={wordIndex}
-                        expectedWord={word + " "}
-                        printedWord={wordIndex === currentWordIndex ? typingValue : undefined}
-                        wordStatus={
-                            getWordStatus({
-                                currentWordIndex,
-                                wordIndex
-                            })
-                        }
+            <div className={css.typing} onClick={handleFocus} ref={parentRef}>
+                <Text
+                    fontSize="xxx-large"
+                    display="inline-flex"
+                    flexWrap="wrap"
+                    justifyContent="left"
+                    wordBreak="break-all"
+                >
+                    <Cursor
+                        top={cursorRelativePositionTop}
+                        left={cursorRelativePositionLeft}
                     />
-                ))}
-            </Text>
 
-            <TypingField
-                value={typingValue}
-                onChange={handleChangeTypingField}
-                ref={typingFieldRef}
-                top={`${cursorRelativePositionTop}px`}
-            />
-        </div>
+                    {currentText.map((word, wordIndex) => (
+                        <Word
+                            key={wordIndex}
+                            wordIndex={wordIndex}
+                            expectedWord={word + " "}
+                            printedWord={wordIndex === currentWordIndex ? typingValue : undefined}
+                            wordStatus={
+                                getWordStatus({
+                                    currentWordIndex,
+                                    wordIndex
+                                })
+                            }
+                        />
+                    ))}
+                </Text>
+
+                <TypingField
+                    value={typingValue}
+                    onChange={handleChangeTypingField}
+                    ref={typingFieldRef}
+                    top={`${cursorRelativePositionTop}px`}
+                />
+            </div>
+        </>
+
     )
 
 }
