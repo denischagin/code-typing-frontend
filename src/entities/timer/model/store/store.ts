@@ -6,7 +6,7 @@ export const eventStopTimer = createEvent()
 export const eventResetTimer = createEvent()
 
 export const $timerStore = createStore<ITimerStore>({
-    timerStatus: "stoped",
+    timerStatus: "stopped",
     timeMillisecondsStart: null,
     timeMillisecondsEnd: null,
 })
@@ -16,12 +16,12 @@ export const $timerStore = createStore<ITimerStore>({
         timeMillisecondsEnd: null 
     }))
     .on(eventStopTimer, (store) => ({
-        timerStatus: "stoped", 
+        timerStatus: "stopped", 
         timeMillisecondsStart: store.timeMillisecondsStart, 
         timeMillisecondsEnd: Date.now()
     }))
     .on(eventResetTimer, () => ({
-        timerStatus: "stoped",
+        timerStatus: "stopped",
         timeMillisecondsStart: null, 
         timeMillisecondsEnd: null,
     }))

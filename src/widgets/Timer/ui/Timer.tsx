@@ -18,7 +18,7 @@ export const Timer = () => {
                 setCurrentTimeMilliseconds(dateNow - (timeMillisecondsStart ?? 0))
             }, 30)
         }
-        if (timerStatus === "stoped") {
+        if (timerStatus === "stopped") {
             setCurrentTimeMilliseconds(
                 (timeMillisecondsEnd ?? 0) - (timeMillisecondsStart ?? 0))
         }

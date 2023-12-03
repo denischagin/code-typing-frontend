@@ -3,6 +3,7 @@ import {Timer} from "@widgets/Timer";
 import {Typing} from "@widgets/Typing";
 import {useGetTextQuery} from "@entities/text";
 import {ButtonNewText} from "@features/new-text";
+import {ButtonRepeatText} from "@features/repeat-text";
 
 export const TypingPage = () => {
     const {isFetching} = useGetTextQuery()
@@ -12,10 +13,13 @@ export const TypingPage = () => {
             <Flex justify="space-between" align="center">
                 <Timer/>
 
-                <ButtonNewText/>
+                <Flex gap="5px">
+                    <ButtonNewText/>
+                    <ButtonRepeatText/>
+                </Flex>
             </Flex>
 
-            {isFetching && <Progress isIndeterminate/>}
+            {isFetching && <Progress mt="10px" isIndeterminate/>}
 
             <Typing/>
         </Container>
