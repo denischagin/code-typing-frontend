@@ -3,4 +3,4 @@ export {
     getWordStatus,
 } from './helpers'
 export type {GetWordStatusArgs} from './helpers'
-export {useTyping} from "./hooks";
+export {useTyping, useGetTextQuery} from "./hooks";

@@ -28,7 +28,7 @@ export const Timer = () => {
 
     return (
         <div>
-            <Text fontSize="large">
+            <Text fontSize="x-large">
                 {convertMillisecondsToTime(currentTimeMilliseconds)}
             </Text>
         </div>

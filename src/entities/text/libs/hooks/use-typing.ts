@@ -1,7 +1,13 @@
-import {ChangeEventHandler, useState} from "react";
+import {ChangeEventHandler} from "react";
 import {useUnit} from "effector-react";
 import {$timerStore, eventStartTimer, eventStopTimer} from "@entities/timer";
 import {useGetTextQuery} from "@entities/text/libs/hooks/use-get-text-query.ts";
+import {
+    $currentWordIndexStore,
+    $typingValueStore,
+    eventChangeCurrentWordIndex,
+    eventChangeTypingValue, eventIncrementCurrentWordIndex
+} from "@entities/text";
 
 
 export const useTyping = () => {
@@ -9,8 +15,10 @@ export const useTyping = () => {
 
     const currentText = text?.data[0].content?.split(' ')
 
-    const [typingValue, setTypingValue] = useState('')
-    const [currentWordIndex, setCurrentWordIndex] = useState(0)
+    const [currentWordIndex, setCurrentWordIndex, incrementCurrentWordIndex] =
+        useUnit([$currentWordIndexStore, eventChangeCurrentWordIndex, eventIncrementCurrentWordIndex])
+    const [typingValue, setTypingValue] =
+        useUnit([$typingValueStore, eventChangeTypingValue])
 
     const {timerStatus} = useUnit($timerStore)
     const [startTimer, stopTimer] = useUnit([eventStartTimer, eventStopTimer])
@@ -24,7 +32,7 @@ export const useTyping = () => {
     }
 
     const handleNextWord = () => {
-        setCurrentWordIndex(prev => prev + 1)
+        incrementCurrentWordIndex()
         setTypingValue('')
     }
 

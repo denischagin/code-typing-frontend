@@ -1,23 +1,18 @@
-import {Button, Container, Flex, Progress} from "@chakra-ui/react";
-import {Timer} from "@widgets/Timer/ui/Timer.tsx";
+import {Container, Flex, Progress} from "@chakra-ui/react";
+import {Timer} from "@widgets/Timer";
 import {Typing} from "@widgets/Typing";
-import {useGetTextQuery} from "@entities/text/libs/hooks/use-get-text-query.ts";
+import {useGetTextQuery} from "@entities/text";
+import {ButtonNewText} from "@features/new-text";
 
 export const TypingPage = () => {
-    const {isFetching, refetch} = useGetTextQuery()
-
-    const handleNewTextClick = async () => {
-        await refetch()
-    };
+    const {isFetching} = useGetTextQuery()
 
     return (
         <Container maxW="1000px">
             <Flex justify="space-between" align="center">
                 <Timer/>
 
-                <Button onClick={handleNewTextClick}>
-                    Новый текст
-                </Button>
+                <ButtonNewText/>
             </Flex>
 
             {isFetching && <Progress isIndeterminate/>}
