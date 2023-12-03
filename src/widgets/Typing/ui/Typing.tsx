@@ -1,21 +1,24 @@
-import { useRef } from "react";
-import { Text } from "@chakra-ui/react";
+import {useRef} from "react";
+import {Text} from "@chakra-ui/react";
 import css from './Typing.module.scss'
-import { Cursor, TypingField } from "@features/typing";
+import {Cursor, TypingField} from "@features/typing";
 import {
     getWordStatus,
     useTyping,
     Word
 } from "@entities/text";
-import { useUnit } from "effector-react";
-import { $storeCursorPosition } from "@entities/cursor";
+import {useUnit} from "effector-react";
+import {$storeCursorPosition} from "@entities/cursor";
+import {useGetTextQuery} from "@entities/text/libs/hooks/use-get-text-query.ts";
 
 export const Typing = () => {
     const typingFieldRef = useRef<HTMLInputElement>(null)
     const parentRef = useRef<HTMLParagraphElement>(null)
     const parentRect = parentRef.current?.getBoundingClientRect()
 
-    const { left, top } = useUnit($storeCursorPosition)
+    const {isFetching} = useGetTextQuery()
+
+    const {left, top} = useUnit($storeCursorPosition)
 
     const cursorRelativePositionTop = top - (parentRect?.top ?? 0)
     const cursorRelativePositionLeft = left - (parentRect?.left ?? 0)
@@ -31,9 +34,10 @@ export const Typing = () => {
         typingFieldRef.current?.focus()
     }
 
+    if (isFetching) return null
+
     return (
         <>
-
             <div className={css.typing} onClick={handleFocus} ref={parentRef}>
                 <Text
                     fontSize="xxx-large"
@@ -47,7 +51,7 @@ export const Typing = () => {
                         left={cursorRelativePositionLeft}
                     />
 
-                    {currentText.map((word, wordIndex) => (
+                    {currentText?.map((word, wordIndex) => (
                         <Word
                             key={wordIndex}
                             wordIndex={wordIndex}

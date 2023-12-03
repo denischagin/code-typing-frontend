@@ -1,21 +1,23 @@
-import { ChangeEventHandler, useState } from "react";
-import {
-    text
-} from "@entities/text";
-import { useUnit } from "effector-react";
-import { $timerStore, eventStartTimer, eventStopTimer } from "@entities/timer";
+import {ChangeEventHandler, useState} from "react";
+import {useUnit} from "effector-react";
+import {$timerStore, eventStartTimer, eventStopTimer} from "@entities/timer";
+import {useGetTextQuery} from "@entities/text/libs/hooks/use-get-text-query.ts";
+
 
 export const useTyping = () => {
-    const [currentText] = useState<string[]>(text.split(' '))
+    const {data: text} = useGetTextQuery()
+
+    const currentText = text?.data[0].content?.split(' ')
 
     const [typingValue, setTypingValue] = useState('')
     const [currentWordIndex, setCurrentWordIndex] = useState(0)
-    const { timerStatus } = useUnit($timerStore)
+
+    const {timerStatus} = useUnit($timerStore)
     const [startTimer, stopTimer] = useUnit([eventStartTimer, eventStopTimer])
 
-    const currentWord = currentText[currentWordIndex]
+    const currentWord = currentText?.[currentWordIndex]
 
-    const handleEndText = () => {
+    const handleEndText = async () => {
         setCurrentWordIndex(0)
         setTypingValue('')
         stopTimer()
@@ -31,8 +33,10 @@ export const useTyping = () => {
     }
 
     const handleChangeTypingField: ChangeEventHandler<HTMLInputElement> = (e) => {
+        if (!currentText) return
+
         const typedValue = e.target.value
-        const maxInputLength = currentWord.length + 5
+        const maxInputLength = (currentWord?.length ?? 0) + 5
 
         if (typedValue.length > maxInputLength)
             return setTypingValue(typedValue.slice(0, maxInputLength))
