@@ -13,6 +13,6 @@ $currentWordIndexStore
     .on(eventChangeCurrentWordIndex, (_, value) => value)
     .on(eventIncrementCurrentWordIndex, (store) => store + 1)
 
-$currentWordIndexStore.watch((state) => console.log(state))
-$typingValueStore.watch((state) => console.log(state))
+// $currentWordIndexStore.watch((state) => console.log(state))
+// $typingValueStore.watch((state) => console.log(state))
 

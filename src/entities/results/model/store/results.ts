@@ -8,3 +8,6 @@ export const $resultsStore = createStore<TResultStore | null>(null)
 $resultsStore
     .on(eventAddResult, (state, payload) =>
         state ? [...state, payload] : [payload])
+$resultsStore.watch((state) => {
+   console.log(state);
+})

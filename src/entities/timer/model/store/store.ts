@@ -1,8 +1,8 @@
 import { createStore, createEvent } from "effector";
 import { ITimerStore } from "../types";
 
-export const eventStartTimer = createEvent()
-export const eventStopTimer = createEvent()
+export const eventStartTimer = createEvent<number>()
+export const eventStopTimer = createEvent<number>()
 export const eventResetTimer = createEvent()
 
 export const $timerStore = createStore<ITimerStore>({
@@ -10,15 +10,15 @@ export const $timerStore = createStore<ITimerStore>({
     timeMillisecondsStart: null,
     timeMillisecondsEnd: null,
 })
-    .on(eventStartTimer, () => ({ 
+    .on(eventStartTimer, (_store, startTimeMilliseconds) => ({ 
         timerStatus: "started",
-        timeMillisecondsStart: Date.now(), 
+        timeMillisecondsStart: startTimeMilliseconds, 
         timeMillisecondsEnd: null 
     }))
-    .on(eventStopTimer, (store) => ({
+    .on(eventStopTimer, (store, stopTimeMilliseconds) => ({
         timerStatus: "stopped", 
         timeMillisecondsStart: store.timeMillisecondsStart, 
-        timeMillisecondsEnd: Date.now()
+        timeMillisecondsEnd: stopTimeMilliseconds
     }))
     .on(eventResetTimer, () => ({
         timerStatus: "stopped",

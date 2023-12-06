@@ -1,4 +1,5 @@
 export interface IResult {
+    resultId: string
     timeResultMilliseconds: number
     timeStartMilliseconds: number
     timeEndMilliseconds: number

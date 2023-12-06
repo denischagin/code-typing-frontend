@@ -1,6 +1,6 @@
-import {ChangeEventHandler} from "react";
-import {useUnit} from "effector-react";
-import {$timerStore, eventStartTimer, eventStopTimer} from "@entities/timer";
+import { ChangeEventHandler } from "react";
+import { useUnit } from "effector-react";
+import { $timerStore, eventStartTimer, eventStopTimer } from "@entities/timer";
 import {
     $currentWordIndexStore,
     $typingValueStore,
@@ -8,25 +8,45 @@ import {
     eventIncrementCurrentWordIndex,
     useGetTextQuery
 } from "@entities/text";
+import { eventAddResult, getResultId } from "@entities/results";
 
 
 export const useTyping = () => {
-    const {data: text} = useGetTextQuery()
+    const { data: textObject } = useGetTextQuery()
 
-    const currentText = text?.data[0].content?.split(' ')
+    const currentTextString = textObject?.data[0].content
+    const currentText = currentTextString?.split(' ')
 
     const [currentWordIndex, incrementCurrentWordIndex] =
         useUnit([$currentWordIndexStore, eventIncrementCurrentWordIndex])
     const [typingValue, setTypingValue] =
         useUnit([$typingValueStore, eventChangeTypingValue])
 
-    const {timerStatus} = useUnit($timerStore)
+    const [addResult] = useUnit([eventAddResult])
+
+    const { timerStatus, timeMillisecondsStart } = useUnit($timerStore)
     const [startTimer, stopTimer] = useUnit([eventStartTimer, eventStopTimer])
 
     const currentWord = currentText?.[currentWordIndex]
 
     const handleEndText = async () => {
-        stopTimer()
+        const stopTimeMilliseconds = Date.now()
+
+        stopTimer(stopTimeMilliseconds)
+
+        if (!timeMillisecondsStart || !currentTextString)
+            return
+
+        addResult({
+            resultId: getResultId({
+                timeEndMilliseconds: stopTimeMilliseconds,
+                timeStartMilliseconds: timeMillisecondsStart
+            }),
+            text: currentTextString,
+            timeEndMilliseconds: stopTimeMilliseconds,
+            timeStartMilliseconds: timeMillisecondsStart,
+            timeResultMilliseconds: stopTimeMilliseconds - timeMillisecondsStart
+        })
     }
 
     const handleNextWord = () => {
@@ -35,7 +55,9 @@ export const useTyping = () => {
     }
 
     const handleStartText = () => {
-        startTimer()
+        const startTimeMilliseconds = Date.now()
+
+        startTimer(startTimeMilliseconds)
     }
 
     const handleChangeTypingField: ChangeEventHandler<HTMLInputElement> = (e) => {
