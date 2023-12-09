@@ -1,6 +1,6 @@
-import { ChangeEventHandler } from "react";
-import { useUnit } from "effector-react";
-import { $timerStore, eventStartTimer, eventStopTimer } from "@entities/timer";
+import {ChangeEventHandler} from "react";
+import {useUnit} from "effector-react";
+import {$timerStore, eventStartTimer, eventStopTimer} from "@entities/timer";
 import {
     $currentWordIndexStore,
     $typingValueStore,
@@ -8,11 +8,14 @@ import {
     eventIncrementCurrentWordIndex,
     useGetTextQuery
 } from "@entities/text";
-import { eventAddResult, getResultId } from "@entities/results";
+import {eventAddResult, getResultId} from "@entities/results";
+import {useNavigate} from "react-router-dom";
+import {getUrlResultsCardPage} from "@pages/index.tsx";
 
 
 export const useTyping = () => {
-    const { data: textObject } = useGetTextQuery()
+    const {data: textObject} = useGetTextQuery()
+    const navigate = useNavigate()
 
     const currentTextString = textObject?.data[0].content
     const currentText = currentTextString?.split(' ')
@@ -24,7 +27,7 @@ export const useTyping = () => {
 
     const [addResult] = useUnit([eventAddResult])
 
-    const { timerStatus, timeMillisecondsStart } = useUnit($timerStore)
+    const {timerStatus, timeMillisecondsStart} = useUnit($timerStore)
     const [startTimer, stopTimer] = useUnit([eventStartTimer, eventStopTimer])
 
     const currentWord = currentText?.[currentWordIndex]
@@ -37,16 +40,20 @@ export const useTyping = () => {
         if (!timeMillisecondsStart || !currentTextString)
             return
 
+        const resultId = getResultId({
+            timeEndMilliseconds: stopTimeMilliseconds,
+            timeStartMilliseconds: timeMillisecondsStart
+        })
+
         addResult({
-            resultId: getResultId({
-                timeEndMilliseconds: stopTimeMilliseconds,
-                timeStartMilliseconds: timeMillisecondsStart
-            }),
+            resultId,
             text: currentTextString,
             timeEndMilliseconds: stopTimeMilliseconds,
             timeStartMilliseconds: timeMillisecondsStart,
             timeResultMilliseconds: stopTimeMilliseconds - timeMillisecondsStart
         })
+
+        navigate(getUrlResultsCardPage(resultId))
     }
 
     const handleNextWord = () => {

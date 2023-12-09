@@ -5,7 +5,7 @@ import {useGetTextQuery} from "@entities/text";
 import {ButtonNewText} from "@features/new-text";
 import {ButtonRepeatText} from "@features/repeat-text";
 
-export const TypingPage = () => {
+const TypingPage = () => {
     const {isFetching} = useGetTextQuery()
 
     return (
@@ -25,3 +25,5 @@ export const TypingPage = () => {
         </Container>
     )
 }
+
+export default TypingPage

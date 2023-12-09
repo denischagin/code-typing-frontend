@@ -1,1 +1,1 @@
-export {TypingPage} from './TypingPage.tsx'
+export {default} from './TypingPage.tsx'
