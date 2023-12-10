@@ -1,13 +1,26 @@
 import {createEvent, createStore} from "effector";
-import {IResult, TResultStore} from "@entities/results/model/types/store.ts";
+import {IResult, TResultStore} from "@entities/results";
+import {storageKeysEnum} from "@shared/constants";
 
 export const eventAddResult = createEvent<IResult>()
 
-export const $resultsStore = createStore<TResultStore | null>(null)
+const loadResultsToLocalStorage = (state: TResultStore | null) => {
+    if (!state) return
+
+    localStorage.setItem(storageKeysEnum.results, JSON.stringify(state))
+}
+
+const loadResultsFromLocalStorage = (): TResultStore | null => {
+    const preloadResultsString = localStorage.getItem(storageKeysEnum.results)
+    return preloadResultsString ? JSON.parse(preloadResultsString) : null
+}
+
+
+export const $resultsStore = createStore<TResultStore | null>(loadResultsFromLocalStorage())
 
 $resultsStore
     .on(eventAddResult, (state, payload) =>
         state ? [...state, payload] : [payload])
 $resultsStore.watch((state) => {
-   console.log(state);
+    loadResultsToLocalStorage(state)
 })

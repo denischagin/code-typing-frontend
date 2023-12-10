@@ -3,11 +3,13 @@ import {useGetTextQuery} from "@entities/text";
 import {useUnit} from "effector-react/compat";
 import {eventChangeCurrentWordIndex, eventChangeTypingValue} from "@entities/text";
 import {eventResetTimer} from "@entities/timer";
+import {useSearchParams} from "react-router-dom";
 
 export const ButtonNewText = () => {
     const {refetch} = useGetTextQuery()
     const [changeCurrentWordIndex, changeTypingValue] =
         useUnit([eventChangeCurrentWordIndex, eventChangeTypingValue])
+    const [, setSearchParams] = useSearchParams()
 
     const [resetTimer] = useUnit([eventResetTimer])
 
@@ -16,11 +18,12 @@ export const ButtonNewText = () => {
         changeTypingValue("")
         resetTimer()
         refetch()
+        setSearchParams({})
     };
 
     return (
         <Button onClick={handleNewTextClick}>
-            Новый текст
+            New text
         </Button>
     )
 }

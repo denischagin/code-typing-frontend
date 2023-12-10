@@ -9,26 +9,36 @@ import {
     useGetTextQuery
 } from "@entities/text";
 import {eventAddResult, getResultId} from "@entities/results";
-import {useNavigate} from "react-router-dom";
-import {getUrlResultsCardPage} from "@pages/index.tsx";
+import {useSearchParams} from "react-router-dom";
+import {searchParamsEnum} from "@shared/constants";
 
 
 export const useTyping = () => {
     const {data: textObject} = useGetTextQuery()
-    const navigate = useNavigate()
+    const [, setSearchParams] = useSearchParams()
 
     const currentTextString = textObject?.data[0].content
     const currentText = currentTextString?.split(' ')
 
-    const [currentWordIndex, incrementCurrentWordIndex] =
-        useUnit([$currentWordIndexStore, eventIncrementCurrentWordIndex])
-    const [typingValue, setTypingValue] =
-        useUnit([$typingValueStore, eventChangeTypingValue])
-
-    const [addResult] = useUnit([eventAddResult])
-
-    const {timerStatus, timeMillisecondsStart} = useUnit($timerStore)
-    const [startTimer, stopTimer] = useUnit([eventStartTimer, eventStopTimer])
+    const {
+        typingValue,
+        setTypingValue,
+        stopTimer,
+        startTimer,
+        incrementCurrentWordIndex,
+        currentWordIndex,
+        addResult,
+        timerState: {timerStatus, timeMillisecondsStart}
+    } = useUnit({
+        currentWordIndex: $currentWordIndexStore,
+        incrementCurrentWordIndex: eventIncrementCurrentWordIndex,
+        typingValue: $typingValueStore,
+        setTypingValue: eventChangeTypingValue,
+        addResult: eventAddResult,
+        timerState: $timerStore,
+        startTimer: eventStartTimer,
+        stopTimer: eventStopTimer,
+    })
 
     const currentWord = currentText?.[currentWordIndex]
 
@@ -53,7 +63,7 @@ export const useTyping = () => {
             timeResultMilliseconds: stopTimeMilliseconds - timeMillisecondsStart
         })
 
-        navigate(getUrlResultsCardPage(resultId))
+        setSearchParams({[searchParamsEnum.resultId]: resultId})
     }
 
     const handleNextWord = () => {
@@ -65,6 +75,7 @@ export const useTyping = () => {
         const startTimeMilliseconds = Date.now()
 
         startTimer(startTimeMilliseconds)
+        setSearchParams({})
     }
 
     const handleChangeTypingField: ChangeEventHandler<HTMLInputElement> = (e) => {
