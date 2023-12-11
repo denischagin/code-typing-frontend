@@ -2,8 +2,7 @@ import {Select} from "@chakra-ui/react";
 import {selectOption} from "@features/change-language";
 import {ChangeEventHandler} from "react";
 import {useUnit} from "effector-react";
-import {$textParamsStore, eventChangeLanguage} from "@entities/text/model/store/text-params.ts";
-import {ETextLocale} from "@entities/text";
+import {$textParamsStore, ETextLocale, eventChangeLanguage, useText} from "@entities/text";
 
 
 export const SelectChangeLanguage = () => {
@@ -11,9 +10,12 @@ export const SelectChangeLanguage = () => {
         changeLanguage: eventChangeLanguage,
         textParamsStore: $textParamsStore
     })
+
+    const {handleResetText} = useText()
     const handleChangeLanguage: ChangeEventHandler<HTMLSelectElement> = (e) => {
         const changedValue = e.target.value as ETextLocale
         changeLanguage(changedValue)
+        handleResetText()
     }
 
 

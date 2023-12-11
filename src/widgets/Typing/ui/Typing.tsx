@@ -3,13 +3,12 @@ import {Text} from "@chakra-ui/react";
 import css from './Typing.module.scss'
 import {Cursor, TypingField} from "@features/typing";
 import {
-    getWordStatus,
-    useTyping,
+    getWordStatus, useGetTextQuery,
     Word
 } from "@entities/text";
 import {useUnit} from "effector-react";
 import {$storeCursorPosition} from "@entities/cursor";
-import {useGetTextQuery} from "@entities/text/libs/hooks/use-get-text-query.ts";
+import {useTyping} from "@widgets/Typing";
 
 export const Typing = () => {
     const typingFieldRef = useRef<HTMLInputElement>(null)

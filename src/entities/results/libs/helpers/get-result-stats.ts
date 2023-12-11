@@ -1,13 +1,16 @@
 import {IResult} from "@entities/results";
 
-export interface UseResultStatsReturn {
+export interface GetResultStatsReturn {
     charactersPerMinuteString: string
     wordsPerMinuteString: string
 }
 
-export const useResultStats = (currentResult: IResult | null): UseResultStatsReturn | null=> {
+export const getResultStats = (currentResult: Omit<IResult, "wordsPerMinuteString" | "charactersPerMinuteString"> | null): GetResultStatsReturn => {
     if (currentResult === null)
-        return null
+        return {
+            charactersPerMinuteString: "Ошибка в подсчете",
+            wordsPerMinuteString: "Ошибка в подсчете",
+        }
     const {timeResultMilliseconds, text} = currentResult;
 
     const characterCount = text.length;

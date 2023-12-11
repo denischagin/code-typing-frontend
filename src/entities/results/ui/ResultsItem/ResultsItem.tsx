@@ -1,20 +1,73 @@
 import {ResultsItemProps} from "@entities/results";
 import {convertMillisecondsToTime} from "@shared/libs";
-import {Flex, Text} from "@chakra-ui/react";
+import {
+    Flex,
+    VStack,
+    Text,
+    Button,
+    Modal,
+    ModalCloseButton,
+    ModalHeader,
+    ModalContent,
+    ModalOverlay, ModalBody
+} from "@chakra-ui/react";
+import {useState} from "react";
 
 export const ResultsItem = ({
                                 timeResultMilliseconds,
-                                resultIndex
+                                resultIndex,
+                                charactersPerMinuteString,
+                                wordsPerMinuteString,
+                                text,
                             }: ResultsItemProps) => {
-    return (
-        <Flex gap="5px" align="center">
-            <Text fontSize="large" as="strong">
-                {resultIndex + 1}.
-            </Text>
+    const [isOpenTextModal, setIsOpenTextModal] = useState(false)
 
-            <Text fontSize="x-large" flexGrow={1}>
-                {convertMillisecondsToTime(timeResultMilliseconds)}
-            </Text>
-        </Flex>
+    const handleCloseTextModal = () => {
+        setIsOpenTextModal(false)
+    }
+    const handleOpenTextModal = () => {
+        setIsOpenTextModal(true)
+    }
+
+    return (
+        <>
+            <Flex
+                gap="10px"
+                align="center"
+                bg={"whiteAlpha.100"}
+                px="10px" py="5px"
+                borderRadius="10px"
+            >
+                <Text fontSize="large" as="strong">
+                    {resultIndex + 1}.
+                </Text>
+
+                <Text fontSize="x-large" flexGrow={1}>
+                    {convertMillisecondsToTime(timeResultMilliseconds)}
+                </Text>
+
+                <Button colorScheme="blue" onClick={handleOpenTextModal}>Text</Button>
+
+                <VStack spacing={2}>
+                    <Text fontSize="medium"><Text as="strong"
+                                                  fontSize="large">{charactersPerMinuteString}</Text> sym./min. </Text>
+                    <Text fontSize="medium"> <Text as="strong" fontSize="large">{wordsPerMinuteString}</Text> word/min.
+                    </Text>
+                </VStack>
+            </Flex>
+
+            <Modal isOpen={isOpenTextModal} onClose={handleCloseTextModal}>
+                <ModalOverlay/>
+                <ModalContent>
+                    <ModalCloseButton/>
+
+                    <ModalHeader>Текст</ModalHeader>
+
+                    <ModalBody>
+                        <Text fontSize="large">{text}</Text>
+                    </ModalBody>
+                </ModalContent>
+            </Modal>
+        </>
     )
 }

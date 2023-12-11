@@ -2,7 +2,7 @@ import {Flex, Text} from "@chakra-ui/react";
 import {convertMillisecondsToTime} from "@shared/libs";
 import {useSearchParams} from "react-router-dom";
 import {searchParamsEnum} from "@shared/constants";
-import {useFindResultById, useResultStats} from "@entities/results";
+import {useFindResultById, getResultStats} from "@entities/results";
 
 export const ResultSpeed = () => {
     const [searchParams] = useSearchParams()
@@ -10,7 +10,7 @@ export const ResultSpeed = () => {
     const resultId = searchParams.get(searchParamsEnum.resultId)
 
     const resultById = useFindResultById(resultId)
-    const resultStats = useResultStats(resultById?.result ?? null)
+    const resultStats = getResultStats(resultById?.result ?? null)
 
     if (!resultId || !resultById?.result || !resultStats)
         return null

@@ -4,6 +4,8 @@ export interface IResult {
     timeStartMilliseconds: number
     timeEndMilliseconds: number
     text: string
+    charactersPerMinuteString: string,
+    wordsPerMinuteString: string,
 }
 
 export type TResultStore = IResult[]

@@ -11,3 +11,4 @@ export const $storeCursorPosition = createStore<ICursorPosition>({
     .on(eventChangePosition, (_, newPosition) => {
         return newPosition
     })
+
