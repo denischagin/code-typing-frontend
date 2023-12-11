@@ -1,10 +1,11 @@
-import {Container, Divider, Flex, Progress} from "@chakra-ui/react";
+import {Container, Divider, Flex, HStack, Progress} from "@chakra-ui/react";
 import {Timer} from "@widgets/Timer";
 import {Typing} from "@widgets/Typing";
 import {useGetTextQuery} from "@entities/text";
 import {ButtonNewText} from "@features/new-text";
 import {ButtonRepeatText} from "@features/repeat-text";
 import {ResultSpeed} from "@widgets/ResultSpeed";
+import {SelectChangeLanguage} from "@features/change-language";
 
 const TypingPage = () => {
     const {isFetching} = useGetTextQuery()
@@ -14,10 +15,11 @@ const TypingPage = () => {
             <Flex justify="space-between" align="center">
                 <Timer/>
 
-                <Flex gap="5px">
+                <HStack spacing={2}>
                     <ButtonNewText/>
                     <ButtonRepeatText/>
-                </Flex>
+                    <SelectChangeLanguage/>
+                </HStack>
             </Flex>
 
             {isFetching && <Progress mt="10px" isIndeterminate/>}

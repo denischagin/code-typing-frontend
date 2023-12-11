@@ -11,10 +11,12 @@ import {
 import {eventAddResult, getResultId} from "@entities/results";
 import {useSearchParams} from "react-router-dom";
 import {searchParamsEnum} from "@shared/constants";
+import {$textParamsStore} from "@entities/text/model/store/text-params.ts";
 
 
 export const useTyping = () => {
     const {data: textObject} = useGetTextQuery()
+
     const [, setSearchParams] = useSearchParams()
 
     const currentTextString = textObject?.data[0].content

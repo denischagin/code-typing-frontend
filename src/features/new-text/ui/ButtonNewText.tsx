@@ -23,7 +23,7 @@ export const ButtonNewText = () => {
 
     return (
         <Button onClick={handleNewTextClick}>
-            New text
+            New
         </Button>
     )
 }

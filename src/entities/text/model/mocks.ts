@@ -1,1 +1,0 @@
-export const text = 'Once upon a time, in a land far, far away, there was a majestic kingdom called Youlandia.'

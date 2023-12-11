@@ -5,7 +5,7 @@ export enum ETextLocale {
 }
 
 export interface ITextRequestParams {
-    locale?: ETextLocale
+    _locale?: ETextLocale
 }
 
 export interface IText {

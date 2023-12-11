@@ -20,6 +20,6 @@ export const ButtonRepeatText = () => {
     }
 
     return (
-        <Button onClick={handleRepeatText}>Repeat text</Button>
+        <Button onClick={handleRepeatText}>Repeat</Button>
     )
 }
