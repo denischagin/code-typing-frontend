@@ -1,8 +1,10 @@
 import {createBrowserRouter} from "react-router-dom";
-import ResultsPage from "@pages/ResultsPage";
-import Root from "@pages/Root/ui";
-import ErrorPage from "@pages/ErrorPage";
-import TypingPage from "@pages/TypingPage";
+import {lazy} from "react";
+
+const ResultsPage = lazy(() => import('@pages/ResultsPage'))
+const Root = lazy(() => import('@pages/Root'))
+const ErrorPage = lazy(() => import('@pages/ErrorPage'))
+const TypingPage = lazy(() => import('@pages/TypingPage'))
 
 export const paths = {
     typingPage: '/',

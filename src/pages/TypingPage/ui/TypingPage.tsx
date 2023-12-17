@@ -1,10 +1,10 @@
-import {Container, Divider, Flex, HStack, Progress} from "@chakra-ui/react";
+import {Container, Flex, HStack, Progress} from "@chakra-ui/react";
 import {Timer} from "@widgets/Timer";
 import {Typing} from "@widgets/Typing";
+import {ResultSpeed} from "@widgets/ResultSpeed";
 import {useGetTextQuery} from "@entities/text";
 import {ButtonNewText} from "@features/new-text";
 import {ButtonRepeatText} from "@features/repeat-text";
-import {ResultSpeed} from "@widgets/ResultSpeed";
 import {SelectChangeLanguage} from "@features/change-language";
 
 const TypingPage = () => {
@@ -26,11 +26,10 @@ const TypingPage = () => {
 
             <Typing/>
 
-            <Divider my={4}/>
-
             <ResultSpeed/>
         </Container>
     )
 }
+
 
 export default TypingPage

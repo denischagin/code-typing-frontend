@@ -1,4 +1,4 @@
-import {Flex, Text} from "@chakra-ui/react";
+import {Divider, Flex, Text} from "@chakra-ui/react";
 import {convertMillisecondsToTime} from "@shared/libs";
 import {useSearchParams} from "react-router-dom";
 import {searchParamsEnum} from "@shared/constants";
@@ -19,27 +19,31 @@ export const ResultSpeed = () => {
     const {wordsPerMinuteString, charactersPerMinuteString} = resultStats
 
     return (
-        <Flex direction="column" align="center">
-            <Text fontSize="xxx-large">
-                Result: {(resultById.resultIndex) + 1}
-            </Text>
-            <Text fontSize="xxx-large">
-                {convertMillisecondsToTime(timeResultMilliseconds)}
-            </Text>
+        <>
+            <Divider my={4}/>
 
-            <Flex gap="10px" justify="space-evenly" wrap="wrap" w="100%">
+            <Flex direction="column" align="center">
                 <Text fontSize="xxx-large">
-                    {charactersPerMinuteString} sym./m.
+                    Result: {(resultById.resultIndex) + 1}
+                </Text>
+                <Text fontSize="xxx-large">
+                    {convertMillisecondsToTime(timeResultMilliseconds)}
                 </Text>
 
-                <Text fontSize="xxx-large">
-                    {wordsPerMinuteString} word/m.
+                <Flex gap="10px" justify="space-evenly" wrap="wrap" w="100%">
+                    <Text fontSize="xxx-large">
+                        {charactersPerMinuteString} sym./m.
+                    </Text>
+
+                    <Text fontSize="xxx-large">
+                        {wordsPerMinuteString} word/m.
+                    </Text>
+                </Flex>
+
+                <Text>
+                    <Text as="strong">Text:</Text> {text}
                 </Text>
             </Flex>
-
-            <Text>
-                <Text as="strong">Text:</Text> {text}
-            </Text>
-        </Flex>
+        </>
     )
 }
