@@ -5,13 +5,9 @@ import {
     VStack,
     Text,
     Button,
-    Modal,
-    ModalCloseButton,
-    ModalHeader,
-    ModalContent,
-    ModalOverlay, ModalBody
 } from "@chakra-ui/react";
 import {useState} from "react";
+import {ShowTextModal} from "@features/show-text";
 
 export const ResultsItem = ({
                                 timeResultMilliseconds,
@@ -56,18 +52,7 @@ export const ResultsItem = ({
                 </VStack>
             </Flex>
 
-            <Modal isOpen={isOpenTextModal} onClose={handleCloseTextModal}>
-                <ModalOverlay/>
-                <ModalContent>
-                    <ModalCloseButton/>
-
-                    <ModalHeader>Текст</ModalHeader>
-
-                    <ModalBody>
-                        <Text fontSize="large">{text}</Text>
-                    </ModalBody>
-                </ModalContent>
-            </Modal>
+            <ShowTextModal isOpen={isOpenTextModal} onClose={handleCloseTextModal} text={text}/>
         </>
     )
 }

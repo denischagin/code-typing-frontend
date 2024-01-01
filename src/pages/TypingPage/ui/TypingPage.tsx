@@ -11,7 +11,13 @@ const TypingPage = () => {
     const {isFetching} = useGetTextQuery()
 
     return (
-        <Container maxW="1000px">
+        <Container
+            display="flex"
+            flexDirection="column"
+            flexGrow="1"
+            maxW="1000px"
+            minH="100%"
+        >
             <Flex justify="space-between" align="center">
                 <Timer/>
 
@@ -22,11 +28,11 @@ const TypingPage = () => {
                 </HStack>
             </Flex>
 
+            <ResultSpeed/>
+
             {isFetching && <Progress mt="10px" isIndeterminate/>}
 
             <Typing/>
-
-            <ResultSpeed/>
         </Container>
     )
 }

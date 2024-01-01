@@ -9,8 +9,11 @@ import {
 import {useUnit} from "effector-react";
 import {$storeCursorPosition} from "@entities/cursor";
 import {useTyping} from "@widgets/Typing";
+import {useSearchParams} from "react-router-dom";
+import {searchParamsEnum} from "@shared/constants";
 
 export const Typing = () => {
+    const [searchParams] = useSearchParams()
     const typingFieldRef = useRef<HTMLInputElement>(null)
     const parentRef = useRef<HTMLParagraphElement>(null)
     const parentRect = parentRef.current?.getBoundingClientRect()
@@ -33,7 +36,10 @@ export const Typing = () => {
         typingFieldRef.current?.focus()
     }
 
+    const resultId = searchParams.get(searchParamsEnum.resultId)
+
     if (isFetching) return null
+    if (resultId) return null
 
     return (
         <>
