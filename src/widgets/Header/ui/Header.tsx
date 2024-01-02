@@ -4,10 +4,10 @@ import {paths} from "@pages/index.tsx";
 
 export const Header = () => {
     return (
-        <Flex as="header" bgColor="blue.900" mb="10px" py="5px">
-            <Container maxW="1200px">
+        <Flex as="header" bgColor="blackAlpha.400" mb="10px" py="5px">
+            <Container maxW="100%">
                 <Flex justify="space-between" align="center">
-                    <Text fontSize="xx-large">
+                    <Text fontSize="x-large">
                         Speed-typing
                     </Text>
 

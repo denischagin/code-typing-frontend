@@ -23,7 +23,7 @@ export const Typing = () => {
     const {left, top} = useUnit($storeCursorPosition)
 
     const cursorRelativePositionTop = top - (parentRect?.top ?? 0)
-    const cursorRelativePositionLeft = left - (parentRect?.left ?? 0)
+    const cursorRelativePositionLeft = left - (parentRect?.left ?? 0) - 5
 
     const {
         currentText,
@@ -45,7 +45,7 @@ export const Typing = () => {
         <>
             <div className={css.typing} onClick={handleFocus} ref={parentRef}>
                 <Text
-                    fontSize="xxx-large"
+                    fontSize="xx-large"
                     display="inline-flex"
                     flexWrap="wrap"
                     justifyContent="left"

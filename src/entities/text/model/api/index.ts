@@ -16,3 +16,12 @@ export interface IText {
 }
 
 export type TTextResponse = { data: IText[] }
+
+export interface IProgrammingLanguage {
+    UUID: string
+    name: string
+}
+
+export type TProgrammingLanguageResponse = IProgrammingLanguage[]
+
+

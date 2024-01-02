@@ -1,15 +1,17 @@
 import {Box, Container, Link, Text} from "@chakra-ui/react";
 
 export const Footer = () => {
+    const date = new Date()
+
     return (
         <Box
             as="footer"
-            bgColor="blue.800"
+            bgColor="blackAlpha.400"
             mt="20px"
         >
             <Container maxW="1000px">
                 <Text align="center">
-                    Created with <Link href="https://github.com/denischagin" target="_blank">denischagin</Link>
+                    {date.getFullYear()} © copyright
                 </Text>
             </Container>
         </Box>

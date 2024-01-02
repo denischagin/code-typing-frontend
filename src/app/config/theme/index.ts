@@ -5,4 +5,10 @@ const config = {
     useSystemColorMode: false,
 }
 
-export const theme = extendTheme({config})
+export const theme = extendTheme({
+    config,
+    fonts: {
+        heading: `"JetBrains Mono", monospace`,
+        body: `"JetBrains Mono", monospace`,
+    },
+})

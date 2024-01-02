@@ -1,6 +1,8 @@
 import {PrintingInput, PrintingRow, useRandomText} from "@entities/text";
 import {useRow} from "@widgets/TypingCode";
-import {KeyboardEvent} from "react";
+import {KeyboardEvent, useEffect} from "react";
+import {useUnit} from "effector-react";
+import {$timerStore, eventStartTimer, eventStopTimer} from "@entities/timer";
 
 export const TypingCode = () => {
     const randomText = useRandomText()
@@ -14,8 +16,21 @@ export const TypingCode = () => {
         setValueWithTab,
     } = useRow(rows)
 
-    const handleKeyDown = (row: string) => (e: KeyboardEvent) => {
+    const {timer, startTimer, stopTimer} = useUnit({
+        timer: $timerStore,
+        startTimer: eventStartTimer,
+        stopTimer: eventStopTimer,
+    })
+    useEffect(() => {
+        if (currentRowIndex === 0 && timer.timerStatus !== "started" && typingValue.length === 1) {
+            startTimer(Date.now())
+        }
+    }, [currentRowIndex, startTimer, timer.timerStatus, typingValue.length]);
+
+    const handleKeyDown = (row: string, rowIndex: number) => (e: KeyboardEvent) => {
         if (e.key === 'Enter' && row === typingValue.trimEnd()) {
+            if (rowIndex === rows.length - 1)
+                return stopTimer(Date.now())
             nextRow()
         }
         if (e.key === 'Tab') {
@@ -36,7 +51,7 @@ export const TypingCode = () => {
                         <PrintingInput
                             typingValue={typingValue}
                             isRightRow={row.startsWith(typingValue)}
-                            handleKeyDown={handleKeyDown(row)}
+                            handleKeyDown={handleKeyDown(row, rowIndex)}
                             onChange={(e) => setTypingValue(e.target.value)}
                         />
                     )}

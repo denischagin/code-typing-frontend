@@ -41,7 +41,6 @@ export const PrintingRow = (props: PrintingRowProps) => {
                 {isActive && printingInput}
 
                 <Text
-                    fontFamily="monospace"
                     fontSize={"25px"}
                     whiteSpace="pre"
                     color={isPrinted ? 'whiteAlpha.800' : "gray.500"}

@@ -11,7 +11,6 @@ export const PrintingInput = (props: PrintingInputProps) => {
 
     return (
         <Input
-            fontFamily="monospace"
             fontSize={"25px"}
             pos="absolute"
             color={isRightRow ? "white" : 'red.400'}

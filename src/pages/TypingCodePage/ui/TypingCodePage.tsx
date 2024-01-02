@@ -1,7 +1,12 @@
-import {Container} from "@chakra-ui/react";
+import {Button, ButtonGroup, Container, Flex} from "@chakra-ui/react";
 import {TypingCode} from "@widgets/TypingCode";
+import {useGetProgrammingLanguages} from "@entities/text";
+import {Timer} from "@widgets/Timer";
 
 const TypingCodePage = () => {
+    const {
+        data: programmingLanguages,
+    } = useGetProgrammingLanguages()
 
     return (
         <Container
@@ -11,7 +16,17 @@ const TypingCodePage = () => {
             maxW="100%"
             minH="100%"
         >
-            <TypingCode />
+            <Flex justify="end">
+                <Timer/>
+            </Flex>
+
+            <ButtonGroup>
+                {programmingLanguages?.map(({name}) => (
+                    <Button>{name}</Button>
+                ))}
+            </ButtonGroup>
+
+            <TypingCode/>
         </Container>
     )
 }
