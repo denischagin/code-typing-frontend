@@ -1,0 +1,15 @@
+version: "3.5"
+services:
+  frontend:
+    build: .
+
+    image: speed-typing-frontend
+
+    container_name: speed-typing-frontend
+
+    restart: always
+
+    stdin_open: true
+
+    ports:
+      - "3000:3000"
