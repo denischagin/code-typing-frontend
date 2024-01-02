@@ -5,9 +5,11 @@ const ResultsPage = lazy(() => import('@pages/ResultsPage'))
 const Root = lazy(() => import('@pages/Root'))
 const ErrorPage = lazy(() => import('@pages/ErrorPage'))
 const TypingPage = lazy(() => import('@pages/TypingPage'))
+const TypingCodePage = lazy(() => import('@pages/TypingCodePage'))
 
 export const paths = {
-    typingPage: '/',
+    typingPage: '/typing',
+    typingCodePage: '/typing-code',
     resultsPage: '/results'
 }
 
@@ -20,6 +22,10 @@ export const router = createBrowserRouter([
             {
                 path: paths.typingPage,
                 element: <TypingPage/>
+            },
+            {
+                path: paths.typingCodePage,
+                element: <TypingCodePage/>
             },
             {
                 path: paths.resultsPage,

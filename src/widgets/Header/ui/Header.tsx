@@ -20,6 +20,10 @@ export const Header = () => {
                             <ListItem>
                                 <NavLink to={paths.typingPage}>Go typing</NavLink>
                             </ListItem>
+
+                            <ListItem>
+                                <NavLink to={paths.typingCodePage}>Code typing</NavLink>
+                            </ListItem>
                         </List>
                     </Flex>
                 </Flex>
