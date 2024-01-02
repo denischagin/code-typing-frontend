@@ -1,23 +1,27 @@
-import {useState} from "react";
-import {PrintingRow, useRandomText} from "@entities/text";
+import {PrintingInput, PrintingRow, useRandomText} from "@entities/text";
+import {useRow} from "@widgets/TypingCode";
+import {KeyboardEvent} from "react";
 
 export const TypingCode = () => {
     const randomText = useRandomText()
-    const [currentRowIndex, setCurrentRowIndex] = useState(0)
     const rows = randomText.split('\n')
-    const [startIndent, setStartIndent] = useState(0)
 
-    const handleNextRow = () => {
-        const nextRow = rows[currentRowIndex + 1]
+    const {
+        nextRow,
+        currentRowIndex,
+        setTypingValue,
+        typingValue,
+        setValueWithTab,
+    } = useRow(rows)
 
-        if (nextRow) {
-            const startIndexText = nextRow.search(/\S/g)
-            setStartIndent(startIndexText === -1 ? 0 : startIndexText)
-        } else
-            setStartIndent(0)
-
-        setCurrentRowIndex(prev => prev + 1)
-
+    const handleKeyDown = (row: string) => (e: KeyboardEvent) => {
+        if (e.key === 'Enter' && row === typingValue.trimEnd()) {
+            nextRow()
+        }
+        if (e.key === 'Tab') {
+            e.preventDefault()
+            setValueWithTab()
+        }
     }
 
     return (
@@ -26,10 +30,16 @@ export const TypingCode = () => {
                 <PrintingRow
                     isActive={rowIndex === currentRowIndex}
                     index={rowIndex}
-                    onNextRow={handleNextRow}
                     text={row}
-                    indent={startIndent}
                     isPrinted={currentRowIndex > rowIndex}
+                    printingInput={(
+                        <PrintingInput
+                            typingValue={typingValue}
+                            isRightRow={row.startsWith(typingValue)}
+                            handleKeyDown={handleKeyDown(row)}
+                            onChange={(e) => setTypingValue(e.target.value)}
+                        />
+                    )}
                 />
             ))}
         </div>
