@@ -5,5 +5,5 @@ export interface PrintingRowProps {
     isPrinted: boolean
     index: number
     text: string
-    printingInput: ReactElement
+    printingInput: ReactElement | null
 }

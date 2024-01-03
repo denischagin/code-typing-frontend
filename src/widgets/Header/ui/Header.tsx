@@ -1,5 +1,5 @@
 import {Container, Flex, List, ListItem, Text} from "@chakra-ui/react";
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {paths} from "@pages/index.tsx";
 
 export const Header = () => {
@@ -14,15 +14,15 @@ export const Header = () => {
                     <Flex as="nav" align="center">
                         <List display="flex" gap={5}>
                             <ListItem>
-                                <NavLink to={paths.resultsPage}>Results</NavLink>
+                                <Link to={paths.resultsPage}>Results</Link>
                             </ListItem>
 
                             <ListItem>
-                                <NavLink to={paths.typingPage}>Go typing</NavLink>
+                                <Link to={paths.typingPage}>Go typing</Link>
                             </ListItem>
 
                             <ListItem>
-                                <NavLink to={paths.typingCodePage}>Code typing</NavLink>
+                                <Link to={paths.typingCodePage}>Code typing</Link>
                             </ListItem>
                         </List>
                     </Flex>

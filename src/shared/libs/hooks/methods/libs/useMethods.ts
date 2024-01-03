@@ -22,6 +22,7 @@ export const useMethods = <State, Methods extends AnyMethodsMap<State>>(
         const actualOptions = typeof options === "object" ? options : options();
 
         const actionReducer = actualOptions.methods[action.type];
+
         return produce(state, (draft: State) =>
             actionReducer(draft, action.payload)
         );

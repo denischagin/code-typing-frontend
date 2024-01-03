@@ -1,6 +1,6 @@
 import {useMethods} from "@shared/libs";
 
-export const useRow = (rows: string[]) => {
+export const useRow = (rows: string[] | undefined) => {
     const [state, rowMethods] = useMethods({
         initialState: {
             currentRowIndex: 0,
@@ -9,6 +9,7 @@ export const useRow = (rows: string[]) => {
         },
         methods: {
             nextRow: (state) => {
+                if (!rows) return
                 const nextRow = rows[state.currentRowIndex + 1]
 
                 let indent = 0
@@ -28,6 +29,11 @@ export const useRow = (rows: string[]) => {
             },
             setValueWithTab: (state, tabWidth = 2) => {
                 state.typingValue = " ".repeat(tabWidth) + state.typingValue
+            },
+            resetState: (state) => {
+                state.typingValue = ''
+                state.currentRowIndex = 0
+                state.startIndent = 0
             }
         },
     })

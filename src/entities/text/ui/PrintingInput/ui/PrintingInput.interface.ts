@@ -5,4 +5,5 @@ export interface PrintingInputProps {
     isRightRow: boolean
     handleKeyDown: (e: KeyboardEvent) => void
     onChange: ChangeEventHandler<HTMLInputElement>
+    maxLength: number
 }

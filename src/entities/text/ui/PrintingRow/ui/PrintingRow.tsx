@@ -1,7 +1,8 @@
-import {Grid, GridItem, Text} from "@chakra-ui/react";
+import {Box, Grid, GridItem, Text} from "@chakra-ui/react";
 import {PrintingRowProps} from "@entities/text/ui/PrintingRow/ui/PrintingRow.interface.ts";
+import {memo} from "react";
 
-export const PrintingRow = (props: PrintingRowProps) => {
+const PrintingRow = (props: PrintingRowProps) => {
     const {
         isActive,
         index,
@@ -10,6 +11,7 @@ export const PrintingRow = (props: PrintingRowProps) => {
         printingInput
     } = props
 
+    console.log('render printing row')
 
     return (
         <Grid
@@ -37,18 +39,29 @@ export const PrintingRow = (props: PrintingRowProps) => {
                 </Text>
             </GridItem>
 
-            <GridItem pos="relative">
-                {isActive && printingInput}
-
-                <Text
-                    fontSize={"25px"}
-                    whiteSpace="pre"
-                    color={isPrinted ? 'whiteAlpha.800' : "gray.500"}
+            <GridItem
+                overflowX="auto"
+            >
+                <Box
+                    w="max-content"
+                    pos="relative"
                 >
-                    {text}
-                </Text>
+                    {isActive && printingInput}
+                    <Text
+                        w="max-content"
+                        fontSize={"25px"}
+                        whiteSpace="pre"
+                        color={isPrinted ? 'whiteAlpha.800' : "gray.500"}
+                    >
+                        {text + " "}
+                    </Text>
+
+                </Box>
+
             </GridItem>
 
         </Grid>
     )
 }
+
+export default memo(PrintingRow)

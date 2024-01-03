@@ -1,8 +1,15 @@
-import {texts} from "@entities/text";
+import {useGetCodeExamples, useGetCodeExamplesByName} from "@entities/text";
 import {getRandomNumber} from "@shared/libs";
 import {useMemo} from "react";
+import {useParams} from "react-router-dom";
 
-export const useRandomText = (): string => {
+export const useRandomText = (): string | undefined => {
+    const {typingCodeName} = useParams()
 
-    return useMemo(() => texts[getRandomNumber(0, texts.length - 1)], [])
+    const {data: codesByName} = useGetCodeExamplesByName(typingCodeName, !!typingCodeName)
+    const {data: codes} = useGetCodeExamples(!typingCodeName)
+
+    const codesForRandom = codesByName ? codesByName : codes
+
+    return useMemo(() => codesForRandom?.[getRandomNumber(0, codesForRandom?.length - 1)]?.content, [codesForRandom])
 }

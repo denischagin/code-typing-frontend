@@ -1,4 +1,5 @@
 export enum queryKeysEnum {
     text = 'text',
-    programmingLanguages = "programmingLanguages"
+    programmingLanguages = "programmingLanguages",
+    codeExample = 'codeExample',
 }

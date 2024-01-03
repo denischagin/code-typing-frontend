@@ -1,16 +1,18 @@
 import {createBrowserRouter} from "react-router-dom";
 import {lazy} from "react";
+import Root from "@pages/Root";
+import ErrorPage from "@pages/ErrorPage";
 
 const ResultsPage = lazy(() => import('@pages/ResultsPage'))
-const Root = lazy(() => import('@pages/Root'))
-const ErrorPage = lazy(() => import('@pages/ErrorPage'))
 const TypingPage = lazy(() => import('@pages/TypingPage'))
-const TypingCodePage = lazy(() => import('@pages/TypingCodePage'))
+const SelectCodeLanguagePage = lazy(() => import('@pages/SelectCodeLanguagePage'))
 
 export const paths = {
-    typingPage: '/typing',
-    typingCodePage: '/typing-code',
-    resultsPage: '/results'
+    typingPage: 'typing',
+    typingCodePage: 'typing-code',
+    resultsPage: 'results',
+    typingCodeByLanguage: ":typingCodeName"
+
 }
 
 export const router = createBrowserRouter([
@@ -25,11 +27,16 @@ export const router = createBrowserRouter([
             },
             {
                 path: paths.typingCodePage,
-                element: <TypingCodePage/>
+                element: <SelectCodeLanguagePage/>,
+                children: [
+                    {
+                        path: paths.typingCodeByLanguage,
+                    }
+                ]
             },
             {
                 path: paths.resultsPage,
-                element: <ResultsPage/>
+                element: <ResultsPage/>,
             },
         ]
     },
