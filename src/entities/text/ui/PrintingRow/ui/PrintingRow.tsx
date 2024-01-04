@@ -11,8 +11,6 @@ const PrintingRow = (props: PrintingRowProps) => {
         printingInput
     } = props
 
-    console.log('render printing row')
-
     return (
         <Grid
             templateColumns="80px 1fr"

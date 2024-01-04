@@ -1,14 +1,15 @@
 import {AsideContent} from "../AsideContent";
 import {Flex} from "@chakra-ui/react";
-import {AsideProps, AsideContext} from "@shared/ui/aside";
+import {AsideContext, AsideProps} from "@shared/ui/aside";
 
 export const Aside = (props: AsideProps) => {
     const {
-        onClose,
-        isOpen,
+        onChangeTabIndex,
+        currentTabIndex,
         children,
         ...restProps
     } = props
+
 
     return (
         <Flex
@@ -16,11 +17,14 @@ export const Aside = (props: AsideProps) => {
             direction="column"
             bg="blackAlpha.500"
             h="100%"
-            w={isOpen ? "200px" : "70px"}
+            w={currentTabIndex !== null ? "200px" : "70px"}
             borderRightRadius="10px"
             {...restProps}
         >
-            <AsideContext.Provider value={{onClose, isOpen}}>
+            <AsideContext.Provider value={{
+                onChangeTabIndex: onChangeTabIndex ?? null,
+                currentTabIndex
+            }}>
                 {children}
             </AsideContext.Provider>
         </Flex>

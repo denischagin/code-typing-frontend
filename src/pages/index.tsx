@@ -11,7 +11,6 @@ export const paths = {
     typingPage: 'typing',
     typingCodePage: 'typing-code',
     resultsPage: 'results',
-    typingCodeByLanguage: ":typingCodeName"
 
 }
 
@@ -28,11 +27,6 @@ export const router = createBrowserRouter([
             {
                 path: paths.typingCodePage,
                 element: <SelectCodeLanguagePage/>,
-                children: [
-                    {
-                        path: paths.typingCodeByLanguage,
-                    }
-                ]
             },
             {
                 path: paths.resultsPage,
