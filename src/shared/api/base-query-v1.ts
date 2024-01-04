@@ -1,7 +1,7 @@
 import axios, {AxiosRequestConfig} from "axios";
 
 export const baseQueryV1Instance = axios.create({
-    baseURL: "http://localhost:8080",
+    baseURL: "http://localhost:8443/api/v1",
 })
 
 export const baseQueryV1 = <R>(config: AxiosRequestConfig | string) => {

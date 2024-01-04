@@ -1,5 +1,5 @@
-import {ComponentProps} from "react";
+import {FlexProps} from "@chakra-ui/react";
 
-export interface AsideContentProps extends ComponentProps<"div">{
+export interface AsideContentProps extends FlexProps {
 
 }

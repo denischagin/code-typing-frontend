@@ -13,6 +13,8 @@ export const ProgrammingLanguagesList = (props: ProgrammingLanguagesListProps) =
 
     if (!programmingLanguages) return null
 
+    const getLinkByName = (name: string) => `?${searchParamsEnum.languageName}=${encodeURIComponent(name)}`
+
     return (
         <Stack>
             <StackItem key={'default'} onClick={onClick}>
@@ -31,9 +33,7 @@ export const ProgrammingLanguagesList = (props: ProgrammingLanguagesListProps) =
             </StackItem>
             {programmingLanguages?.map(({name, UUID, logo}) => (
                 <StackItem key={UUID} onClick={onClick}>
-                    <Link
-                        to={`?${searchParamsEnum.languageName}=${name === currentLanguageName ? "" : name}`}
-                    >
+                    <Link to={getLinkByName(name)}>
                         <Flex
                             justifyContent="space-between"
                             alignContent="center"

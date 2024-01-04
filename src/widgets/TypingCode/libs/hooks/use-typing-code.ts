@@ -1,10 +1,9 @@
 import {useMethods} from "@shared/libs";
 
-export const useRow = (rows: string[] | undefined) => {
+export const useTypingCode = (rows: string[] | undefined) => {
     const [state, rowMethods] = useMethods({
         initialState: {
             currentRowIndex: 0,
-            startIndent: 0,
             typingValue: '',
         },
         methods: {
@@ -33,10 +32,9 @@ export const useRow = (rows: string[] | undefined) => {
             resetState: (state) => {
                 state.typingValue = ''
                 state.currentRowIndex = 0
-                state.startIndent = 0
             }
         },
     })
 
-    return {...rowMethods, ...state}
+    return {...state, ...rowMethods}
 }

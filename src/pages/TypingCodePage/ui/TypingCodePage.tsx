@@ -5,7 +5,7 @@ import {useSearchParams} from "react-router-dom";
 import {AsideSettings} from "@widgets/AsideSettings";
 import {searchParamsEnum} from "@shared/constants";
 
-const SelectCodeLanguagePage = () => {
+const TypingCodePage = () => {
     const [searchParams] = useSearchParams()
     const languageName = searchParams.get(searchParamsEnum.languageName)
 
@@ -28,4 +28,4 @@ const SelectCodeLanguagePage = () => {
         </Grid>
     )
 }
-export default SelectCodeLanguagePage
+export default TypingCodePage

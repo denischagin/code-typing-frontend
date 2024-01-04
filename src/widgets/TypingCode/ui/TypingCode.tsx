@@ -1,23 +1,22 @@
-import {PrintingInput, PrintingRow, useRandomText} from "@entities/text";
-import {useRow} from "@widgets/TypingCode";
-import {KeyboardEvent, useEffect, useMemo} from "react";
+import {PrintingInput, PrintingRow, transformCodeToRows, useRandomText} from "@entities/text";
+import {useTypingCode} from "@widgets/TypingCode";
+import {ChangeEventHandler, KeyboardEvent, useEffect, useMemo, useRef} from "react";
 import {useUnit} from "effector-react";
 import {$timerStore, eventResetTimer, eventStartTimer, eventStopTimer} from "@entities/timer";
 import {Box, Text} from "@chakra-ui/react";
 
 export const TypingCode = () => {
+    const endIndent = 2
     const randomText = useRandomText()
-    const rows = useMemo(() => randomText?.split('\n').map((row) => row.replace(/\t/g, "    ")), [randomText])
+    const rows = useMemo(() => transformCodeToRows(randomText ?? null), [randomText])
+    const rowRef = useRef<HTMLDivElement>(null)
 
-    const {
-        nextRow,
-        currentRowIndex,
-        setTypingValue,
-        typingValue,
-        setValueWithTab,
-        resetState
-    } = useRow(rows)
-
+    const
+        {
+            typingValue,
+            currentRowIndex,
+            setTypingValue, setValueWithTab, resetState, nextRow
+        } = useTypingCode(rows)
 
     const {timer, startTimer, stopTimer, resetTimer} = useUnit({
         timer: $timerStore,
@@ -25,32 +24,43 @@ export const TypingCode = () => {
         stopTimer: eventStopTimer,
         resetTimer: eventResetTimer
     })
+
     useEffect(() => {
         return () => {
             resetState()
             resetTimer()
         }
-    }, [randomText, resetState, resetTimer]);
-
-    useEffect(() => {
-        if (currentRowIndex === 0 && timer.timerStatus !== "started" && typingValue.length === 1) {
-            startTimer(Date.now())
-        }
-    }, [currentRowIndex, startTimer, timer.timerStatus, typingValue.length]);
+    }, [randomText]);
 
     const handleKeyDown = (row: string, rowIndex: number) => (e: KeyboardEvent) => {
         if (!rows) return
 
-        if (e.key === 'Enter' && row === typingValue) {
-            if (rowIndex === rows.length - 1)
-                return stopTimer(Date.now())
-            nextRow()
+        const keyHandler = {
+            Enter: () => {
+                if (row !== typingValue)
+                    return
+                if (rowIndex === rows.length - 1)
+                    return stopTimer(Date.now())
+                nextRow()
+            },
+            Tab: () => {
+                e.preventDefault()
+                setValueWithTab()
+            }
         }
-        if (e.key === 'Tab') {
-            e.preventDefault()
-            setValueWithTab()
-        }
+
+        keyHandler[e.key]?.()
     }
+    const handleChangePrintingInput: ChangeEventHandler<HTMLInputElement> = (e) => {
+        setTypingValue(e.target.value)
+        const isFirstRow = currentRowIndex === 0
+        const isTimerNotStarted = timer.timerStatus !== "started"
+        const isFirstSymbolInput = typingValue.length === 1
+
+        if (isFirstRow && isTimerNotStarted && isFirstSymbolInput)
+            startTimer(Date.now())
+    };
+
     return (
         <Box>
             {!randomText && (
@@ -59,24 +69,30 @@ export const TypingCode = () => {
                 </Text>
             )}
 
-            {rows?.map((row, rowIndex) => (
-                <PrintingRow
-                    key={rowIndex}
-                    isActive={rowIndex === currentRowIndex}
-                    index={rowIndex}
-                    text={row}
-                    isPrinted={currentRowIndex > rowIndex}
-                    printingInput={currentRowIndex === rowIndex ? (
-                        <PrintingInput
-                            typingValue={typingValue}
-                            isRightRow={row.startsWith(typingValue)}
-                            handleKeyDown={handleKeyDown(row, rowIndex)}
-                            onChange={(e) => setTypingValue(e.target.value)}
-                            maxLength={row.length + 1}
-                        />
-                    ) : null}
-                />
-            ))}
+            {rows?.map((row, rowIndex) => {
+                const isCurrentRow = rowIndex === currentRowIndex
+
+                return (
+                    <PrintingRow
+                        key={rowIndex}
+                        isActive={isCurrentRow}
+                        index={rowIndex}
+                        text={row}
+                        isPrinted={currentRowIndex > rowIndex}
+                        endIndent={endIndent}
+                        typingValue={isCurrentRow ? typingValue : null}
+                        printingInput={isCurrentRow ? (
+                            <PrintingInput
+                                typingValue={typingValue}
+                                isRightRow={row.startsWith(typingValue)}
+                                handleKeyDown={handleKeyDown(row, rowIndex)}
+                                onChange={handleChangePrintingInput}
+                                maxLength={row.length + 1}
+                            />
+                        ) : null}
+                    />
+                );
+            })}
         </Box>
     )
 }

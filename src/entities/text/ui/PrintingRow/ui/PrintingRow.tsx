@@ -1,15 +1,43 @@
 import {Box, Grid, GridItem, Text} from "@chakra-ui/react";
 import {PrintingRowProps} from "@entities/text/ui/PrintingRow/ui/PrintingRow.interface.ts";
-import {memo} from "react";
+import {memo, useEffect, useRef} from "react";
 
-const PrintingRow = (props: PrintingRowProps) => {
+const PrintingRow = (props: PrintingRowProps,) => {
     const {
         isActive,
         index,
         isPrinted,
         text,
-        printingInput
+        endIndent,
+        printingInput,
+        typingValue
     } = props
+
+    const containerRef = useRef<HTMLDivElement>(null)
+    const rowRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        rowRef.current?.scroll({
+            left: 0,
+            behavior: "smooth",
+        })
+    }, [isActive]);
+
+    useEffect(() => {
+        const rowElement = rowRef.current
+        const rowRect = rowElement?.getBoundingClientRect()
+
+        if (typingValue === null || !rowRect || !rowElement) return
+
+        const widthTypingValue = rowElement.scrollWidth / text.length * typingValue.length
+
+        if (widthTypingValue + 200 > rowRect.width + rowElement.scrollLeft) {
+            rowElement.scroll({
+                left: widthTypingValue - rowRect.width / 4,
+                behavior: "smooth",
+            })
+        }
+    }, [text.length, typingValue]);
 
     return (
         <Grid
@@ -21,6 +49,7 @@ const PrintingRow = (props: PrintingRowProps) => {
             }}
             px={4}
             h="max-content"
+            ref={containerRef}
         >
             <GridItem
                 display="flex"
@@ -39,6 +68,8 @@ const PrintingRow = (props: PrintingRowProps) => {
 
             <GridItem
                 overflowX="auto"
+                overflow="hidden"
+                ref={rowRef}
             >
                 <Box
                     w="max-content"
@@ -51,7 +82,7 @@ const PrintingRow = (props: PrintingRowProps) => {
                         whiteSpace="pre"
                         color={isPrinted ? 'whiteAlpha.800' : "gray.500"}
                     >
-                        {text + " "}
+                        {text + " ".repeat(endIndent)}
                     </Text>
 
                 </Box>

@@ -1,8 +1,8 @@
 import {Input} from '@chakra-ui/react'
 import {PrintingInputProps} from "@entities/text";
-import {memo} from "react";
+import {forwardRef, memo} from "react";
 
-const PrintingInput = (props: PrintingInputProps) => {
+const PrintingInput = forwardRef<HTMLInputElement, PrintingInputProps>((props, ref) => {
     const {
         typingValue,
         isRightRow,
@@ -27,8 +27,9 @@ const PrintingInput = (props: PrintingInputProps) => {
             onKeyDown={handleKeyDown}
             value={typingValue}
             onChange={onChange}
+            ref={ref}
         />
     )
-}
+})
 
 export default memo(PrintingInput)

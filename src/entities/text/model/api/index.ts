@@ -8,14 +8,9 @@ export interface ITextRequestParams {
     _locale?: ETextLocale
 }
 
-export interface IText {
-    title?: string
-    author?: string
-    genre?: string
-    content?: string
-}
+export type TText = { UUID: string; content: string }
 
-export type TTextResponse = { data: IText[] }
+export type TTextResponse = TText[]
 
 export interface IProgrammingLanguage {
     UUID: string

@@ -2,22 +2,26 @@ import {ChangeEventHandler, useEffect} from "react";
 import {useUnit} from "effector-react";
 import {$timerStore, eventStartTimer, eventStopTimer} from "@entities/timer";
 import {
-    $currentWordIndexStore, $typingValueStore,
+    $currentWordIndexStore,
+    $typingValueStore,
     eventChangeTypingValue,
     eventIncrementCurrentWordIndex,
-    useGetTextQuery, useText,
+    useGetTextQuery,
+    useText,
 } from "@entities/text";
 import {eventAddResult, getResultWithStats} from "@entities/results";
 import {useSearchParams} from "react-router-dom";
 import {searchParamsEnum} from "@shared/constants";
+import {useRandom} from "@shared/libs/hooks/random";
 
 
 export const useTyping = () => {
-    const {data: textObject} = useGetTextQuery()
+    const {data: texts} = useGetTextQuery()
 
     const [, setSearchParams] = useSearchParams()
+    const randomTextObject = useRandom(texts)
 
-    const currentTextString = textObject?.content
+    const currentTextString = randomTextObject?.content
     const currentText = currentTextString?.split(' ')
 
     const store = useUnit({
