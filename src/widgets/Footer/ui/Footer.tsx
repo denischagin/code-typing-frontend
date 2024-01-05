@@ -1,4 +1,4 @@
-import {Box, Container, Link, Text} from "@chakra-ui/react";
+import {Box, Container, Text} from "@chakra-ui/react";
 
 export const Footer = () => {
     const date = new Date()

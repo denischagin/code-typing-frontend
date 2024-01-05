@@ -2,16 +2,19 @@ import {Box, Grid, GridItem, Text} from "@chakra-ui/react";
 import {PrintingRowProps} from "@entities/text/ui/PrintingRow/ui/PrintingRow.interface.ts";
 import {memo, useEffect, useRef} from "react";
 
-const PrintingRow = (props: PrintingRowProps,) => {
+const PrintingRow = (props: PrintingRowProps) => {
     const {
-        isActive,
         index,
-        isPrinted,
         text,
         endIndent,
         printingInput,
-        typingValue
+        typingValue,
+        status,
+        textProps,
     } = props
+
+    const isActive = status === 'active'
+    const isPrinted = status === "printed"
 
     const containerRef = useRef<HTMLDivElement>(null)
     const rowRef = useRef<HTMLDivElement>(null)
@@ -27,7 +30,7 @@ const PrintingRow = (props: PrintingRowProps,) => {
         const rowElement = rowRef.current
         const rowRect = rowElement?.getBoundingClientRect()
 
-        if (typingValue === null || !rowRect || !rowElement) return
+        if (typingValue === null || typingValue === undefined || !rowRect || !rowElement) return
 
         const widthTypingValue = rowElement.scrollWidth / text.length * typingValue.length
 
@@ -81,8 +84,9 @@ const PrintingRow = (props: PrintingRowProps,) => {
                         fontSize={"25px"}
                         whiteSpace="pre"
                         color={isPrinted ? 'whiteAlpha.800' : "gray.500"}
+                        {...textProps}
                     >
-                        {text + " ".repeat(endIndent)}
+                        {text + " ".repeat(endIndent ?? 0)}
                     </Text>
 
                 </Box>

@@ -1,7 +1,7 @@
 import {useMethods} from "@shared/libs";
 
 export const useTypingCode = (rows: string[] | undefined) => {
-    const [state, rowMethods] = useMethods({
+    const [state, methods] = useMethods({
         initialState: {
             currentRowIndex: 0,
             typingValue: '',
@@ -36,5 +36,5 @@ export const useTypingCode = (rows: string[] | undefined) => {
         },
     })
 
-    return {...state, ...rowMethods}
+    return {...state, ...methods}
 }

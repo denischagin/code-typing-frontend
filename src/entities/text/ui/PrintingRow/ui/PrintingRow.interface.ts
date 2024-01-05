@@ -1,11 +1,14 @@
 import {ReactElement} from "react";
+import {TextProps} from "@chakra-ui/react";
+
+export type TPrintingRowStatus = 'default' | 'active' | 'printed'
 
 export interface PrintingRowProps {
-    isActive: boolean
-    isPrinted: boolean
-    index: number
     text: string
-    endIndent: number
-    printingInput: ReactElement | null
-    typingValue: string | null
+    index: number
+    status?: TPrintingRowStatus
+    endIndent?: number
+    printingInput?: ReactElement | null
+    typingValue?: string | null
+    textProps?: TextProps
 }

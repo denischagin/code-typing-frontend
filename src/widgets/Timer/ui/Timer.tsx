@@ -19,6 +19,7 @@ export const Timer = () => {
             }, 30)
         }
         if (timerStatus === "stopped") {
+            clearInterval(interval)
             setCurrentTimeMilliseconds(
                 (timeMillisecondsEnd ?? 0) - (timeMillisecondsStart ?? 0))
         }

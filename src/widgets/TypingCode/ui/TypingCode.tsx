@@ -1,22 +1,23 @@
-import {PrintingInput, PrintingRow, transformCodeToRows, useRandomText} from "@entities/text";
-import {useTypingCode} from "@widgets/TypingCode";
-import {ChangeEventHandler, KeyboardEvent, useEffect, useMemo, useRef} from "react";
+import {PrintingInput, PrintingRow, transformCodeToRows, useRandomText, useTypingAction} from "@entities/text";
+import {getPrintingRowStatus, useTypingCode} from "@widgets/TypingCode";
+import {ChangeEventHandler, KeyboardEvent, useEffect, useMemo} from "react";
 import {useUnit} from "effector-react";
 import {$timerStore, eventResetTimer, eventStartTimer, eventStopTimer} from "@entities/timer";
 import {Box, Text} from "@chakra-ui/react";
 
 export const TypingCode = () => {
     const endIndent = 2
-    const randomText = useRandomText()
+    const [randomText, newText] = useRandomText()
     const rows = useMemo(() => transformCodeToRows(randomText ?? null), [randomText])
-    const rowRef = useRef<HTMLDivElement>(null)
 
-    const
-        {
-            typingValue,
-            currentRowIndex,
-            setTypingValue, setValueWithTab, resetState, nextRow
-        } = useTypingCode(rows)
+    const {
+        typingValue,
+        currentRowIndex,
+        setTypingValue,
+        setValueWithTab,
+        resetState,
+        nextRow
+    } = useTypingCode(rows)
 
     const {timer, startTimer, stopTimer, resetTimer} = useUnit({
         timer: $timerStore,
@@ -25,41 +26,81 @@ export const TypingCode = () => {
         resetTimer: eventResetTimer
     })
 
+    const {
+        isEnded,
+        isNotStarted,
+        start,
+        end,
+        reset
+    } = useTypingAction({
+        onStartEffect: () => {
+            startTimer(Date.now())
+        },
+        onEndEffect: () => {
+            newText()
+            stopTimer(Date.now())
+            window.scroll({
+                top: document.body.scrollHeight,
+                behavior: "smooth"
+            })
+        }
+    })
+
     useEffect(() => {
         return () => {
             resetState()
             resetTimer()
+            reset()
         }
     }, [randomText]);
 
     const handleKeyDown = (row: string, rowIndex: number) => (e: KeyboardEvent) => {
         if (!rows) return
 
-        const keyHandler = {
-            Enter: () => {
+        switch (e.key) {
+            case "Enter":
                 if (row !== typingValue)
                     return
-                if (rowIndex === rows.length - 1)
-                    return stopTimer(Date.now())
-                nextRow()
-            },
-            Tab: () => {
+                if (rowIndex === rows.length - 1) {
+                    if (timer.timerStatus === "stopped") return
+                    end()
+                }
+                return nextRow()
+            case "Tab":
                 e.preventDefault()
                 setValueWithTab()
-            }
-        }
 
-        keyHandler[e.key]?.()
+        }
     }
     const handleChangePrintingInput: ChangeEventHandler<HTMLInputElement> = (e) => {
         setTypingValue(e.target.value)
         const isFirstRow = currentRowIndex === 0
         const isTimerNotStarted = timer.timerStatus !== "started"
-        const isFirstSymbolInput = typingValue.length === 1
 
-        if (isFirstRow && isTimerNotStarted && isFirstSymbolInput)
-            startTimer(Date.now())
+        start(isFirstRow && isTimerNotStarted && isNotStarted)
     };
+
+    const getPrintingRowProps = (row: string, rowIndex: number) => {
+        const status = getPrintingRowStatus(rowIndex, currentRowIndex)
+        const isActive = status === "active"
+
+        return {
+            index: rowIndex,
+            text: row,
+            endIndent: endIndent,
+            status,
+            typingValue: isActive ? typingValue : null,
+            printingInput: status === 'active' ? (
+                <PrintingInput
+                    typingValue={typingValue}
+                    isRightRow={row.startsWith(typingValue)}
+                    handleKeyDown={handleKeyDown(row, rowIndex)}
+                    onChange={handleChangePrintingInput}
+                    maxLength={row.length + 1}
+                />
+            ) : null
+        }
+    }
 
     return (
         <Box>
@@ -69,30 +110,26 @@ export const TypingCode = () => {
                 </Text>
             )}
 
-            {rows?.map((row, rowIndex) => {
-                const isCurrentRow = rowIndex === currentRowIndex
-
-                return (
-                    <PrintingRow
-                        key={rowIndex}
-                        isActive={isCurrentRow}
-                        index={rowIndex}
-                        text={row}
-                        isPrinted={currentRowIndex > rowIndex}
-                        endIndent={endIndent}
-                        typingValue={isCurrentRow ? typingValue : null}
-                        printingInput={isCurrentRow ? (
-                            <PrintingInput
-                                typingValue={typingValue}
-                                isRightRow={row.startsWith(typingValue)}
-                                handleKeyDown={handleKeyDown(row, rowIndex)}
-                                onChange={handleChangePrintingInput}
-                                maxLength={row.length + 1}
-                            />
-                        ) : null}
-                    />
-                );
-            })}
+            {rows?.map((row, rowIndex) => (
+                <PrintingRow
+                    key={rowIndex}
+                    {...getPrintingRowProps(row, rowIndex)}
+                />
+            ))}
+            {isEnded && (
+                <>
+                    {Array.from({length: 10}).map((_, index) => (
+                        <PrintingRow text="" index={(rows?.length ?? 0) + index}/>
+                    ))}
+                    <PrintingRow text="wpm: 100" textProps={{textAlign: "center", fontSize: "35px"}} index={1000}/>
+                    <PrintingRow text="accuracy: 100%" textProps={{textAlign: "center", fontSize: "35px"}}
+                                 index={1000}/>
+                    <PrintingRow text="time: 1.50.50" textProps={{textAlign: "center", fontSize: "35px"}} index={1000}/>
+                    {Array.from({length: 20}).map((_, index) => (
+                        <PrintingRow text="" index={(rows?.length ?? 0) + index}/>
+                    ))}
+                </>
+            )}
         </Box>
     )
 }

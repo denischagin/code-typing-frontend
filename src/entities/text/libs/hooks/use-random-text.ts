@@ -3,7 +3,7 @@ import {useSearchParams} from "react-router-dom";
 import {searchParamsEnum} from "@shared/constants";
 import {useRandom} from "@shared/libs/hooks/random";
 
-export const useRandomText = (): string | undefined => {
+export const useRandomText = (): [string | undefined, () => void] => {
     const [searchParams] = useSearchParams()
     const languageName = searchParams.get(searchParamsEnum.languageName)
 
@@ -12,6 +12,6 @@ export const useRandomText = (): string | undefined => {
 
     const codesForRandom = codesByName ? codesByName : codes
 
-    const randomText = useRandom(codesForRandom)
-    return randomText?.content
+    const [randomText, newText] = useRandom(codesForRandom)
+    return [randomText?.content, newText]
 }
