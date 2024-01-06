@@ -26,7 +26,6 @@ export const useRandom = <Item>(
         [items, randomIndex]);
     const handleNewRandom = useCallback(() => {
         const newRandom = getNewRandom()
-        console.log(newRandom)
         return setRandomIndex(newRandom)
     }, [getNewRandom])
 

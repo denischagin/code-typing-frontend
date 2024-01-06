@@ -1,13 +1,21 @@
-import {PrintingInput, PrintingRow, transformCodeToRows, useRandomText, useTypingAction} from "@entities/text";
+import {
+    PrintingInput,
+    PrintingRow,
+    PrintingRowProps,
+    transformCodeToRows,
+    useRandomText,
+    useTypingAction
+} from "@entities/text";
 import {getPrintingRowStatus, TypingCodeResultRows, useTypingCode} from "@widgets/TypingCode";
 import {ChangeEventHandler, KeyboardEvent, useEffect, useMemo} from "react";
 import {useTimer} from "@entities/timer";
 import {Box, Text} from "@chakra-ui/react";
 import {useScrollIntoView} from "@shared/libs/hooks/scroll-into-view";
+import {useTick} from "@shared/libs/hooks/tick";
 
 export const TypingCode = () => {
     const endIndent = 2
-    const [randomText, newText] = useRandomText()
+    const [randomText,] = useRandomText()
 
     const rows = useMemo(() => transformCodeToRows(randomText?.trim() ?? null), [randomText])
     const [resultRef, scrollToResult, containerRef] = useScrollIntoView<HTMLDivElement>(-50)
@@ -20,6 +28,9 @@ export const TypingCode = () => {
         resetState,
         nextRow
     } = useTypingCode(rows)
+    const {startTick, endTick} = useTick((tick) => {
+        console.log("result by second - ", tick)
+    })
 
     const {
         timer: {
@@ -39,11 +50,13 @@ export const TypingCode = () => {
     } = useTypingAction({
         onStartEffect: () => {
             startTimer(Date.now())
+            startTick()
         },
         onEndEffect: () => {
             stopTimer(Date.now())
             scrollToResult()
             nextRow()
+            endTick()
         }
     })
 
@@ -87,12 +100,11 @@ export const TypingCode = () => {
             endTyping()
     };
 
-    const getPrintingRowProps = (row: string, rowIndex: number) => {
+    const getPrintingRowProps = (row: string, rowIndex: number): PrintingRowProps => {
         const status = getPrintingRowStatus(rowIndex, currentRowIndex)
         const isActive = status === "active"
 
         return {
-            key: rowIndex,
             index: rowIndex,
             text: row,
             endIndent: endIndent,
@@ -119,7 +131,7 @@ export const TypingCode = () => {
             )}
 
             {rows?.map((row, rowIndex) => (
-                <PrintingRow {...getPrintingRowProps(row, rowIndex)} />
+                <PrintingRow key={rowIndex} {...getPrintingRowProps(row, rowIndex)} />
             ))}
             {isEnded && (
                 <TypingCodeResultRows ref={resultRef} startIndex={rows?.length ?? 0}/>

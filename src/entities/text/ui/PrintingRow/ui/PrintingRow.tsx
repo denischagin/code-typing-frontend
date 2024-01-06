@@ -34,66 +34,75 @@ const PrintingRow = (props: PrintingRowProps) => {
 
         const widthTypingValue = rowElement.scrollWidth / text.length * typingValue.length
 
-        if (widthTypingValue + 200 > rowRect.width + rowElement.scrollLeft) {
-            rowElement.scroll({
-                left: widthTypingValue - rowRect.width / 4,
-                behavior: "smooth",
-            })
-        }
+        requestAnimationFrame(() => {
+            if (widthTypingValue < rowElement.scrollLeft + 100) {
+                rowElement.scroll({
+                    left: widthTypingValue - rowRect.width / 2,
+                    behavior: "smooth",
+                })
+            } else if (widthTypingValue + 200 > rowRect.width + rowElement.scrollLeft) {
+                rowElement.scroll({
+                    left: widthTypingValue - rowRect.width / 4,
+                    behavior: "smooth",
+                })
+            }
+        })
     }, [text.length, typingValue]);
 
     return (
-        <Grid
-            templateColumns="80px 1fr"
-            gap={4}
-            bgColor={isActive ? 'whiteAlpha.100' : undefined}
-            _hover={{
-                bgColor: 'whiteAlpha.100'
-            }}
-            px={4}
-            h="max-content"
-            ref={containerRef}
-        >
-            <GridItem
-                display="flex"
-                borderRight="2px solid"
-                borderColor="whiteAlpha.200"
-                alignItems="center"
+        <Box>
+            <Grid
+                templateColumns="80px 1fr"
+                gap={4}
+                bgColor={isActive ? 'whiteAlpha.100' : undefined}
+                _hover={{
+                    bgColor: 'whiteAlpha.100'
+                }}
+                px={4}
+                h="max-content"
+                ref={containerRef}
             >
-                <Text
-                    color={isActive ? 'white' : "whiteAlpha.300"}
-                    fontWeight="bold"
-                    fontSize="20px"
+                <GridItem
+                    display="flex"
+                    borderRight="2px solid"
+                    borderColor="whiteAlpha.200"
+                    alignItems="center"
                 >
-                    {index + 1}
-                </Text>
-            </GridItem>
-
-            <GridItem
-                overflowX="auto"
-                overflow="hidden"
-                ref={rowRef}
-            >
-                <Box
-                    w="max-content"
-                    pos="relative"
-                >
-                    {isActive && printingInput}
                     <Text
-                        w="max-content"
-                        fontSize={"25px"}
-                        whiteSpace="pre"
-                        color={isPrinted ? 'whiteAlpha.800' : "gray.500"}
-                        {...textProps}
+                        color={isActive ? 'white' : "whiteAlpha.300"}
+                        fontWeight="bold"
+                        fontSize="20px"
                     >
-                        {text + " ".repeat(endIndent ?? 0)}
+                        {index + 1}
                     </Text>
+                </GridItem>
 
-                </Box>
+                <GridItem
+                    overflowX="auto"
+                    overflow="hidden"
+                    ref={rowRef}
+                >
+                    <Box
+                        w="max-content"
+                        pos="relative"
+                    >
+                        {isActive && printingInput}
+                        <Text
+                            w="max-content"
+                            fontSize={"25px"}
+                            whiteSpace="pre"
+                            color={isPrinted ? 'whiteAlpha.800' : "gray.500"}
+                            {...textProps}
+                        >
+                            {text + " ".repeat(endIndent ?? 0)}
+                        </Text>
 
-            </GridItem>
+                    </Box>
 
-        </Grid>
+                </GridItem>
+
+            </Grid>
+        </Box>
     )
 }
 
