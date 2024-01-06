@@ -1,1 +1,3 @@
-export {TypingCode} from "./TypingCode.tsx";
+export * from "./TypingCode";
+export * from "./TypingCodeResultRows";
+

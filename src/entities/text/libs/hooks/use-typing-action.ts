@@ -43,8 +43,8 @@ export const useTypingAction = (options: UseTypingActionOptions) => {
             isPrinting: false
         } as UseTypingActionState,
         methods: {
-            start: (state, canStartOpt?: boolean) => {
-                if (canStart === false || canStartOpt === false) return
+            startTyping: (state) => {
+                if (canStart === false) return
 
                 state.status = "printing"
                 state.isNotStarted = false
@@ -53,8 +53,8 @@ export const useTypingAction = (options: UseTypingActionOptions) => {
 
                 onStart && onStart()
             },
-            end: (state, canEndOpt?: boolean) => {
-                if (canEnd === false || canEndOpt === false) return
+            endTyping: (state) => {
+                if (canEnd === false) return
 
                 state.status = "ended"
                 state.isNotStarted = false
@@ -63,8 +63,8 @@ export const useTypingAction = (options: UseTypingActionOptions) => {
 
                 onEnd && onEnd()
             },
-            reset: (state, canResetOpt?: boolean) => {
-                if (canReset === false || canResetOpt === false) return
+            resetTyping: (state) => {
+                if (canReset === false) return
 
                 state.status = "not-started"
                 state.isEnded = false

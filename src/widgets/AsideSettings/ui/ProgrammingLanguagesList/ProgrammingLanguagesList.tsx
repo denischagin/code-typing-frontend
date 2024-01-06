@@ -16,7 +16,7 @@ export const ProgrammingLanguagesList = (props: ProgrammingLanguagesListProps) =
     const getLinkByName = (name: string) => `?${searchParamsEnum.languageName}=${encodeURIComponent(name)}`
 
     return (
-        <Stack>
+        <Stack overflowY="scroll" h="100%" pr="5px">
             <StackItem key={'default'} onClick={onClick}>
                 <Link to={``}>
                     <Flex

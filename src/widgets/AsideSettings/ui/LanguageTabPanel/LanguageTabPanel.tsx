@@ -22,7 +22,7 @@ export const LanguageTabPanel = (props: LanguageTabPanelProps) => {
         programmingLanguages, searchValue, (item) => item.name
     )
     return (
-        <Stack p="10px">
+        <Stack p="10px" h="85vh">
             <Box display="flex" w="100%" justifyContent="end">
                 <Tooltip label="Скрыть">
                     <div>

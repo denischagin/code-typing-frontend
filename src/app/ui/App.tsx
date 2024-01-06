@@ -1,6 +1,7 @@
 import {Providers} from "./providers";
 import {Suspense} from "react";
 import {Progress} from "@chakra-ui/react";
+import '../styles/global.scss'
 
 function App() {
     return (
