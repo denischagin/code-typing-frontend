@@ -39,7 +39,7 @@ export const LanguageTabPanel = (props: LanguageTabPanelProps) => {
             <Input
                 variant='flushed'
                 type="search"
-                placeholder="Поиск языков"
+                placeholder="Search languages"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
             />

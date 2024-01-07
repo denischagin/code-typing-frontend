@@ -1,14 +1,13 @@
-import {useEffect, useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 export const useTick = (callback: (tick: number) => void, intervalMs = 1000) => {
+    const [tick, setTick] = useState<number>(0);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
-    const tickRef = useRef<number>(1);
 
     const startTick = () => {
         if (!intervalRef.current) {
             intervalRef.current = setInterval(() => {
-                callback(tickRef.current);
-                tickRef.current++;
+                setTick((prevTick) => prevTick + 1);
             }, intervalMs);
         }
     };
@@ -17,15 +16,20 @@ export const useTick = (callback: (tick: number) => void, intervalMs = 1000) => 
         if (intervalRef.current) {
             clearInterval(intervalRef.current);
             intervalRef.current = null;
-            tickRef.current = 0;
+            setTick(0);
         }
     };
 
     useEffect(() => {
         return () => {
-            endTick(); // Stop the tick when the component is unmounted
+            endTick();
         };
     }, []);
+
+    useEffect(() => {
+        if (tick === 0) return
+        callback(tick);
+    }, [tick]);
 
     return {startTick, endTick};
 };

@@ -11,6 +11,7 @@ const PrintingRow = (props: PrintingRowProps) => {
         typingValue,
         status,
         textProps,
+        textRowElement
     } = props
 
     const isActive = status === 'active'
@@ -50,7 +51,7 @@ const PrintingRow = (props: PrintingRowProps) => {
     }, [text.length, typingValue]);
 
     return (
-        <Box>
+        <Box zIndex={0}>
             <Grid
                 templateColumns="80px 1fr"
                 gap={4}
@@ -83,19 +84,21 @@ const PrintingRow = (props: PrintingRowProps) => {
                     ref={rowRef}
                 >
                     <Box
-                        w="max-content"
                         pos="relative"
+                        zIndex={1000}
                     >
                         {isActive && printingInput}
-                        <Text
-                            w="max-content"
-                            fontSize={"25px"}
-                            whiteSpace="pre"
-                            color={isPrinted ? 'whiteAlpha.800' : "gray.500"}
-                            {...textProps}
-                        >
-                            {text + " ".repeat(endIndent ?? 0)}
-                        </Text>
+                        {textRowElement !== undefined ? textRowElement : (
+                            <Text
+                                w="max-content"
+                                fontSize={"25px"}
+                                whiteSpace="pre"
+                                color={isPrinted ? 'whiteAlpha.800' : "gray.500"}
+                                {...textProps}
+                            >
+                                {text + " ".repeat(endIndent ?? 0)}
+                            </Text>
+                        )}
 
                     </Box>
 

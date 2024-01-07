@@ -1,13 +1,14 @@
-import {Ref, useRef} from "react";
+import {RefObject, useRef} from "react";
+import {ScrollHandlers} from "@shared/libs/hooks/scroll-into-view";
 
 export const useScrollIntoView = <ScrollElement extends HTMLElement, ScrollElementParent extends HTMLElement = ScrollElement>(
     indentTop: number = 0,
     indentLeft: number = 0
-): [scrollRef: Ref<ScrollElement>, scrollHandler: () => void, scrollRefParent: Ref<ScrollElementParent>] => {
+): [scrollRef: RefObject<ScrollElement>, scrollRefParent: RefObject<ScrollElementParent>, scrollHandlers: ScrollHandlers] => {
     const scrollRef = useRef<ScrollElement>(null)
     const scrollRefParent = useRef<ScrollElementParent>(null)
 
-    const scrollIntoView = () => {
+    const scrollIntoView = (behavior: ScrollBehavior = "smooth") => {
         if (!scrollRef.current || !scrollRefParent.current) return
 
         const parentRect = scrollRefParent.current.getBoundingClientRect()
@@ -19,8 +20,15 @@ export const useScrollIntoView = <ScrollElement extends HTMLElement, ScrollEleme
         scrollRefParent.current.scroll({
             top: topOffset,
             left: leftOffset,
-            behavior: "smooth"
+            behavior
         })
     }
-    return [scrollRef, scrollIntoView, scrollRefParent]
+
+    const scrollTo = (options?: ScrollToOptions) => {
+        if (!scrollRefParent.current) return
+
+        scrollRefParent.current.scrollTo(options)
+    }
+
+    return [scrollRef, scrollRefParent, {scrollIntoView, scrollTo}]
 }

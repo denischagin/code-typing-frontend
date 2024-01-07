@@ -1,35 +1,29 @@
-import {Flex, Grid, GridItem, Text} from "@chakra-ui/react";
-import {Timer} from "@widgets/Timer";
-import {TypingCode} from "@widgets/TypingCode";
-import {useSearchParams} from "react-router-dom";
+import {Grid, GridItem} from "@chakra-ui/react";
+import {TypingCode, TypingCodeProvider} from "@widgets/TypingCode";
 import {AsideSettings} from "@widgets/AsideSettings";
-import {searchParamsEnum} from "@shared/constants";
+import {TypingCodePanel} from "@widgets/TypingCodePanel/ui/TypingCodePanel.tsx";
 
 const TypingCodePage = () => {
-    const [searchParams] = useSearchParams()
-    const languageName = searchParams.get(searchParamsEnum.languageName)
-
     return (
-        <Grid flexGrow="1" h="100%" maxW="100vw" templateColumns="auto 1fr" gap="10px">
-            <GridItem h="100%">
-                <AsideSettings/>
-            </GridItem>
+        <TypingCodeProvider>
+            <Grid flexGrow="1" h="100%" maxW="100vw" templateColumns="auto 1fr" gap="10px">
+                <GridItem h="100%">
+                    <AsideSettings/>
+                </GridItem>
 
-            <GridItem>
-                <Grid templateRows="auto 83vh">
-                    <GridItem>
-                        <Flex justify="space-between" align="center" px="10px ">
-                            <Text fontSize="large" textDecoration="underline">{languageName}</Text>
-                            <Timer/>
-                        </Flex>
-                    </GridItem>
+                <GridItem>
+                    <Grid templateRows="auto 83vh">
+                        <GridItem>
+                            <TypingCodePanel/>
+                        </GridItem>
 
-                    <GridItem>
-                        <TypingCode/>
-                    </GridItem>
-                </Grid>
-            </GridItem>
-        </Grid>
+                        <GridItem>
+                            <TypingCode/>
+                        </GridItem>
+                    </Grid>
+                </GridItem>
+            </Grid>
+        </TypingCodeProvider>
     )
 }
 export default TypingCodePage
