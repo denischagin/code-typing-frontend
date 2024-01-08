@@ -82,10 +82,12 @@ const PrintingRow = (props: PrintingRowProps) => {
                     overflowX="auto"
                     overflow="hidden"
                     ref={rowRef}
+                    w="100%"
                 >
                     <Box
                         pos="relative"
                         zIndex={1000}
+                        w="max-content"
                     >
                         {isActive && printingInput}
                         {textRowElement !== undefined ? textRowElement : (
