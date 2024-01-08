@@ -101,9 +101,7 @@ const PrintingRow = (props: PrintingRowProps) => {
                                 {text + " ".repeat(endIndent ?? 0)}
                             </Text>
                         )}
-
                     </Box>
-
                 </GridItem>
 
             </Grid>

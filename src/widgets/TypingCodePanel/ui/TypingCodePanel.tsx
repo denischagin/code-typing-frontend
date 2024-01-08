@@ -1,7 +1,7 @@
 import {Flex, IconButton, Text, Tooltip} from "@chakra-ui/react";
 import {useSearchParams} from "react-router-dom";
 import {searchParamsEnum} from "@shared/constants";
-import {useTypingCodeHandlers} from "@entities/code";
+import {useCodeErrors, useTypingCodeHandlers} from "@entities/code";
 import {RefreshIcon} from "@shared/ui/icons";
 import {Timer} from "@widgets/Timer";
 
@@ -10,6 +10,7 @@ export const TypingCodePanel = () => {
     const languageName = searchParams.get(searchParamsEnum.languageName)
 
     const {scrollTo, handleNewText, containerRef} = useTypingCodeHandlers()
+    const {errorsCount} = useCodeErrors()
 
     const handleRepeatText = () => {
         if (containerRef.current?.scrollTop === 0) {
@@ -35,7 +36,13 @@ export const TypingCodePanel = () => {
                 </Tooltip>
             </Flex>
 
-            <Timer/>
+            <Flex gap="20px" align="center">
+                {errorsCount !== 0 && (
+                    <Text color="red.300">{errorsCount}x</Text>
+                )}
+
+                <Timer/>
+            </Flex>
         </Flex>
     )
 }

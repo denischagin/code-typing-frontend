@@ -5,6 +5,8 @@ export interface ICurrentRowState {
     typingValue: string,
     prevRowsRightSymbols: number,
     currentRowRightSymbols: number
+    errorsCount: number
+    isError: boolean
 }
 
 export interface ICurrentRowMethods {
@@ -20,7 +22,9 @@ export const useCurrentRowState = (rows: string[] | undefined) => {
             currentRowIndex: 0,
             typingValue: '',
             prevRowsRightSymbols: 0,
-            currentRowRightSymbols: 0
+            currentRowRightSymbols: 0,
+            errorsCount: 0,
+            isError: false
         } as ICurrentRowState,
         methods: {
             nextRow: (state) => {
@@ -63,7 +67,8 @@ export const useCurrentRowState = (rows: string[] | undefined) => {
                 state.currentRowIndex = 0
                 state.prevRowsRightSymbols = 0
                 state.currentRowRightSymbols = 0
-            }
+                state.errorsCount = 0
+            },
         },
     })
 

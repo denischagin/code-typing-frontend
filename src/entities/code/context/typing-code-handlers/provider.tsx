@@ -3,7 +3,7 @@ import {useScrollIntoView} from "@shared/libs/hooks/scroll-into-view";
 import {useResult} from "@entities/results";
 import {useTick} from "@shared/libs/hooks/tick";
 import {useTimer} from "@entities/timer";
-import {useCurrentRow, useRandomCode, useTypingAction, TypingCodeHandlersContext} from "@entities/code";
+import {TypingCodeHandlersContext, useCodeErrors, useCurrentRow, useRandomCode, useTypingAction} from "@entities/code";
 
 export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) => {
     const [
@@ -26,8 +26,10 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         setTypingValue,
         nextRow,
         setValueWithTab,
-        resetState
+        resetState,
     } = useCurrentRow()
+
+    const {isError, setIsError, incrementErrors} = useCodeErrors()
 
     const {startResult, tickResult, endResult, clearResult} = useResult()
 
@@ -57,7 +59,6 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
             stopTimer(dateEnd)
             scrollToResult()
             nextRow()
-
             endTick()
             endResult({endTime: dateEnd, textSymbolCount: prevRowsRightSymbols + currentRowRightSymbols})
         }
@@ -90,7 +91,7 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
 
         switch (e.key) {
             case "Enter":
-                if (row !== typingValue) return
+                if (row !== typingValue) return incrementErrors()
                 return nextRow()
             case "Tab":
                 e.preventDefault()
@@ -102,6 +103,13 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         const currentTypingValue = e.target.value
         setTypingValue(currentTypingValue)
         if (!rows) return
+        if (!rows[currentRowIndex].startsWith(currentTypingValue)) {
+            if (!isError) {
+                incrementErrors()
+                setIsError(true)
+            }
+        } else setIsError(false)
+
 
         const isFirstRow = currentRowIndex === 0
         const isTimerNotStarted = timerStatus !== "started"

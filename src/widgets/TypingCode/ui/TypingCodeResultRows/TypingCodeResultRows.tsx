@@ -4,7 +4,7 @@ import {useResult} from "@entities/results";
 import {convertMillisecondsToTime} from "@shared/libs";
 import {Flex, Text, Tooltip} from "@chakra-ui/react";
 import {CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip as TooltipChart, XAxis, YAxis} from "recharts";
-import {PrintingRow} from "@entities/code";
+import {PrintingRow, useCodeErrors} from "@entities/code";
 
 export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultRowsProps>((props, scrollRef) => {
     const {startIndex} = props
@@ -12,6 +12,7 @@ export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultR
     const {result: {resultTime, symbolPerMinute, symbolsPerSecond}} = useResult()
     const chartData = symbolsPerSecond.map((value, index) =>
         ({name: `${index + 1}`, value: value}));
+    const {errorsCount} = useCodeErrors()
 
     const startRows = 10
     const endRows = 17
@@ -43,9 +44,17 @@ export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultR
                 index={startIndex + startRows + 2}
             />
 
+            <PrintingRow
+                text=""
+                index={startIndex + startRows + 3}
+                textRowElement={(
+                    <Text fontSize="25px" color="red.200">errors: {errorsCount}</Text>
+                )}
+            />
+
             <Flex direction="column" pos="relative">
                 {Array.from({length: endRows}).map((_, index) => (
-                    <PrintingRow key={index} text="  " index={startIndex + index + startRows + 3}/>
+                    <PrintingRow key={index} text="  " index={startIndex + index + startRows + 4}/>
                 ))}
                 <Flex
                     pos="absolute"
