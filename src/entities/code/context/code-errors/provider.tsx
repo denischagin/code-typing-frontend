@@ -11,7 +11,7 @@ export const CodeErrorsProvider = ({children}: { children: ReactNode }) => {
     }
 
     return (
-        <CodeErrorsContext.Provider value={{setIsError, isError, errorsCount, incrementErrors}}>
+        <CodeErrorsContext.Provider value={{setIsError, isError, errorsCount, incrementErrors, setErrorsCount}}>
             {children}
         </CodeErrorsContext.Provider>
     )

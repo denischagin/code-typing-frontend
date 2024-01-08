@@ -3,4 +3,5 @@ export interface ICodeErrorsContext {
     errorsCount: number
     incrementErrors: () => void
     setIsError: (isError: boolean) => void
+    setErrorsCount: (errors: number) => void
 }

@@ -29,7 +29,7 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         resetState,
     } = useCurrentRow()
 
-    const {isError, setIsError, incrementErrors} = useCodeErrors()
+    const {isError, setIsError, incrementErrors, setErrorsCount} = useCodeErrors()
 
     const {startResult, tickResult, endResult, clearResult} = useResult()
 
@@ -76,6 +76,8 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         resetTyping()
         clearResult()
         endTick()
+        setErrorsCount(0)
+        setIsError(false)
     }
 
     const handleNewText = () => {
