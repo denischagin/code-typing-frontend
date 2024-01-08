@@ -1,5 +1,11 @@
 import {PrintingInput, PrintingRow, PrintingRowProps} from "@entities/text";
-import {getPrintingRowStatus, TypingCodeResultRows, useTypingCode} from "@widgets/TypingCode";
+import {
+    getPrintingRowStatus,
+    TypingCodeResultRows,
+    useCurrentRow,
+    useRandomCode,
+    useTypingCodeHandlers
+} from "@widgets/TypingCode";
 import {Box, Text} from "@chakra-ui/react";
 
 export const TypingCode = () => {
@@ -7,17 +13,16 @@ export const TypingCode = () => {
 
     const {
         handleChangePrintingInput,
-        typingValue,
         handleNewText,
-        currentRowIndex,
         handleKeyDown,
         isEnded,
         containerRef,
         resultRef,
-        randomText,
-        rows,
-        scrollTo
-    } = useTypingCode()
+    } = useTypingCodeHandlers()
+
+    const {rows, randomText} = useRandomCode()
+
+    const {currentRowIndex, typingValue} = useCurrentRow()
 
     const getPrintingRowProps = (row: string, rowIndex: number): PrintingRowProps => {
         const status = getPrintingRowStatus(rowIndex, currentRowIndex)

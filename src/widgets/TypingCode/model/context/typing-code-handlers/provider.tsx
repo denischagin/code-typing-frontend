@@ -1,18 +1,12 @@
-import {TypingCodeContext} from "@widgets/TypingCode/model";
-import {ChangeEventHandler, KeyboardEvent, ReactNode, useEffect, useMemo} from "react";
-import {transformCodeToRows, useRandomText, useTypingAction} from "@entities/text";
+import {TypingCodeHandlersContext, useCurrentRow, useRandomCode} from "@widgets/TypingCode/model";
+import {ChangeEventHandler, KeyboardEvent, ReactNode, useEffect} from "react";
+import {useTypingAction} from "@entities/text";
 import {useScrollIntoView} from "@shared/libs/hooks/scroll-into-view";
-import {useCurrentRow} from "@widgets/TypingCode";
 import {useResult} from "@entities/results";
 import {useTick} from "@shared/libs/hooks/tick";
 import {useTimer} from "@entities/timer";
 
-export const TypingCodeProvider = ({children}: { children: ReactNode }) => {
-    const [randomText, newRandomText] = useRandomText()
-
-    const rows = useMemo(() =>
-            transformCodeToRows(randomText?.trim() ?? null),
-        [randomText])
+export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) => {
     const [
         resultRef,
         containerRef,
@@ -20,15 +14,21 @@ export const TypingCodeProvider = ({children}: { children: ReactNode }) => {
     ] = useScrollIntoView<HTMLDivElement>(-50)
 
     const {
+        randomText,
+        newRandomText,
+        rows
+    } = useRandomCode()
+
+    const {
         typingValue,
+        currentRowRightSymbols,
+        prevRowsRightSymbols,
         currentRowIndex,
         setTypingValue,
-        setValueWithTab,
-        resetState,
         nextRow,
-        prevRowsRightSymbols,
-        currentRowRightSymbols,
-    } = useCurrentRow(rows)
+        setValueWithTab,
+        resetState
+    } = useCurrentRow()
 
     const {startResult, tickResult, endResult, clearResult} = useResult()
 
@@ -45,13 +45,7 @@ export const TypingCodeProvider = ({children}: { children: ReactNode }) => {
         resetTimer
     } = useTimer()
 
-    const {
-        isEnded,
-        isNotStarted,
-        startTyping,
-        endTyping,
-        resetTyping
-    } = useTypingAction({
+    const typingAction = useTypingAction({
         onStartEffect: () => {
             if (!randomText) return
             const dateStart = Date.now()
@@ -69,6 +63,12 @@ export const TypingCodeProvider = ({children}: { children: ReactNode }) => {
             endResult({endTime: dateEnd, textSymbolCount: prevRowsRightSymbols + currentRowRightSymbols})
         }
     })
+    const {
+        isNotStarted,
+        startTyping,
+        endTyping,
+        resetTyping
+    } = typingAction
 
     const handleResetAll = () => {
         resetState()
@@ -76,7 +76,6 @@ export const TypingCodeProvider = ({children}: { children: ReactNode }) => {
         resetTyping()
         clearResult()
         endTick()
-        resultRef
     }
 
     const handleNewText = () => {
@@ -117,21 +116,18 @@ export const TypingCodeProvider = ({children}: { children: ReactNode }) => {
         if (isTypingValueRight && isLastRow)
             endTyping()
     };
+
     return (
-        <TypingCodeContext.Provider value={{
-            currentRowIndex,
-            typingValue,
-            isEnded,
+        <TypingCodeHandlersContext.Provider value={{
             handleKeyDown,
             handleChangePrintingInput,
             containerRef,
             resultRef,
             handleNewText,
-            rows,
-            randomText,
-            scrollTo
+            scrollTo,
+            ...typingAction
         }}>
             {children}
-        </TypingCodeContext.Provider>
+        </TypingCodeHandlersContext.Provider>
     )
 }

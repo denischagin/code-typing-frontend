@@ -1,15 +1,11 @@
 import {ChangeEventHandler, KeyboardEventHandler, RefObject} from "react";
+import {UseTypingActionState} from "@entities/text";
 
-export interface ITypingCodeContext {
-    currentRowIndex: number,
-    typingValue: string,
-    isEnded: boolean,
+export interface ITypingCodeHandlersContext extends UseTypingActionState{
     handleKeyDown: KeyboardEventHandler<HTMLInputElement>,
     handleChangePrintingInput: ChangeEventHandler<HTMLInputElement>,
     containerRef: RefObject<HTMLDivElement>,
     resultRef: RefObject<HTMLDivElement>,
     handleNewText: () => void
-    rows?: string[]
-    randomText?: null | string
     scrollTo: (options: ScrollToOptions) => void
 }

@@ -2,12 +2,12 @@ import {Button, Flex, Text} from "@chakra-ui/react";
 import {Timer} from "@widgets/Timer";
 import {useSearchParams} from "react-router-dom";
 import {searchParamsEnum} from "@shared/constants";
-import {useTypingCode} from "@widgets/TypingCode";
+import {useTypingCodeHandlers} from "@widgets/TypingCode";
 
 export const TypingCodePanel = () => {
     const [searchParams] = useSearchParams()
     const languageName = searchParams.get(searchParamsEnum.languageName)
-    const {handleNewText} = useTypingCode()
+    const {handleNewText} = useTypingCodeHandlers()
 
     return (
         <Flex justify="space-between" align="center" px="10px" mb="4px">

@@ -9,7 +9,7 @@ const TypingCodePage = lazy(() => import('@pages/TypingCodePage'))
 
 export const paths = {
     typingPage: 'typing',
-    typingCodePage: 'typing-code',
+    typingCodePage: 'typing-code-handlers',
     resultsPage: 'results',
 
 }

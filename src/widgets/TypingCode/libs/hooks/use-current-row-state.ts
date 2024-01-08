@@ -1,13 +1,27 @@
 import {useMethods} from "@shared/libs";
 
-export const useCurrentRow = (rows: string[] | undefined) => {
+export interface ICurrentRowState {
+    currentRowIndex: number,
+    typingValue: string,
+    prevRowsRightSymbols: number,
+    currentRowRightSymbols: number
+}
+
+export interface ICurrentRowMethods {
+    nextRow: () => void
+    setTypingValue: (value: string) => void
+    setValueWithTab: (tabWidth?: number) => void
+    resetState: () => void
+}
+
+export const useCurrentRowState = (rows: string[] | undefined) => {
     const [state, methods] = useMethods({
         initialState: {
             currentRowIndex: 0,
             typingValue: '',
             prevRowsRightSymbols: 0,
             currentRowRightSymbols: 0
-        },
+        } as ICurrentRowState,
         methods: {
             nextRow: (state) => {
                 if (!rows) return

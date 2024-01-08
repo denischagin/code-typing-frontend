@@ -1,2 +1,2 @@
-export * from "./use-current-row.ts";
+export * from "./use-current-row-state.ts";
 
