@@ -49,9 +49,9 @@ $resultStore
     }))
 
 
-$resultStore.watch((state) => {
-    // console.log(state)
-})
+// $resultStore.watch((state) => {
+//     console.log(state)
+// })
 
 
 

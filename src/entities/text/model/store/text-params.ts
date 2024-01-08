@@ -11,7 +11,7 @@ $textParamsStore
         (_state, payload) => ({_locale: payload})
     )
 
-$textParamsStore.watch((state) => {
-    // console.log(state)
-})
+// $textParamsStore.watch((state) => {
+//     // console.log(state)
+// })
 

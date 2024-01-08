@@ -24,8 +24,29 @@ export const useScrollIntoView = <ScrollElement extends HTMLElement, ScrollEleme
         })
     }
 
-    const scrollTo = (options?: ScrollToOptions) => {
+    const scrollTo = (options?: ScrollToOptions, callback?: () => void) => {
         if (!scrollRefParent.current) return
+
+        if (callback) {
+            const handleScrollEnd = () => {
+                const scrollLeft = scrollRefParent.current?.scrollLeft;
+                const scrollTop = scrollRefParent.current?.scrollTop;
+
+                if (
+                    options?.left !== undefined
+                    && options.top !== undefined
+                    && scrollTop === options?.top
+                    && scrollLeft === options?.left ||
+                    options?.top !== undefined && options?.left === undefined && scrollTop === options.top ||
+                    options?.top === undefined && options?.left !== undefined && scrollLeft === options.left
+                ) {
+                    callback()
+                    scrollRefParent.current?.removeEventListener('scroll', handleScrollEnd)
+                }
+            }
+
+            scrollRefParent.current.addEventListener('scroll', handleScrollEnd)
+        }
 
         scrollRefParent.current.scrollTo(options)
     }

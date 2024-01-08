@@ -19,7 +19,7 @@ export const useTyping = () => {
     const {data: texts} = useGetTextQuery()
 
     const [, setSearchParams] = useSearchParams()
-    const [randomTextObject, newText] = useRandom(texts)
+    const [randomTextObject] = useRandom(texts)
 
     const currentTextString = randomTextObject?.content
     const currentText = currentTextString?.split(' ')

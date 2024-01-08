@@ -1,7 +1,8 @@
 import {Grid, GridItem} from "@chakra-ui/react";
-import {TypingCode, TypingCodeProviders} from "@widgets/TypingCode";
+import {TypingCode} from "@widgets/TypingCode";
 import {AsideSettings} from "@widgets/AsideSettings";
-import {TypingCodePanel} from "@widgets/TypingCodePanel/ui/TypingCodePanel.tsx";
+import {TypingCodePanel} from "@widgets/TypingCodePanel";
+import {TypingCodeProviders} from "@entities/code";
 
 const TypingCodePage = () => {
     return (

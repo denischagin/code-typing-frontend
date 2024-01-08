@@ -2,29 +2,29 @@ import {Text} from "@chakra-ui/react"
 import {$timerStore} from "@entities/timer"
 import {convertMillisecondsToTime} from "@shared/libs"
 import {useUnit} from "effector-react"
-import {useEffect, useState} from "react"
+import {useEffect, useRef, useState} from "react"
 
 export const Timer = () => {
     const [currentTimeMilliseconds, setCurrentTimeMilliseconds] = useState(0)
     const {timerStatus, timeMillisecondsStart, timeMillisecondsEnd} = useUnit($timerStore)
 
-    useEffect(() => {
-        let interval: NodeJS.Timeout
+    const intervalRef = useRef<NodeJS.Timeout | undefined>()
 
+    useEffect(() => {
         if (timerStatus === "started") {
-            interval = setInterval(() => {
+            intervalRef.current = setInterval(() => {
                 const dateNow = Date.now()
 
                 setCurrentTimeMilliseconds(dateNow - (timeMillisecondsStart ?? 0))
             }, 30)
         }
-        if (timerStatus === "stopped") {
-            clearInterval(interval)
+        if (timerStatus === "stopped" && !!intervalRef.current) {
+            clearInterval(intervalRef.current)
             setCurrentTimeMilliseconds(
                 (timeMillisecondsEnd ?? 0) - (timeMillisecondsStart ?? 0))
         }
 
-        return () => clearInterval(interval)
+        return () => clearInterval(intervalRef.current)
     }, [timeMillisecondsEnd, timeMillisecondsStart, timerStatus])
 
     return (

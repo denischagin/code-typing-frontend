@@ -4,8 +4,8 @@ import {LanguageTabPanelProps, ProgrammingLanguagesList} from "@widgets/AsideSet
 import {AsideCloseButton} from "@shared/ui/aside";
 import {useSearch} from "@shared/libs/hooks/search";
 import {useState} from "react";
-import {useGetProgrammingLanguages} from "@entities/text";
 import {searchParamsEnum} from "@shared/constants";
+import {useGetProgrammingLanguages} from "@entities/code";
 
 export const LanguageTabPanel = (props: LanguageTabPanelProps) => {
     const {handleClosePanel} = props

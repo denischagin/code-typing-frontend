@@ -1,9 +1,9 @@
 import {Box, Flex, Image, Tooltip} from "@chakra-ui/react";
 import ProgrammingLanguageIcon from "@shared/assets/programming-language.svg";
-import {useGetProgrammingLanguages} from "@entities/text";
 import {useSearchParams} from "react-router-dom";
 import {LanguageTabProps} from "src/widgets/AsideSettings";
 import {searchParamsEnum} from "@shared/constants";
+import {useGetProgrammingLanguages} from "@entities/code";
 
 export const LanguageTab = (props: LanguageTabProps) => {
     const {handleClosePanel} = props

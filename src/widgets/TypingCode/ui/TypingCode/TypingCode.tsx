@@ -1,19 +1,22 @@
-import {PrintingInput, PrintingRow, PrintingRowProps} from "@entities/text";
+import {
+    TypingCodeResultRows,
+} from "@widgets/TypingCode";
+import {Box, Text} from "@chakra-ui/react";
 import {
     getPrintingRowStatus,
-    TypingCodeResultRows,
+    PrintingInput,
+    PrintingRow,
+    PrintingRowProps,
     useCurrentRow,
     useRandomCode,
     useTypingCodeHandlers
-} from "@widgets/TypingCode";
-import {Box, Text} from "@chakra-ui/react";
+} from "@entities/code";
 
 export const TypingCode = () => {
     const endIndent = 2
 
     const {
         handleChangePrintingInput,
-        handleNewText,
         handleKeyDown,
         isEnded,
         containerRef,
@@ -58,9 +61,7 @@ export const TypingCode = () => {
                 <PrintingRow key={rowIndex} {...getPrintingRowProps(row, rowIndex)} />
             ))}
             {isEnded && (
-                <TypingCodeResultRows onNewText={() => {
-                    handleNewText()
-                }} ref={resultRef} startIndex={rows?.length ?? 0}/>
+                <TypingCodeResultRows ref={resultRef} startIndex={rows?.length ?? 0}/>
             )}
         </Box>
     )
