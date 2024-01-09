@@ -1,6 +1,4 @@
-import {
-    TypingCodeResultRows,
-} from "@widgets/TypingCode";
+import {TypingCodeResultRows,} from "@widgets/TypingCode";
 import {Box, Text} from "@chakra-ui/react";
 import {
     getPrintingRowStatus,
@@ -50,7 +48,7 @@ export const TypingCode = () => {
     }
 
     return (
-        <Box h="100%" overflowY="scroll" ref={containerRef} mr="4px" pr="4px">
+        <Box overflowY="auto" ref={containerRef} mr="4px" pr="4px">
             {!randomText && (
                 <Text>
                     Пока еще нет текстов

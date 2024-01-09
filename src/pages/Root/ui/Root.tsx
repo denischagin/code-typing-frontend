@@ -5,10 +5,10 @@ import {Footer} from "@widgets/Footer";
 
 const Root = () => {
     return (
-        <Flex direction="column" minH="100vh" h="100%">
+        <Flex direction="column" h="100vh">
             <Header/>
 
-            <Flex as="main" flexGrow="2" flexDirection="column">
+            <Flex as="main" flex="1" overflow="hidden">
                 <Outlet/>
             </Flex>
 

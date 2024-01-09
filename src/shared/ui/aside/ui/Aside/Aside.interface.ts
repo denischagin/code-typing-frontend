@@ -1,6 +1,6 @@
-import {ComponentProps} from "react";
+import {FlexProps} from "@chakra-ui/react";
 
-export interface AsideProps extends ComponentProps<"aside"> {
+export interface AsideProps extends FlexProps {
     currentTabIndex: number | null
     onChangeTabIndex?: (index: number | null) => void
 }

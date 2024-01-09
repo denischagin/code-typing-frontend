@@ -1,4 +1,4 @@
-import {Grid, GridItem} from "@chakra-ui/react";
+import {Flex} from "@chakra-ui/react";
 import {TypingCode} from "@widgets/TypingCode";
 import {AsideSettings} from "@widgets/AsideSettings";
 import {TypingCodePanel} from "@widgets/TypingCodePanel";
@@ -7,23 +7,15 @@ import {TypingCodeProviders} from "@entities/code";
 const TypingCodePage = () => {
     return (
         <TypingCodeProviders>
-            <Grid flexGrow="1" h="100%" maxW="100vw" templateColumns="auto 1fr" gap="10px">
-                <GridItem h="100%">
-                    <AsideSettings/>
-                </GridItem>
+            <Flex justify="start" flexGrow="1" maxW="100vw" gap="10px" overflowY="hidden">
+                <AsideSettings/>
 
-                <GridItem>
-                    <Grid templateRows="auto 83vh">
-                        <GridItem>
-                            <TypingCodePanel/>
-                        </GridItem>
+                <Flex flex="1" direction="column">
+                    <TypingCodePanel/>
 
-                        <GridItem>
-                            <TypingCode/>
-                        </GridItem>
-                    </Grid>
-                </GridItem>
-            </Grid>
+                    <TypingCode/>
+                </Flex>
+            </Flex>
         </TypingCodeProviders>
     )
 }
