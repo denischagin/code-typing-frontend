@@ -7,7 +7,7 @@ import {TypingCodeProviders} from "@entities/code";
 const TypingCodePage = () => {
     return (
         <TypingCodeProviders>
-            <Flex justify="start" flexGrow="1" maxW="100vw" gap="10px" overflowY="hidden">
+            <Flex justify="start" flexGrow="1" maxW="100vw" gap="10px" overflow="hidden">
                 <AsideSettings/>
 
                 <Flex flex="1" direction="column">

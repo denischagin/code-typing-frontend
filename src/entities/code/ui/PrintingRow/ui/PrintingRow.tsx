@@ -1,4 +1,4 @@
-import {Box, Grid, GridItem, Text} from "@chakra-ui/react";
+import {Box, Grid, Text} from "@chakra-ui/react";
 import {memo, useEffect, useRef} from "react";
 import {PrintingRowProps} from "@entities/code";
 
@@ -51,61 +51,44 @@ const PrintingRow = (props: PrintingRowProps) => {
     }, [text.length, typingValue]);
 
     return (
-        <Box zIndex={0}>
-            <Grid
-                templateColumns="80px 1fr"
-                gap={4}
-                bgColor={isActive ? 'whiteAlpha.100' : undefined}
-                _hover={{
-                    bgColor: 'whiteAlpha.100'
-                }}
-                px={4}
-                h="max-content"
-                ref={containerRef}
+        <Grid
+            gap={4}
+            bgColor={isActive ? 'whiteAlpha.100' : undefined}
+            _hover={{
+                bgColor: 'whiteAlpha.100'
+            }}
+            px={4}
+            h="max-content"
+            ref={containerRef}
+        >
+
+            <Box
+                overflowX="auto"
+                overflow="hidden"
+                ref={rowRef}
+                w="100%"
             >
-                <GridItem
-                    display="flex"
-                    borderRight="2px solid"
-                    borderColor="whiteAlpha.200"
-                    alignItems="center"
+                <Box
+                    pos="relative"
+                    zIndex={1000}
+                    w="max-content"
                 >
-                    <Text
-                        color={isActive ? 'white' : "whiteAlpha.300"}
-                        fontWeight="bold"
-                        fontSize="20px"
-                    >
-                        {index + 1}
-                    </Text>
-                </GridItem>
+                    {isActive && printingInput}
+                    {textRowElement !== undefined ? textRowElement : (
+                        <Text
+                            w="max-content"
+                            fontSize={"25px"}
+                            whiteSpace="pre"
+                            color={isPrinted ? 'whiteAlpha.800' : "gray.500"}
+                            {...textProps}
+                        >
+                            {text + " ".repeat(endIndent ?? 0)}
+                        </Text>
+                    )}
+                </Box>
+            </Box>
 
-                <GridItem
-                    overflowX="auto"
-                    overflow="hidden"
-                    ref={rowRef}
-                    w="100%"
-                >
-                    <Box
-                        pos="relative"
-                        zIndex={1000}
-                        w="max-content"
-                    >
-                        {isActive && printingInput}
-                        {textRowElement !== undefined ? textRowElement : (
-                            <Text
-                                w="max-content"
-                                fontSize={"25px"}
-                                whiteSpace="pre"
-                                color={isPrinted ? 'whiteAlpha.800' : "gray.500"}
-                                {...textProps}
-                            >
-                                {text + " ".repeat(endIndent ?? 0)}
-                            </Text>
-                        )}
-                    </Box>
-                </GridItem>
-
-            </Grid>
-        </Box>
+        </Grid>
     )
 }
 

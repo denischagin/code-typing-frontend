@@ -7,7 +7,6 @@ export const CodeErrorsProvider = ({children}: { children: ReactNode }) => {
 
     const incrementErrors = () => {
         setErrorsCount(prev => prev + 1)
-        console.log('increment error')
     }
 
     return (

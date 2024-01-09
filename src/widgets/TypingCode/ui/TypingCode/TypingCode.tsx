@@ -1,6 +1,9 @@
 import {TypingCodeResultRows,} from "@widgets/TypingCode";
 import {Box, Text} from "@chakra-ui/react";
 import {
+    CodeContainer,
+    CodeIndexesRange,
+    CodeRows,
     getPrintingRowStatus,
     PrintingInput,
     PrintingRow,
@@ -48,16 +51,23 @@ export const TypingCode = () => {
     }
 
     return (
-        <Box overflowY="auto" ref={containerRef} mr="4px" pr="4px">
+        <Box overflowX="hidden" overflowY="auto" ref={containerRef} mr="4px" pr="4px">
             {!randomText && (
                 <Text>
                     Пока еще нет текстов
                 </Text>
             )}
 
-            {rows?.map((row, rowIndex) => (
-                <PrintingRow key={rowIndex} {...getPrintingRowProps(row, rowIndex)} />
-            ))}
+            <CodeContainer>
+                <CodeIndexesRange startIndex={1} length={rows?.length ?? 0}/>
+
+                <CodeRows>
+                    {rows?.map((row, rowIndex) => (
+                        <PrintingRow key={rowIndex} {...getPrintingRowProps(row, rowIndex)} />
+                    ))}
+                </CodeRows>
+            </CodeContainer>
+
             {isEnded && (
                 <TypingCodeResultRows ref={resultRef} startIndex={rows?.length ?? 0}/>
             )}
