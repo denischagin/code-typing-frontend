@@ -1,6 +1,6 @@
-import {useState} from "react";
-import {Aside, AsideContent, AsideTab, AsideTabList, AsideTabPanel, AsideTabPanels} from "@shared/ui/aside";
-import {LanguageTab, LanguageTabPanel} from "@widgets/AsideSettings";
+import { useState } from "react";
+import { Aside, AsideContent, AsideTab, AsideTabList, AsideTabPanel, AsideTabPanels } from "@shared/ui/aside";
+import { LanguageTab, LanguageTabPanel } from "@widgets/AsideSettings";
 
 export const AsideSettings = () => {
     const [currentTabIndex, setCurrentTabIndex] =
@@ -15,16 +15,21 @@ export const AsideSettings = () => {
             currentTabIndex={currentTabIndex}
             onChangeTabIndex={setCurrentTabIndex}
         >
-            <AsideContent>
+            <AsideContent
+                display="flex"
+                flexDirection="column"
+                flex="1"
+                overflow="hidden"
+            >
                 <AsideTabList>
                     <AsideTab>
-                        <LanguageTab handleClosePanel={handleClosePanel}/>
+                        <LanguageTab handleClosePanel={handleClosePanel} />
                     </AsideTab>
                 </AsideTabList>
 
-                <AsideTabPanels>
-                    <AsideTabPanel>
-                        <LanguageTabPanel handleClosePanel={handleClosePanel}/>
+                <AsideTabPanels overflow="hidden" display="flex">
+                    <AsideTabPanel overflow="hidden" display="flex">
+                        <LanguageTabPanel handleClosePanel={handleClosePanel} />
                     </AsideTabPanel>
                 </AsideTabPanels>
             </AsideContent>

@@ -1,11 +1,11 @@
-import {Children} from "react";
-import {AsideTabPanelsProps, useAside} from "@shared/ui/aside";
-import {Box} from "@chakra-ui/react";
+import { Children } from "react";
+import { AsideTabPanelsProps, useAside } from "@shared/ui/aside";
+import { Box } from "@chakra-ui/react";
 
 export const AsideTabPanels = (props: AsideTabPanelsProps) => {
-    const {children, ...restProps} = props
+    const { children, ...restProps } = props
 
-    const {currentTabIndex} = useAside()
+    const { currentTabIndex } = useAside()
 
     return (
         <Box {...restProps}>

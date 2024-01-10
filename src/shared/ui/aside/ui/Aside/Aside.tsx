@@ -1,6 +1,6 @@
-import {AsideContent} from "../AsideContent";
-import {Flex} from "@chakra-ui/react";
-import {AsideContext, AsideProps} from "@shared/ui/aside";
+import { AsideContent } from "../AsideContent";
+import { Flex } from "@chakra-ui/react";
+import { AsideContext, AsideProps } from "@shared/ui/aside";
 
 export const Aside = (props: AsideProps) => {
     const {
@@ -16,7 +16,6 @@ export const Aside = (props: AsideProps) => {
             as="aside"
             direction="column"
             bg="blackAlpha.500"
-            h="100%"
             w={currentTabIndex !== null ? "200px" : "70px"}
             borderRightRadius="10px"
             {...restProps}

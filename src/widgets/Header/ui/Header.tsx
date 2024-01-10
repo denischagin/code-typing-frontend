@@ -1,6 +1,6 @@
-import {Container, Flex, List, ListItem, Text} from "@chakra-ui/react";
-import {Link} from "react-router-dom";
-import {paths} from "@pages/index.tsx";
+import { Container, Flex, List, ListItem, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { paths } from "@pages/index.tsx";
 
 export const Header = () => {
     return (

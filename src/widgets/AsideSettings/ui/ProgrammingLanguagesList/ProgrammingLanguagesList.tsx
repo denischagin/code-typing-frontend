@@ -1,7 +1,7 @@
-import {Flex, Image, Stack, StackItem, Text} from "@chakra-ui/react";
-import {Link} from "react-router-dom";
-import {ProgrammingLanguagesListProps} from "src/widgets/AsideSettings";
-import {searchParamsEnum} from "@shared/constants";
+import { Flex, Image, Stack, StackItem, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { ProgrammingLanguagesListProps } from "src/widgets/AsideSettings";
+import { searchParamsEnum } from "@shared/constants";
 import ProgrammingLanguageIcon from '@shared/assets/programming-language.svg'
 
 export const ProgrammingLanguagesList = (props: ProgrammingLanguagesListProps) => {
@@ -16,7 +16,7 @@ export const ProgrammingLanguagesList = (props: ProgrammingLanguagesListProps) =
     const getLinkByName = (name: string) => `?${searchParamsEnum.languageName}=${encodeURIComponent(name)}`
 
     return (
-        <Stack overflowY="scroll" h="100%" pr="5px">
+        <Stack overflowY="scroll" pr="5px">
             <StackItem key={'default'} onClick={onClick}>
                 <Link to={``}>
                     <Flex
@@ -27,11 +27,11 @@ export const ProgrammingLanguagesList = (props: ProgrammingLanguagesListProps) =
                         borderRadius="10px"
                     >
                         <Text>Random </Text>
-                        <Image w="30px" src={ProgrammingLanguageIcon}/>
+                        <Image w="30px" src={ProgrammingLanguageIcon} />
                     </Flex>
                 </Link>
             </StackItem>
-            {programmingLanguages?.map(({name, UUID, logo}) => (
+            {programmingLanguages?.map(({ name, UUID, logo }) => (
                 <StackItem key={UUID} onClick={onClick}>
                     <Link to={getLinkByName(name)}>
                         <Flex
@@ -42,7 +42,7 @@ export const ProgrammingLanguagesList = (props: ProgrammingLanguagesListProps) =
                             borderRadius="10px"
                         >
                             <Text>{name}</Text>
-                            <Image w="30px" src={logo}/>
+                            <Image w="30px" src={logo} />
                         </Flex>
                     </Link>
                 </StackItem>
