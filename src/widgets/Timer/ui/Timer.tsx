@@ -1,6 +1,6 @@
 import {Text} from "@chakra-ui/react"
 import {$timerStore} from "@entities/timer"
-import {convertMillisecondsToTime} from "@shared/libs"
+import {convertMillisecondsAndDateToTime} from "@shared/libs"
 import {useUnit} from "effector-react"
 import {useEffect, useRef, useState} from "react"
 
@@ -30,7 +30,7 @@ export const Timer = () => {
     return (
         <div>
             <Text fontSize="x-large">
-                {convertMillisecondsToTime(currentTimeMilliseconds)}
+                {convertMillisecondsAndDateToTime(currentTimeMilliseconds)}
             </Text>
         </div>
     )

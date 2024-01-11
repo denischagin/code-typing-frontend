@@ -6,6 +6,6 @@ import {theme} from "@app/config";
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <>
         <App/>
-        <ColorModeScript initialColorMode={theme.config.initialColorMode}/>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} type="cookie" />
     </>
 )

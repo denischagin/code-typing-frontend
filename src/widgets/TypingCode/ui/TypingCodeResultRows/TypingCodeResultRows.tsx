@@ -1,17 +1,16 @@
 import {forwardRef} from "react";
 import {TypingCodeResultRowsProps} from "@widgets/TypingCode";
-import {useResult} from "@entities/results";
-import {convertMillisecondsToTime} from "@shared/libs";
+import {SymbolsPerSecondChart, symbolsPerSecondToChart, useResult} from "@entities/results";
+import {convertMillisecondsAndDateToTime} from "@shared/libs";
 import {Flex, Text, Tooltip} from "@chakra-ui/react";
-import {CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip as TooltipChart, XAxis, YAxis} from "recharts";
 import {CodeContainer, CodeIndexesRange, CodeRow, CodeRows, useCodeErrors} from "@entities/code";
 
 export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultRowsProps>((props, scrollRef) => {
     const {startIndex} = props
 
-    const {result: {resultTime, symbolPerMinute, symbolsPerSecond}} = useResult()
-    const chartData = symbolsPerSecond.map((value, index) =>
-        ({name: `${index + 1}`, value: value}));
+    const {result: {resultTime, symbolPerMinute, symbolsPerSecond}} =
+        useResult()
+    const chartData = symbolsPerSecondToChart(symbolsPerSecond)
     const {errorsCount} = useCodeErrors()
 
     const startRows = 10
@@ -22,7 +21,7 @@ export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultR
 
                 <CodeRows>
                     {Array.from({length: startRows}).map((_, index) => (
-                        <CodeRow key={index} />
+                        <CodeRow key={index}/>
                     ))}
                 </CodeRows>
             </CodeContainer>
@@ -49,7 +48,7 @@ export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultR
 
                     <CodeRow>
                         <Text fontSize="25px" color="whiteAlpha.500">
-                            time: {convertMillisecondsToTime(resultTime ?? 0)}
+                            time: {convertMillisecondsAndDateToTime(resultTime ?? 0)}
                         </Text>
                     </CodeRow>
 
@@ -66,15 +65,7 @@ export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultR
                                 h="300px"
                                 width="97%"
                             >
-                                <ResponsiveContainer width="100%" height={300}>
-                                    <LineChart width={1000} height={300} data={chartData}>
-                                        <XAxis/>
-                                        <YAxis/>
-                                        <TooltipChart/>
-                                        <CartesianGrid stroke="rgba(238, 238, 238, 0.46)" strokeDasharray="7 7"/>
-                                        <Line type="monotone" dataKey="value" dot={false} stroke="#8884d8"/>
-                                    </LineChart>
-                                </ResponsiveContainer>
+                                <SymbolsPerSecondChart data={chartData}/>
                             </Flex>
                         </Flex>
                     </CodeRow>

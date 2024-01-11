@@ -1,5 +1,5 @@
 import {Divider, Flex, Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs, Text} from "@chakra-ui/react";
-import {convertMillisecondsToTime} from "@shared/libs";
+import {convertMillisecondsAndDateToTime} from "@shared/libs";
 import {useSearchParams} from "react-router-dom";
 import {searchParamsEnum} from "@shared/constants";
 import {useFindResultById, getResultStats} from "@entities/results";
@@ -32,7 +32,7 @@ export const ResultSpeed = () => {
                     Result: {(resultById.resultIndex) + 1}
                 </Text>
                 <Text fontSize="xxx-large">
-                    {convertMillisecondsToTime(timeResultMilliseconds)}
+                    {convertMillisecondsAndDateToTime(timeResultMilliseconds)}
                 </Text>
 
                 <Tabs position="relative" variant="unstyled">

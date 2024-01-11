@@ -34,7 +34,8 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
     const {startResult, tickResult, endResult, clearResult} = useResult()
 
     const {startTick, endTick} = useTick(() => {
-        tickResult({symbols: prevRowsRightSymbols + currentRowRightSymbols, msDate: Date.now()})
+        const date = new Date()
+        tickResult({symbols: prevRowsRightSymbols + currentRowRightSymbols, date})
     })
 
     const {
@@ -49,14 +50,14 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
     const typingAction = useTypingAction({
         onStartEffect: () => {
             if (!randomText) return
-            const dateStart = Date.now()
-            startTimer(dateStart)
+            const dateStart = new Date()
+            startTimer(dateStart.valueOf())
             startTick()
             startResult({startTime: dateStart, text: randomText})
         },
         onEndEffect: () => {
-            const dateEnd = Date.now()
-            stopTimer(dateEnd)
+            const dateEnd = new Date()
+            stopTimer(dateEnd.valueOf())
             scrollToResult()
             nextRow()
             endTick()

@@ -1,5 +1,5 @@
 import {ResultsItemProps} from "@entities/results";
-import {convertMillisecondsToTime} from "@shared/libs";
+import {convertMillisecondsAndDateToTime} from "@shared/libs";
 import {
     Flex,
     VStack,
@@ -39,7 +39,7 @@ export const ResultsItem = ({
                 </Text>
 
                 <Text fontSize="x-large" flexGrow={1}>
-                    {convertMillisecondsToTime(timeResultMilliseconds)}
+                    {convertMillisecondsAndDateToTime(timeResultMilliseconds)}
                 </Text>
 
                 <Button colorScheme="blue" onClick={handleOpenTextModal}>Text</Button>

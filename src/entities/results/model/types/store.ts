@@ -10,11 +10,11 @@ export interface IResult {
 
 export interface IResultCode {
     symbolPerMinute: null | number,
-    startTime: null | number,
-    endTime: null | number,
+    startTime: Date | null,
+    endTime: Date | null,
     symbolsPerSecond: number[]
     text: string | null;
-    resultTime: number | null
+    resultTime: Date | null
     errorsCount: number | null
     accuracy: number | null
 }

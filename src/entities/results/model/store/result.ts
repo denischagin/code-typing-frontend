@@ -1,9 +1,9 @@
 import {createEvent, createStore} from "effector";
 import {IResultCode} from "@entities/results";
 
-export const eventEndResult = createEvent<{ textSymbolCount: number, endTime: number }>()
-export const eventStartResult = createEvent<{ text: string, startTime: number }>()
-export const eventTick = createEvent<{ symbols: number, msDate: number }>()
+export const eventEndResult = createEvent<{ textSymbolCount: number, endTime: Date }>()
+export const eventStartResult = createEvent<{ text: string, startTime: Date }>()
+export const eventTick = createEvent<{ symbols: number, date: Date }>()
 
 export const eventClearResult = createEvent()
 
@@ -20,17 +20,19 @@ export const $resultStore = createStore<IResultCode>({
 })
 
 $resultStore
-    .on(eventTick, (state, {symbols, msDate}) => {
+    .on(eventTick, (state, {symbols, date}) => {
         if (!state.startTime) return
-        const tick = symbols / ((msDate - state.startTime) / 1000 / 60)
+
+        const tick = symbols / ((date.valueOf() - state.startTime.valueOf()) / 1000 / 60)
 
         return ({...state, symbolsPerSecond: [...state.symbolsPerSecond, tick]});
     })
-    .on(eventStartResult, (state, {startTime, text}) => ({...state, startTime, text}))
+    .on(eventStartResult, (state, {startTime, text}) => ({...state, startTime: startTime, text}))
     .on(eventEndResult, (state, {endTime, textSymbolCount}) => {
         const countSymbols = textSymbolCount
-        const resultTime = endTime - (state.startTime ?? 0)
-        const resultMinutes = resultTime / 1000 / 60
+        const resultTimeMs = endTime.valueOf() - (state.startTime?.valueOf() ?? 0)
+        const resultTime = new Date(resultTimeMs)
+        const resultMinutes = resultTimeMs / 1000 / 60
         const symbolPerMinute = countSymbols / resultMinutes
         // const symbolsTick = [...state.symbolsTick, countSymbols]
 

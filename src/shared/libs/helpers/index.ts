@@ -1,2 +1,2 @@
-export {convertMillisecondsToTime} from './convert-milliseconds-to-time'
+export {convertMillisecondsAndDateToTime} from './convert-milliseconds-and-date-to-time.ts'
 export {getRandomNumber} from "./get-random-number.ts";
