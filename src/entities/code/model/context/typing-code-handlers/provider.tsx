@@ -29,7 +29,7 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         resetState,
     } = useCurrentRow()
 
-    const {isError, setIsError, incrementErrors, setErrorsCount} = useCodeErrors()
+    const {isError, setIsError, incrementErrors, setErrorsCount, errorsCount} = useCodeErrors()
 
     const {startResult, tickResult, endResult, clearResult} = useResult()
 
@@ -61,7 +61,11 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
             scrollToResult()
             nextRow()
             endTick()
-            endResult({endTime: dateEnd, textSymbolCount: prevRowsRightSymbols + currentRowRightSymbols})
+            endResult({
+                endTime: dateEnd,
+                textSymbolCount: prevRowsRightSymbols + currentRowRightSymbols,
+                errorsCount
+            })
         }
     })
     const {

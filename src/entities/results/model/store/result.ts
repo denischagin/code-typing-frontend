@@ -1,7 +1,7 @@
 import {createEvent, createStore} from "effector";
 import {IResultCode} from "@entities/results";
 
-export const eventEndResult = createEvent<{ textSymbolCount: number, endTime: Date }>()
+export const eventEndResult = createEvent<{ textSymbolCount: number, endTime: Date, errorsCount: number }>()
 export const eventStartResult = createEvent<{ text: string, startTime: Date }>()
 export const eventTick = createEvent<{ symbols: number, date: Date }>()
 
@@ -28,7 +28,7 @@ $resultStore
         return ({...state, symbolsPerSecond: [...state.symbolsPerSecond, tick]});
     })
     .on(eventStartResult, (state, {startTime, text}) => ({...state, startTime: startTime, text}))
-    .on(eventEndResult, (state, {endTime, textSymbolCount}) => {
+    .on(eventEndResult, (state, {endTime, textSymbolCount, errorsCount}) => {
         const countSymbols = textSymbolCount
         const resultTimeMs = endTime.valueOf() - (state.startTime?.valueOf() ?? 0)
         const resultTime = new Date(resultTimeMs)
@@ -36,7 +36,7 @@ $resultStore
         const symbolPerMinute = countSymbols / resultMinutes
         // const symbolsTick = [...state.symbolsTick, countSymbols]
 
-        return {...state, endTime, resultTime, symbolPerMinute,}
+        return {...state, endTime, resultTime, symbolPerMinute, errorsCount}
 
     })
     .on(eventClearResult, () => ({

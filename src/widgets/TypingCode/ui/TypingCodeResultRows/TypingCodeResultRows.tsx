@@ -1,6 +1,6 @@
-import {forwardRef} from "react";
+import {forwardRef, useEffect} from "react";
 import {TypingCodeResultRowsProps} from "@widgets/TypingCode";
-import {SymbolsPerSecondChart, symbolsPerSecondToChart, useResult} from "@entities/results";
+import {SymbolsPerSecondChart, symbolsPerSecondToChart, useResult, useSaveResult} from "@entities/results";
 import {convertMillisecondsAndDateToTime} from "@shared/libs";
 import {Flex, Text, Tooltip} from "@chakra-ui/react";
 import {CodeContainer, CodeIndexesRange, CodeRow, CodeRows, useCodeErrors} from "@entities/code";
@@ -8,8 +8,17 @@ import {CodeContainer, CodeIndexesRange, CodeRow, CodeRows, useCodeErrors} from 
 export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultRowsProps>((props, scrollRef) => {
     const {startIndex} = props
 
-    const {result: {resultTime, symbolPerMinute, symbolsPerSecond}} =
-        useResult()
+    const {result} = useResult()
+    const {resultTime, symbolPerMinute, symbolsPerSecond} = result
+
+    const {mutate: saveResult} = useSaveResult()
+
+    useEffect(() => {
+        if (!result.resultTime) return
+
+        saveResult(result)
+    }, [result.resultTime]);
+
     const chartData = symbolsPerSecondToChart(symbolsPerSecond)
     const {errorsCount} = useCodeErrors()
 
