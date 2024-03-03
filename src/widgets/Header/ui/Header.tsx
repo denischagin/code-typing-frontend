@@ -1,6 +1,6 @@
-import { Container, Flex, List, ListItem, Text } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import { paths } from "@pages/index.tsx";
+import {Container, Flex, List, ListItem, Text} from "@chakra-ui/react";
+import {Link} from "react-router-dom";
+import {paths} from "@pages/index.tsx";
 
 export const Header = () => {
     return (
@@ -18,11 +18,15 @@ export const Header = () => {
                             </ListItem>
 
                             <ListItem>
-                                <Link to={paths.typingPage}>Go typing</Link>
+                                <Link to={paths.typingCodePage}>Code typing</Link>
                             </ListItem>
 
                             <ListItem>
-                                <Link to={paths.typingCodePage}>Code typing</Link>
+                                <Link to={paths.loginPage}>Login</Link>
+                            </ListItem>
+
+                            <ListItem>
+                                <Link to={paths.registerPage}>Register</Link>
                             </ListItem>
                         </List>
                     </Flex>

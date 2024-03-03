@@ -4,7 +4,6 @@ import {PrintingRowProps} from "@entities/code";
 
 const PrintingRow = (props: PrintingRowProps) => {
     const {
-        index,
         text,
         endIndent,
         printingInput,
