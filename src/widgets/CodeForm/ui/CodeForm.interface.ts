@@ -1,8 +1,7 @@
 export type CodeFormRow = { placeholder: string; rows: string[], name: string, inputType: string };
 
-export interface CodeFormProps {
-    fields: CodeFormRow[]
-    onSuccess: (result: Record<string, unknown>) => void
+export interface CodeFormProps<Fields> {
+    title: string;
+    fields: Record<keyof Fields, CodeFormRow>;
+    onSuccess: (result: Record<keyof Fields, string>) => void;
 }
-
-// TODO типизировать CodeFormProps

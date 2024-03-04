@@ -1,35 +1,27 @@
-import {Box, Text} from "@chakra-ui/react";
+import {Box} from "@chakra-ui/react";
 import {useRandom} from "@shared/libs/hooks";
 import {languagesLoginPassword} from "@pages/LoginPage/constants";
-import {CodeForm, CodeFormRow} from "@widgets/CodeForm";
-import {capitalizeFirstLetter} from "@shared/libs";
+import {CodeForm, makeObjectCodeRows} from "@widgets/CodeForm";
 
 
 const LoginPage = () => {
     const [randomLanguageName] = useRandom(Object.keys(languagesLoginPassword) as Array<keyof typeof languagesLoginPassword>);
 
-    const randomLanguage = languagesLoginPassword[randomLanguageName!];
+    const randomLanguage = languagesLoginPassword[randomLanguageName!] ?? {login: '', password: ''};
 
-    const fields = Object.keys(randomLanguage).map((key) => {
-        return {
-            rows: randomLanguage[key as keyof typeof randomLanguage],
-            name: key,
-            placeholder: `Please enter ${key}`,
-            inputType: key === 'password' ? 'password' : 'text',
-        };
-    }) as Array<CodeFormRow>;
-
+    const fields = makeObjectCodeRows(randomLanguage);
 
     return (
         <Box ml={4}>
-            <Text color="whiteAlpha.900" fontSize="xl">
-                {capitalizeFirstLetter(randomLanguageName!)}
-            </Text>
             <CodeForm
+                title="Login"
                 onSuccess={(res) => {
-                    console.log(res);
+                    alert("Ваш логин: " + res.login + "\nВаш пароль: " + res.password);
                 }}
-                fields={fields}
+                fields={{
+                    login: fields.login,
+                    password: fields.password,
+                }}
             />
         </Box>
     )
