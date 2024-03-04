@@ -1,28 +1,39 @@
 import {Box} from "@chakra-ui/react";
 import {useRandom} from "@shared/libs/hooks";
-import {languagesLoginPassword} from "@pages/LoginPage/constants";
+import {languagesAuthForm} from "@pages/LoginPage/constants";
 import {CodeForm, makeObjectCodeRows} from "@widgets/CodeForm";
+import {ILoginCredentials, useLogin} from "@entities/viewer";
+import {useMemo} from "react";
+import {languagesRegisterForm} from "@pages/RegisterPage";
 
 
 const LoginPage = () => {
-    const [randomLanguageName] = useRandom(Object.keys(languagesLoginPassword) as Array<keyof typeof languagesLoginPassword>);
+    const languages = useMemo(() => Object.keys(languagesRegisterForm), [])
+    const [randomLanguageName] = useRandom(languages);
 
-    const randomLanguage = languagesLoginPassword[randomLanguageName!] ?? {login: '', password: ''};
+    const {mutate: loginMutate} = useLogin();
 
-    const fields = makeObjectCodeRows(randomLanguage);
+    const fields = randomLanguageName
+        ? makeObjectCodeRows(
+            languagesAuthForm[randomLanguageName]
+        ) : undefined;
+
+    const handleSubmit = (values: Record<keyof ILoginCredentials, string>) => {
+        loginMutate(values);
+    }
 
     return (
-        <Box ml={4}>
-            <CodeForm
-                title="Login"
-                onSuccess={(res) => {
-                    alert("Ваш логин: " + res.login + "\nВаш пароль: " + res.password);
-                }}
-                fields={{
-                    login: fields.login,
-                    password: fields.password,
-                }}
-            />
+        <Box ml={4} mr={4} w="100%">
+            {fields && (
+                <CodeForm
+                    title="Login"
+                    onSuccess={handleSubmit}
+                    fields={{
+                        login: fields.login,
+                        password: fields.password,
+                    }}
+                />
+            )}
         </Box>
     )
 }

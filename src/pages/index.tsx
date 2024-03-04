@@ -11,10 +11,10 @@ const RegisterPage = lazy(() => import('@pages/RegisterPage'))
 
 export const paths = {
     typingPage: 'typing',
-    typingCodePage: 'typing-code',
-    resultsPage: 'results',
-    loginPage: 'login',
-    registerPage: 'register',
+    typingCodePage: '/typing-code',
+    resultsPage: '/results',
+    loginPage: '/login',
+    registerPage: '/register',
 }
 
 export const router = createBrowserRouter([

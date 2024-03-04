@@ -6,8 +6,10 @@ const ViewerContext = createContext<IViewerContext>({
     isAuthenticated: false,
     refreshToken: undefined,
     accessToken: undefined,
-    loginViewer: undefined,
-    logoutViewer: undefined,
+    loginViewer: () => {
+    },
+    logoutViewer: () => {
+    },
 });
 
 export const useViewer = () => {

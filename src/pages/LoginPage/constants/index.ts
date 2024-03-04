@@ -1,3 +1,7 @@
+import {ILoginCredentials} from "@entities/viewer";
+
+export type FormType<Credentials> = Record<string, Record<keyof Credentials, string[]>>
+
 const javaLogin = [
     'Scanner scanner = new Scanner(System.in);',
     'String login = scanner.nextLine();',
@@ -31,37 +35,37 @@ const cLogin = [
     'fgets(login, 100, stdin);',
 ]
 
-const javaPassword = [
+export const javaPassword = [
     'String password = scanner.nextLine();',
 ]
 
-const pythonPassword = [
+export const pythonPassword = [
     'password = input("Please enter your password: ")',
 ]
 
-const jsPassword = [
+export const jsPassword = [
     'let password = prompt()',
 ]
 
-const scalaPassword = [
+export const scalaPassword = [
     'val password = scala.io.StdIn.readLine()',
 ]
 
-const goPassword = [
+export const goPassword = [
     'var password string',
     'fmt.Scanln(&password)',
 ]
 
-const rustPassword = [
+export const rustPassword = [
     'let mut password = String::new()',
     'std::io::stdin().read_line(&mut password)',
 ]
 
-const cPassword = [
+export const cPassword = [
     'char password[100];',
     'fgets(password, 100, stdin);',
 ]
-export const languagesLoginPassword = {
+export const languagesAuthForm: FormType<ILoginCredentials> = {
     java: {
         login: javaLogin,
         password: javaPassword,

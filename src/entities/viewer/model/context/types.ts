@@ -8,6 +8,6 @@ export interface IViewerTokens {
 }
 
 export interface IViewerHandlers {
-    loginViewer?: (viewer: IViewerContext) => void;
-    logoutViewer?: () => void;
+    loginViewer: (viewer: IViewerTokens) => void;
+    logoutViewer: () => void;
 }

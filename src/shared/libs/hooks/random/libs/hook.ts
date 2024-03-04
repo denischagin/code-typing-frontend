@@ -1,33 +1,24 @@
+import {useCallback, useEffect, useState} from "react";
 import {getRandomNumber} from "@shared/libs";
-import {useCallback, useEffect, useMemo, useState} from "react";
 
 export const useRandom = <Item>(
     items: Item[] | undefined
-): [Item | undefined, refreshRandom: () => void] => {
-    const getNewRandom = useCallback(() => {
-        return items === undefined ? null : getRandomNumber(0, (items.length - 1))
-    }, [items])
+): [randomItem: Item | undefined, refreshRandom: () => void] => {
+    const [randomIndex, setRandomIndex] = useState<number | undefined>(undefined);
 
-    const [randomIndex, setRandomIndex] = useState<null | number>(() => {
-        return getNewRandom()
-    })
+    const refreshRandom = useCallback(() => {
+        if (!items?.length)
+            return
+
+        const newRandomIndex = getRandomNumber(0, items.length - 1);
+        setRandomIndex(newRandomIndex);
+    }, [items]);
+
 
     useEffect(() => {
-        if (!items) return
-        const randomIndex = getNewRandom()
-        setRandomIndex(randomIndex)
+        refreshRandom();
     }, [items])
 
 
-    const randomItem = useMemo(() =>
-            items === undefined || randomIndex === null
-                ? undefined
-                : items[randomIndex],
-        [items, randomIndex]);
-    const handleNewRandom = useCallback(() => {
-        const newRandom = getNewRandom()
-        return setRandomIndex(newRandom)
-    }, [getNewRandom])
-
-    return [randomItem, handleNewRandom]
+    return [randomIndex !== undefined ? items?.[randomIndex] : undefined, refreshRandom];
 }

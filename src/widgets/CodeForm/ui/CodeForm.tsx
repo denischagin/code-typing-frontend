@@ -1,4 +1,4 @@
-import {Flex, Input, Text} from "@chakra-ui/react";
+import {Box, Flex, Input, Text} from "@chakra-ui/react";
 import {CodeContainer, CodeIndexesRange, CodeRow, CodeRows} from "@entities/code";
 import {CodeFormProps} from "@widgets/CodeForm";
 import {ChangeEventHandler, Fragment, KeyboardEventHandler, useState} from "react";
@@ -28,7 +28,7 @@ export const CodeForm = <Fields extends Record<string, unknown>>(props: CodeForm
     }
 
     return (
-        <form onKeyDown={handleSubmitIncrement} onSubmit={e => e.preventDefault()}>
+        <Box w="100%" onKeyDown={handleSubmitIncrement} onSubmit={e => e.preventDefault()}>
             <CodeContainer>
                 <CodeIndexesRange startIndex={1} length={20}/>
 
@@ -58,7 +58,7 @@ export const CodeForm = <Fields extends Record<string, unknown>>(props: CodeForm
                                 ))}
 
                                 <CodeRow>
-                                    <Flex gap={2} alignItems="center">
+                                    <Flex gap={2} alignItems="center" width="100%">
                                         <Text
                                             fontSize="25px"
                                             color="whiteAlpha.800"
@@ -82,53 +82,12 @@ export const CodeForm = <Fields extends Record<string, unknown>>(props: CodeForm
                                 </CodeRow>
                                 <CodeRow></CodeRow>
                             </Fragment>
-
                         );
                     })}
-                    {/*{fields.slice(0, openCount + 1).map(({rows, placeholder, inputType, name}) => (*/}
-                    {/*    <Fragment key={placeholder}>*/}
-                    {/*        {rows.map((rowString,) => (*/}
-                    {/*            <CodeRow key={rowString}>*/}
-                    {/*                <Text*/}
-                    {/*                    fontSize="25px"*/}
-                    {/*                    color="whiteAlpha.500"*/}
-                    {/*                >*/}
-                    {/*                    {rowString}*/}
-                    {/*                </Text>*/}
-                    {/*            </CodeRow>*/}
-                    {/*        ))}*/}
-
-                    {/*        <CodeRow>*/}
-                    {/*            <Flex gap={2} alignItems="center">*/}
-                    {/*                <Text*/}
-                    {/*                    fontSize="25px"*/}
-                    {/*                    color="whiteAlpha.800"*/}
-                    {/*                    variant="unstyled"*/}
-                    {/*                >*/}
-                    {/*                    {`>>`}*/}
-                    {/*                </Text>*/}
-
-                    {/*                <Input*/}
-                    {/*                    fontSize="25px"*/}
-                    {/*                    color="whiteAlpha.800"*/}
-                    {/*                    variant="unstyled"*/}
-                    {/*                    placeholder={placeholder}*/}
-                    {/*                    type={inputType}*/}
-                    {/*                    name={name}*/}
-                    {/*                    onChange={handleInputChange(name)}*/}
-                    {/*                    value={values[name] ?? ''}*/}
-                    {/*                    autoFocus*/}
-                    {/*                />*/}
-                    {/*            </Flex>*/}
-                    {/*        </CodeRow>*/}
-                    {/*        <CodeRow></CodeRow>*/}
-                    {/*    </Fragment>*/}
-                    {/*))}*/}
-
                     <CodeRow></CodeRow>
                 </CodeRows>
             </CodeContainer>
-        </form>
+        </Box>
     );
 
 }

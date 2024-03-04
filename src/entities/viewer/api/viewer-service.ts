@@ -18,7 +18,7 @@ class ViewerService {
 
     public async register({nickname, email, password}: IRegisterCredentials) {
         const response = await baseQueryV1<AuthResponse>({
-            url: `/auth/register`,
+            url: `/auth/registration`,
             method: 'POST',
             data: {
                 nickname,
@@ -32,7 +32,7 @@ class ViewerService {
     public async logout() {
         const response = await baseQueryV1<AuthResponse>({
             url: `/auth/logout`,
-            method: 'POST'
+            method: 'DELETE'
         })
         return response.data
     }
@@ -40,7 +40,7 @@ class ViewerService {
     public async refresh() {
         const response = await baseQueryV1<AuthResponse>({
             url: `/auth/refresh`,
-            method: 'POST'
+            method: 'GET'
         })
         return response.data
     }
