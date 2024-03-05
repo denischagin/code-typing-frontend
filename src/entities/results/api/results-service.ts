@@ -1,14 +1,14 @@
 import {baseQueryV1} from "@shared/api";
 import {TGetSavedResultsResponse, TSaveResultBody} from "@entities/results";
 
-export class ResultsService {
-    static async fetchSavedResults() {
+class ResultsService {
+    async fetchSavedResults() {
         const response =
-            await baseQueryV1<TGetSavedResultsResponse>("results/")
+            await baseQueryV1<TGetSavedResultsResponse>("/results/")
         return response.data
     }
 
-    static async saveResult(body: TSaveResultBody) {
+    async saveResult(body: TSaveResultBody) {
         const response =
             await baseQueryV1<TGetSavedResultsResponse>({
                 url: "results/",
@@ -18,3 +18,5 @@ export class ResultsService {
         return response.data
     }
 }
+
+export default new ResultsService();

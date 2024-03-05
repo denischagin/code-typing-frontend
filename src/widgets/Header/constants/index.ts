@@ -1,4 +1,4 @@
-import {paths} from "@pages/index.tsx";
+import {paths} from "@pages/routes";
 
 type CommonPath = {
     name: string;

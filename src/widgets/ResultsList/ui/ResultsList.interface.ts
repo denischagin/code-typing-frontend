@@ -1,5 +1,5 @@
-import {IResult} from "@entities/results";
+import {IResultFromApi} from "@entities/results";
 
 export interface ResultsListProps {
-    results: IResult[]
+    results: IResultFromApi[]
 }

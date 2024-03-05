@@ -4,7 +4,8 @@ import {AxiosError} from "axios";
 import {ApiError} from "@shared/api";
 import {useToast} from "@chakra-ui/react";
 import {useNavigate} from "react-router-dom";
-import {paths} from "@pages/index.tsx";
+import {paths} from "@pages/routes";
+import {TokenService} from "@entities/token";
 
 export const useRegister = () => {
     const {loginViewer} = useViewer();
@@ -13,14 +14,14 @@ export const useRegister = () => {
 
     return useMutation({
         mutationFn: (credentials: IRegisterCredentials) => ViewerService.register(credentials),
-        onSuccess: ({access, refresh}) => {
-            loginViewer({accessToken: access, refreshToken: refresh});
+        onSuccess: ({access}) => {
+            loginViewer();
             toast({
                 title: "Registration successful",
                 status: "success",
             })
+            TokenService.setAccessToken(access);
             navigate(paths.typingCodePage, {replace: true});
-
         },
         onError: (error: AxiosError<ApiError>) => {
             toast({colorScheme: 'red', title: error.response?.data?.message, status: 'error'})

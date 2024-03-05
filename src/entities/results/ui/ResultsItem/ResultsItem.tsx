@@ -1,21 +1,16 @@
 import {ResultsItemProps} from "@entities/results";
-import {convertMillisecondsAndDateToTime} from "@shared/libs";
-import {
-    Flex,
-    VStack,
-    Text,
-    Button,
-} from "@chakra-ui/react";
+import {Button, Flex, Text, VStack,} from "@chakra-ui/react";
 import {useState} from "react";
 import {ShowTextModal} from "@features/show-text";
 
-export const ResultsItem = ({
-                                timeResultMilliseconds,
-                                resultIndex,
-                                charactersPerMinuteString,
-                                wordsPerMinuteString,
-                                text,
-                            }: ResultsItemProps) => {
+export const ResultsItem = (props: ResultsItemProps) => {
+    const {
+        resultIndex,
+        text,
+        startTime,
+        endTime
+    } = props;
+
     const [isOpenTextModal, setIsOpenTextModal] = useState(false)
 
     const handleCloseTextModal = () => {
@@ -38,21 +33,12 @@ export const ResultsItem = ({
                     {resultIndex + 1}.
                 </Text>
 
-                <Text fontSize="x-large" flexGrow={1}>
-                    {convertMillisecondsAndDateToTime(timeResultMilliseconds)}
-                </Text>
-
-                <Button colorScheme="blue" onClick={handleOpenTextModal}>Text</Button>
-
                 <VStack spacing={2}>
-                    <Text fontSize="medium"><Text as="strong"
-                                                  fontSize="large">{charactersPerMinuteString}</Text> sym./min. </Text>
-                    <Text fontSize="medium"> <Text as="strong" fontSize="large">{wordsPerMinuteString}</Text> word/min.
-                    </Text>
+                    <Text fontSize="medium">{(Date.parse(endTime) - Date.parse(startTime)).toLocaleString()}</Text>
                 </VStack>
             </Flex>
 
-            <ShowTextModal isOpen={isOpenTextModal} onClose={handleCloseTextModal} text={text}/>
+            <ShowTextModal isOpen={isOpenTextModal} onClose={handleCloseTextModal} text={text ?? ""}/>
         </>
     )
 }

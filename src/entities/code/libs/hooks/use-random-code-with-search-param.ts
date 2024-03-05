@@ -3,7 +3,7 @@ import {searchParamsEnum} from "@shared/constants";
 import {useRandom} from "@shared/libs/hooks/random";
 import {useGetCodeExamples, useGetCodeExamplesByName} from "@entities/code";
 
-export const useRandomCodeWithSearchParam = (): [string | undefined, () => void] => {
+export const useRandomCodeWithSearchParam = (): [textContent: string | undefined, newText: () => void, id?: string] => {
     const [searchParams] = useSearchParams()
     const languageName = searchParams.get(searchParamsEnum.languageName)
 
@@ -13,5 +13,5 @@ export const useRandomCodeWithSearchParam = (): [string | undefined, () => void]
     const codesForRandom = codesByName ? codesByName : codes
 
     const [randomText, newText] = useRandom(codesForRandom)
-    return [randomText?.content, newText]
+    return [randomText?.content, newText, randomText?.UUID]
 }

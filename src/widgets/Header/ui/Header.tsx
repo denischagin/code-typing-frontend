@@ -1,7 +1,9 @@
 import {Container, Flex, List, ListItem, Text} from "@chakra-ui/react";
 import {Link} from "react-router-dom";
-import {paths} from "@pages/index.tsx";
-import {useLogout, useViewer} from "@entities/viewer";
+import {paths} from "@pages/routes";
+import {useViewer} from "@entities/viewer";
+import {AlertDialogLogout} from "@features/auth/logout";
+import {useState} from "react";
 
 export type CommonPath = {
     name: string;
@@ -9,8 +11,16 @@ export type CommonPath = {
     onClick?: () => void;
 }
 export const Header = () => {
-    const {mutate: logoutMutate} = useLogout();
     const {isAuthenticated} = useViewer();
+    const [isOpenLogout, setIsOpenLogout] = useState(false);
+
+    const handleCloseLogout = () => {
+        setIsOpenLogout(false);
+    }
+
+    const handleOpenLogout = () => {
+        setIsOpenLogout(true);
+    }
 
     const navigationItems: CommonPath[] = [
         {
@@ -24,7 +34,7 @@ export const Header = () => {
         ...(isAuthenticated ? [
             {
                 name: "Logout",
-                onClick: logoutMutate,
+                onClick: handleOpenLogout,
             }
         ] : [
             {
@@ -40,33 +50,38 @@ export const Header = () => {
 
 
     return (
-        <Flex as="header" bgColor="blackAlpha.400" mb="10px" py="5px">
-            <Container maxW="100%">
-                <Flex justify="space-between" align="center">
-                    <Text fontSize="x-large">
-                        Speed-typing
-                    </Text>
+        <>
+            <Flex as="header" bgColor="blackAlpha.400" mb="10px" py="5px">
+                <Container maxW="100%">
+                    <Flex justify="space-between" align="center">
+                        <Text fontSize="x-large">
+                            Speed-typing
+                        </Text>
 
-                    <Flex as="nav" align="center">
-                        <List display="flex" gap={5}>
-                            {navigationItems.map(item => (
-                                <ListItem key={item.name}>
-                                    {item.path ? (
-                                        <Link to={item.path}>
-                                            {item.name}
-                                        </Link>
-                                    ) : (
-                                        <Text onClick={item.onClick} cursor="pointer">
-                                            {item.name}
-                                        </Text>
-                                    )
-                                    }
-                                </ListItem>
-                            ))}
-                        </List>
+                        <Flex as="nav" align="center">
+                            <List display="flex" gap={5}>
+                                {navigationItems.map(item => (
+                                    <ListItem key={item.name}>
+                                        {item.path ? (
+                                            <Link to={item.path}>
+                                                {item.name}
+                                            </Link>
+                                        ) : (
+                                            <Text onClick={item.onClick} cursor="pointer">
+                                                {item.name}
+                                            </Text>
+                                        )
+                                        }
+                                    </ListItem>
+                                ))}
+                            </List>
+                        </Flex>
                     </Flex>
-                </Flex>
-            </Container>
-        </Flex>
+                </Container>
+            </Flex>
+
+            <AlertDialogLogout isOpen={isOpenLogout} onClose={handleCloseLogout}/>
+        </>
+
     )
 }

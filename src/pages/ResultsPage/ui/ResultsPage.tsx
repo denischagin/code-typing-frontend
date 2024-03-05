@@ -1,15 +1,19 @@
 import {ResultsList} from "@widgets/ResultsList";
-import {useUnit} from "effector-react";
-import {$resultsStore} from "@entities/results";
-import {Container} from "@chakra-ui/react";
+import {useGetSavedResults} from "@entities/results";
+import {Container, Progress, Text} from "@chakra-ui/react";
 
 const ResultsPage = () => {
-    const resultsList = useUnit($resultsStore)
+    const {data: resultsList, isPending} = useGetSavedResults()
+
+    if (isPending) {
+        return <Progress colorScheme="blue" isIndeterminate/>
+    }
 
     return (
-            <Container maxW="1000px">
-                <ResultsList results={resultsList ?? []}/>
-            </Container>
+        <Container maxW="1000px">
+            {resultsList?.length === 0 && <Text>No results</Text>}
+            {!!resultsList?.length && <ResultsList results={resultsList}/>}
+        </Container>
     )
 }
 

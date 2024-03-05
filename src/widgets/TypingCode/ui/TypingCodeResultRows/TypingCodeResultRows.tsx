@@ -3,7 +3,7 @@ import {TypingCodeResultRowsProps} from "@widgets/TypingCode";
 import {SymbolsPerSecondChart, symbolsPerSecondToChart, useResult, useSaveResult} from "@entities/results";
 import {convertMillisecondsAndDateToTime} from "@shared/libs";
 import {Flex, Text, Tooltip} from "@chakra-ui/react";
-import {CodeContainer, CodeIndexesRange, CodeRow, CodeRows, useCodeErrors} from "@entities/code";
+import {CodeContainer, CodeIndexesRange, CodeRow, CodeRows, useCodeErrors, useRandomCode} from "@entities/code";
 
 export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultRowsProps>((props, scrollRef) => {
     const {startIndex} = props
@@ -12,11 +12,14 @@ export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultR
     const {resultTime, symbolPerMinute, symbolsPerSecond} = result
 
     const {mutate: saveResult} = useSaveResult()
+    const { randomTextUUID } = useRandomCode()
 
     useEffect(() => {
         if (!result.resultTime) return
 
-        saveResult(result)
+        saveResult({
+
+        })
     }, [result.resultTime]);
 
     const chartData = symbolsPerSecondToChart(symbolsPerSecond)
