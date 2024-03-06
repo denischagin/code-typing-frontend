@@ -2,7 +2,8 @@ export type AnyAction = {
     type: string;
     payload?: unknown;
 };
-export type AnyMethod = (state: unknown, payload?: unknown) => unknown;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AnyMethod = (state: any, payload?: any) => any;
 
 export type Tail<Arr extends readonly unknown[]> = Arr extends readonly [
         unknown,
@@ -18,7 +19,8 @@ export interface UseMethodsOptions<State, Methods> {
 
 export type AnyMethodsMap<State> = Record<
     string,
-    (state: State, payload?: unknown) => State | void
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (state: State, payload?: any) => State | void
 >;
 
 export type UseMethodsInit<State, Methods extends AnyMethodsMap<State>> =
@@ -29,6 +31,7 @@ export type BoundMethod<Method extends AnyMethod> = (
     ...args: Tail<Parameters<Method>>
 ) => void;
 
-export type BoundMethods<Methods extends AnyMethodsMap<unknown>> = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type BoundMethods<Methods extends AnyMethodsMap<any>> = {
     [Key in keyof Methods]: BoundMethod<Methods[Key]>;
 };
