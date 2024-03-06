@@ -45,4 +45,4 @@ export const router = createBrowserRouter([
             ]),
         ]
     },
-]);
+], {basename: '/speed-typing-new'});

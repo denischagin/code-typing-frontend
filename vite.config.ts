@@ -18,5 +18,5 @@ export default defineConfig({
         },
     },
     plugins: [react()],
-    base: "/speed-typing-new/"
+    base: "/speed-typing-new"
 })
