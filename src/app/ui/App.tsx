@@ -1,15 +1,15 @@
-import { Suspense } from "react";
+import {Suspense} from "react";
 
-import { Progress } from "@chakra-ui/react";
+import {Progress} from "@chakra-ui/react";
 
 import '../styles/global.scss'
 
-import { Providers } from "./providers";
+import {Providers} from "./providers";
 
 function App() {
     return (
-        <Suspense fallback={<Progress isIndeterminate />}>
-            <Providers />
+        <Suspense fallback={<Progress isIndeterminate/>}>
+            <Providers/>
         </Suspense>
     )
 }

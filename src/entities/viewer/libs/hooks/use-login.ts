@@ -5,14 +5,14 @@ import {useNavigate} from "react-router-dom";
 import {TokenService} from "@entities/token";
 import {ILoginCredentials, useViewer, ViewerService} from "@entities/viewer";
 import {paths} from "@pages/routes";
-import {ApiError} from "@shared/api";
+import {useAxiosErrorToast} from "@shared/libs/hooks/axios-error-toast";
 import {useMutation} from "@tanstack/react-query";
-import {AxiosError} from "axios";
 
 export const useLogin = () => {
     const {loginViewer} = useViewer()
     const toast = useToast()
     const navigate = useNavigate()
+    const errorHandler = useAxiosErrorToast()
 
     return useMutation({
         mutationFn: (credentials: ILoginCredentials) => ViewerService.login(credentials),
@@ -25,8 +25,6 @@ export const useLogin = () => {
             navigate(paths.typingCodePage, {replace: true})
             TokenService.setAccessToken(access)
         },
-        onError: (error: AxiosError<ApiError>) => {
-            toast({colorScheme: 'red', title: error.response?.data?.message, status: 'error'})
-        }
+        onError: errorHandler
     })
 }
