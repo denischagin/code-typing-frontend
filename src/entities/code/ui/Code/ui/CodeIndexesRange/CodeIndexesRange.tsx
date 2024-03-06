@@ -1,5 +1,6 @@
-import {CodeIndex, CodeIndexes, CodeIndexesRangeProps} from "@entities/code";
 import {memo} from "react";
+
+import {CodeIndex, CodeIndexes, CodeIndexesRangeProps} from "@entities/code";
 
 const CodeIndexesRange = (props: CodeIndexesRangeProps) => {
     const {length, startIndex} = props

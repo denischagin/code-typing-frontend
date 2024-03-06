@@ -1,11 +1,12 @@
 import {Container, Flex, HStack, Progress} from "@chakra-ui/react";
-import {Timer} from "@widgets/Timer";
-import {Typing} from "@widgets/Typing";
-import {ResultSpeed} from "@widgets/ResultSpeed";
+
 import {useGetTextQuery} from "@entities/text";
+import {SelectChangeLanguage} from "@features/change-language";
 import {ButtonNewText} from "@features/new-text";
 import {ButtonRepeatText} from "@features/repeat-text";
-import {SelectChangeLanguage} from "@features/change-language";
+import {ResultSpeed} from "@widgets/ResultSpeed";
+import {Timer} from "@widgets/Timer";
+import {Typing} from "@widgets/Typing";
 
 const TypingPage = () => {
     const {isFetching} = useGetTextQuery()

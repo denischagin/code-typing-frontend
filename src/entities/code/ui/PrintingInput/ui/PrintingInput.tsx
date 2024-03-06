@@ -1,5 +1,7 @@
-import {Input} from '@chakra-ui/react'
 import {forwardRef, memo} from "react";
+
+import {Input} from '@chakra-ui/react'
+
 import {PrintingInputProps} from "@entities/code";
 
 const PrintingInput = forwardRef<HTMLInputElement, PrintingInputProps>((props, ref) => {

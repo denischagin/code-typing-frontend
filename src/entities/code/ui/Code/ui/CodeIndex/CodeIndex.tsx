@@ -1,6 +1,8 @@
-import {Flex, Text} from "@chakra-ui/react";
-import {CodeIndexProps} from "@entities/code";
 import {memo} from "react";
+
+import {Flex, Text} from "@chakra-ui/react";
+
+import {CodeIndexProps} from "@entities/code";
 
 const CodeIndex = ({index}: CodeIndexProps) => {
     return (

@@ -1,11 +1,10 @@
-import {Grid} from "@chakra-ui/react";
 import {memo, ReactNode} from "react";
 
-const CodeContainer = ({children}: { children: ReactNode }) => {
+import {Grid} from "@chakra-ui/react";
+
+const CodeContainer = (props: { children: ReactNode }) => {
     return (
-        <Grid templateColumns="80px 1fr" gap="10px" overflow="hidden">
-            {children}
-        </Grid>
+        <Grid templateColumns="80px 1fr" gap="10px" overflow="hidden" {...props} />
     );
 };
 

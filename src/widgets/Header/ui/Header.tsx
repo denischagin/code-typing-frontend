@@ -1,9 +1,12 @@
+import {useState} from "react";
+
 import {Container, Flex, List, ListItem, Text} from "@chakra-ui/react";
+
 import {Link} from "react-router-dom";
-import {paths} from "@pages/routes";
+
 import {useViewer} from "@entities/viewer";
 import {AlertDialogLogout} from "@features/auth/logout";
-import {useState} from "react";
+import {paths} from "@pages/routes";
 
 export type CommonPath = {
     name: string;

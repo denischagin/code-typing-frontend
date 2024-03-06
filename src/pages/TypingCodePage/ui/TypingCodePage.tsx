@@ -1,8 +1,9 @@
 import {Flex} from "@chakra-ui/react";
-import {TypingCode} from "@widgets/TypingCode";
-import {AsideSettings} from "@widgets/AsideSettings";
-import {TypingCodePanel} from "@widgets/TypingCodePanel";
+
 import {TypingCodeProviders} from "@entities/code";
+import {AsideSettings} from "@widgets/AsideSettings";
+import {TypingCode} from "@widgets/TypingCode";
+import {TypingCodePanel} from "@widgets/TypingCodePanel";
 
 const TypingCodePage = () => {
     return (

@@ -1,5 +1,6 @@
-import {Grid} from "@chakra-ui/react";
 import {memo, ReactNode} from "react";
+
+import {Grid} from "@chakra-ui/react";
 
 const CodeIndexes = ({children}: { children: ReactNode }) => {
     return (

@@ -1,7 +1,9 @@
-import { WordProps } from "./Word.interface.ts";
-import { Text } from "@chakra-ui/react";
 import { memo } from "react";
+
+import { Text } from "@chakra-ui/react";
+
 import { Symbol } from "../Symbol";
+import { WordProps } from "./Word.interface.ts";
 import { getSymbolStatus } from "@entities/text";
 
 export const Word = memo(({

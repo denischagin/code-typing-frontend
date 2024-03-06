@@ -1,4 +1,5 @@
 import {useCallback, useEffect, useState} from "react";
+
 import {getRandomNumber} from "@shared/libs";
 
 export const useRandom = <Item>(

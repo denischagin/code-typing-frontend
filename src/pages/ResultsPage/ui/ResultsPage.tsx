@@ -1,6 +1,7 @@
-import {ResultsList} from "@widgets/ResultsList";
-import {useGetSavedResults} from "@entities/results";
 import {Container, Progress, Text} from "@chakra-ui/react";
+
+import {useGetSavedResults} from "@entities/results";
+import {ResultsList} from "@widgets/ResultsList";
 
 const ResultsPage = () => {
     const {data: resultsList, isPending} = useGetSavedResults()

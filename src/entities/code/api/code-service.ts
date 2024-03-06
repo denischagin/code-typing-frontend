@@ -1,5 +1,5 @@
-import {baseQueryV1} from "@shared/api";
 import {TCodeExamplesByNameResponse, TCodeExamplesResponse, TProgrammingLanguageResponse} from "@entities/code";
+import {baseQueryV1} from "@shared/api";
 
 export class CodeService {
     static async fetchProgrammingLanguages() {

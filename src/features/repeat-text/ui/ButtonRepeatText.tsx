@@ -1,4 +1,5 @@
 import {Button} from "@chakra-ui/react";
+
 import {useText} from "@entities/text";
 
 export const ButtonRepeatText = () => {

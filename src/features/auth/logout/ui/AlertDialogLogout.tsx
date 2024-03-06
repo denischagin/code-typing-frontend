@@ -1,3 +1,5 @@
+import {useRef} from "react";
+
 import {
     AlertDialog,
     AlertDialogBody,
@@ -7,7 +9,7 @@ import {
     AlertDialogOverlay,
     Button
 } from "@chakra-ui/react";
-import {useRef} from "react";
+
 import {useLogout} from "@entities/viewer";
 
 export interface AlertDialogLogoutProps {

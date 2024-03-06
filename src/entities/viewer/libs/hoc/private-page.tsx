@@ -1,9 +1,12 @@
 import {ReactNode, useEffect} from "react";
-import {useRefresh, useViewer} from "@entities/viewer";
-import {useNavigate} from "react-router-dom";
-import {paths} from "@pages/routes";
-import {TokenService} from "@entities/token";
+
 import {Progress} from "@chakra-ui/react";
+
+import {useNavigate} from "react-router-dom";
+
+import {TokenService} from "@entities/token";
+import {useRefresh, useViewer} from "@entities/viewer";
+import {paths} from "@pages/routes";
 
 export const privatePage = (children: ReactNode) => {
     return (

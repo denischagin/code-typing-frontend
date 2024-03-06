@@ -1,7 +1,9 @@
-import {useRefresh, useViewer} from "@entities/viewer";
 import {ReactNode, useEffect, useState} from "react";
-import {TokenService} from "@entities/token";
+
 import {Progress} from "@chakra-ui/react";
+
+import {TokenService} from "@entities/token";
+import {useRefresh, useViewer} from "@entities/viewer";
 
 export const publicPage = (children: ReactNode) => {
     return (

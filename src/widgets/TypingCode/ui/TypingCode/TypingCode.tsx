@@ -1,5 +1,5 @@
-import {TypingCodeResultRows,} from "@widgets/TypingCode";
 import {Box, Text} from "@chakra-ui/react";
+
 import {
     CodeContainer,
     CodeIndexesRange,
@@ -12,6 +12,7 @@ import {
     useRandomCode,
     useTypingCodeHandlers
 } from "@entities/code";
+import {TypingCodeResultRows,} from "@widgets/TypingCode";
 
 export const TypingCode = () => {
     const endIndent = 2

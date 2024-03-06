@@ -1,4 +1,5 @@
 import {ChangeEventHandler, KeyboardEventHandler, RefObject} from "react";
+
 import {UseTypingActionState} from "@entities/code";
 
 export interface ITypingCodeHandlersContext extends UseTypingActionState {

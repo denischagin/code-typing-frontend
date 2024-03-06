@@ -1,9 +1,11 @@
-import {createBrowserRouter} from "react-router-dom";
-import Root from "@pages/Root";
-import ErrorPage from "@pages/ErrorPage";
-import {paths, routesWithHOC} from "@pages/routes";
-import {privatePage, publicPage} from "@entities/viewer";
 import {lazy} from "react";
+
+import {createBrowserRouter} from "react-router-dom";
+
+import {privatePage, publicPage} from "@entities/viewer";
+import ErrorPage from "@pages/ErrorPage";
+import Root from "@pages/Root";
+import {paths, routesWithHOC} from "@pages/routes";
 
 const ResultsPage = lazy(() => import('@pages/ResultsPage'))
 const TypingCodePage = lazy(() => import('@pages/TypingCodePage'))

@@ -1,6 +1,7 @@
 import {Image} from "@chakra-ui/react";
-import {RefreshIconProps} from "@shared/ui/icons";
+
 import RefreshIconImg from "@shared/assets/refresh.svg"
+import {RefreshIconProps} from "@shared/ui/icons";
 
 export const RefreshIcon = (props: RefreshIconProps) => {
     return (

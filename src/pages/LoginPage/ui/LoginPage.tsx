@@ -1,10 +1,12 @@
-import {Box} from "@chakra-ui/react";
-import {useRandom} from "@shared/libs/hooks";
-import {languagesAuthForm} from "@pages/LoginPage/constants";
-import {CodeForm, makeObjectCodeRows} from "@widgets/CodeForm";
-import {ILoginCredentials, useLogin} from "@entities/viewer";
 import {useMemo} from "react";
+
+import {Box} from "@chakra-ui/react";
+
+import {ILoginCredentials, useLogin} from "@entities/viewer";
+import {languagesAuthForm} from "@pages/LoginPage/constants";
 import {languagesRegisterForm} from "@pages/RegisterPage";
+import {useRandom} from "@shared/libs/hooks";
+import {CodeForm, makeObjectCodeRows} from "@widgets/CodeForm";
 
 
 const LoginPage = () => {

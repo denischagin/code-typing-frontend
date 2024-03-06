@@ -1,5 +1,5 @@
-import {createEvent, createStore} from "effector";
 import {ETextLocale, ITextRequestParams} from "@entities/text";
+import {createEvent, createStore} from "effector";
 
 export const eventChangeLanguage = createEvent<ETextLocale>()
 

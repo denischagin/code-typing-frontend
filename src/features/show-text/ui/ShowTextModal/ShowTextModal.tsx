@@ -1,4 +1,5 @@
 import {Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text} from "@chakra-ui/react";
+
 import {ShowTextModalProps} from "@features/show-text/ui/ShowTextModal/ShowTextModal.interface.ts";
 
 export const ShowTextModal = ({text, ...restProps}: ShowTextModalProps) => {

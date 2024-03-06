@@ -1,5 +1,6 @@
-import {Flex} from "@chakra-ui/react";
 import {ReactNode} from "react";
+
+import {Flex} from "@chakra-ui/react";
 
 const CodeRow = ({children}: { children?: ReactNode }) => {
     return (

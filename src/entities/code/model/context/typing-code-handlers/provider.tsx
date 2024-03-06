@@ -1,9 +1,10 @@
 import {ChangeEventHandler, KeyboardEvent, ReactNode, useEffect} from "react";
-import {useScrollIntoView} from "@shared/libs/hooks/scroll-into-view";
-import {useResult} from "@entities/results";
-import {useTick} from "@shared/libs/hooks/tick";
-import {useTimer} from "@entities/timer";
+
 import {TypingCodeHandlersContext, useCodeErrors, useCurrentRow, useRandomCode, useTypingAction} from "@entities/code";
+import {useResult} from "@entities/results";
+import {useTimer} from "@entities/timer";
+import {useScrollIntoView} from "@shared/libs/hooks/scroll-into-view";
+import {useTick} from "@shared/libs/hooks/tick";
 
 export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) => {
     const [

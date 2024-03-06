@@ -1,8 +1,10 @@
+import {useEffect, useRef, useState} from "react"
+
 import {Text} from "@chakra-ui/react"
+
 import {$timerStore} from "@entities/timer"
 import {convertMillisecondsAndDateToTime} from "@shared/libs"
 import {useUnit} from "effector-react"
-import {useEffect, useRef, useState} from "react"
 
 export const Timer = () => {
     const [currentTimeMilliseconds, setCurrentTimeMilliseconds] = useState(0)

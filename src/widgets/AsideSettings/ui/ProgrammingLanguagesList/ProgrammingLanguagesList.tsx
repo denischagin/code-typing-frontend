@@ -1,8 +1,10 @@
 import { Flex, Image, Stack, StackItem, Text } from "@chakra-ui/react";
+
 import { Link } from "react-router-dom";
-import { ProgrammingLanguagesListProps } from "src/widgets/AsideSettings";
-import { searchParamsEnum } from "@shared/constants";
+
 import ProgrammingLanguageIcon from '@shared/assets/programming-language.svg'
+import { searchParamsEnum } from "@shared/constants";
+import { ProgrammingLanguagesListProps } from "src/widgets/AsideSettings";
 
 export const ProgrammingLanguagesList = (props: ProgrammingLanguagesListProps) => {
     const {

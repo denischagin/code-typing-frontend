@@ -1,8 +1,10 @@
-import {Select} from "@chakra-ui/react";
-import {selectOption} from "@features/change-language";
 import {ChangeEventHandler} from "react";
-import {useUnit} from "effector-react";
+
+import {Select} from "@chakra-ui/react";
+
 import {$textParamsStore, ETextLocale, eventChangeLanguage, useText} from "@entities/text";
+import {selectOption} from "@features/change-language";
+import {useUnit} from "effector-react";
 
 
 export const SelectChangeLanguage = () => {

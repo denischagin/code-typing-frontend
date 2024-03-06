@@ -1,11 +1,13 @@
-import {useMutation} from "@tanstack/react-query";
-import {ILoginCredentials, useViewer, ViewerService} from "@entities/viewer";
 import {useToast} from "@chakra-ui/react";
-import {AxiosError} from "axios";
-import {ApiError} from "@shared/api";
+
 import {useNavigate} from "react-router-dom";
-import {paths} from "@pages/routes";
+
 import {TokenService} from "@entities/token";
+import {ILoginCredentials, useViewer, ViewerService} from "@entities/viewer";
+import {paths} from "@pages/routes";
+import {ApiError} from "@shared/api";
+import {useMutation} from "@tanstack/react-query";
+import {AxiosError} from "axios";
 
 export const useLogin = () => {
     const {loginViewer} = useViewer()

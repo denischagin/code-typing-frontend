@@ -1,8 +1,10 @@
-import {Text, TextProps} from "@chakra-ui/react";
-import {SymbolProps, TSymbolStatus} from "@entities/text";
 import {memo, useEffect, useRef} from "react";
-import {useUnit} from 'effector-react'
+
+import {Text, TextProps} from "@chakra-ui/react";
+
 import {eventChangePosition} from "@entities/cursor";
+import {SymbolProps, TSymbolStatus} from "@entities/text";
+import {useUnit} from 'effector-react'
 
 export const Symbol = memo(({
                                 symbol, status, isPrinting,

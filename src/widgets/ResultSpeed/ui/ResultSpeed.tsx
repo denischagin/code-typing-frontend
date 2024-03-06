@@ -1,9 +1,12 @@
-import {Divider, Flex, Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs, Text} from "@chakra-ui/react";
-import {convertMillisecondsAndDateToTime} from "@shared/libs";
-import {useSearchParams} from "react-router-dom";
-import {searchParamsEnum} from "@shared/constants";
-import {useFindResultById, getResultStats} from "@entities/results";
 import {useEffect} from "react";
+
+import {Divider, Flex, Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs, Text} from "@chakra-ui/react";
+
+import {useSearchParams} from "react-router-dom";
+
+import {getResultStats,useFindResultById} from "@entities/results";
+import {searchParamsEnum} from "@shared/constants";
+import {convertMillisecondsAndDateToTime} from "@shared/libs";
 
 export const ResultSpeed = () => {
     const [searchParams, setSearchParams] = useSearchParams()

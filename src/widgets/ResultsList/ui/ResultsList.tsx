@@ -1,6 +1,7 @@
+import {Stack, Text} from "@chakra-ui/react";
+
 import {ResultsItem} from "@entities/results";
 import {ResultsListProps} from "@widgets/ResultsList";
-import {Stack, Text} from "@chakra-ui/react";
 
 export const ResultsList = ({results}: ResultsListProps) => {
     console.log(results)

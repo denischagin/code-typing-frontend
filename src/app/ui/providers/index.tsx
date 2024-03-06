@@ -1,10 +1,13 @@
-import {ChakraProvider} from "@chakra-ui/react"
 import {ReactNode} from "react"
-import {QueryClientProvider} from "@tanstack/react-query";
-import {queryClient, theme} from "@app/config";
+
+import {ChakraProvider} from "@chakra-ui/react"
+
 import {RouterProvider} from "react-router-dom";
-import {router} from "@pages/index.tsx";
+
+import {queryClient, theme} from "@app/config";
 import {ViewerProvider} from "@entities/viewer";
+import {router} from "@pages/index.tsx";
+import {QueryClientProvider} from "@tanstack/react-query";
 
 export const Providers = ({children}: { children?: ReactNode }) => {
     return (

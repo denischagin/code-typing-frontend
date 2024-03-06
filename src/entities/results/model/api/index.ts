@@ -1,4 +1,4 @@
-import {IResultCode, IResultFromApi} from "@entities/results";
+import {IResultFromApi, IResultWithoutId} from "@entities/results";
 
 export type TGetSavedResultsResponse = IResultFromApi[]
-export type TSaveResultBody = IResultCode
+export type TSaveResultBody = IResultWithoutId

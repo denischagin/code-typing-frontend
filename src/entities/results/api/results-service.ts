@@ -1,5 +1,5 @@
-import {baseQueryV1} from "@shared/api";
 import {TGetSavedResultsResponse, TSaveResultBody} from "@entities/results";
+import {baseQueryV1} from "@shared/api";
 
 class ResultsService {
     async fetchSavedResults() {

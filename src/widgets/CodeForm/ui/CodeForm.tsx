@@ -1,7 +1,9 @@
+import {ChangeEventHandler, Fragment, KeyboardEventHandler, useState} from "react";
+
 import {Box, Flex, Input, Text} from "@chakra-ui/react";
+
 import {CodeContainer, CodeIndexesRange, CodeRow, CodeRows} from "@entities/code";
 import {CodeFormProps} from "@widgets/CodeForm";
-import {ChangeEventHandler, Fragment, KeyboardEventHandler, useState} from "react";
 
 export const CodeForm = <Fields extends Record<string, unknown>>(props: CodeFormProps<Fields>) => {
     const {fields, onSuccess, title} = props;

@@ -1,5 +1,5 @@
-import {createStore, createEvent} from "effector";
 import {ITimerStore} from "../types";
+import {createEvent,createStore} from "effector";
 
 export const eventStartTimer = createEvent<number>()
 export const eventStopTimer = createEvent<number>()

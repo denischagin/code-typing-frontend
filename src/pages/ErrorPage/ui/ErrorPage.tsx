@@ -1,5 +1,6 @@
-import {useRouteError, isRouteErrorResponse} from 'react-router-dom';
 import {Flex, Text} from "@chakra-ui/react";
+
+import {isRouteErrorResponse,useRouteError} from 'react-router-dom';
 
 const ErrorPage = () => {
     const error = useRouteError();

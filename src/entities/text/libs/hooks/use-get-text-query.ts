@@ -1,6 +1,6 @@
-import {useQuery} from "@tanstack/react-query";
 import {$textParamsStore, TextService} from "@entities/text";
 import {queryKeysEnum} from "@shared/constants";
+import {useQuery} from "@tanstack/react-query";
 import {useUnit} from "effector-react";
 
 export const useGetTextQuery = () => {

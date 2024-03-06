@@ -1,6 +1,8 @@
 import {Children} from "react";
-import {AsideTabListProps, useAside} from "@shared/ui/aside";
+
 import {Box} from "@chakra-ui/react";
+
+import {AsideTabListProps, useAside} from "@shared/ui/aside";
 
 export const AsideTabList = (props: AsideTabListProps) => {
     const {children, ...restProps} = props

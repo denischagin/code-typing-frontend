@@ -1,16 +1,20 @@
 import {useRef} from "react";
+
 import {Text} from "@chakra-ui/react";
+
+import {useSearchParams} from "react-router-dom";
+
 import css from './Typing.module.scss'
-import {Cursor, TypingField} from "@features/typing";
+
+import {$storeCursorPosition} from "@entities/cursor";
 import {
     getWordStatus, useGetTextQuery,
     Word
 } from "@entities/text";
-import {useUnit} from "effector-react";
-import {$storeCursorPosition} from "@entities/cursor";
-import {useTyping} from "@widgets/Typing";
-import {useSearchParams} from "react-router-dom";
+import {Cursor, TypingField} from "@features/typing";
 import {searchParamsEnum} from "@shared/constants";
+import {useTyping} from "@widgets/Typing";
+import {useUnit} from "effector-react";
 
 export const Typing = () => {
     const [searchParams] = useSearchParams()

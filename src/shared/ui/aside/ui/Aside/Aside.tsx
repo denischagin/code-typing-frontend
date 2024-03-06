@@ -1,5 +1,6 @@
-import { AsideContent } from "../AsideContent";
 import { Flex } from "@chakra-ui/react";
+
+import { AsideContent } from "../AsideContent";
 import { AsideContext, AsideProps } from "@shared/ui/aside";
 
 export const Aside = (props: AsideProps) => {

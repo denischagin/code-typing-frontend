@@ -1,5 +1,5 @@
-import {CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip as TooltipChart, XAxis, YAxis} from "recharts";
 import {SymbolsPerSecondChartProps} from "@entities/results";
+import {CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip as TooltipChart, XAxis, YAxis} from "recharts";
 
 export const SymbolsPerSecondChart = (props: SymbolsPerSecondChartProps) => {
     const {data} = props

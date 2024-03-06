@@ -1,7 +1,8 @@
-import {eventChangeCurrentWordIndex, eventChangeTypingValue, useGetTextQuery} from "@entities/text";
-import {useUnit} from "effector-react/compat";
 import {useSearchParams} from "react-router-dom";
+
+import {eventChangeCurrentWordIndex, eventChangeTypingValue, useGetTextQuery} from "@entities/text";
 import {eventResetTimer} from "@entities/timer";
+import {useUnit} from "effector-react/compat";
 
 export interface UseTextReturn {
     handleNewText: () => void

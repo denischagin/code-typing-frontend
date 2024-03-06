@@ -1,13 +1,16 @@
-import {CodeForm, makeObjectCodeRows} from "@widgets/CodeForm";
-import {Box} from "@chakra-ui/react";
-import {useRandom} from "@shared/libs";
-import {languagesRegisterForm} from "@pages/RegisterPage/constants";
-import {IRegisterCredentials, useRegister} from "@entities/viewer";
 import {useMemo} from "react";
+
+import {Box} from "@chakra-ui/react";
+
+import {IRegisterCredentials, useRegister} from "@entities/viewer";
+import {languagesRegisterForm} from "@pages/RegisterPage/constants";
+import {useRandom} from "@shared/libs";
+import {CodeForm, makeObjectCodeRows} from "@widgets/CodeForm";
 
 const RegisterPage = () => {
     const languages = useMemo(() => Object.keys(languagesRegisterForm), [])
     const [randomLanguageName] = useRandom(languages);
+
 
     const {mutate: registerMutate} = useRegister();
 

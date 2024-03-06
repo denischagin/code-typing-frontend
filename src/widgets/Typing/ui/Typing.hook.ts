@@ -1,6 +1,8 @@
 import {ChangeEventHandler, useEffect} from "react";
-import {useUnit} from "effector-react";
-import {$timerStore, eventStartTimer, eventStopTimer} from "@entities/timer";
+
+import {useSearchParams} from "react-router-dom";
+
+import {eventAddResult, getResultWithStats} from "@entities/results";
 import {
     $currentWordIndexStore,
     $typingValueStore,
@@ -9,10 +11,10 @@ import {
     useGetTextQuery,
     useText,
 } from "@entities/text";
-import {eventAddResult, getResultWithStats} from "@entities/results";
-import {useSearchParams} from "react-router-dom";
+import {$timerStore, eventStartTimer, eventStopTimer} from "@entities/timer";
 import {searchParamsEnum} from "@shared/constants";
 import {useRandom} from "@shared/libs/hooks/random";
+import {useUnit} from "effector-react";
 
 
 export const useTyping = () => {

@@ -1,6 +1,6 @@
-import {useQuery} from "@tanstack/react-query";
-import {queryKeysEnum} from "@shared/constants";
 import {CodeService} from "@entities/code";
+import {queryKeysEnum} from "@shared/constants";
+import {useQuery} from "@tanstack/react-query";
 
 export const useGetProgrammingLanguages = () => {
     return useQuery({

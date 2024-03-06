@@ -1,4 +1,5 @@
 import {ReactNode, useState} from "react";
+
 import {CodeErrorsContext} from "@entities/code";
 
 export const CodeErrorsProvider = ({children}: { children: ReactNode }) => {

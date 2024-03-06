@@ -1,5 +1,7 @@
-import {Box, Grid, Text} from "@chakra-ui/react";
 import {memo, useEffect, useRef} from "react";
+
+import {Box, Grid, Text} from "@chakra-ui/react";
+
 import {PrintingRowProps} from "@entities/code";
 
 const PrintingRow = (props: PrintingRowProps) => {

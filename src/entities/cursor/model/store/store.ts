@@ -1,5 +1,5 @@
-import {createStore} from "effector";
 import {ICursorPosition} from "..";
+import {createStore} from "effector";
 import {createEvent} from "effector/compat";
 
 export const eventChangePosition = createEvent<ICursorPosition>()

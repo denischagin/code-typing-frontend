@@ -1,7 +1,9 @@
 import {Flex, IconButton, Text, Tooltip} from "@chakra-ui/react";
+
 import {useSearchParams} from "react-router-dom";
-import {searchParamsEnum} from "@shared/constants";
+
 import {useCodeErrors, useTypingCodeHandlers} from "@entities/code";
+import {searchParamsEnum} from "@shared/constants";
 import {RefreshIcon} from "@shared/ui/icons";
 import {Timer} from "@widgets/Timer";
 

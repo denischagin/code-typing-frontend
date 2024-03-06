@@ -1,9 +1,12 @@
 import {forwardRef, useEffect} from "react";
-import {TypingCodeResultRowsProps} from "@widgets/TypingCode";
-import {SymbolsPerSecondChart, symbolsPerSecondToChart, useResult, useSaveResult} from "@entities/results";
-import {convertMillisecondsAndDateToTime} from "@shared/libs";
+
 import {Flex, Text, Tooltip} from "@chakra-ui/react";
+
 import {CodeContainer, CodeIndexesRange, CodeRow, CodeRows, useCodeErrors, useRandomCode} from "@entities/code";
+import {SymbolsPerSecondChart, symbolsPerSecondToChart, useResult, useSaveResult} from "@entities/results";
+import {mapResultToApiBody} from "@entities/results";
+import {convertMillisecondsAndDateToTime} from "@shared/libs";
+import {TypingCodeResultRowsProps} from "@widgets/TypingCode";
 
 export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultRowsProps>((props, scrollRef) => {
     const {startIndex} = props
@@ -12,14 +15,12 @@ export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultR
     const {resultTime, symbolPerMinute, symbolsPerSecond} = result
 
     const {mutate: saveResult} = useSaveResult()
-    const { randomTextUUID } = useRandomCode()
+    const {randomTextUUID} = useRandomCode()
 
     useEffect(() => {
-        if (!result.resultTime) return
+        if (!result.resultTime || !randomTextUUID) return
 
-        saveResult({
-
-        })
+        saveResult(mapResultToApiBody(result))
     }, [result.resultTime]);
 
     const chartData = symbolsPerSecondToChart(symbolsPerSecond)

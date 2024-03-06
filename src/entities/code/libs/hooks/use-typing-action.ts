@@ -1,5 +1,6 @@
-import {useMethods} from "@shared/libs";
 import {useEffect} from "react";
+
+import {useMethods} from "@shared/libs";
 
 export type TTypingStatus = 'printing' | 'not-started' | 'ended'
 

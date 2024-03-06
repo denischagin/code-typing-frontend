@@ -1,6 +1,8 @@
-import {ResultsItemProps} from "@entities/results";
-import {Button, Flex, Text, VStack,} from "@chakra-ui/react";
 import {useState} from "react";
+
+import {Flex, Text, VStack,} from "@chakra-ui/react";
+
+import {ResultsItemProps} from "@entities/results";
 import {ShowTextModal} from "@features/show-text";
 
 export const ResultsItem = (props: ResultsItemProps) => {
@@ -16,9 +18,10 @@ export const ResultsItem = (props: ResultsItemProps) => {
     const handleCloseTextModal = () => {
         setIsOpenTextModal(false)
     }
-    const handleOpenTextModal = () => {
-        setIsOpenTextModal(true)
-    }
+    // const handleOpenTextModal = () => {
+    //     setIsOpenTextModal(true)
+    // }
+    // TODO button to open text modal
 
     return (
         <>

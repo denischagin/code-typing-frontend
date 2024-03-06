@@ -1,6 +1,7 @@
-import {useMutation} from "@tanstack/react-query";
-import {useViewer, ViewerService} from "@entities/viewer";
 import {useToast} from "@chakra-ui/react";
+
+import {useViewer, ViewerService} from "@entities/viewer";
+import {useMutation} from "@tanstack/react-query";
 
 export const useLogout = () => {
     const toast = useToast();

@@ -1,4 +1,5 @@
 import {RefObject, useRef} from "react";
+
 import {ScrollHandlers} from "@shared/libs/hooks/scroll-into-view";
 
 export const useScrollIntoView = <ScrollElement extends HTMLElement, ScrollElementParent extends HTMLElement = ScrollElement>(

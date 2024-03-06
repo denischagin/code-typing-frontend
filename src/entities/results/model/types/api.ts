@@ -7,3 +7,6 @@ export interface IResultFromApi extends Omit<IResultCode, "startTime" | "endTime
     startTime: string
     endTime: string
 }
+
+export interface IResultWithoutId extends Omit<IResultFromApi, "id" | "codeExampleUUID" | "userID"> {
+}

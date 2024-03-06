@@ -1,4 +1,5 @@
 import {Text} from "@chakra-ui/react"
+
 import {CursorProps} from "@features/typing";
 
 export const Cursor = ({top, left}: CursorProps) => {

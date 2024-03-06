@@ -1,6 +1,6 @@
-import axios, {AxiosRequestConfig} from "axios";
-import {ViewerService} from "@entities/viewer";
 import {TokenService} from "@entities/token";
+import {ViewerService} from "@entities/viewer";
+import axios, {AxiosRequestConfig} from "axios";
 
 export const baseQueryV1Instance = axios.create({
     baseURL: "http://localhost:8443/api/v1",

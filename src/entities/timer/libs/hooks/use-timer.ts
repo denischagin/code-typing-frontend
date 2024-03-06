@@ -1,5 +1,5 @@
-import {useUnit} from "effector-react";
 import {$timerStore, eventResetTimer, eventStartTimer, eventStopTimer} from "@entities/timer";
+import {useUnit} from "effector-react";
 
 export const useTimer = () => {
     return useUnit({

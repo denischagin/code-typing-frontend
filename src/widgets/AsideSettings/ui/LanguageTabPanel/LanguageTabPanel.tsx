@@ -1,11 +1,14 @@
-import { Box, Input, Stack, Text, Tooltip } from "@chakra-ui/react";
-import { useSearchParams } from "react-router-dom";
-import { LanguageTabPanelProps, ProgrammingLanguagesList } from "@widgets/AsideSettings";
-import { AsideCloseButton } from "@shared/ui/aside";
-import { useSearch } from "@shared/libs/hooks/search";
 import { useState } from "react";
-import { searchParamsEnum } from "@shared/constants";
+
+import { Box, Input, Stack, Text, Tooltip } from "@chakra-ui/react";
+
+import { useSearchParams } from "react-router-dom";
+
 import { useGetProgrammingLanguages } from "@entities/code";
+import { searchParamsEnum } from "@shared/constants";
+import { useSearch } from "@shared/libs/hooks/search";
+import { AsideCloseButton } from "@shared/ui/aside";
+import { LanguageTabPanelProps, ProgrammingLanguagesList } from "@widgets/AsideSettings";
 
 export const LanguageTabPanel = (props: LanguageTabPanelProps) => {
     const { handleClosePanel } = props
