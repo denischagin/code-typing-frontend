@@ -12,6 +12,7 @@ const TypingCodePage = lazy(() => import('@pages/TypingCodePage'))
 const LoginPage = lazy(() => import('@pages/LoginPage'))
 const RegisterPage = lazy(() => import('@pages/RegisterPage'))
 const TypingPage = lazy(() => import('@pages/TypingPage'))
+const MainPage = lazy(() => import('@pages/MainPage'))
 
 export const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
                 {
                     path: paths.registerPage,
                     element: <RegisterPage/>,
+                },
+                {
+                    path: paths.mainPage,
+                    element: <MainPage/>,
                 }
             ]),
             ...routesWithHOC(privatePage, [

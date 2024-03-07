@@ -4,4 +4,5 @@ export const paths = {
     resultsPage: '/results',
     loginPage: '/login',
     registerPage: '/register',
+    mainPage: '/',
 }

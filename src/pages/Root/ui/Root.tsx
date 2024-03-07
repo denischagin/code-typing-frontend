@@ -1,4 +1,6 @@
-import {Flex} from "@chakra-ui/react";
+import {Suspense} from "react";
+
+import {Flex, Progress} from "@chakra-ui/react";
 
 import {Outlet} from "react-router-dom";
 
@@ -11,7 +13,9 @@ const Root = () => {
             <Header/>
 
             <Flex as="main" flex="1" overflow="hidden">
-                <Outlet/>
+                <Suspense fallback={<Progress isIndeterminate w="100%" colorScheme="gray" h={2}/>}>
+                    <Outlet/>
+                </Suspense>
             </Flex>
 
             <Footer/>

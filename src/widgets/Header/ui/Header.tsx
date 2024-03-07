@@ -2,7 +2,7 @@ import {useState} from "react";
 
 import {Container, Flex, List, ListItem, Text} from "@chakra-ui/react";
 
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 import {useViewer} from "@entities/viewer";
 import {AlertDialogLogout} from "@features/auth/logout";
@@ -57,9 +57,11 @@ export const Header = () => {
             <Flex as="header" bgColor="blackAlpha.400" mb="10px" py="5px">
                 <Container maxW="100%">
                     <Flex justify="space-between" align="center">
-                        <Text fontSize="x-large">
-                            Speed-typing
-                        </Text>
+                        <NavLink to={paths.mainPage}>
+                            <Text fontSize="x-large">
+                                Code-Typing
+                            </Text>
+                        </NavLink>
 
                         <Flex as="nav" align="center">
                             <List display="flex" gap={5}>
