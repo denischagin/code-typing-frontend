@@ -1,0 +1,35 @@
+import {useState} from "react";
+
+import {Box, Text} from '@chakra-ui/react'
+
+import {CodeRow} from "@entities/code";
+import {ResultJSONProps} from "@entities/results";
+
+export const ResultJSONKey = (props: ResultJSONProps) => {
+    const {jsonKey, value, details} = props
+    const [isShowDetail, setIsShowDetail] = useState(false)
+
+    const handleShowDetail = () => {
+        setIsShowDetail(true)
+    }
+
+    const handleHideDetail = () => {
+        setIsShowDetail(false)
+    }
+
+    return (
+        <CodeRow onMouseEnter={handleShowDetail} onMouseLeave={handleHideDetail} cursor="pointer">
+            <Box
+                whiteSpace="pre"
+            >
+                {`    `}"{jsonKey}": {value},
+                {!!details && (
+                    <Text as="span" color="gray.500" opacity={isShowDetail ? 1 : 0} transition="opacity 200ms">
+                        {`  // ${details}`}
+                    </Text>
+                )}
+
+            </Box>
+        </CodeRow>
+    )
+}

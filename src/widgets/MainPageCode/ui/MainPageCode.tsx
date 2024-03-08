@@ -97,7 +97,7 @@ export const MainPageCode = () => {
                         </CodeRow>
 
                         {pages.map((page) => (
-                            <CodeRow>
+                            <CodeRow key={page.path}>
                                 <Text fontSize="xl" color="whiteAlpha.800">
                                     <Text as="span" color="blue.400" mr={1}>
                                         {`>`}

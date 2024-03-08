@@ -1,19 +1,19 @@
-import {Container, Progress, Text} from "@chakra-ui/react";
+import {Container, Text} from "@chakra-ui/react";
 
 import {useGetSavedResults} from "@entities/results";
+import {CodeLoading} from "@shared/ui/loading";
 import {ResultsList} from "@widgets/ResultsList";
 
 const ResultsPage = () => {
     const {data: resultsList, isPending} = useGetSavedResults()
 
     if (isPending) {
-        return <Progress colorScheme="blue" isIndeterminate/>
+        return <CodeLoading loadingTitle="Loading results"/>
     }
 
     return (
         <Container maxW="1000px">
-            {resultsList?.length === 0 && <Text>No results</Text>}
-            {!!resultsList?.length && <ResultsList results={resultsList}/>}
+            {resultsList?.length ? <ResultsList results={resultsList}/> : <Text fontSize="xl">No results</Text>}
         </Container>
     )
 }

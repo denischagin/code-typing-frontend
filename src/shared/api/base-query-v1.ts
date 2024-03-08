@@ -1,5 +1,6 @@
 import {TokenService} from "@entities/token";
 import {ViewerService} from "@entities/viewer";
+import {paths} from "@pages/routes";
 import axios, {AxiosRequestConfig} from "axios";
 
 export const baseQueryV1Instance = axios.create({
@@ -7,6 +8,7 @@ export const baseQueryV1Instance = axios.create({
     withCredentials: true,
 })
 
+// add access token to every request
 baseQueryV1Instance.interceptors.request.use((config) => {
     const token = TokenService.getAccessToken()
 
@@ -15,6 +17,8 @@ baseQueryV1Instance.interceptors.request.use((config) => {
     config.headers["Authorization"] = `Bearer ${token}`
     return config;
 })
+
+// refresh access token if it expires
 baseQueryV1Instance.interceptors.response.use((response) => {
     return response
 }, async function (error) {
@@ -24,7 +28,10 @@ baseQueryV1Instance.interceptors.response.use((response) => {
         const response = await ViewerService.refresh();
 
         if (response) TokenService.setAccessToken(response.access);
-        else TokenService.deleteAccessToken();
+        else {
+            TokenService.deleteAccessToken();
+            window.location.href = paths.loginPage
+        }
 
         return baseQueryV1Instance(originalRequest);
     }

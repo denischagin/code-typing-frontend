@@ -1,12 +1,11 @@
 import {ReactNode, useEffect} from "react";
 
-import {Progress} from "@chakra-ui/react";
-
 import {useNavigate} from "react-router-dom";
 
 import {TokenService} from "@entities/token";
 import {useRefresh, useViewer} from "@entities/viewer";
 import {paths} from "@pages/routes";
+import {CodeLoading} from "@shared/ui/loading";
 
 export const privatePage = (children: ReactNode) => {
     return (
@@ -34,7 +33,7 @@ const PrivatePage = ({children}: { children: ReactNode }) => {
     }, []);
 
     if (isPending)
-        return <Progress isIndeterminate/>;
+        return <CodeLoading/>
 
     return (isAuthenticated ? children : null);
 }

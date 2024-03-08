@@ -4,10 +4,9 @@ import {ResultsItem} from "@entities/results";
 import {ResultsListProps} from "@widgets/ResultsList";
 
 export const ResultsList = ({results}: ResultsListProps) => {
-    console.log(results)
 
     return (
-        <Stack spacing={5}>
+        <Stack spacing={5} overflow="scroll">
             {results.length !== 0
                 ? results.map((result, index) => (
                     <ResultsItem key={result.id} resultIndex={index} {...result} />

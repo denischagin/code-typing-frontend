@@ -10,7 +10,7 @@ export const CodeLoading: FC<CodeLoadingProps> = (props) => {
     const {
         maxLoadingCount = 50,
         loadingSymbol = "#",
-        loadingEmptySymbol = ' ',
+        loadingEmptySymbol = '.',
         loadingDelay = 200,
         loadingTitle = 'Loading page:',
         px = 4
@@ -28,7 +28,7 @@ export const CodeLoading: FC<CodeLoadingProps> = (props) => {
         }, loadingDelay);
 
         return () => clearInterval(interval.current);
-    }, [loadingHash]);
+    }, [loadingDelay, loadingHash, maxLoadingCount]);
 
     useEffect(() => {
         if (loadingCount >= maxLoadingCount) {
@@ -37,7 +37,10 @@ export const CodeLoading: FC<CodeLoadingProps> = (props) => {
                 setLoadingCount(0);
             }, 200)
         }
-    }, [loadingCount]);
+    }, [loadingCount, maxLoadingCount]);
+
+    const filledLoadingSymbol = loadingSymbol.repeat(loadingCount);
+    const emptyLoadingSymbol = loadingEmptySymbol.repeat(maxLoadingCount - loadingCount);
 
     return (
         <Flex w="100%" justify="space-between">
@@ -46,7 +49,7 @@ export const CodeLoading: FC<CodeLoadingProps> = (props) => {
             </Text>
 
             <Text color="whiteAlpha.900" fontSize="xl" whiteSpace="pre" textAlign="end" px={px}>
-                [{loadingSymbol.repeat(loadingCount)}{loadingEmptySymbol.repeat(maxLoadingCount - loadingCount)}]
+                [{filledLoadingSymbol + emptyLoadingSymbol}]
             </Text>
         </Flex>
     )

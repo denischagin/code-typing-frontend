@@ -1,9 +1,11 @@
-import {memo, ReactNode} from "react";
+import {memo} from "react";
 
 import {Grid} from "@chakra-ui/react";
 
-const CodeRows = ({children}: { children: ReactNode }) => {
-    return <Grid autoRows="40px">{children}</Grid>;
+import {CodeRowsProps} from "@entities/code";
+
+const CodeRows = (props: CodeRowsProps) => {
+    return <Grid autoRows="40px" {...props} />
 };
 
 export default memo(CodeRows);

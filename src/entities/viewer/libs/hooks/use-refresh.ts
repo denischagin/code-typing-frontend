@@ -3,6 +3,6 @@ import {useMutation} from "@tanstack/react-query";
 
 export const useRefresh = () => {
     return useMutation({
-       mutationFn: () => ViewerService.refreshWithCredentials()
+        mutationFn: () => ViewerService.refresh()
     })
 }

@@ -1,36 +1,44 @@
-import {useState} from "react";
+import {MouseEventHandler, useRef, useState} from "react";
 
-import {Flex, Text, VStack,} from "@chakra-ui/react";
+import {Button, Flex, Text, VStack,} from "@chakra-ui/react";
 
-import {ResultsItemProps} from "@entities/results";
-import {ShowTextModal} from "@features/show-text";
+import {ResultJSON, ResultsItemProps} from "@entities/results";
 
 export const ResultsItem = (props: ResultsItemProps) => {
     const {
         resultIndex,
-        text,
         startTime,
         endTime
     } = props;
 
-    const [isOpenTextModal, setIsOpenTextModal] = useState(false)
+    const [isOpenJson, setIsOpenJson] = useState(false);
 
-    const handleCloseTextModal = () => {
-        setIsOpenTextModal(false)
+    const resultRef = useRef<HTMLDivElement>(null);
+
+    const handleToggleJson: MouseEventHandler = (e) => {
+        e.stopPropagation();
+
+        if (!isOpenJson && resultRef.current) {
+            console.log(resultRef.current);
+            resultRef.current.scrollIntoView({
+                behavior: "smooth",
+            })
+        }
+        setIsOpenJson(prev => !prev);
     }
-    // const handleOpenTextModal = () => {
-    //     setIsOpenTextModal(true)
-    // }
-    // TODO button to open text modal
+
 
     return (
         <>
             <Flex
+                as="button"
                 gap="10px"
                 align="center"
                 bg={"whiteAlpha.100"}
                 px="10px" py="5px"
                 borderRadius="10px"
+                onClick={handleToggleJson}
+                ref={resultRef}
             >
                 <Text fontSize="large" as="strong">
                     {resultIndex + 1}.
@@ -39,9 +47,19 @@ export const ResultsItem = (props: ResultsItemProps) => {
                 <VStack spacing={2}>
                     <Text fontSize="medium">{(Date.parse(endTime) - Date.parse(startTime)).toLocaleString()}</Text>
                 </VStack>
+
+
+                <Button size="sm" onClick={handleToggleJson} ml="auto">
+                    {isOpenJson ? "Hide" : "Show more"}
+                </Button>
+
+
             </Flex>
 
-            <ShowTextModal isOpen={isOpenTextModal} onClose={handleCloseTextModal} text={text ?? ""}/>
+            {isOpenJson && (
+                <ResultJSON {...props} />
+            )}
+
         </>
     )
 }

@@ -1,12 +1,11 @@
-import {ReactNode} from "react";
-
 import {Flex} from "@chakra-ui/react";
 
-const CodeRow = ({children}: { children?: ReactNode }) => {
+import {CodeRowProps} from "@entities/code";
+
+
+const CodeRow = (props: CodeRowProps) => {
     return (
-        <Flex align="center" w="100%">
-            {children}
-        </Flex>
+        <Flex align="center" w="100%" {...props}/>
     );
 };
 
