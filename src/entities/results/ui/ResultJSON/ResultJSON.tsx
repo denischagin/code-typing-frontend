@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-import {Button, Text} from "@chakra-ui/react";
+import {BoxProps, Button, Text} from "@chakra-ui/react";
 
 import {CodeContainer, CodeRow, CodeRows} from "@entities/code";
 import {ResultJSONKey, ResultsItemProps, SymbolsPerSecondChart, symbolsPerSecondToChart} from "@entities/results";
@@ -11,14 +11,16 @@ export const ResultJSON = (props: ResultsItemProps) => {
 
     const chartData = symbolsPerSecondToChart(symbolsPerSecond)
 
-    const fieldDetails: Record<keyof ResultsItemProps, string> = {
-        accuracy: "Accuracy",
-        // text: "Typing code text",
-        symbolsPerSecond: "Symbols per second (graph with symbols per second)",
-        symbolPerMinute: "Symbols per minute (spm)",
-        resultTime: "Result time",
-        startTime: "Start time",
-        endTime: "End time",
+    const fields: Record<string, BoxProps & { details?: string }> = {
+        accuracy: {color: 'green.100', details: "Accuracy"},
+        errorsCount: {color: 'red.100', details: "Errors count"},
+        symbolsPerMinute: {color: 'blue.100', details: "Symbols per minute (spm)"},
+        startTime: {color: 'gray.400', details: "Start time"},
+        endTime: {color: 'gray.400', details: "End time"},
+        id: {color: "gray.500"},
+        userID: {color: "gray.500"},
+        codeExampleUUID: {color: "gray.500"},
+        text: {},
     }
 
     const handleToggleChart = () => {
@@ -27,10 +29,6 @@ export const ResultJSON = (props: ResultsItemProps) => {
 
     return (
         <>
-            {/*<Text fontSize="sm" color="green.500">*/}
-            {/*    Status 200 ok*/}
-            {/*</Text>*/}
-
             <CodeContainer>
                 <CodeRows autoRows="33px">
                     <CodeRow>
@@ -42,12 +40,12 @@ export const ResultJSON = (props: ResultsItemProps) => {
                     <CodeRow>
                         {`{`}
                     </CodeRow>
-                    {Object.keys(restResult).map((key) => (
+                    {Object.entries(fields).map(([key, props]) => (
                         <ResultJSONKey
                             key={key}
                             jsonKey={key}
                             value={JSON.stringify(restResult[key as keyof typeof restResult])}
-                            details={fieldDetails[key as keyof typeof restResult]}
+                            {...props}
                         />
                     ))}
                     <ResultJSONKey

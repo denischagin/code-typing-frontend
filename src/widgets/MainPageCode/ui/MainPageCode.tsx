@@ -1,4 +1,4 @@
-import {ChangeEvent, FormEventHandler, useEffect, useState} from 'react';
+import {ChangeEvent, FormEventHandler, useState} from 'react';
 
 import {Flex, Input, Link, Text} from "@chakra-ui/react";
 
@@ -18,11 +18,9 @@ export const MainPageCode = () => {
         setValue(e.target.value);
     }
 
-    useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 2000)
-    }, []);
+    const handleStopLoading = () => {
+        setIsLoading(false);
+    }
 
     const handleSubmit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -76,12 +74,10 @@ export const MainPageCode = () => {
 
                 {isLoading ? (
                     <CodeRow>
-                        <CodeLoading loadingTitle={'Loading...'} px={0}/>
+                        <CodeLoading title={'Loading...'} px={0} onSuccess={handleStopLoading} delay={80}/>
                     </CodeRow>
                 ) : (
                     <>
-                        <CodeRow/>
-
                         <CodeRow>
                             <Text fontSize="xl" color="blue.400" ml={3}>
                                 CODE TYPING v1.0.0 ready
@@ -142,7 +138,6 @@ export const MainPageCode = () => {
                             </Link>
                         </CodeRow>
                     </>
-
                 )}
             </CodeRows>
         </CodeContainer>

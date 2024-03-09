@@ -8,7 +8,7 @@ const ResultsPage = () => {
     const {data: resultsList, isPending} = useGetSavedResults()
 
     if (isPending) {
-        return <CodeLoading loadingTitle="Loading results"/>
+        return <CodeLoading title="Loading results"/>
     }
 
     return (

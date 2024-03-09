@@ -6,7 +6,7 @@ import {CodeRow} from "@entities/code";
 import {ResultJSONProps} from "@entities/results";
 
 export const ResultJSONKey = (props: ResultJSONProps) => {
-    const {jsonKey, value, details} = props
+    const {jsonKey, value, details, ...boxProps} = props
     const [isShowDetail, setIsShowDetail] = useState(false)
 
     const handleShowDetail = () => {
@@ -21,6 +21,7 @@ export const ResultJSONKey = (props: ResultJSONProps) => {
         <CodeRow onMouseEnter={handleShowDetail} onMouseLeave={handleHideDetail} cursor="pointer">
             <Box
                 whiteSpace="pre"
+                {...boxProps}
             >
                 {`    `}"{jsonKey}": {value},
                 {!!details && (

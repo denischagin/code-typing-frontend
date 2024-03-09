@@ -1,6 +1,8 @@
 import {ReactNode} from "react";
 
-export interface ResultJSONProps {
+import {BoxProps} from "@chakra-ui/react";
+
+export interface ResultJSONProps extends BoxProps {
     jsonKey: string;
     value: ReactNode
     details?: string

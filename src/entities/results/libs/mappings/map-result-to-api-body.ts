@@ -1,25 +1,30 @@
 import {IResultCode, TSaveResultBody} from "@entities/results";
+import {roundToFixed} from "@shared/libs";
 
-export const mapResultToApiBody = (result: IResultCode): TSaveResultBody => {
+
+export const mapResultToApiBody = (result: IResultCode & { codeExampleUUID?: string }): TSaveResultBody => {
     const {
-        resultTime,
         endTime,
         startTime,
         symbolsPerSecond,
-        accuracy,
         text,
         errorsCount,
-        symbolPerMinute
+        symbolsPerMinute,
+        codeExampleUUID
     } = result
 
+    const errorPercent = errorsCount && text ? errorsCount / text.length : 0
+
+    const accuracy = (1 - (errorPercent > 1 ? 1 : errorPercent)) * 100
+
     return {
-        resultTime,
         endTime: endTime?.toISOString() ?? "",
         startTime: startTime?.toISOString() ?? "",
         symbolsPerSecond,
-        accuracy,
+        accuracy: roundToFixed(accuracy, 2),
         text,
         errorsCount,
-        symbolPerMinute
+        symbolsPerMinute,
+        codeExampleUUID,
     }
 }

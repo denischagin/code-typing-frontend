@@ -3,8 +3,13 @@ import {forwardRef, useEffect} from "react";
 import {Flex, Text, Tooltip} from "@chakra-ui/react";
 
 import {CodeContainer, CodeIndexesRange, CodeRow, CodeRows, useCodeErrors, useRandomCode} from "@entities/code";
-import {SymbolsPerSecondChart, symbolsPerSecondToChart, useResult, useSaveResult} from "@entities/results";
-import {mapResultToApiBody} from "@entities/results";
+import {
+    mapResultToApiBody,
+    SymbolsPerSecondChart,
+    symbolsPerSecondToChart,
+    useResult,
+    useSaveResult
+} from "@entities/results";
 import {convertMillisecondsAndDateToTime} from "@shared/libs";
 import {TypingCodeResultRowsProps} from "@widgets/TypingCode";
 
@@ -12,7 +17,7 @@ export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultR
     const {startIndex} = props
 
     const {result} = useResult()
-    const {resultTime, symbolPerMinute, symbolsPerSecond} = result
+    const {resultTime, symbolsPerMinute, symbolsPerSecond} = result
 
     const {mutate: saveResult} = useSaveResult()
     const {randomTextUUID} = useRandomCode()
@@ -20,7 +25,7 @@ export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultR
     useEffect(() => {
         if (!result.resultTime || !randomTextUUID) return
 
-        saveResult(mapResultToApiBody(result))
+        saveResult(mapResultToApiBody({...result, codeExampleUUID: randomTextUUID}))
     }, [result.resultTime]);
 
     const chartData = symbolsPerSecondToChart(symbolsPerSecond)
@@ -53,7 +58,7 @@ export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultR
                                 </Text>
 
                                 <Text as="span" fontSize="25px">
-                                    {symbolPerMinute?.toFixed(3)}
+                                    {symbolsPerMinute?.toFixed(3)}
                                 </Text>
                             </Flex>
                         </Tooltip>

@@ -9,11 +9,12 @@ import {CodeLoadingProps} from "@shared/ui/loading";
 export const CodeLoading: FC<CodeLoadingProps> = (props) => {
     const {
         maxLoadingCount = 50,
-        loadingSymbol = "#",
-        loadingEmptySymbol = '.',
-        loadingDelay = 200,
-        loadingTitle = 'Loading page:',
-        px = 4
+        symbol = "#",
+        emptySymbol = '.',
+        delay = 200,
+        title = 'Loading page:',
+        px = 4,
+        onSuccess,
     } = props;
 
     const [loadingCount, setLoadingCount] = useState(0);
@@ -25,13 +26,15 @@ export const CodeLoading: FC<CodeLoadingProps> = (props) => {
         interval.current = setInterval(() => {
             const random = getRandomNumber(1, Math.floor(maxLoadingCount / 6));
             setLoadingCount(prev => prev + random > maxLoadingCount ? maxLoadingCount : prev + random);
-        }, loadingDelay);
+        }, delay);
 
         return () => clearInterval(interval.current);
-    }, [loadingDelay, loadingHash, maxLoadingCount]);
+    }, [delay, loadingHash, maxLoadingCount]);
 
     useEffect(() => {
         if (loadingCount >= maxLoadingCount) {
+            onSuccess && onSuccess();
+
             setTimeout(() => {
                 setLoadingHash(Date.now());
                 setLoadingCount(0);
@@ -39,13 +42,13 @@ export const CodeLoading: FC<CodeLoadingProps> = (props) => {
         }
     }, [loadingCount, maxLoadingCount]);
 
-    const filledLoadingSymbol = loadingSymbol.repeat(loadingCount);
-    const emptyLoadingSymbol = loadingEmptySymbol.repeat(maxLoadingCount - loadingCount);
+    const filledLoadingSymbol = symbol.repeat(loadingCount);
+    const emptyLoadingSymbol = emptySymbol.repeat(maxLoadingCount - loadingCount);
 
     return (
         <Flex w="100%" justify="space-between">
             <Text fontSize="2xl">
-                {`>>`} {loadingTitle}
+                {`>>`} {title}
             </Text>
 
             <Text color="whiteAlpha.900" fontSize="xl" whiteSpace="pre" textAlign="end" px={px}>

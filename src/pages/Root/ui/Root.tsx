@@ -12,8 +12,6 @@ import {Header} from "@widgets/Header";
 const Root = () => {
     const location = useLocation()
 
-    console.log(location)
-
     return (
         <Flex direction="column" h={location.pathname === paths.typingCodePage ? "100vh" : "auto"} minH="100vh">
             <Header/>

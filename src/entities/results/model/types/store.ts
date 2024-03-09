@@ -9,7 +9,7 @@ export interface IResult {
 }
 
 export interface IResultCode {
-    symbolPerMinute: null | number,
+    symbolsPerMinute: null | number,
     startTime: Date | null,
     endTime: Date | null,
     symbolsPerSecond: number[]

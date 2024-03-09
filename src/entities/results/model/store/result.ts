@@ -10,7 +10,7 @@ export const eventClearResult = createEvent()
 
 export const $resultStore = createStore<IResultCode>({
     text: null,
-    symbolPerMinute: null,
+    symbolsPerMinute: null,
     startTime: null,
     endTime: null,
     resultTime: null,
@@ -36,12 +36,12 @@ $resultStore
         const symbolPerMinute = countSymbols / resultMinutes
         // const symbolsTick = [...state.symbolsTick, countSymbols]
 
-        return {...state, endTime, resultTime, symbolPerMinute, errorsCount}
+        return {...state, endTime, resultTime, symbolsPerMinute: symbolPerMinute, errorsCount}
 
     })
     .on(eventClearResult, () => ({
         text: null,
-        symbolPerMinute: null,
+        symbolsPerMinute: null,
         startTime: null,
         endTime: null,
         resultTime: null,
