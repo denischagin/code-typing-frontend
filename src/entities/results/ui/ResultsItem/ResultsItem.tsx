@@ -1,14 +1,15 @@
 import {MouseEventHandler, useState} from "react";
 
-import {Button, Flex, Text, VStack,} from "@chakra-ui/react";
+import {Button, Flex, Text, Tooltip,} from "@chakra-ui/react";
 
 import {ResultJSON, ResultsItemProps} from "@entities/results";
+import {formatterDate} from "@shared/constants";
 
 export const ResultsItem = (props: ResultsItemProps) => {
     const {
         resultIndex,
-        startTime,
-        endTime
+        endTime,
+        symbolsPerMinute
     } = props;
 
     const [isOpenJson, setIsOpenJson] = useState(false);
@@ -20,6 +21,8 @@ export const ResultsItem = (props: ResultsItemProps) => {
         setIsOpenJson(prev => !prev);
     }
 
+    // TODO add prop to json result
+    // const result = (Date.parse(endTime) - Date.parse(startTime)).toLocaleString()
 
     return (
         <>
@@ -37,14 +40,21 @@ export const ResultsItem = (props: ResultsItemProps) => {
                     {resultIndex + 1}.
                 </Text>
 
-                <VStack spacing={2}>
-                    <Text fontSize="medium">{(Date.parse(endTime) - Date.parse(startTime)).toLocaleString()}</Text>
-                </VStack>
 
+                <Text fontSize="medium">spm: {symbolsPerMinute}</Text>
 
-                <Button size="sm" onClick={handleToggleJson} ml="auto">
-                    {isOpenJson ? "Hide" : "Show more"}
-                </Button>
+                <Text
+                    fontSize="medium"
+                    ml="auto"
+                >
+                    {formatterDate.format(Date.parse(endTime))}
+                </Text>
+
+                <Tooltip label={isOpenJson ? "Hide details" : "Show details"}>
+                    <Button size="sm" onClick={handleToggleJson}>
+                        {isOpenJson ? "-" : ">"}
+                    </Button>
+                </Tooltip>
 
 
             </Flex>

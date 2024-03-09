@@ -17,9 +17,6 @@ export const ResultJSON = (props: ResultsItemProps) => {
         symbolsPerMinute: {color: 'blue.100', details: "Symbols per minute (spm)"},
         startTime: {color: 'gray.400', details: "Start time"},
         endTime: {color: 'gray.400', details: "End time"},
-        id: {color: "gray.500"},
-        userID: {color: "gray.500"},
-        codeExampleUUID: {color: "gray.500"},
         text: {},
     }
 
