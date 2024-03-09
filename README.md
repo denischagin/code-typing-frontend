@@ -1,4 +1,4 @@
-# Speed-typing
+# Speed-typing 
 
 [this frontend works with this backend](https://github.com/ttodoshi/speed-typing-backend)
 
@@ -16,6 +16,11 @@ npm run dev
 ```shell
 docker compose up -d
 ```
+
+## Deploy
+
+[speed typing versel](https://speed-typing-new.vercel.app/)
+
 
 ## Preview
 
