@@ -11,5 +11,6 @@ export interface ICodeExample {
     content: string
 }
 
+export type TCodeExampleByUUID = ICodeExample
 export type TCodeExamplesByNameResponse = ICodeExample[]
 export type TCodeExamplesResponse = ICodeExample[]

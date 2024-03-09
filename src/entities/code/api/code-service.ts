@@ -1,20 +1,25 @@
-import {TCodeExamplesByNameResponse, TCodeExamplesResponse, TProgrammingLanguageResponse} from "@entities/code";
+import {
+    TCodeExampleByUUID,
+    TCodeExamplesByNameResponse,
+    TCodeExamplesResponse,
+    TProgrammingLanguageResponse
+} from "@entities/code";
 import {baseQueryV1} from "@shared/api";
 
-export class CodeService {
-    static async fetchProgrammingLanguages() {
+class CodeService {
+    async fetchProgrammingLanguages() {
         const response =
             await baseQueryV1<TProgrammingLanguageResponse>("texts/programming-languages/")
         return response.data
     }
 
-    static async fetchCodeExamples() {
+    async fetchCodeExamples() {
         const response =
             await baseQueryV1<TCodeExamplesResponse>("texts/code-examples/")
         return response.data
     }
 
-    static async fetchCodeExamplesByName(name: string) {
+    async fetchCodeExamplesByName(name: string) {
         const response =
             await baseQueryV1<TCodeExamplesByNameResponse>({
                 url: "texts/code-examples/",
@@ -24,4 +29,14 @@ export class CodeService {
             })
         return response.data
     }
+
+    async fetchCodeExamplesByUUID(uuid: string) {
+        const response =
+            await baseQueryV1<TCodeExampleByUUID>({
+                url: `texts/code-examples/${uuid}`,
+            })
+        return response.data
+    }
 }
+
+export default new CodeService()

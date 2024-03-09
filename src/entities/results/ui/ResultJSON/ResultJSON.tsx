@@ -2,14 +2,17 @@ import {useState} from "react";
 
 import {BoxProps, Button, Text} from "@chakra-ui/react";
 
-import {CodeContainer, CodeRow, CodeRows} from "@entities/code";
+import {CodeContainer, CodeRow, CodeRows, transformCodeToRows, useGetCodeExampleByUuid} from "@entities/code";
 import {ResultJSONKey, ResultsItemProps, SymbolsPerSecondChart, symbolsPerSecondToChart} from "@entities/results";
 
 export const ResultJSON = (props: ResultsItemProps) => {
-    const {resultIndex, symbolsPerSecond, ...restResult} = props
-    const [isOpenChart, setIsOpenChart] = useState(false)
+    const {resultIndex, symbolsPerSecond, codeExampleUUID, ...restResult} = props
+    const [openDetails, setOpenDetails] = useState<undefined | 'code' | 'chart'>()
 
     const chartData = symbolsPerSecondToChart(symbolsPerSecond)
+    const {
+        data: codeExample,
+    } = useGetCodeExampleByUuid(codeExampleUUID, !!codeExampleUUID && openDetails === 'code')
 
     const fields: Record<string, BoxProps & { details?: string }> = {
         accuracy: {color: 'green.100', details: "Accuracy"},
@@ -17,12 +20,18 @@ export const ResultJSON = (props: ResultsItemProps) => {
         symbolsPerMinute: {color: 'blue.100', details: "Symbols per minute (spm)"},
         startTime: {color: 'gray.400', details: "Start time"},
         endTime: {color: 'gray.400', details: "End time"},
-        text: {},
+        // text: {},
     }
 
     const handleToggleChart = () => {
-        setIsOpenChart(prev => !prev)
+        setOpenDetails(prev => prev === 'chart' ? undefined : 'chart')
     }
+
+    const handleToggleCode = () => {
+        setOpenDetails(prev => prev === 'code' ? undefined : 'code')
+    }
+
+    const rows = transformCodeToRows(codeExample?.content ?? null)
 
     return (
         <>
@@ -53,17 +62,41 @@ export const ResultJSON = (props: ResultsItemProps) => {
                                 size='sm'
                                 onClick={handleToggleChart}
                             >
-                                {isOpenChart ? "Hide" : "Show chart"}
+                                {openDetails === 'chart' ? 'Hide chart' : 'Show chart'}
                             </Button>
                         }
                         details="Chart with symbols per second"
+                    />
+                    <ResultJSONKey
+                        jsonKey={"text"}
+                        value={
+                            <Button
+                                variant='outline'
+                                size='sm'
+                                onClick={handleToggleCode}
+                            >
+                                {openDetails === 'code' ? 'Hide code' : 'Show code'}
+                            </Button>
+                        }
+                        details="Show typing code"
                     />
                     <CodeRow>{`}`}</CodeRow>
                 </CodeRows>
             </CodeContainer>
 
-            {isOpenChart && (
+            {openDetails === 'chart' && (
                 <SymbolsPerSecondChart data={chartData}/>
+            )}
+            {openDetails === 'code' && (
+                <CodeContainer ml={5}>
+                    <CodeRows autoRows="20px">
+                        {rows?.map((line, index) => (
+                            <CodeRow>
+                                <Text fontSize="sm" color="gray.500" whiteSpace="pre" key={index}>{line}</Text>
+                            </CodeRow>
+                        ))}
+                    </CodeRows>
+                </CodeContainer>
             )}
         </>
     )
