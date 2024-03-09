@@ -88,7 +88,7 @@ export const ResultJSON = (props: ResultsItemProps) => {
                 <SymbolsPerSecondChart data={chartData}/>
             )}
             {openDetails === 'code' && (
-                <CodeContainer ml={5}>
+                <CodeContainer ml={5} overflowX="auto">
                     <CodeRows autoRows="20px">
                         {rows?.map((line, index) => (
                             <CodeRow>

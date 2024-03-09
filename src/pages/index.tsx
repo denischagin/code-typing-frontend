@@ -15,39 +15,41 @@ const TypingPage = lazy(() => import('@pages/TypingPage'))
 const MainPage = lazy(() => import('@pages/MainPage'))
 
 export const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Root/>,
-        errorElement: <ErrorPage/>,
-        children: [
-            ...routesWithHOC(publicPage, [
-                {
-                    path: paths.typingCodePage,
-                    element: <TypingCodePage/>,
-                },
-                {
-                    path: paths.resultsPage,
-                    element: <ResultsPage/>,
-                },
-                {
-                    path: paths.loginPage,
-                    element: <LoginPage/>,
-                },
-                {
-                    path: paths.registerPage,
-                    element: <RegisterPage/>,
-                },
-                {
-                    path: paths.mainPage,
-                    element: <MainPage/>,
-                }
-            ]),
-            ...routesWithHOC(privatePage, [
-                {
-                    path: paths.typingPage,
-                    element: <TypingPage/>
-                },
-            ]),
-        ]
-    },
-], {basename: '/speed-typing-new'});
+        {
+            path: "/",
+            element: <Root/>,
+            errorElement: <ErrorPage/>,
+            children: [
+                ...routesWithHOC(publicPage, [
+                    {
+                        path: paths.typingCodePage,
+                        element: <TypingCodePage/>,
+                    },
+                    {
+                        path: paths.resultsPage,
+                        element: <ResultsPage/>,
+                    },
+                    {
+                        path: paths.loginPage,
+                        element: <LoginPage/>,
+                    },
+                    {
+                        path: paths.registerPage,
+                        element: <RegisterPage/>,
+                    },
+                    {
+                        path: paths.mainPage,
+                        element: <MainPage/>,
+                    }
+                ]),
+                ...routesWithHOC(privatePage, [
+                    {
+                        path: paths.typingPage,
+                        element: <TypingPage/>
+                    },
+                ]),
+            ]
+        },
+    ],
+    // {basename: '/speed-typing-new'}
+);
