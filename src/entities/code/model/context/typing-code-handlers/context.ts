@@ -12,7 +12,10 @@ export const TypingCodeHandlersContext = createContext<ITypingCodeHandlersContex
     isEnded: false,
     isNotStarted: true,
     isPrinting: false,
-    status: "not-started"
+    status: "not-started",
+    endTyping: () => null,
+    startTyping: () => null,
+    resetTyping: () => null,
 })
 
 export const useTypingCodeHandlers = () => useContext(TypingCodeHandlersContext)

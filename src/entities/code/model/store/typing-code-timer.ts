@@ -1,11 +1,11 @@
-import {ITimerStore} from "../types";
-import {createEvent,createStore} from "effector";
+import {ITimerStore} from "@shared/ui/timer";
+import {createEvent, createStore} from "effector";
 
 export const eventStartTimer = createEvent<number>()
 export const eventStopTimer = createEvent<number>()
 export const eventResetTimer = createEvent()
 
-export const $timerStore = createStore<ITimerStore>({
+export const $typingCodeTimerStore = createStore<ITimerStore>({
     timerStatus: "stopped",
     timeMillisecondsStart: null,
     timeMillisecondsEnd: null,

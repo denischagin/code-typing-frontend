@@ -1,8 +1,8 @@
 import {ChangeEventHandler, KeyboardEvent, ReactNode, useEffect} from "react";
 
 import {TypingCodeHandlersContext, useCodeErrors, useCurrentRow, useRandomCode, useTypingAction} from "@entities/code";
+import {useTypingCodeTimer} from "@entities/code/libs/hooks/use-typing-code-timer.ts";
 import {useResult} from "@entities/results";
-import {useTimer} from "@entities/timer";
 import {useScrollIntoView} from "@shared/libs/hooks/scroll-into-view";
 import {useTick} from "@shared/libs/hooks/tick";
 
@@ -46,35 +46,46 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         startTimer,
         stopTimer,
         resetTimer
-    } = useTimer()
+    } = useTypingCodeTimer()
 
-    const typingAction = useTypingAction({
-        onStartEffect: () => {
-            if (!randomText) return
-            const dateStart = new Date()
-            startTimer(dateStart.valueOf())
-            startTick()
-            startResult({startTime: dateStart, text: randomText})
-        },
-        onEndEffect: () => {
-            const dateEnd = new Date()
-            stopTimer(dateEnd.valueOf())
-            scrollToResult()
-            nextRow()
-            endTick()
-            endResult({
-                endTime: dateEnd,
-                textSymbolCount: prevRowsRightSymbols + currentRowRightSymbols,
-                errorsCount
-            })
-        }
-    })
+
+    const typingAction = useTypingAction()
     const {
         isNotStarted,
         startTyping,
         endTyping,
-        resetTyping
+        resetTyping,
+        isEnded
     } = typingAction
+
+    const handleStart = () => {
+        if (!randomText) return
+        startTyping()
+        const dateStart = new Date()
+        startTimer(dateStart.valueOf())
+        startTick()
+        startResult({startTime: dateStart, text: randomText})
+    }
+
+    const handleEnd = () => {
+        const dateEnd = new Date()
+        endTyping()
+        stopTimer(dateEnd.valueOf())
+        nextRow()
+        endTick()
+        endResult({
+            endTime: dateEnd,
+            textSymbolCount: prevRowsRightSymbols + currentRowRightSymbols,
+            errorsCount
+        })
+    }
+
+    useEffect(() => {
+        if (isEnded) {
+            scrollToResult()
+        }
+    }, [isEnded]);
+
 
     const handleResetAll = () => {
         resetState()
@@ -123,24 +134,27 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         const isTimerNotStarted = timerStatus !== "started"
 
         if (isFirstRow && isTimerNotStarted && isNotStarted)
-            startTyping()
+            handleStart()
 
         const isTypingValueRight = currentTypingValue === rows[currentRowIndex]
         const isLastRow = currentRowIndex === rows.length - 1
 
         if (isTypingValueRight && isLastRow)
-            endTyping()
+            handleEnd()
     };
 
     return (
         <TypingCodeHandlersContext.Provider value={{
+            ...typingAction,
             handleKeyDown,
             handleChangePrintingInput,
             containerRef,
             resultRef,
             handleNewText,
             scrollTo,
-            ...typingAction
+            resetTyping: handleResetAll,
+            endTyping: handleEnd,
+            startTyping: handleStart,
         }}>
             {children}
         </TypingCodeHandlersContext.Provider>

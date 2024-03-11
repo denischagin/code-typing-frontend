@@ -1,3 +1,5 @@
+import {useEffect} from "react";
+
 import {Flex, IconButton, Text, Tooltip} from "@chakra-ui/react";
 
 import {useSearchParams} from "react-router-dom";
@@ -5,14 +7,32 @@ import {useSearchParams} from "react-router-dom";
 import {useCodeErrors, useTypingCodeHandlers} from "@entities/code";
 import {searchParamsEnum} from "@shared/constants";
 import {RefreshIcon} from "@shared/ui/icons";
-import {Timer} from "@widgets/Timer";
+import {Timer, useTimer} from "@shared/ui/timer";
 
 export const TypingCodePanel = () => {
     const [searchParams] = useSearchParams()
     const languageName = searchParams.get(searchParamsEnum.languageName)
 
-    const {scrollTo, handleNewText, containerRef} = useTypingCodeHandlers()
+    const {scrollTo, endTyping, handleNewText, containerRef, isPrinting, isEnded, isNotStarted} = useTypingCodeHandlers()
     const {errorsCount} = useCodeErrors()
+
+    const {start, time, reset} = useTimer({
+        onEnd: () => {
+            endTyping()
+        }
+    })
+
+    useEffect(() => {
+        if (isPrinting) {
+            start()
+        }
+    }, [isPrinting])
+
+    useEffect(() => {
+        if (isEnded || isNotStarted) {
+            reset()
+        }
+    }, [isEnded, isNotStarted])
 
     const handleRepeatText = () => {
         if (containerRef.current?.scrollTop === 0) {
@@ -43,7 +63,7 @@ export const TypingCodePanel = () => {
                     <Text color="red.300">{errorsCount}x</Text>
                 )}
 
-                <Timer/>
+                <Timer time={time}/>
             </Flex>
         </Flex>
     )

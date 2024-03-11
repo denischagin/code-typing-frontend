@@ -9,4 +9,7 @@ export interface ITypingCodeHandlersContext extends UseTypingActionState {
     resultRef: RefObject<HTMLDivElement>,
     handleNewText: () => void
     scrollTo: (options: ScrollToOptions, callback?: () => void) => void
+    startTyping: () => void
+    endTyping: () => void
+    resetTyping: () => void
 }

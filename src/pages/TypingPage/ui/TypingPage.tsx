@@ -5,7 +5,6 @@ import {SelectChangeLanguage} from "@features/change-language";
 import {ButtonNewText} from "@features/new-text";
 import {ButtonRepeatText} from "@features/repeat-text";
 import {ResultSpeed} from "@widgets/ResultSpeed";
-import {Timer} from "@widgets/Timer";
 import {Typing} from "@widgets/Typing";
 
 const TypingPage = () => {
@@ -20,8 +19,6 @@ const TypingPage = () => {
             minH="100%"
         >
             <Flex justify="space-between" align="center">
-                <Timer/>
-
                 <HStack spacing={2}>
                     <ButtonNewText/>
                     <ButtonRepeatText/>
