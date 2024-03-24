@@ -2,20 +2,13 @@ import {useRef, useState} from "react";
 
 import {TimerDirection, UseTimerOptions} from "@shared/ui/timer";
 
-const defaultOptions: Required<UseTimerOptions> = {
-    direction: "down",
-    timeout: 20,
-    startSeconds: 30,
-    onEnd: () => {
-    },
-}
 
-export const useTimer = (options: UseTimerOptions = defaultOptions) => {
+export const useTimer = (options: UseTimerOptions) => {
     const {
-        startSeconds = defaultOptions.startSeconds,
-        timeout = defaultOptions.timeout,
-        direction = defaultOptions.direction,
-        onEnd = defaultOptions.onEnd,
+        startSeconds,
+        timeout = 20,
+        direction,
+        onEnd,
     } = options
 
     const [timeMs, setTimeMs] = useState(startSeconds * 1000);
@@ -31,7 +24,8 @@ export const useTimer = (options: UseTimerOptions = defaultOptions) => {
                 if (newDate <= 0) {
                     setTimeMs(0)
                     clearInterval(intervalRef.current!);
-                    return onEnd()
+                    setIsRunning(false);
+                    return onEnd && onEnd()
                 }
                 setTimeMs(newDate);
             }, timeout);
@@ -51,9 +45,8 @@ export const useTimer = (options: UseTimerOptions = defaultOptions) => {
         setIsRunning(true);
         const startTimeNow = new Date();
 
+        console.log('interval')
         intervalRef.current = intervalByDirection[direction](startTimeNow);
-
-        return () => clearInterval(intervalRef.current!);
     };
 
     const stop = () => {

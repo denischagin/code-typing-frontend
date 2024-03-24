@@ -1,6 +1,6 @@
 import {useMethods} from "@shared/libs";
 
-export interface ICurrentRowState {
+export interface CurrentRowState {
     currentRowIndex: number,
     typingValue: string,
     prevRowsRightSymbols: number,
@@ -9,14 +9,40 @@ export interface ICurrentRowState {
     isError: boolean
 }
 
-export interface ICurrentRowMethods {
+export interface CurrentRowMethods {
     nextRow: () => void
     setTypingValue: (value: string) => void
     setValueWithTab: (tabWidth?: number) => void
     resetState: () => void
 }
 
+const calculateRowStartIndent = (row?: string) => {
+    let indent = 0
+
+    if (row) {
+        const startIndexText = row.search(/\S/g)
+        indent = startIndexText === -1 ? 0 : startIndexText
+    } else
+        indent = 0
+
+    return indent
+}
+
+const calculateRowRightSymbols = (row: string, typingValue: string) => {
+    let currentRowRightSymbols = 0
+
+    const startIndexText = row.search(/\S/g)
+
+    for (let i = startIndexText; i < typingValue.length; i++) {
+        if (typingValue[i] === row[i])
+            currentRowRightSymbols++
+    }
+
+    return currentRowRightSymbols
+}
+
 export const useCurrentRowState = (rows: string[] | undefined) => {
+
     const [state, methods] = useMethods({
         initialState: {
             currentRowIndex: 0,
@@ -25,21 +51,15 @@ export const useCurrentRowState = (rows: string[] | undefined) => {
             currentRowRightSymbols: 0,
             errorsCount: 0,
             isError: false
-        } as ICurrentRowState,
+        } as CurrentRowState,
         methods: {
             nextRow: (state) => {
                 if (!rows) return
-                const nextRow = rows[state.currentRowIndex + 1]
+                const nextRow = rows.at(state.currentRowIndex + 1)
 
-                let indent = 0
+                const indent = calculateRowStartIndent(nextRow)
 
-                if (nextRow) {
-                    const startIndexText = nextRow.search(/\S/g)
-                    indent = startIndexText === -1 ? 0 : startIndexText
-                } else
-                    indent = 0
-
-                state.typingValue = " ".repeat(indent) + ''
+                state.typingValue = " ".repeat(indent)
                 state.prevRowsRightSymbols = state.prevRowsRightSymbols + rows[state.currentRowIndex].trimStart().length
                 state.currentRowRightSymbols = 0
                 state.currentRowIndex = state.currentRowIndex + 1
@@ -49,15 +69,8 @@ export const useCurrentRowState = (rows: string[] | undefined) => {
 
                 if (!rows) return
                 const currentRow = rows[state.currentRowIndex]
-                let currentRowRightSymbols = 0
 
-                const startIndexText = currentRow.search(/\S/g)
-
-                for (let i = startIndexText; i < state.typingValue.length; i++) {
-                    if (state.typingValue[i] === currentRow[i])
-                        currentRowRightSymbols++
-                }
-                state.currentRowRightSymbols = currentRowRightSymbols
+                state.currentRowRightSymbols = calculateRowRightSymbols(currentRow, state.typingValue)
             },
             setValueWithTab: (state, tabWidth = 2) => {
                 state.typingValue = " ".repeat(tabWidth) + state.typingValue

@@ -2,7 +2,7 @@ import {memo, useEffect, useRef} from "react";
 
 import {Box, Grid, Text} from "@chakra-ui/react";
 
-import {PrintingRowProps} from "@entities/code";
+import {PrintingRowProps, usePrintingRowHorizontalScroll} from "@entities/code";
 
 const PrintingRow = (props: PrintingRowProps) => {
     const {
@@ -28,28 +28,8 @@ const PrintingRow = (props: PrintingRowProps) => {
         })
     }, [isActive]);
 
-    useEffect(() => {
-        const rowElement = rowRef.current
-        const rowRect = rowElement?.getBoundingClientRect()
+    usePrintingRowHorizontalScroll({rowRef, text, typingValue})
 
-        if (typingValue === null || typingValue === undefined || !rowRect || !rowElement) return
-
-        const widthTypingValue = rowElement.scrollWidth / text.length * typingValue.length
-
-        requestAnimationFrame(() => {
-            if (widthTypingValue < rowElement.scrollLeft + 100) {
-                rowElement.scroll({
-                    left: widthTypingValue - rowRect.width / 2,
-                    behavior: "smooth",
-                })
-            } else if (widthTypingValue + 200 > rowRect.width + rowElement.scrollLeft) {
-                rowElement.scroll({
-                    left: widthTypingValue - rowRect.width / 4,
-                    behavior: "smooth",
-                })
-            }
-        })
-    }, [text.length, typingValue]);
 
     return (
         <Grid
@@ -70,6 +50,7 @@ const PrintingRow = (props: PrintingRowProps) => {
                 w="100%"
             >
                 <Box
+                    as='pre'
                     pos="relative"
                     zIndex={1000}
                     w="max-content"
@@ -77,6 +58,7 @@ const PrintingRow = (props: PrintingRowProps) => {
                     {isActive && printingInput}
                     {textRowElement !== undefined ? textRowElement : (
                         <Text
+                            as='code'
                             w="max-content"
                             fontSize={"25px"}
                             whiteSpace="pre"
@@ -88,7 +70,6 @@ const PrintingRow = (props: PrintingRowProps) => {
                     )}
                 </Box>
             </Box>
-
         </Grid>
     )
 }

@@ -1,6 +1,6 @@
 import {IResultCode} from "@entities/results";
 
-export interface IResultFromApi extends Omit<IResultCode, "startTime" | "endTime" | "resultTime"> {
+export interface ResultFromApi extends Omit<IResultCode, "startTime" | "endTime" | "resultTime"> {
     id: string;
     codeExampleUUID: string;
     userID: string
@@ -8,5 +8,5 @@ export interface IResultFromApi extends Omit<IResultCode, "startTime" | "endTime
     endTime: string
 }
 
-export interface IResultWithoutId extends Omit<IResultFromApi, "id" | "codeExampleUUID" | "userID"> {
+export interface ResultWithoutId extends Omit<ResultFromApi, "id" | "codeExampleUUID" | "userID"> {
 }

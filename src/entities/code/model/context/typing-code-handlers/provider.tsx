@@ -42,6 +42,7 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
     const {
         timer: {
             timerStatus,
+            timerSettings
         },
         startTimer,
         stopTimer,
@@ -55,11 +56,13 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         startTyping,
         endTyping,
         resetTyping,
-        isEnded
+        isEnded,
+        isPrinting
     } = typingAction
 
     const handleStart = () => {
         if (!randomText) return
+
         startTyping()
         const dateStart = new Date()
         startTimer(dateStart.valueOf())
@@ -86,6 +89,10 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         }
     }, [isEnded]);
 
+    useEffect(() => {
+        if (timerSettings.direction === "down" && timerStatus == "stopped" && isPrinting)
+            handleEnd()
+    }, [timerStatus]);
 
     const handleResetAll = () => {
         resetState()
@@ -122,6 +129,7 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         const currentTypingValue = e.target.value
         setTypingValue(currentTypingValue)
         if (!rows) return
+
         if (!rows[currentRowIndex].startsWith(currentTypingValue)) {
             if (!isError) {
                 incrementErrors()

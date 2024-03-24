@@ -1,4 +1,4 @@
-import {ICurrentRowMethods, ICurrentRowState} from "@entities/code";
+import {CurrentRowMethods, CurrentRowState} from "@entities/code";
 
-export interface ICurrentRowContext extends ICurrentRowState, ICurrentRowMethods {
+export interface ICurrentRowContext extends CurrentRowState, CurrentRowMethods {
 }

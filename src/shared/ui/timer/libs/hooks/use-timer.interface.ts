@@ -7,8 +7,8 @@ export interface UseTimerReturn {
 }
 
 export interface UseTimerOptions {
-    startSeconds?: number,
-    direction?: TimerDirection,
+    startSeconds: number,
+    direction: TimerDirection,
     timeout?: number
     onEnd?: () => void
 }

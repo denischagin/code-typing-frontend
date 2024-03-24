@@ -1,8 +1,8 @@
 import {createContext, RefObject, useContext} from "react";
 
-import {ITypingCodeHandlersContext} from "@entities/code";
+import {TypingCodeHandlersContextState} from "@entities/code";
 
-export const TypingCodeHandlersContext = createContext<ITypingCodeHandlersContext>({
+export const TypingCodeHandlersContext = createContext<TypingCodeHandlersContextState>({
     handleNewText: () => null,
     handleChangePrintingInput: () => null,
     handleKeyDown: () => null,

@@ -1,5 +1,5 @@
-import {IResultFromApi} from "@entities/results";
+import {ResultFromApi} from "@entities/results";
 
-export interface ResultsItemProps extends IResultFromApi {
+export interface ResultsItemProps extends ResultFromApi {
     resultIndex: number
 }

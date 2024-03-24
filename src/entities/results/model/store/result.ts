@@ -30,7 +30,8 @@ $resultStore
     .on(eventStartResult, (state, {startTime, text}) => ({...state, startTime: startTime, text}))
     .on(eventEndResult, (state, {endTime, textSymbolCount, errorsCount}) => {
         const countSymbols = textSymbolCount
-        const resultTimeMs = endTime.valueOf() - (state.startTime?.valueOf() ?? 0)
+        const resultTimeMs = Math.abs(endTime.valueOf() - (state.startTime?.valueOf() ?? 0))
+
         const resultTime = new Date(resultTimeMs)
         const resultMinutes = resultTimeMs / 1000 / 60
         const symbolPerMinute = countSymbols / resultMinutes

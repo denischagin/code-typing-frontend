@@ -2,7 +2,7 @@ import {ChangeEventHandler, KeyboardEventHandler, RefObject} from "react";
 
 import {UseTypingActionState} from "@entities/code";
 
-export interface ITypingCodeHandlersContext extends UseTypingActionState {
+export interface TypingCodeHandlersContextState extends UseTypingActionState {
     handleKeyDown: KeyboardEventHandler<HTMLInputElement>,
     handleChangePrintingInput: ChangeEventHandler<HTMLInputElement>,
     containerRef: RefObject<HTMLDivElement>,
