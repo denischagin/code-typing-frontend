@@ -1,7 +1,7 @@
 import {createContext, useContext} from "react";
 
-import {IRandomCodeContext} from "@entities/code";
+import {RandomCodeState} from "@entities/code";
 
-export const RandomCodeContext = createContext<IRandomCodeContext>({} as IRandomCodeContext)
+export const RandomCodeContext = createContext<RandomCodeState>({} as RandomCodeState)
 
 export const useRandomCode = () => useContext(RandomCodeContext)

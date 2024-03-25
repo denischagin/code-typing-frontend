@@ -1,4 +1,4 @@
-export interface IRandomCodeContext {
+export interface RandomCodeState {
     randomText?: string
     rows?: string[]
     newRandomText: () => void

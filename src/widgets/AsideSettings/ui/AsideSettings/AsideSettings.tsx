@@ -30,7 +30,7 @@ export const AsideSettings = () => {
 
                 <AsideTabPanels overflow="hidden" display="flex">
                     <AsideTabPanel overflow="hidden" display="flex">
-                        <LanguageTabPanel handleClosePanel={handleClosePanel} />
+                        <LanguageTabPanel />
                     </AsideTabPanel>
                 </AsideTabPanels>
             </AsideContent>

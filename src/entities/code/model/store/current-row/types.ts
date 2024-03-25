@@ -1,4 +1,15 @@
-import {CurrentRowMethods, CurrentRowState} from "@entities/code";
+export interface CurrentRowState {
+    currentRowIndex: number,
+    typingValue: string,
+    prevRowsRightSymbols: number,
+    currentRowRightSymbols: number
+    errorsCount: number
+    isError: boolean
+}
 
-export interface ICurrentRowContext extends CurrentRowState, CurrentRowMethods {
+export interface CurrentRowMethods {
+    nextRow: () => void
+    setTypingValue: (value: string) => void
+    setValueWithTab: (tabWidth?: number) => void
+    resetState: () => void
 }

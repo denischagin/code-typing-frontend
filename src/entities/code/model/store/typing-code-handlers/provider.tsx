@@ -3,7 +3,9 @@ import {ChangeEventHandler, KeyboardEvent, ReactNode, useEffect} from "react";
 import {
     TypingCodeHandlersContext,
     useCodeErrors,
+    useCodeErrorsHandlers,
     useCurrentRow,
+    useCurrentRowHandlers,
     useRandomCode,
     useTypingAction
 } from "@entities/code";
@@ -30,13 +32,16 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         currentRowRightSymbols,
         prevRowsRightSymbols,
         currentRowIndex,
+    } = useCurrentRow()
+    const {
         setTypingValue,
         nextRow,
         setValueWithTab,
         resetState,
-    } = useCurrentRow()
+    } = useCurrentRowHandlers()
 
-    const {isError, setIsError, incrementErrors, setErrorsCount, errorsCount} = useCodeErrors()
+    const {isError, errorsCount} = useCodeErrors()
+    const {setErrorsCount, setIsError, incrementErrors} = useCodeErrorsHandlers()
 
     const {startResult, tickResult, endResult, clearResult} = useResult()
 
@@ -78,7 +83,7 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         const dateEnd = new Date()
         endTyping()
         stopTimer(dateEnd.valueOf())
-        nextRow()
+        nextRow(rows)
         endTick()
         endResult({
             endTime: dateEnd,
@@ -119,7 +124,7 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         switch (e.key) {
             case "Enter":
                 if (row !== typingValue) return incrementErrors()
-                return nextRow()
+                return nextRow(rows)
             case "Tab":
                 e.preventDefault()
                 setValueWithTab()
@@ -128,7 +133,7 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
     }
     const handleChangePrintingInput: ChangeEventHandler<HTMLInputElement> = (e) => {
         const currentTypingValue = e.target.value
-        setTypingValue(currentTypingValue)
+        setTypingValue({ value: currentTypingValue, rows})
         if (!rows) return
 
         if (!rows[currentRowIndex].startsWith(currentTypingValue)) {
