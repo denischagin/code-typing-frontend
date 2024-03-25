@@ -10,12 +10,20 @@ export const AsideTab = (props: AsideTabProps) => {
         onChangeTabIndex && onChangeTabIndex(currentTabIndex === index ? null : index)
     }
 
+    const isActive = currentTabIndex === index
+
     return (
         <Tile
-            isActive={currentTabIndex === index}
+            isActive={isActive}
+            justifyContent="center"
+            backgroundColor={isActive ? 'whiteAlpha.200' : 'transparent'}
             borderRadius="md"
+            borderWidth="1px"
             p="5px"
             onClick={handleTabClick}
+            _hover={{
+                backgroundColor: isActive ? 'whiteAlpha.300' : 'whiteAlpha.100',
+            }}
             {...restProps}
         />
     )
