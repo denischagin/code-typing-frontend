@@ -54,7 +54,7 @@ export const Header = () => {
 
     return (
         <>
-            <Flex as="header" bgColor="blackAlpha.400" mb="10px" py="5px">
+            <Flex as="header" bgColor="blackAlpha.400" py="5px">
                 <Container maxW="100%">
                     <Flex justify="space-between" align="center">
                         <NavLink to={paths.mainPage}>

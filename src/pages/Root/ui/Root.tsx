@@ -16,7 +16,7 @@ const Root = () => {
         <Flex direction="column" h={location.pathname === paths.typingCodePage ? "100vh" : "auto"} minH="100vh">
             <Header/>
 
-            <Flex as="main" flex="1" overflow="hidden">
+            <Flex as="main" flex="1" overflow="hidden" py="1px">
                 <Suspense fallback={<CodeLoading/>}>
                     <Outlet/>
                 </Suspense>

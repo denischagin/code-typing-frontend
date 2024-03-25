@@ -1,16 +1,13 @@
-import {Box, Flex, Image, Tooltip} from "@chakra-ui/react";
+import {Box, Image, Tooltip} from "@chakra-ui/react";
 
 import {useSearchParams} from "react-router-dom";
 
 import {useGetProgrammingLanguages} from "@entities/code";
-import ProgrammingLanguageIcon from "@shared/assets/programming-language.svg";
+import programmingLanguageIcon from "@shared/assets/programming-language.svg";
 import {searchParamsEnum} from "@shared/constants";
-import {LanguageTabProps} from "src/widgets/AsideSettings";
+import {AsideTab} from "@shared/ui/aside";
 
-export const LanguageTab = (props: LanguageTabProps) => {
-    const {handleClosePanel} = props
-
-    // const {languageName} = useParams()
+export const LanguageTab = () => {
     const [searchParams] = useSearchParams()
     const languageName = searchParams.get(searchParamsEnum.languageName)
 
@@ -23,21 +20,15 @@ export const LanguageTab = (props: LanguageTabProps) => {
     )?.logo
 
     return (
-        <Flex justify="center">
-            <Tooltip label={languageName ? `Current language: ${languageName}` : "Select language"}>
-                <Box
-                    as="button"
-                    bg={"whiteAlpha.100"}
-                    p="5px"
-                    borderRadius="5px"
-                    onClick={handleClosePanel}
-                >
+        <Tooltip label={languageName ? `Current language: ${languageName}` : "Select language"}>
+            <Box>
+                <AsideTab index={0} cursor="pointer">
                     <Image
                         w="50px"
-                        src={currentCodeIcon ? currentCodeIcon : ProgrammingLanguageIcon}
+                        src={currentCodeIcon ? currentCodeIcon : programmingLanguageIcon}
                     />
-                </Box>
-            </Tooltip>
-        </Flex>
+                </AsideTab>
+            </Box>
+        </Tooltip>
     )
 }

@@ -1,16 +1,13 @@
-import { Flex, Image, Stack, StackItem, Text } from "@chakra-ui/react";
+import {Stack} from "@chakra-ui/react";
 
-import { Link } from "react-router-dom";
-
-import ProgrammingLanguageIcon from '@shared/assets/programming-language.svg'
-import { searchParamsEnum } from "@shared/constants";
-import { ProgrammingLanguagesListProps } from "src/widgets/AsideSettings";
+import programmingLanguageIcon from '@shared/assets/programming-language.svg'
+import {searchParamsEnum} from "@shared/constants";
+import {ProgrammingLanguagesListProps} from "src/widgets/AsideSettings";
 
 export const ProgrammingLanguagesList = (props: ProgrammingLanguagesListProps) => {
     const {
         programmingLanguages,
-        onClick,
-        currentLanguageName,
+        renderItem
     } = props
 
     if (!programmingLanguages) return null
@@ -18,38 +15,22 @@ export const ProgrammingLanguagesList = (props: ProgrammingLanguagesListProps) =
     const getLinkByName = (name: string) => `?${searchParamsEnum.languageName}=${encodeURIComponent(name)}`
 
     return (
-        <Stack overflowY="scroll" pr="5px">
-            <StackItem key={'default'} onClick={onClick}>
-                <Link to={``}>
-                    <Flex
-                        justifyContent="space-between"
-                        alignContent="center"
-                        bg={!currentLanguageName ? "whiteAlpha.300" : "whiteAlpha.100"}
-                        p="10px"
-                        borderRadius="10px"
-                    >
-                        <Text>Random </Text>
-                        <Image w="30px" src={ProgrammingLanguageIcon} />
-                    </Flex>
-                </Link>
-            </StackItem>
-            {programmingLanguages?.map(({ name, UUID, logo }) => (
-                <StackItem key={UUID} onClick={onClick}>
-                    <Link to={getLinkByName(name)}>
-                        <Flex
-                            justifyContent="space-between"
-                            alignContent="center"
-                            bg={name === currentLanguageName ? "whiteAlpha.300" : "whiteAlpha.100"}
-                            p="10px"
-                            borderRadius="10px"
-                        >
-                            <Text>{name}</Text>
-                            <Image w="30px" src={logo} />
-                        </Flex>
-                    </Link>
-                </StackItem>
-            ))}
-
+        <Stack overflowY="scroll" pr="10px">
+            {renderItem({
+                to: '',
+                name: "Random",
+                logo: programmingLanguageIcon,
+                UUID: "Random"
+            })}
+            {programmingLanguages.length !== 0 && (
+                programmingLanguages?.map((programmingLanguage) => (
+                    renderItem({
+                        to: getLinkByName(programmingLanguage.name),
+                        key: programmingLanguage.UUID,
+                        ...programmingLanguage,
+                    })
+                ))
+            )}
         </Stack>
     )
 }

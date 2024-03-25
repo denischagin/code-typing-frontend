@@ -1,7 +1,7 @@
-import { Flex } from "@chakra-ui/react";
+import {Flex} from "@chakra-ui/react";
 
-import { AsideContent } from "../AsideContent";
-import { AsideContext, AsideProps } from "@shared/ui/aside";
+import {AsideContent} from "../AsideContent";
+import {AsideContext, AsideProps} from "@shared/ui/aside";
 
 export const Aside = (props: AsideProps) => {
     const {
@@ -16,9 +16,7 @@ export const Aside = (props: AsideProps) => {
         <Flex
             as="aside"
             direction="column"
-            bg="blackAlpha.500"
-            w={currentTabIndex !== null ? "200px" : "70px"}
-            borderRightRadius="10px"
+            bg="blackAlpha.300"
             {...restProps}
         >
             <AsideContext.Provider value={{

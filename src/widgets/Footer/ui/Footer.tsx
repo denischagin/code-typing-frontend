@@ -7,7 +7,6 @@ export const Footer = () => {
         <Box
             as="footer"
             bgColor="blackAlpha.400"
-            mt="20px"
         >
             <Container maxW="1000px">
                 <Text align="center">

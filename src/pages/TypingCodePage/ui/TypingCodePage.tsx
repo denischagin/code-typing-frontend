@@ -11,7 +11,7 @@ const TypingCodePage = () => {
             <Flex justify="start" flexGrow="1" maxW="100vw" gap="10px" overflow="hidden">
                 <AsideSettings/>
 
-                <Flex flex="1" direction="column">
+                <Flex flex="1" direction="column" py="5px" ml="10px">
                     <TypingCodePanel/>
 
                     <TypingCode/>
