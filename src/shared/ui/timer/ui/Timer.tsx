@@ -1,16 +1,16 @@
-import {Text} from "@chakra-ui/react"
+import {Box} from "@chakra-ui/react"
 
-import {convertMillisecondsAndDateToTime} from "@shared/libs"
-import {TimerProps} from "@shared/ui/timer";
+import {TimerItem, TimerProps} from "@shared/ui/timer";
 
 export const Timer = (props: TimerProps) => {
     const {time} = props
 
+    const date = new Date(time)
+
     return (
-        <div>
-            <Text fontSize="x-large">
-                {convertMillisecondsAndDateToTime(time)}
-            </Text>
-        </div>
+        <Box fontSize="x-large" display="inline-flex" gap={2}>
+            <TimerItem time={date.getMinutes()} postfix="m" required={false}/>
+            <TimerItem time={date.getSeconds()} postfix="s"/>
+        </Box>
     )
 }

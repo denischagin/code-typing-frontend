@@ -10,8 +10,8 @@ export const ResultsList = ({results}: ResultsListProps) => {
                 ? results.map((result, index) => (
                     <ResultsItem key={result.id} resultIndex={index} {...result} />
                 )) : (
-                    <Text fontSize="large" as="li">
-                        Пока еще нет результатов
+                    <Text fontSize="xx-large" as="li">
+                        No results
                     </Text>
                 )}
         </Stack>

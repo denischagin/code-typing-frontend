@@ -8,6 +8,7 @@ export const queryClient = new QueryClient({
             refetchOnReconnect: false,
             refetchIntervalInBackground: false,
             refetchInterval: false,
+            retry: 2
         }
     }
 })

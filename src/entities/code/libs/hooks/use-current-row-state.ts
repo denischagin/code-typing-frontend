@@ -17,15 +17,10 @@ export interface CurrentRowMethods {
 }
 
 const calculateRowStartIndent = (row?: string) => {
-    let indent = 0
+    if (!row) return 0
 
-    if (row) {
-        const startIndexText = row.search(/\S/g)
-        indent = startIndexText === -1 ? 0 : startIndexText
-    } else
-        indent = 0
-
-    return indent
+    const startIndexText = row.search(/\S/g)
+    return startIndexText === -1 ? 0 : startIndexText
 }
 
 const calculateRowRightSymbols = (row: string, typingValue: string) => {

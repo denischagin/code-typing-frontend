@@ -1,18 +1,16 @@
-import { useState } from "react";
+import {useState} from "react";
 
-import { Box, Input, Stack, Text, Tooltip } from "@chakra-ui/react";
+import {Box, Input, Stack, Text, Tooltip} from "@chakra-ui/react";
 
-import { useSearchParams } from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 
-import { useGetProgrammingLanguages } from "@entities/code";
-import { searchParamsEnum } from "@shared/constants";
-import { useSearch } from "@shared/libs/hooks/search";
-import { AsideCloseButton } from "@shared/ui/aside";
-import { LanguageTabPanelProps, ProgrammingLanguagesList } from "@widgets/AsideSettings";
+import {useGetProgrammingLanguages} from "@entities/code";
+import {searchParamsEnum} from "@shared/constants";
+import {useSearch} from "@shared/libs/hooks/search";
+import {AsideCloseButton} from "@shared/ui/aside";
+import {ProgrammingLanguagesList} from "@widgets/AsideSettings";
 
-export const LanguageTabPanel = (props: LanguageTabPanelProps) => {
-    const { handleClosePanel } = props
-
+export const LanguageTabPanel = () => {
     const [searchValue, setSearchValue] = useState("")
     const [searchParams] = useSearchParams()
     const languageName = searchParams.get(searchParamsEnum.languageName)
@@ -50,7 +48,6 @@ export const LanguageTabPanel = (props: LanguageTabPanelProps) => {
             {searchList?.length !== 0 ? (
                 <ProgrammingLanguagesList
                     programmingLanguages={searchList}
-                    onClick={handleClosePanel}
                     currentLanguageName={languageName ?? null}
                 />
             ) : (

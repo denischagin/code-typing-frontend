@@ -1,6 +1,12 @@
 import {ChangeEventHandler, KeyboardEvent, ReactNode, useEffect} from "react";
 
-import {TypingCodeHandlersContext, useCodeErrors, useCurrentRow, useRandomCode, useTypingAction} from "@entities/code";
+import {
+    TypingCodeHandlersContext,
+    useCodeErrors,
+    useCurrentRow,
+    useRandomCode,
+    useTypingAction
+} from "@entities/code";
 import {useTypingCodeTimer} from "@entities/code/libs/hooks/use-typing-code-timer.ts";
 import {useResult} from "@entities/results";
 import {useScrollIntoView} from "@shared/libs/hooks/scroll-into-view";
@@ -42,7 +48,6 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
     const {
         timer: {
             timerStatus,
-            timerSettings
         },
         startTimer,
         stopTimer,
@@ -57,7 +62,6 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         endTyping,
         resetTyping,
         isEnded,
-        isPrinting
     } = typingAction
 
     const handleStart = () => {
@@ -89,11 +93,6 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         }
     }, [isEnded]);
 
-    useEffect(() => {
-        if (timerSettings.direction === "down" && timerStatus == "stopped" && isPrinting)
-            handleEnd()
-    }, [timerStatus]);
-
     const handleResetAll = () => {
         resetState()
         resetTimer()
@@ -109,7 +108,9 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         newRandomText()
     }
 
-    useEffect(() => handleResetAll, [randomText]);
+    useEffect(() => {
+        return () => handleResetAll()
+    }, [randomText]);
 
     const handleKeyDown = (e: KeyboardEvent) => {
         if (!rows) return

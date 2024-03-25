@@ -12,23 +12,25 @@ export const useRandomCodeWithSearchParam = (): [textContent: string | undefined
 
     const toast = useToast()
 
-    const {data: codesByName} = useGetCodeExamplesByName(languageName!, !!languageName)
-    const {data: codes} = useGetCodeExamples(!languageName)
+    const {data: codesByName, isError: isErrorByName} = useGetCodeExamplesByName(languageName!, !!languageName)
+    const {data: codes, isError: isErrorAll} = useGetCodeExamples(!languageName)
 
     const codesForRandom = codesByName ? codesByName : codes
 
     const [randomText, newText] = useRandom(codesForRandom)
+    const [defaultRandomText, newDefaultRandomText] = useRandom(defaultTexts)
 
     const handleNewTextWithoutNetwork = () => {
         toast({
             title: "No network",
-            description: "You are offline. Only one code can be generated",
+            description: `Backend not found :(. Only ${defaultTexts.length} texts are available.`,
             status: "warning",
         })
+        newDefaultRandomText()
     }
 
-    if (!randomText) {
-        return [defaultTexts, handleNewTextWithoutNetwork]
+    if (isErrorByName || isErrorAll) {
+        return [defaultRandomText, handleNewTextWithoutNetwork]
     }
     return [randomText?.content, newText, randomText?.UUID]
 }

@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 import {TimerDirection, UseTimerOptions} from "@shared/ui/timer";
 
@@ -13,6 +13,7 @@ export const useTimer = (options: UseTimerOptions) => {
 
     const [timeMs, setTimeMs] = useState(startSeconds * 1000);
     const [isRunning, setIsRunning] = useState(false);
+    const [isEnded, setIsEnded] = useState(false);
 
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -21,12 +22,13 @@ export const useTimer = (options: UseTimerOptions) => {
             return setInterval(() => {
                 const now = new Date();
                 const newDate = startSeconds * 1000 - (now.getTime() - startDate.getTime())
-                if (newDate <= 0) {
-                    setTimeMs(0)
-                    clearInterval(intervalRef.current!);
-                    setIsRunning(false);
-                    return onEnd && onEnd()
-                }
+
+                if (newDate > 0) return setTimeMs(newDate);
+
+                setTimeMs(0)
+                clearInterval(intervalRef.current!);
+                setIsRunning(false);
+                setIsEnded(true)
                 setTimeMs(newDate);
             }, timeout);
         },
@@ -41,11 +43,17 @@ export const useTimer = (options: UseTimerOptions) => {
     }
 
 
+    useEffect(() => {
+        if (isEnded) {
+            onEnd && onEnd();
+            setIsEnded(false)
+        }
+    }, [isEnded]);
+
     const start = () => {
         setIsRunning(true);
         const startTimeNow = new Date();
 
-        console.log('interval')
         intervalRef.current = intervalByDirection[direction](startTimeNow);
     };
 

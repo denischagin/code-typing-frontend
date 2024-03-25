@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 
-import {TimerStatus, useTypingCodeTimer} from "@entities/code";
+import {TimerStatus, useTypingCodeHandlers, useTypingCodeTimer} from "@entities/code";
 import {Timer, useTimer} from "@shared/ui/timer";
 
 export const TypingCodeTimer = () => {
@@ -9,12 +9,14 @@ export const TypingCodeTimer = () => {
             timerStatus,
             timerSettings
         },
-        stopTimer
     } = useTypingCodeTimer()
+    const {
+        endTyping
+    } = useTypingCodeHandlers()
 
     const {start, time, reset} = useTimer({
         onEnd: () => {
-            stopTimer(Date.now())
+            endTyping()
         },
         startSeconds: timerSettings.direction === "down" ? timerSettings.startSeconds : 0,
         direction: timerSettings.direction
