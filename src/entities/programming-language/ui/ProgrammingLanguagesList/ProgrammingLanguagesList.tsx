@@ -1,8 +1,8 @@
 import {Stack} from "@chakra-ui/react";
 
+import {ProgrammingLanguagesListProps} from "@entities/programming-language";
 import programmingLanguageIcon from '@shared/assets/programming-language.svg'
 import {searchParamsEnum} from "@shared/constants";
-import {ProgrammingLanguagesListProps} from "src/widgets/AsideSettings";
 
 export const ProgrammingLanguagesList = (props: ProgrammingLanguagesListProps) => {
     const {

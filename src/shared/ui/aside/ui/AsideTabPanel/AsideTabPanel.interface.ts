@@ -1,7 +1,7 @@
-import {ReactNode} from "react";
-
 import {BoxProps} from "@chakra-ui/react";
 
-export interface AsideTabPanelProps extends BoxProps{
-    children: ReactNode
+import {AsideTabName} from "@shared/ui/aside";
+
+export interface AsideTabPanelProps extends BoxProps {
+    name: AsideTabName
 }

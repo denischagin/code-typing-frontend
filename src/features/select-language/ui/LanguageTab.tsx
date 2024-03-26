@@ -3,6 +3,7 @@ import {Box, Image, Tooltip} from "@chakra-ui/react";
 import {useSearchParams} from "react-router-dom";
 
 import {useGetProgrammingLanguages} from "@entities/code";
+import {LANGUAGE_TAB} from "@features/select-language/constants";
 import programmingLanguageIcon from "@shared/assets/programming-language.svg";
 import {searchParamsEnum} from "@shared/constants";
 import {AsideTab} from "@shared/ui/aside";
@@ -22,7 +23,7 @@ export const LanguageTab = () => {
     return (
         <Tooltip label={languageName ? `Current language: ${languageName}` : "Select language"}>
             <Box>
-                <AsideTab index={0} cursor="pointer">
+                <AsideTab name={LANGUAGE_TAB} cursor="pointer">
                     <Image
                         w="50px"
                         src={currentCodeIcon ? currentCodeIcon : programmingLanguageIcon}

@@ -1,15 +1,16 @@
 import {useState} from "react";
 
-import {Box, Input, Stack} from "@chakra-ui/react";
+import {Input, Stack} from "@chakra-ui/react";
 
 import {Link, useSearchParams} from "react-router-dom";
 
 import {useGetProgrammingLanguages} from "@entities/code";
+import {ProgrammingLanguagesList} from "@entities/programming-language";
+import {LANGUAGE_TAB} from "@features/select-language/constants";
 import {searchParamsEnum} from "@shared/constants";
 import {useSearch} from "@shared/libs/hooks/search";
-import {AsideCloseButton, AsideTabPanel} from "@shared/ui/aside";
+import {AsideButtons, AsideCloseButton, AsideTabPanel} from "@shared/ui/aside";
 import {Tile, TileImage, TileText} from "@shared/ui/tile";
-import {ProgrammingLanguagesList} from "@widgets/AsideSettings";
 
 export const LanguageTabPanel = () => {
     const [searchValue, setSearchValue] = useState("")
@@ -24,13 +25,13 @@ export const LanguageTabPanel = () => {
         programmingLanguages, searchValue, (item) => item.name
     )
     return (
-        <AsideTabPanel overflow="hidden" display="flex">
-            <Stack p="10px" overflow="hidden" w="200px">
-                <Box display="flex" w="100%" justifyContent="end">
+        <AsideTabPanel overflow="hidden" display="flex" name={LANGUAGE_TAB}>
+            <Stack overflow="hidden">
+                <AsideButtons>
                     <AsideCloseButton>
                         —
                     </AsideCloseButton>
-                </Box>
+                </AsideButtons>
 
                 <Input
                     variant='flushed'

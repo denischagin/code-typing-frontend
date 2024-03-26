@@ -11,16 +11,20 @@ export const TypingCodeTimer = () => {
         },
     } = useTypingCodeTimer()
     const {
-        endTyping
+        endTyping,
+        resetTyping
     } = useTypingCodeHandlers()
 
     const {start, time, reset} = useTimer({
-        onEnd: () => {
-            endTyping()
-        },
+        onEnd: () => endTyping(),
         startSeconds: timerSettings.direction === "down" ? timerSettings.startSeconds : 0,
         direction: timerSettings.direction
     })
+
+    useEffect(() => {
+        resetTyping()
+        reset()
+    }, [timerSettings.startSeconds])
 
     useEffect(() => {
         const handlerByTimerStatus: Record<TimerStatus, () => void> = {

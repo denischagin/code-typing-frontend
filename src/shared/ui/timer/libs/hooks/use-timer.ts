@@ -17,6 +17,7 @@ export const useTimer = (options: UseTimerOptions) => {
 
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+
     const intervalByDirection: Record<TimerDirection, (startDate: Date) => NodeJS.Timeout> = {
         down: (startDate) => {
             return setInterval(() => {

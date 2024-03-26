@@ -3,10 +3,10 @@ import {Button, Tooltip} from "@chakra-ui/react";
 import {AsideCloseButtonProps, useAside} from "@shared/ui/aside";
 
 export const AsideCloseButton = (props: AsideCloseButtonProps) => {
-    const {onChangeTabIndex} = useAside()
+    const {onChangeTabName} = useAside()
 
     const handleHideClick = () => {
-        onChangeTabIndex && onChangeTabIndex(null)
+        onChangeTabName && onChangeTabName(null)
     }
 
     return (

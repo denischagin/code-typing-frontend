@@ -17,6 +17,7 @@ export const Tile = (props: TileProps) => {
             transition="all 0.2s"
             p="7px"
             borderRadius="10px"
+            cursor="pointer"
             {...flexProps}
         />
     )

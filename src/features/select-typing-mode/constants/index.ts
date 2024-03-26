@@ -1,0 +1,1 @@
+export const TYPING_MODE_TAB = 'TypingMode'
