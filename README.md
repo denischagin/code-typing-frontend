@@ -1,4 +1,4 @@
-# Speed-typing 
+# Code-typing 
 
 [this frontend works with this backend](https://github.com/ttodoshi/speed-typing-backend)
 
