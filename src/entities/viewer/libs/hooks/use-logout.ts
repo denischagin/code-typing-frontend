@@ -9,7 +9,7 @@ export const useLogout = () => {
     const {logoutViewer} = useViewer()
     return useMutation({
         mutationFn: () => ViewerService.logout(),
-        onSettled: () => {
+        onSettled: async () => {
             logoutViewer()
         },
         onSuccess: () => {

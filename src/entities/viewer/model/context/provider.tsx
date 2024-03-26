@@ -1,9 +1,10 @@
 import {createContext, ReactNode, useContext, useState} from "react";
 
-import {IViewerContext} from "@entities/viewer";
+import {ViewerHandlers, ViewerState} from "@entities/viewer";
+import tokenService from "@entities/token/libs/token-service.ts";
 
 
-const ViewerContext = createContext<IViewerContext>({
+const ViewerContext = createContext<ViewerState & ViewerHandlers>({
     isAuthenticated: false,
     loginViewer: () => {
     },
@@ -15,20 +16,24 @@ export const useViewer = () => {
     return useContext(ViewerContext);
 }
 export const ViewerProvider = ({children}: { children: ReactNode }) => {
-    const [viewer, setViewer] = useState<{ isAuthenticated: boolean }>({
+    const [viewer, setViewer] = useState<{ isAuthenticated: boolean, accessToken?: string }>({
         isAuthenticated: false,
     });
 
-    const handleLoginViewer = () => {
+    const handleLoginViewer = (accessToken: string) => {
         setViewer({
             isAuthenticated: true,
+            accessToken
         });
+        tokenService.setAccessToken(accessToken)
     }
 
     const handleLogoutViewer = () => {
         setViewer({
             isAuthenticated: false,
+            accessToken: undefined
         });
+        tokenService.deleteAccessToken()
     }
 
     return (

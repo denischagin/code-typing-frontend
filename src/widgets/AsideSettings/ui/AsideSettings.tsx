@@ -21,9 +21,7 @@ export const AsideSettings = () => {
             >
                 <AsideTabList>
                     <LanguageTab/>
-
                     <Divider/>
-
                     <TypingModeTab/>
                 </AsideTabList>
 

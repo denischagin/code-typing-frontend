@@ -1,6 +1,5 @@
 import {TokenService} from "@entities/token";
 import {ViewerService} from "@entities/viewer";
-import {paths} from "@pages/routes";
 import axios, {AxiosRequestConfig} from "axios";
 
 export const baseQueryV1Instance = axios.create({
@@ -12,9 +11,13 @@ export const baseQueryV1Instance = axios.create({
 baseQueryV1Instance.interceptors.request.use((config) => {
     const token = TokenService.getAccessToken()
 
-    if (!token) TokenService.deleteAccessToken()
+    if (token) {
+        config.headers["Authorization"] = `Bearer ${token}`
+    } else {
+        TokenService.deleteAccessToken()
+    }
 
-    config.headers["Authorization"] = `Bearer ${token}`
+
     return config;
 })
 
@@ -25,12 +28,15 @@ baseQueryV1Instance.interceptors.response.use((response) => {
     const originalRequest = error.config;
     if (error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
-        const response = await ViewerService.refresh();
+        try {
+            const response = await ViewerService.refresh();
 
-        if (response) TokenService.setAccessToken(response.access);
-        else {
+            if (response) TokenService.setAccessToken(response.access);
+            else {
+                TokenService.deleteAccessToken();
+            }
+        } catch (e) {
             TokenService.deleteAccessToken();
-            window.location.href = paths.loginPage
         }
 
         return baseQueryV1Instance(originalRequest);

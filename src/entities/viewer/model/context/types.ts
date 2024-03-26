@@ -1,13 +1,9 @@
-export interface IViewerContext extends IViewerHandlers {
+export interface ViewerState  {
     isAuthenticated: boolean;
+    accessToken?: string;
 }
 
-export interface IViewerTokens {
-    refresh?: string;
-    access?: string;
-}
-
-export interface IViewerHandlers {
-    loginViewer: () => void;
+export interface ViewerHandlers {
+    loginViewer: (accessToken: string) => void;
     logoutViewer: () => void;
 }

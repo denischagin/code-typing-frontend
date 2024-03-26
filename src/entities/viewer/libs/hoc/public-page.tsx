@@ -1,8 +1,6 @@
 import {ReactNode, useEffect, useState} from "react";
 
 import {Progress} from "@chakra-ui/react";
-
-import {TokenService} from "@entities/token";
 import {useRefresh, useViewer} from "@entities/viewer";
 
 export const publicPage = (children: ReactNode) => {
@@ -21,8 +19,7 @@ const PublicPage = ({children}: { children: ReactNode }) => {
     useEffect(() => {
         refreshMutate(undefined, {
             onSuccess: ({access}) => {
-                loginViewer();
-                TokenService.setAccessToken(access);
+                loginViewer(access);
             },
             onSettled: () => {
                 setAccess(true);

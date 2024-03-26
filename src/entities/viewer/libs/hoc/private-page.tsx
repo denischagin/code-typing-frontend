@@ -1,8 +1,6 @@
 import {ReactNode, useEffect} from "react";
 
 import {useNavigate} from "react-router-dom";
-
-import {TokenService} from "@entities/token";
 import {useRefresh, useViewer} from "@entities/viewer";
 import {paths} from "@pages/routes";
 import {CodeLoading} from "@shared/ui/loading";
@@ -23,8 +21,7 @@ const PrivatePage = ({children}: { children: ReactNode }) => {
     useEffect(() => {
         refreshMutate(undefined, {
             onSuccess: ({access}) => {
-                loginViewer();
-                TokenService.setAccessToken(access);
+                loginViewer(access);
             },
             onError: () => {
                 navigate(paths.loginPage);
