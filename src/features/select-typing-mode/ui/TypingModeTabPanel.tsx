@@ -47,6 +47,7 @@ export const TypingModeTabPanel = () => {
                     isActive={direction === 'down'}
                 >
                     <Text>Counter down</Text>
+
                     <Flex flexWrap="wrap" gap={1}>
                         {counterDownVariants.map(variant => (
                             <ModeSmallItem

@@ -1,92 +1,24 @@
-import {useState} from "react";
+import {Box,Container, Flex, Text} from "@chakra-ui/react";
 
-import {Container, Flex, List, ListItem, Text} from "@chakra-ui/react";
+import {NavLink} from "react-router-dom";
 
-import {Link, NavLink} from "react-router-dom";
-
-import {useViewer} from "@entities/viewer";
-import {AlertDialogLogout} from "@features/auth/logout";
 import {paths} from "@pages/routes";
+import {Navigation} from "@widgets/Header";
 
-export type CommonPath = {
-    name: string;
-    path?: string;
-    onClick?: () => void;
-}
 export const Header = () => {
-    const {isAuthenticated} = useViewer();
-    const [isOpenLogout, setIsOpenLogout] = useState(false);
-
-    const handleCloseLogout = () => {
-        setIsOpenLogout(false);
-    }
-
-    const handleOpenLogout = () => {
-        setIsOpenLogout(true);
-    }
-
-    const navigationItems: CommonPath[] = [
-        {
-            name: "Results",
-            path: paths.resultsPage,
-        },
-        {
-            name: 'Code Typing',
-            path: paths.typingCodePage,
-        },
-        ...(isAuthenticated ? [
-            {
-                name: "Logout",
-                onClick: handleOpenLogout,
-            }
-        ] : [
-            {
-                name: "Login",
-                path: paths.loginPage,
-            },
-            {
-                name: "Register",
-                path: paths.registerPage,
-            },
-        ]),
-    ]
-
-
     return (
-        <>
-            <Flex as="header" bgColor="blackAlpha.400" py="5px">
-                <Container maxW="100%">
-                    <Flex justify="space-between" align="center">
-                        <NavLink to={paths.mainPage}>
-                            <Text fontSize="x-large">
-                                Code-Typing
-                            </Text>
-                        </NavLink>
+        <Flex as="header" bgColor="blackAlpha.400" borderBottom="1px solid" borderBottomColor="whiteAlpha.100">
+            <Container maxW="100%" display="flex">
+                <Box p={2}>
+                    <NavLink to={paths.mainPage}>
+                        <Text fontSize="large" fontWeight="bold">
+                            Code-typing
+                        </Text>
+                    </NavLink>
+                </Box>
 
-                        <Flex as="nav" align="center">
-                            <List display="flex" gap={5}>
-                                {navigationItems.map(item => (
-                                    <ListItem key={item.name}>
-                                        {item.path ? (
-                                            <Link to={item.path}>
-                                                {item.name}
-                                            </Link>
-                                        ) : (
-                                            <Text onClick={item.onClick} cursor="pointer">
-                                                {item.name}
-                                            </Text>
-                                        )
-                                        }
-                                    </ListItem>
-                                ))}
-                            </List>
-                        </Flex>
-                    </Flex>
-                </Container>
-            </Flex>
-
-            <AlertDialogLogout isOpen={isOpenLogout} onClose={handleCloseLogout}/>
-        </>
-
+                <Navigation/>
+            </Container>
+        </Flex>
     )
 }

@@ -16,7 +16,7 @@ export const AsideTab = (props: AsideTabProps) => {
         <Tile
             isActive={isActive}
             justifyContent="center"
-            backgroundColor={isActive ? 'whiteAlpha.200' : 'transparent'}
+            backgroundColor={'transparent'}
             borderRadius="md"
             borderWidth="1px"
             borderColor={isActive? 'whiteAlpha.500' : 'whiteAlpha.200'}

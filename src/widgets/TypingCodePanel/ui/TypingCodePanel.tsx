@@ -1,4 +1,4 @@
-import {Flex, Text} from "@chakra-ui/react";
+import {Box, Flex, Text, Tooltip} from "@chakra-ui/react";
 
 import {useSearchParams} from "react-router-dom";
 
@@ -19,14 +19,23 @@ export const TypingCodePanel = () => {
                 <Text fontSize="large" textDecoration="underline">{languageName ?? "Random"}</Text>
 
                 <RepeatCodeButton/>
+
+                <Box ml={10}>
+                    <TypingCodeTimer/>
+                </Box>
             </Flex>
 
             <Flex gap="20px" align="center">
-                {errorsCount !== 0 && (
-                    <Text color="red.300">{errorsCount}x</Text>
+                {errorsCount !== 0 ? (
+                    <Tooltip label={`${errorsCount} error(s)`}>
+                        <Text color="red.300">{errorsCount}x</Text>
+                    </Tooltip>
+                ) : (
+                    <Tooltip label="No errors">
+                        <Text color="green.300" fontSize="x-large">&#x2713;</Text>
+                    </Tooltip>
                 )}
 
-                <TypingCodeTimer/>
             </Flex>
         </Flex>
     )

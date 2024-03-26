@@ -12,7 +12,7 @@ const ResultsPage = () => {
     }
 
     return (
-        <Container maxW="1000px">
+        <Container maxW="1000px" py={3}>
             {resultsList?.length ? <ResultsList results={resultsList}/> : <Text fontSize="xl">No results</Text>}
         </Container>
     )
