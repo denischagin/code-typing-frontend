@@ -19,21 +19,26 @@ docker compose up -d
 
 ## Deploy
 
-[speed typing versel](https://speed-typing-new.vercel.app/)
+[code typing versel](https://speed-typing-new.vercel.app/)
 
 
 ## Preview
 
 #### Start page
-
-![image](https://github.com/denischagin/speed-typing-new/assets/98116130/e9fefa16-24bc-46da-8430-d89fc79638e5)
+![image](https://github.com/denischagin/code-typing/assets/98116130/0886eaba-894f-4d01-8d41-f24c9909d5b3)
 
 #### Code typing page
+![image](https://github.com/denischagin/code-typing/assets/98116130/9799b101-a2c1-4337-91ff-b3d340c90afd)
+![image](https://github.com/denischagin/code-typing/assets/98116130/8337cc23-ca62-4f9f-be5e-1d6005246615)
 
-![image](https://github.com/denischagin/speed-typing-new/assets/98116130/dafef598-f45f-4910-a83c-712f75897d9a)
 
 #### Auth page
+![image](https://github.com/denischagin/code-typing/assets/98116130/dc7ba379-cb24-4882-8eb1-e3c407d57f30)
 
-![image](https://github.com/denischagin/speed-typing-new/assets/98116130/ddf5a7fe-7313-4f08-a906-1b33df9aad0e)
+
+#### ResultPage
+![image](https://github.com/denischagin/code-typing/assets/98116130/a40767d0-7564-4300-b415-c0676496acf6)
+![image](https://github.com/denischagin/code-typing/assets/98116130/ff24c528-b21d-4294-8fd7-39416b93855a)
+
 
 
