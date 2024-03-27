@@ -1,6 +1,7 @@
 import {ReactNode, useEffect} from "react";
 
 import {useNavigate} from "react-router-dom";
+
 import {useRefresh, useViewer} from "@entities/viewer";
 import {paths} from "@pages/routes";
 import {CodeLoading} from "@shared/ui/loading";

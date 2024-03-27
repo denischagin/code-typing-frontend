@@ -58,7 +58,7 @@ export const MainPageCode = () => {
 
                 <CodeRow/>
 
-                {['speed-typing-new@1.0.0 dev', 'vite'].map((text, index) => (
+                {['code-typing@1.0.0 dev', 'vite'].map((text, index) => (
                     <CodeRow key={index}>
                         <Text
                             fontSize="2xl"

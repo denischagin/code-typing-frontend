@@ -1,7 +1,7 @@
 import {createContext, ReactNode, useContext, useState} from "react";
 
-import {ViewerHandlers, ViewerState} from "@entities/viewer";
 import tokenService from "@entities/token/libs/token-service.ts";
+import {ViewerHandlers, ViewerState} from "@entities/viewer";
 
 
 const ViewerContext = createContext<ViewerState & ViewerHandlers>({

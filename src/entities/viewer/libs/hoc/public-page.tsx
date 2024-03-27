@@ -1,6 +1,7 @@
 import {ReactNode, useEffect, useState} from "react";
 
 import {Progress} from "@chakra-ui/react";
+
 import {useRefresh, useViewer} from "@entities/viewer";
 
 export const publicPage = (children: ReactNode) => {

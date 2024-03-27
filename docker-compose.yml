@@ -3,9 +3,9 @@ services:
   frontend:
     build: .
 
-    image: speed-typing-frontend
+    image: code-typing
 
-    container_name: speed-typing-frontend
+    container_name: code-typing-frontend
 
     restart: always
 

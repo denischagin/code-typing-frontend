@@ -4,9 +4,9 @@ import {useNavigate} from "react-router-dom";
 
 import {ILoginCredentials, useViewer, ViewerService} from "@entities/viewer";
 import {paths} from "@pages/routes";
+import {queryKeysEnum} from "@shared/constants";
 import {useAxiosErrorToast} from "@shared/libs/hooks/axios-error-toast";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {queryKeysEnum} from "@shared/constants";
 
 export const useLogin = () => {
     const {loginViewer} = useViewer()
