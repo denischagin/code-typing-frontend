@@ -18,7 +18,6 @@ public class Solution {
         String result = getResult("Android", 19);
         System.out.println(result);
     }
-
     private static String getResult(String name, int age) {
         return new Student(name, age).toString();
     

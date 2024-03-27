@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {ChangeEventHandler, useState} from "react";
 
 import {Input, Stack} from "@chakra-ui/react";
 
@@ -24,6 +24,11 @@ export const LanguageTabPanel = () => {
     const searchList = useSearch(
         programmingLanguages, searchValue, (item) => item.name
     )
+
+    const handleChangeSearch: ChangeEventHandler<HTMLInputElement>= (e) => {
+       setSearchValue(e.target.value)
+    }
+
     return (
         <AsideTabPanel overflow="hidden" display="flex" name={LANGUAGE_TAB}>
             <Stack overflow="hidden">
@@ -38,7 +43,7 @@ export const LanguageTabPanel = () => {
                     type="search"
                     placeholder="Search.."
                     value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={handleChangeSearch}
                 />
 
                 <ProgrammingLanguagesList

@@ -9,11 +9,12 @@ export const eventStopTimer = createEvent<number>()
 export const eventResetTimer = createEvent()
 export const eventChangeTimerSettings = createEvent<TypingTimerSettings>()
 
-const timerDirection = localStorage.getItem(storageKeysEnum.timerDirection);
-const startSeconds = localStorage.getItem(storageKeysEnum.timerStartSeconds);
 
 
-const loadSettings = (): TypingTimerSettings => {
+const loadSettingsFromLocalStorage = (): TypingTimerSettings => {
+    const timerDirection = localStorage.getItem(storageKeysEnum.timerDirection);
+    const startSeconds = localStorage.getItem(storageKeysEnum.timerStartSeconds);
+
     const initSettings: TypingTimerSettings = {
         direction: "down",
         startSeconds: counterDownVariants[1]
@@ -37,7 +38,7 @@ export const $typingCodeTimerStore = createStore<TypingCodeTimerStore>({
     timerStatus: "stopped",
     timeMillisecondsStart: null,
     timeMillisecondsEnd: null,
-    timerSettings: loadSettings()
+    timerSettings: loadSettingsFromLocalStorage()
 })
     .on(eventStartTimer, (store, startTimeMilliseconds) => ({
         ...store,
