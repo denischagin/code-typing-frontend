@@ -4,20 +4,20 @@ import {useTypingCodeHandlers} from "@entities/code";
 import {RefreshIcon} from "@shared/ui/icons";
 
 export const RepeatCodeButton = () => {
-    const {scrollTo, handleNewText, containerRef} = useTypingCodeHandlers()
+    const {scrollTo, containerRef, resetTyping} = useTypingCodeHandlers()
 
     const handleRepeatText = () => {
         if (containerRef.current?.scrollTop === 0) {
-            return handleNewText()
+            return resetTyping()
         }
 
         scrollTo({top: 0, behavior: "smooth"}, () => {
-            handleNewText()
+            resetTyping()
         })
     }
 
     return (
-        <Tooltip label="New text">
+        <Tooltip label="Repeat text">
             <IconButton
                 aria-label={"refresh code"}
                 icon={<RefreshIcon/>}
