@@ -11,13 +11,16 @@ export const usePrintingRowHorizontalScroll = ({rowRef, typingValue, text}: UseP
 
         const widthTypingValue = rowElement.scrollWidth / text.length * typingValue.length
 
+        const leftIndent = 50
+        const rightIndent = 50
+
         requestAnimationFrame(() => {
-            if (widthTypingValue < rowElement.scrollLeft + 100) {
+            if (widthTypingValue < rowElement.scrollLeft + leftIndent) {
                 rowElement.scroll({
                     left: widthTypingValue - rowRect.width / 2,
                     behavior: "smooth",
                 })
-            } else if (widthTypingValue + 200 > rowRect.width + rowElement.scrollLeft) {
+            } else if (widthTypingValue + rightIndent > rowRect.width + rowElement.scrollLeft) {
                 rowElement.scroll({
                     left: widthTypingValue - rowRect.width / 4,
                     behavior: "smooth",
