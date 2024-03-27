@@ -1,3 +1,5 @@
 export enum storageKeysEnum {
-    results = 'results'
+    results = 'results',
+    timerDirection = 'timerDirection',
+    timerStartSeconds = 'timerStartSeconds',
 }

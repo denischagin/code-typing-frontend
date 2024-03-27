@@ -3,7 +3,7 @@ import {MouseEventHandler} from "react";
 import {Flex, Stack, Text} from "@chakra-ui/react";
 
 import {ModeSmallItem} from "./ModeSmallItem.tsx";
-import {useTypingCodeTimer} from "@entities/code";
+import {counterDownVariants, useTypingCodeTimer} from "@entities/code";
 import {ModeItem} from "@features/select-typing-mode";
 import {TYPING_MODE_TAB} from "@features/select-typing-mode/constants";
 import {AsideButtons, AsideCloseButton, AsideTabPanel} from "@shared/ui/aside";
@@ -12,7 +12,6 @@ import {TimerDirection} from "@shared/ui/timer";
 
 
 export const TypingModeTabPanel = () => {
-    const counterDownVariants = [15, 30, 60]
     const {changeTimerSetting, timer} = useTypingCodeTimer()
     const {timerSettings: {direction, startSeconds,}} = timer
 
