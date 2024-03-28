@@ -1,6 +1,7 @@
-import {CurrentRowState} from "@entities/code";
 import {createEvent, createStore} from 'effector';
 import {useUnit} from "effector-react";
+
+import {CurrentRowState} from "@entities/code";
 
 
 const calculateRowStartIndent = (row?: string) => {

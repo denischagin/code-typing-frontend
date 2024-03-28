@@ -1,3 +1,5 @@
+import {useUnit} from "effector-react";
+
 import {
     $typingCodeTimerStore,
     eventChangeTimerSettings,
@@ -5,7 +7,6 @@ import {
     eventStartTimer,
     eventStopTimer
 } from "@entities/code";
-import {useUnit} from "effector-react";
 
 export const useTypingCodeTimer = () => {
     return useUnit({

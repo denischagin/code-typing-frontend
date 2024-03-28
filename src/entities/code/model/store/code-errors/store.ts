@@ -1,6 +1,7 @@
-import {CodeErrorsContextState} from "@entities/code";
 import {createEvent, createStore} from "effector";
 import {useUnit} from "effector-react/compat";
+
+import {CodeErrorsContextState} from "@entities/code";
 
 const eventIncrementErrors = createEvent()
 const eventSetErrorsCount = createEvent<number>()

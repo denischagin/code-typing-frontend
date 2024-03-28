@@ -1,5 +1,6 @@
-import {IResultCode} from "@entities/results";
 import {createEvent, createStore} from "effector";
+
+import {IResultCode} from "@entities/results";
 
 export const eventEndResult = createEvent<{ textSymbolCount: number, endTime: Date, errorsCount: number }>()
 export const eventStartResult = createEvent<{ text: string, startTime: Date }>()

@@ -1,6 +1,7 @@
+import {createEvent, createStore} from "effector";
+
 import {TypingCodeTimerStore, TypingTimerSettings} from "@entities/code";
 import {storageKeysEnum} from "@shared/constants";
-import {createEvent, createStore} from "effector";
 
 
 export const counterDownVariants = [15, 30, 60]

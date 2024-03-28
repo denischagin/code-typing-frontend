@@ -20,6 +20,7 @@ module.exports = {
                 groups: [
                     ['^react'],
                     ["^@chakra-ui/react"],
+                    ['^effector'],
                     ['^react-router-dom', '^react-router'],
                     ['^classnames'],
                     ['^@/app', '^@/pages', '^@/widgets', '^@/features', '^@/entities', '^@/shared'],

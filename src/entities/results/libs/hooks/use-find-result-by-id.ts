@@ -1,7 +1,8 @@
 import {useMemo} from "react";
 
-import {$resultsStore, IResult} from "@entities/results";
 import {useUnit} from "effector-react";
+
+import {$resultsStore, IResult} from "@entities/results";
 
 export interface UseFindResultByIdReturn {
     result: IResult

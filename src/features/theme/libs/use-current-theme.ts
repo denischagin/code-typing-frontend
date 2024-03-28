@@ -1,8 +1,9 @@
 import {extendTheme} from "@chakra-ui/react";
 
+import {useUnit} from "effector-react";
+
 import {$currentTheme} from "@features/theme";
 import {ColorTokens} from "@shared/constants";
-import {useUnit} from "effector-react";
 
 export const useCurrentTheme = () => {
     const theme = useUnit($currentTheme)

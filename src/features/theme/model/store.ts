@@ -1,3 +1,5 @@
+import {createEvent, createStore} from "effector";
+
 import {AppTheme} from "@features/theme";
 import {
     blueDarkTheme,
@@ -8,7 +10,6 @@ import {
     violetTheme, yellowDarkTheme, yellowTheme
 } from "@features/theme/model/themes";
 import {storageKeysEnum} from "@shared/constants";
-import {createEvent, createStore} from "effector";
 
 
 export const themes = [

@@ -1,6 +1,7 @@
+import {createEvent, createStore} from "effector";
+
 import {IResult, TResultStore} from "@entities/results";
 import {storageKeysEnum} from "@shared/constants";
-import {createEvent, createStore} from "effector";
 
 export const eventAddResult = createEvent<IResult>()
 
