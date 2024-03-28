@@ -8,12 +8,12 @@ import {Providers} from "./providers";
 
 function App() {
     useEffect(() => {
-        localStorage.setItem('theme', 'dark');
+        localStorage.setItem('chakra-theme', 'dark');
     }, []);
 
     return (
         <>
-            <ColorModeScript initialColorMode="dark" type="localStorage" storageKey="theme"/>
+            <ColorModeScript initialColorMode="dark" type="localStorage" storageKey="chakra-theme"/>
             <Providers/>
         </>
     )
