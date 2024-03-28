@@ -1,6 +1,6 @@
 import {AppTheme} from "@features/theme";
 
-const deepDarkTheme: AppTheme = {
+export const deepDarkTheme: AppTheme = {
     id: "Deep Dark",
     name: "Deep Dark",
     colors: {
@@ -41,5 +41,3 @@ const deepDarkTheme: AppTheme = {
         },
     },
 };
-
-export default deepDarkTheme;

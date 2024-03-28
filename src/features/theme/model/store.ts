@@ -1,31 +1,29 @@
+import {AppTheme} from "@features/theme";
 import {
-    AppTheme,
-    blue,
-    blueDark,
-    deepDark,
-    extraDark,
-    green,
-    greenDark,
-    main,
-    violet,
-    violetDark
-} from "@features/theme";
+    blueDarkTheme,
+    blueTheme,
+    deepDarkTheme, extraDarkTheme, greenDarkTheme, greenTheme,
+    mainTheme,
+    violetDarkTheme,
+    violetTheme, yellowDarkTheme, yellowTheme
+} from "@features/theme/model/themes";
 import {storageKeysEnum} from "@shared/constants";
 import {createEvent, createStore} from "effector";
 
 
 export const themes = [
-    main,
-    deepDark,
-    violet, violetDark,
-    blue, blueDark,
-    green, greenDark,
-    extraDark,
+    mainTheme,
+    deepDarkTheme,
+    violetTheme, violetDarkTheme,
+    blueTheme, blueDarkTheme,
+    greenTheme, greenDarkTheme,
+    yellowTheme, yellowDarkTheme,
+    extraDarkTheme,
 ]
+
 
 const loadThemeFromStorage = () => {
     const id = localStorage.getItem(storageKeysEnum.theme)
-    console.log(id)
     if (id) {
         const theme = themes.find(theme => theme.id === id)
         if (theme) {

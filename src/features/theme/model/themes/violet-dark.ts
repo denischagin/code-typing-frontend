@@ -1,6 +1,6 @@
 import {AppTheme} from "@features/theme";
 
-const violetTheme: AppTheme = {
+export const violetDarkTheme: AppTheme = {
     id: "Violet dark",
     name: "Violet dark",
     colors: {
@@ -42,5 +42,3 @@ const violetTheme: AppTheme = {
         },
     },
 };
-
-export default violetTheme;

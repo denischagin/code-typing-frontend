@@ -1,6 +1,6 @@
 import {AppTheme} from "@features/theme";
 
-const lightBlueTheme: AppTheme = {
+export const lightBlueTheme: AppTheme = {
     id: "Main light",
     name: "Main light",
     colors: {
@@ -42,5 +42,3 @@ const lightBlueTheme: AppTheme = {
         }
     }
 };
-
-export default lightBlueTheme;

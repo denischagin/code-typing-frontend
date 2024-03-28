@@ -1,9 +1,13 @@
-export {default as main} from "./main.ts";
-export {default as blue} from "./blue.ts";
-export {default as blueDark} from "./blue-dark.ts";
-export {default as deepDark} from "./deep-dark.ts";
-export {default as extraDark} from "./extra-dark.ts";
-export {default as green} from "./green.ts";
-export {default as greenDark} from "./green-dark.ts";
-export {default as violet} from "./violet.ts";
-export {default as violetDark} from "./violet-dark.ts";
+
+export * from "./main.ts";
+export * from "./blue.ts";
+export * from "./blue-dark.ts";
+export * from "./deep-dark.ts";
+export * from "./extra-dark.ts";
+export * from "./green.ts";
+export * from "./green-dark.ts";
+export * from "./violet.ts";
+export * from "./violet-dark.ts";
+export * from "./yellow.ts";
+export * from "./yellow-dark.ts";
+

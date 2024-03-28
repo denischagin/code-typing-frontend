@@ -1,6 +1,6 @@
 import {AppTheme} from "@features/theme";
 
-const extraDark: AppTheme = {
+export const extraDarkTheme: AppTheme = {
     id: "Extra dark",
     name: "Extra dark",
     colors: {
@@ -42,5 +42,3 @@ const extraDark: AppTheme = {
         },
     },
 };
-
-export default extraDark;
