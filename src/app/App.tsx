@@ -7,7 +7,6 @@ import './styles/global.scss'
 import {Providers} from "./providers";
 
 function App() {
-
     useEffect(() => {
         localStorage.setItem('theme', 'dark');
     }, []);
