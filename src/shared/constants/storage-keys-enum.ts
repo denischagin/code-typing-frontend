@@ -1,6 +1,7 @@
 export enum storageKeysEnum {
-    results = 'results',
-    timerDirection = 'timerDirection',
-    timerStartSeconds = 'timerStartSeconds',
-    theme = 'theme',
+  results = 'results',
+  timerDirection = 'timerDirection',
+  timerStartSeconds = 'timerStartSeconds',
+  theme = 'theme',
+  fontFamily = 'fontFamily',
 }

@@ -2,11 +2,13 @@ import {extendTheme} from "@chakra-ui/react";
 
 import {useUnit} from "effector-react";
 
+import { useCurrentFont } from "@entities/font";
 import {$currentTheme} from "@features/theme";
 import {ColorTokens} from "@shared/constants";
 
 export const useCurrentTheme = () => {
     const theme = useUnit($currentTheme)
+    const font = useCurrentFont()
 
     const defaultColors = {
         [ColorTokens.headerBg]: "contrast.400",
@@ -18,8 +20,8 @@ export const useCurrentTheme = () => {
 
     const themeConfig = {
         fonts: {
-            heading: `"JetBrains Mono", monospace`,
-            body: `"JetBrains Mono", monospace`,
+            heading: font.fontFamily,
+            body: font.fontFamily,
         },
         semanticTokens: {
             colors: {

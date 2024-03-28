@@ -2,6 +2,7 @@ import {useState} from "react";
 
 import {Divider} from "@chakra-ui/react";
 
+import { ChangeFontTab, ChangeFontTabPanel } from "@features/change-font";
 import {CustomTextTab, CustomTextTabPanel} from "@features/custom-text";
 import {LanguageTab, LanguageTabPanel} from "@features/select-language";
 import {TypingModeTab, TypingModeTabPanel} from "@features/select-typing-mode";
@@ -29,6 +30,7 @@ export const AsideSettings = () => {
 
                     <TypingModeTab/>
                     <ChangeThemeTab/>
+                    <ChangeFontTab />
                 </AsideTabList>
 
                 <AsideTabPanels overflow="hidden" display="flex" flexGrow={1}>
@@ -36,6 +38,7 @@ export const AsideSettings = () => {
                     <TypingModeTabPanel/>
                     <CustomTextTabPanel/>
                     <ChangeThemeTabPanel/>
+                    <ChangeFontTabPanel/>
                 </AsideTabPanels>
             </AsideContent>
         </Aside>
