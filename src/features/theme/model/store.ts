@@ -1,14 +1,27 @@
-import main from "./themes/main.ts";
-import {AppTheme} from "@features/theme";
-import blue from "@features/theme/model/themes/blue.ts";
-import deepDark from "@features/theme/model/themes/deep-dark.ts";
-import extraDark from "@features/theme/model/themes/extraDark.ts";
-import violet from "@features/theme/model/themes/violet.ts";
+import {
+    AppTheme,
+    blue,
+    blueDark,
+    deepDark,
+    extraDark,
+    green,
+    greenDark,
+    main,
+    violet,
+    violetDark
+} from "@features/theme";
 import {storageKeysEnum} from "@shared/constants";
 import {createEvent, createStore} from "effector";
 
 
-export const themes = [main, violet, blue, deepDark, extraDark]
+export const themes = [
+    main,
+    deepDark,
+    violet, violetDark,
+    blue, blueDark,
+    green, greenDark,
+    extraDark,
+]
 
 const loadThemeFromStorage = () => {
     const id = localStorage.getItem(storageKeysEnum.theme)
