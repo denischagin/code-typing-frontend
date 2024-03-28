@@ -1,7 +1,7 @@
 import {AppTheme} from "@features/theme";
 
 const violetTheme: AppTheme = {
-    id: "violet",
+    id: "Violet",
     name: "Violet",
     colors: {
         main: {

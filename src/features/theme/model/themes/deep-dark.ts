@@ -1,8 +1,8 @@
 import {AppTheme} from "@features/theme";
 
 const deepDarkTheme: AppTheme = {
-    id: "DeepDark",
-    name: "DeepDark",
+    id: "Deep Dark",
+    name: "Deep Dark",
     colors: {
         main: {
             50: 'rgba(255, 255, 255, 0.04)',

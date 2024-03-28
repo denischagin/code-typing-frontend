@@ -1,7 +1,7 @@
 import {AppTheme} from "@features/theme";
 
 const mainTheme: AppTheme = {
-    id: "main",
+    id: "Main",
     name: "Main",
     colors: {
         main: {
