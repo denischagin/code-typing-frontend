@@ -41,6 +41,8 @@ const mainTheme: AppTheme = {
             900: 'rgba(0, 0, 0, 0.92)',
         },
     },
+
+    body: 'gray.800'
 };
 
 export default mainTheme;

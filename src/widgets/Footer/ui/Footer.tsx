@@ -6,7 +6,7 @@ export const Footer = () => {
     return (
         <Box
             as="footer"
-            bgColor="contrast.400"
+            bgColor="footerBg"
         >
             <Container maxW="1000px">
                 <Text align="center">

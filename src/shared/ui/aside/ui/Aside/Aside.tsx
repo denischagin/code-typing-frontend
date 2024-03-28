@@ -27,7 +27,7 @@ export const Aside = (props: AsideProps) => {
         <Flex
             as="aside"
             direction="column"
-            bg="contrast.300"
+            bg="asideBg"
             {...restProps}
         >
             <AsideContext.Provider value={{

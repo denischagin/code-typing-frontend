@@ -26,38 +26,41 @@ export const ChangeThemeTabPanel = () => {
             </AsideButtons>
 
             <Flex direction="column" gap={2} mt={5} alignItems={"center"}>
-                {themes.map(({colors, id, name}) => (
-                    <Tile
-                        key={id}
-                        flexDirection={"column"}
-                        alignItems={"center"}
-                        w="100%"
-                        gap={1}
-                        isActive={currentTheme.id === id}
-                        onClick={handleChangeThemeClick({id, name, colors})}
-                    >
-                        <TileText>{name}</TileText>
+                {themes.map((theme) => {
+                    const {colors, id, name} = theme
+                    return (
+                        <Tile
+                            key={id}
+                            flexDirection={"column"}
+                            alignItems={"center"}
+                            w="100%"
+                            gap={1}
+                            isActive={currentTheme.id === id}
+                            onClick={handleChangeThemeClick(theme)}
+                        >
+                            <TileText>{name}</TileText>
 
-                        <Flex wrap={"wrap"} gap={1} align={"center"}>
-                            {Object.keys(colors).map(key => (
-                                <Fragment key={key}>
-                                    <Box
-                                        bg={colors[key as keyof typeof colors]["300"]}
-                                        w={4}
-                                        h={4}
-                                        borderRadius="50%"
-                                    />
-                                    <Box
-                                        bg={colors[key as keyof typeof colors]["700"]}
-                                        w={4}
-                                        h={4}
-                                        borderRadius="50%"
-                                    />
-                                </Fragment>
-                            ))}
-                        </Flex>
-                    </Tile>
-                ))}
+                            <Flex wrap={"wrap"} gap={1} align={"center"}>
+                                {Object.keys(colors).map(key => (
+                                    <Fragment key={key}>
+                                        <Box
+                                            bg={colors[key as keyof typeof colors]["300"]}
+                                            w={4}
+                                            h={4}
+                                            borderRadius="50%"
+                                        />
+                                        <Box
+                                            bg={colors[key as keyof typeof colors]["700"]}
+                                            w={4}
+                                            h={4}
+                                            borderRadius="50%"
+                                        />
+                                    </Fragment>
+                                ))}
+                            </Flex>
+                        </Tile>
+                    );
+                })}
             </Flex>
 
         </AsideTabPanel>

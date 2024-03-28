@@ -1,5 +1,7 @@
 import {ColorHues} from "@chakra-ui/react";
 
+import {ColorTokens} from "@shared/constants";
+
 export interface AppTheme {
     name: string;
     id: string;
@@ -9,8 +11,7 @@ export interface AppTheme {
         main: ColorHues;
     };
     semanticTokens?: {
-        colors: {
-            [key: string]: string;
-        };
-    }
+        colors: Partial<Record<ColorTokens, string>>;
+    },
+    body?: string
 }

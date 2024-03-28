@@ -1,20 +1,35 @@
 import {extendTheme} from "@chakra-ui/react";
 
 import {$currentTheme} from "@features/theme";
+import {ColorTokens} from "@shared/constants";
 import {useUnit} from "effector-react";
 
 export const useCurrentTheme = () => {
     const theme = useUnit($currentTheme)
+
+    const defaultColors = {
+        [ColorTokens.headerBg]: "contrast.400",
+        [ColorTokens.footerBg]: "contrast.400",
+        [ColorTokens.printingTextActive]: "main.900",
+        [ColorTokens.printingTextDisabled]: "main.500",
+        [ColorTokens.asideBg]: "contrast.300",
+    }
 
     const themeConfig = {
         fonts: {
             heading: `"JetBrains Mono", monospace`,
             body: `"JetBrains Mono", monospace`,
         },
+        semanticTokens: {
+            colors: {
+                ...defaultColors,
+                ...theme.semanticTokens?.colors
+            }
+        },
         styles: {
             global: {
                 body: {
-                    bg: 'contrast.200',
+                    bg: theme.body ?? 'contrast.200',
                     color: 'main.900',
                 },
             },
@@ -22,7 +37,7 @@ export const useCurrentTheme = () => {
         components: {
             Button: {
                 baseStyle: {
-                    fontWeight: 'bold', // Normally, it is "semibold"
+                    fontWeight: 'bold',
                 },
                 variants: {
                     solid: {

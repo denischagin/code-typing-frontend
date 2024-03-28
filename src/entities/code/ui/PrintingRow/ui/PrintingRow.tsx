@@ -62,7 +62,7 @@ const PrintingRow = (props: PrintingRowProps) => {
                             w="max-content"
                             fontSize={"25px"}
                             whiteSpace="pre"
-                            color={isPrinted ? 'main.900' : "main.500"}
+                            color={isPrinted ? 'printingTextActive' : "printingTextDisabled"}
                             {...textProps}
                         >
                             {text + " ".repeat(endIndent ?? 0)}
