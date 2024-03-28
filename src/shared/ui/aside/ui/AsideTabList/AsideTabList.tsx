@@ -9,11 +9,11 @@ export const AsideTabList = (props: AsideTabListProps) => {
         <Box
             display="flex"
             flexDirection="column"
-            gap="7px"
+            gap="15px"
             p="4px"
             width="47px"
             borderRight="1px solid"
-            borderColor="whiteAlpha.100"
+            borderColor="main.100"
             {...restProps}
         >
             {children}

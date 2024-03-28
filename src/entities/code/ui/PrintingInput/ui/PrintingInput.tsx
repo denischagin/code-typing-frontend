@@ -22,7 +22,7 @@ const PrintingInput = forwardRef<HTMLInputElement, PrintingInputProps>((props, r
             left="0"
             bottom="0"
             right="0"
-            color={isRightRow ? "white" : 'red.400'}
+            color={isRightRow ? "main.900" : 'red.400'}
             opacity={isRightRow ? "1" : "0.8"}
             autoFocus
             variant="unstyled"

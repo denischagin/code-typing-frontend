@@ -19,11 +19,11 @@ export const AsideTab = (props: AsideTabProps) => {
             backgroundColor={'transparent'}
             borderRadius="md"
             borderWidth="1px"
-            borderColor={isActive? 'whiteAlpha.500' : 'whiteAlpha.200'}
+            borderColor={isActive ? 'main.500' : 'main.200'}
             p="5px"
             onClick={handleTabClick}
             _hover={{
-                backgroundColor: isActive ? 'whiteAlpha.300' : 'whiteAlpha.100',
+                backgroundColor: 'main.100',
             }}
             {...restProps}
         />

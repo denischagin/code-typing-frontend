@@ -68,9 +68,10 @@ export const Navigation = () => {
                             px={5}
                             py={2}
                             borderBottom="2px solid"
-                            borderBottomColor={location.pathname === item.path ? "blue.500" : "transparent"}
+                            color="main.900"
+                            borderBottomColor={location.pathname === item.path ? "primary.500" : "transparent"}
                             _hover={{
-                                borderBottomColor: location.pathname === item.path ? "blue.400" : "blue.900",
+                                borderBottomColor: location.pathname === item.path ? "primary.400" : "primary.900",
                             }}
                             transition="all 300ms"
                         >

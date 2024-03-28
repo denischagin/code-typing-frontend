@@ -51,7 +51,7 @@ export const CodeLoading: FC<CodeLoadingProps> = (props) => {
                 {`>>`} {title}
             </Text>
 
-            <Text color="whiteAlpha.900" fontSize="xl" whiteSpace="pre" textAlign="end" px={px}>
+            <Text color="main.900" fontSize="xl" whiteSpace="pre" textAlign="end" px={px}>
                 [{filledLoadingSymbol + emptyLoadingSymbol}]
             </Text>
         </Flex>

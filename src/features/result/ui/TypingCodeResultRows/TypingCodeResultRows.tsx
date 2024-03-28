@@ -42,7 +42,7 @@ export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultR
                     <CodeRow>
                         <Tooltip label="symbols per minute">
                             <Flex mr="100px" gap="10px">
-                                <Text as="span" fontSize="25px">
+                                <Text as="span" fontSize="25px" color="main.900">
                                     spm:
                                 </Text>
 
@@ -54,7 +54,7 @@ export const TypingCodeResultRows = forwardRef<HTMLDivElement, TypingCodeResultR
                     </CodeRow>
 
                     <CodeRow>
-                        <Text fontSize="25px" color="whiteAlpha.500">
+                        <Text fontSize="25px" color="main.500">
                             time: {convertMillisecondsAndDateToTime(resultTime ?? 0)}
                         </Text>
                     </CodeRow>

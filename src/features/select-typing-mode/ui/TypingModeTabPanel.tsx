@@ -5,7 +5,7 @@ import {Flex, Stack, Text} from "@chakra-ui/react";
 import {ModeSmallItem} from "./ModeSmallItem.tsx";
 import {counterDownVariants, useTypingCodeTimer} from "@entities/code";
 import {ModeItem} from "@features/select-typing-mode";
-import {TYPING_MODE_TAB} from "@features/select-typing-mode/constants";
+import {settingTabs} from "@shared/constants";
 import {AsideButtons, AsideCloseButton, AsideTabPanel} from "@shared/ui/aside";
 import {TileText} from "@shared/ui/tile";
 import {TimerDirection} from "@shared/ui/timer";
@@ -26,7 +26,7 @@ export const TypingModeTabPanel = () => {
         }
 
     return (
-        <AsideTabPanel name={TYPING_MODE_TAB}>
+        <AsideTabPanel name={settingTabs.typingMode}>
             <AsideButtons>
                 <AsideCloseButton>
                     —

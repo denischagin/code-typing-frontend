@@ -9,7 +9,7 @@ export const AsideTabPanels = (props: AsideTabPanelsProps) => {
     if (currentTabName === null) return null
 
     return (
-        <Box {...restProps} borderRight="1px solid" borderColor="whiteAlpha.100">
+        <Box {...restProps} borderRight="1px solid" borderColor="main.100">
             {children}
         </Box>
     )

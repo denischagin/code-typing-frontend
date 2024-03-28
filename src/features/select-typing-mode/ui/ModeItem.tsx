@@ -11,10 +11,10 @@ export const ModeItem = (props: ModeItemProps) => {
             flexDirection="column"
             gap={2}
             border="1px dashed"
-            borderColor={isActive ? 'whiteAlpha.500' : 'transparent'}
-            bg={'whiteAlpha.50'}
+            borderColor={isActive ? 'main.500' : 'transparent'}
+            bg={'main.50'}
             _hover={{
-                borderColor: isActive? 'whiteAlpha.500' : 'whiteAlpha.200',
+                borderColor: isActive? 'main.500' : 'main.200',
             }}
             {...tileProps}
         />

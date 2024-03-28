@@ -38,7 +38,7 @@ export const CodeForm = <Fields extends Record<string, unknown>>(props: CodeForm
                     <CodeRow>
                         <Text
                             fontSize="25px"
-                            color="whiteAlpha.900"
+                            color="main.900"
                         >
                             {`>> `} <Text as="strong">{title}</Text>
                         </Text>
@@ -52,7 +52,7 @@ export const CodeForm = <Fields extends Record<string, unknown>>(props: CodeForm
                                     <CodeRow key={rowString}>
                                         <Text
                                             fontSize="25px"
-                                            color="whiteAlpha.500"
+                                            color="main.500"
                                         >
                                             {rowString}
                                         </Text>
@@ -63,7 +63,7 @@ export const CodeForm = <Fields extends Record<string, unknown>>(props: CodeForm
                                     <Flex gap={2} alignItems="center" width="100%">
                                         <Text
                                             fontSize="25px"
-                                            color="whiteAlpha.800"
+                                            color="main.800"
                                             variant="unstyled"
                                         >
                                             {`>>`}
@@ -71,7 +71,7 @@ export const CodeForm = <Fields extends Record<string, unknown>>(props: CodeForm
 
                                         <Input
                                             fontSize="25px"
-                                            color="whiteAlpha.800"
+                                            color="main.800"
                                             variant="unstyled"
                                             placeholder={placeholder}
                                             type={inputType}

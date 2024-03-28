@@ -40,7 +40,7 @@ export const MainPageCode = () => {
                     <Flex as="form" onSubmit={handleSubmit} w="100%">
                         <Text
                             fontSize="2xl"
-                            color="whiteAlpha.800"
+                            color="main.800"
                             mr={3}
                         >
                             {`>>`}
@@ -50,7 +50,7 @@ export const MainPageCode = () => {
                             variant="unstyled"
                             value={value}
                             fontSize="2xl"
-                            color="whiteAlpha.800"
+                            color="main.800"
                             onChange={handleChange}
                         />
                     </Flex>
@@ -62,7 +62,7 @@ export const MainPageCode = () => {
                     <CodeRow key={index}>
                         <Text
                             fontSize="2xl"
-                            color="whiteAlpha.800"
+                            color="main.800"
                             mr={3}
                         >
                             {`> ${text}`}
@@ -79,7 +79,7 @@ export const MainPageCode = () => {
                 ) : (
                     <>
                         <CodeRow>
-                            <Text fontSize="xl" color="blue.400" ml={3}>
+                            <Text fontSize="xl" color="primary.400" ml={3}>
                                 CODE TYPING v1.0.0 ready
                             </Text>
                         </CodeRow>
@@ -87,15 +87,15 @@ export const MainPageCode = () => {
                         <CodeRow/>
 
                         <CodeRow>
-                            <Text fontSize="xl" color="whiteAlpha.500" ml={3}>
+                            <Text fontSize="xl" color="main.500" ml={3}>
                                 Pages:
                             </Text>
                         </CodeRow>
 
                         {pages.map((page) => (
                             <CodeRow key={page.path}>
-                                <Text fontSize="xl" color="whiteAlpha.800">
-                                    <Text as="span" color="blue.400" mr={1}>
+                                <Text fontSize="xl" color="main.800">
+                                    <Text as="span" color="primary.400" mr={1}>
                                         {`>`}
                                     </Text>
 
@@ -103,7 +103,11 @@ export const MainPageCode = () => {
                                         {page.title}:
                                     </Text>
 
-                                    <Link textDecoration="underline" color="blue.100">
+                                    <Link
+                                        textDecoration="underline"
+                                        color="primary.100"
+                                        _hover={{color: 'primary.400'}}
+                                    >
                                         <NavLink to={page.path}>
                                             {page.path}
                                         </NavLink>
@@ -119,20 +123,20 @@ export const MainPageCode = () => {
                         <CodeRow/>
 
                         <CodeRow>
-                            <Text fontSize="xl" color="blue.400" ml={6}>
+                            <Text fontSize="xl" color="primary.400" ml={6}>
                                 You found easter egg! Code Typing developers:
                             </Text>
                         </CodeRow>
 
                         <CodeRow>
-                            <Link fontSize="xl" color="blue.100" href="https://github.com/denischagin"
+                            <Link fontSize="xl" color="primary.100" href="https://github.com/denischagin"
                                   textDecoration="underline">
                                 Frontn't developer
                             </Link>
                         </CodeRow>
 
                         <CodeRow>
-                            <Link fontSize="xl" color="blue.100" href="https://github.com/ttodoshi"
+                            <Link fontSize="xl" color="primary.100" href="https://github.com/ttodoshi"
                                   textDecoration="underline">
                                 Backn't developer
                             </Link>

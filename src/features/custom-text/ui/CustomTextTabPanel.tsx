@@ -1,7 +1,7 @@
 import {Box, Button, Flex, Select, Stack, Tooltip} from "@chakra-ui/react";
 
 import {defaultTexts, useGetProgrammingLanguages} from "@entities/code";
-import {CUSTOM_TEXT_TAB} from "@features/custom-text/constants";
+import {settingTabs} from "@shared/constants";
 import {AsideButtons, AsideCloseButton, AsideTabPanel} from "@shared/ui/aside";
 import {Tile, TileText} from "@shared/ui/tile";
 
@@ -9,7 +9,7 @@ export const CustomTextTabPanel = () => {
     const {data: languages} = useGetProgrammingLanguages()
 
     return (
-        <AsideTabPanel name={CUSTOM_TEXT_TAB}>
+        <AsideTabPanel name={settingTabs.customText}>
             <AsideButtons>
                 <AsideCloseButton>
                     —
@@ -32,7 +32,7 @@ export const CustomTextTabPanel = () => {
                     {defaultTexts.map((text) => (
                         <Tooltip key={text} label={text}>
                             <Box>
-                                <Tile _hover={{bgColor: "blue.800"}}>
+                                <Tile _hover={{bgColor: "primary.800"}}>
                                     <TileText>
                                         {text.trim().slice(0, 30)}...
                                     </TileText>

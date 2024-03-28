@@ -5,16 +5,16 @@ import {ColorModeScript} from "@chakra-ui/react";
 import './styles/global.scss'
 
 import {Providers} from "./providers";
-import {theme} from "@app/config";
 
 function App() {
+
     useEffect(() => {
-        localStorage.setItem('theme', theme.config.initialColorMode);
+        localStorage.setItem('theme', 'dark');
     }, []);
 
     return (
         <>
-            <ColorModeScript initialColorMode={theme.config.initialColorMode} type="localStorage" storageKey="theme"/>
+            <ColorModeScript initialColorMode="dark" type="localStorage" storageKey="theme"/>
             <Providers/>
         </>
     )

@@ -30,7 +30,7 @@ export const ResultsItem = (props: ResultsItemProps) => {
                 as="li"
                 gap="10px"
                 align="center"
-                bg={"whiteAlpha.100"}
+                bg={"main.100"}
                 px="10px" py="5px"
                 borderRadius="10px"
                 onClick={handleToggleJson}

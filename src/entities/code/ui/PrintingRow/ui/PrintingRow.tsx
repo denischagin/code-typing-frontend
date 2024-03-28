@@ -34,9 +34,9 @@ const PrintingRow = (props: PrintingRowProps) => {
     return (
         <Grid
             gap={4}
-            bgColor={isActive ? 'whiteAlpha.100' : undefined}
+            bgColor={isActive ? 'main.100' : undefined}
             _hover={{
-                bgColor: 'whiteAlpha.100'
+                bgColor: 'main.100'
             }}
             px={4}
             h="max-content"
@@ -62,7 +62,7 @@ const PrintingRow = (props: PrintingRowProps) => {
                             w="max-content"
                             fontSize={"25px"}
                             whiteSpace="pre"
-                            color={isPrinted ? 'whiteAlpha.800' : "gray.500"}
+                            color={isPrinted ? 'main.900' : "main.500"}
                             {...textProps}
                         >
                             {text + " ".repeat(endIndent ?? 0)}

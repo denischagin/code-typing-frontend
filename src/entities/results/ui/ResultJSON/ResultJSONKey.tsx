@@ -25,7 +25,7 @@ export const ResultJSONKey = (props: ResultJSONProps) => {
             >
                 {`    `}"{jsonKey}": {value},
                 {!!details && (
-                    <Text as="span" color="gray.500" opacity={isShowDetail ? 1 : 0} transition="opacity 200ms">
+                    <Text as="span" color="main.500" opacity={isShowDetail ? 1 : 0} transition="opacity 200ms">
                         {`  // ${details}`}
                     </Text>
                 )}

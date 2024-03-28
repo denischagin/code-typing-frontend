@@ -10,9 +10,9 @@ export const Tile = (props: TileProps) => {
         <Flex
             justifyContent="space-between"
             alignContent="center"
-            bg={isActive ? "whiteAlpha.300" : "whiteAlpha.100"}
+            bg={isActive ? "main.300" : "main.100"}
             _hover={{
-                bg: isActive ? "whiteAlpha.400" : "whiteAlpha.200"
+                bg: isActive ? "main.400" : "main.200"
             }}
             transition="all 0.2s"
             p="7px"

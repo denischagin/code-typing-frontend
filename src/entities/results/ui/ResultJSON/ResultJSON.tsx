@@ -17,9 +17,9 @@ export const ResultJSON = (props: ResultsItemProps) => {
     const fields: Record<string, BoxProps & { details?: string }> = {
         accuracy: {color: 'green.100', details: "Accuracy"},
         errorsCount: {color: 'red.100', details: "Errors count"},
-        symbolsPerMinute: {color: 'blue.100', details: "Symbols per minute (spm)"},
-        startTime: {color: 'gray.400', details: "Start time"},
-        endTime: {color: 'gray.400', details: "End time"},
+        symbolsPerMinute: {color: 'primary.100', details: "Symbols per minute (spm)"},
+        startTime: {color: 'main.400', details: "Start time"},
+        endTime: {color: 'main.400', details: "End time"},
         // text: {},
     }
 
@@ -38,7 +38,7 @@ export const ResultJSON = (props: ResultsItemProps) => {
             <CodeContainer>
                 <CodeRows autoRows="33px">
                     <CodeRow>
-                        <Text as="span" color="gray.500" ml={3}>
+                        <Text as="span" color="main.500" ml={3}>
                             // result
                             number: {resultIndex + 1}
                         </Text>
@@ -92,7 +92,7 @@ export const ResultJSON = (props: ResultsItemProps) => {
                     <CodeRows autoRows="20px">
                         {rows?.map((line, index) => (
                             <CodeRow>
-                                <Text fontSize="sm" color="gray.500" whiteSpace="pre" key={index}>{line}</Text>
+                                <Text fontSize="sm" color="main.500" whiteSpace="pre" key={index}>{line}</Text>
                             </CodeRow>
                         ))}
                     </CodeRows>

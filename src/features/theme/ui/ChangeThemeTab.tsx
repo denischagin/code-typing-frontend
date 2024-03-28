@@ -1,15 +1,15 @@
 import {Box, Image, Tooltip} from "@chakra-ui/react";
 
-import customText from "@shared/assets/text.svg";
+import themeIcon from "@shared/assets/theme.svg";
 import {settingTabs} from "@shared/constants";
 import {AsideTab} from "@shared/ui/aside";
 
-export const CustomTextTab = () => {
+export const ChangeThemeTab = () => {
     return (
-        <Tooltip label="Custom Texts">
+        <Tooltip label="Change theme">
             <Box>
-                <AsideTab name={settingTabs.customText} cursor="pointer">
-                    <Image src={customText}/>
+                <AsideTab name={settingTabs.theme} cursor="pointer">
+                    <Image src={themeIcon}/>
                 </AsideTab>
             </Box>
         </Tooltip>

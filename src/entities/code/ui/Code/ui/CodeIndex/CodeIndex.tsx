@@ -7,7 +7,7 @@ import {CodeIndexProps} from "@entities/code";
 const CodeIndex = ({index}: CodeIndexProps) => {
     return (
         <Flex align="center">
-            <Text color={"whiteAlpha.300"} fontWeight="bold" fontSize="20px">
+            <Text color={"main.300"} fontWeight="bold" fontSize="20px">
                 {index}
             </Text>
         </Flex>

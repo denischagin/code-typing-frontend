@@ -6,7 +6,7 @@ const CodeIndexes = ({children}: { children: ReactNode }) => {
     return (
         <Grid
             borderRight="2px solid"
-            borderColor="whiteAlpha.200"
+            borderColor="main.200"
             pr="30px"
             autoRows="40px"
         >

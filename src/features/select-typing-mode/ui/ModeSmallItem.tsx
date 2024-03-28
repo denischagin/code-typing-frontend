@@ -6,10 +6,10 @@ export const ModeSmallItem = (props: ModeSmallItemProps) => {
 
     return (
         <Tile
-            bg={isActive ? 'blue.700' : 'transparent'}
+            bg={isActive ? 'primary.700' : 'transparent'}
             borderWidth='1px'
-            borderColor='whiteAlpha.100'
-            _hover={{bg: 'blue.700'}}
+            borderColor='main.100'
+            _hover={{bg: 'primary.700'}}
             {...tileProps}
         />
     )
