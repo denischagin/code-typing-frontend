@@ -22,7 +22,7 @@ export const NewCodeButton = () => {
     }
 
     return (
-        <Tooltip label="New text">
+        <Tooltip label="New text (Alt+Enter)" >
             <IconButton
                 aria-label={"refresh code"}
                 icon={<NextIcon/>}

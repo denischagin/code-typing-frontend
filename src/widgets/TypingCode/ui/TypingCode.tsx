@@ -13,11 +13,16 @@ import {
     useTypingCodeHandlers
 } from "@entities/code";
 import {useCurrentFont} from "@entities/font";
+import {useNewCodeMouseDown} from "@features/code/new";
+import {useRepeatCodeMouseDown} from "@features/code/repeat";
 import {TypingCodeResultRows} from "@features/result";
 import {CodeLoading} from "@shared/ui/loading";
 
 export const TypingCode = () => {
     const endIndent = 2
+
+    useNewCodeMouseDown()
+    useRepeatCodeMouseDown()
 
     const {
         handleChangePrintingInput,

@@ -44,6 +44,7 @@ export const ChangeFontTabPanel = () => {
             <Flex gap={2} wrap="wrap" justifyContent="space-evenly" alignItems="end">
                 {typingFontSizes.map((fontSize) => (
                     <FontSizeItem
+                        key={fontSize.fontSize}
                         isActive={font.typingFontSize === fontSize.fontSize}
                         onChangeFontSize={changeFontSize}
                         {...fontSize}
