@@ -1,5 +1,6 @@
-import { FontFamilies } from "@shared/constants";
+import {FontFamilies} from "@shared/constants";
 
 export interface FontState {
-    fontFamily: FontFamilies;   
+    fontFamily: FontFamilies;
+    typingFontSize: number;
 }

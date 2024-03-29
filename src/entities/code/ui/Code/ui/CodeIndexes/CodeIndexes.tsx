@@ -1,17 +1,18 @@
-import {memo, ReactNode} from "react";
+import {memo} from "react";
 
 import {Grid} from "@chakra-ui/react";
 
-const CodeIndexes = ({children}: { children: ReactNode }) => {
+import {CodeIndexesProps} from "@entities/code";
+
+const CodeIndexes = (props: CodeIndexesProps) => {
     return (
         <Grid
             borderRight="2px solid"
             borderColor="main.200"
             pr="30px"
             autoRows="40px"
-        >
-            {children}
-        </Grid>
+            {...props}
+        />
     )
 };
 

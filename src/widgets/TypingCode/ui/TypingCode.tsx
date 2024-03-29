@@ -12,6 +12,7 @@ import {
     useRandomCode,
     useTypingCodeHandlers
 } from "@entities/code";
+import {useCurrentFont} from "@entities/font";
 import {TypingCodeResultRows} from "@features/result";
 
 export const TypingCode = () => {
@@ -28,6 +29,8 @@ export const TypingCode = () => {
     const {rows, randomText} = useRandomCode()
 
     const {currentRowIndex, typingValue} = useCurrentRow()
+    const {typingFontSize} = useCurrentFont()
+    const autoRows = (typingFontSize + typingFontSize * 0.6) + 'px'
 
     const getPrintingRowProps = (row: string, rowIndex: number): PrintingRowProps => {
         const status = getPrintingRowStatus(rowIndex, currentRowIndex)
@@ -60,9 +63,9 @@ export const TypingCode = () => {
             )}
 
             <CodeContainer>
-                <CodeIndexesRange startIndex={1} length={rows?.length ?? 0}/>
+                <CodeIndexesRange startIndex={1} length={rows?.length ?? 0} autoRows={autoRows}/>
 
-                <CodeRows>
+                <CodeRows autoRows={autoRows}>
                     {rows?.map((row, rowIndex) => (
                         <PrintingRow key={rowIndex} {...getPrintingRowProps(row, rowIndex)} />
                     ))}

@@ -6,7 +6,4 @@ export {formatterDate} from "./formatter-date.ts";
 export {settingTabs} from "./setting-tabs.ts";
 export {ColorTokens} from "./color-tokens.ts";
 export {FontFamilies} from './font-families.ts'
-
-
-
-
+export {typingFontSizes} from './typing-font-sizes.ts'

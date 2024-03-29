@@ -4,4 +4,5 @@ export enum storageKeysEnum {
   timerStartSeconds = 'timerStartSeconds',
   theme = 'theme',
   fontFamily = 'fontFamily',
+  typingFontSize = 'typingFontSize',
 }

@@ -5,7 +5,7 @@ import { settingTabs } from '@shared/constants'
 import { AsideTab } from '@shared/ui/aside'
 
 export const ChangeFontTab = () => (
-  <Tooltip label="Select typing mode">
+  <Tooltip label="Font Settings">
     <Box>
       <AsideTab name={settingTabs.font}>
         <Image

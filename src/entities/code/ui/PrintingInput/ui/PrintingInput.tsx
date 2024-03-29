@@ -3,6 +3,7 @@ import {forwardRef, memo} from "react";
 import {Input} from '@chakra-ui/react'
 
 import {PrintingInputProps} from "@entities/code";
+import {useCurrentFont} from "@entities/font";
 
 const PrintingInput = forwardRef<HTMLInputElement, PrintingInputProps>((props, ref) => {
     const {
@@ -13,9 +14,11 @@ const PrintingInput = forwardRef<HTMLInputElement, PrintingInputProps>((props, r
         maxLength,
     } = props
 
+    const { typingFontSize } = useCurrentFont()
+
     return (
         <Input
-            fontSize={"25px"}
+            fontSize={typingFontSize + "px"}
             pos="absolute"
             maxLength={maxLength}
             top="0"

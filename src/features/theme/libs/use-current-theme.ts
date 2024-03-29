@@ -27,7 +27,7 @@ export const useCurrentTheme = () => {
             colors: {
                 ...defaultColors,
                 ...theme.semanticTokens?.colors
-            }
+            },
         },
         styles: {
             global: {
