@@ -4,7 +4,7 @@ import {ChakraProvider} from "@chakra-ui/react"
 
 import {RouterProvider} from "react-router-dom";
 
-import {queryClient} from "@app/config";
+import {colorModeManager, queryClient} from "@app/config";
 import {ViewerProvider} from "@entities/viewer";
 import {useCurrentTheme} from "@features/theme";
 import {router} from "@pages/index.tsx";
@@ -15,7 +15,7 @@ export const Providers = ({children}: { children?: ReactNode }) => {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <ChakraProvider theme={theme}>
+            <ChakraProvider theme={theme} colorModeManager={colorModeManager}>
                 <ViewerProvider>
                     <RouterProvider router={router}/>
                     {children}
