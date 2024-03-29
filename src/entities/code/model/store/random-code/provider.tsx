@@ -3,7 +3,11 @@ import {ReactNode, useMemo} from "react";
 import {RandomCodeContext, transformCodeToRows, useRandomCodeWithSearchParam} from "@entities/code";
 
 export const RandomCodeProvider = ({children}: { children: ReactNode }) => {
-    const [randomText, newRandomText, randomTextUUID] = useRandomCodeWithSearchParam()
+    const [randomText, {
+        newText,
+        isPending,
+        id
+    }] = useRandomCodeWithSearchParam()
 
     const rows = useMemo(() =>
             transformCodeToRows(randomText?.trim() ?? null),
@@ -12,9 +16,10 @@ export const RandomCodeProvider = ({children}: { children: ReactNode }) => {
     return (
         <RandomCodeContext.Provider value={{
             randomText,
-            newRandomText,
+            newRandomText: newText,
             rows,
-            randomTextUUID
+            randomTextUUID: id,
+            isPending
         }}>
             {children}
         </RandomCodeContext.Provider>

@@ -5,6 +5,7 @@ import {useSearchParams} from "react-router-dom";
 import {useCodeErrors} from "@entities/code";
 import {NewCodeButton} from "@features/code/new";
 import {RepeatCodeButton} from "@features/code/repeat";
+import {ButtonScrollToResult} from "@features/scroll-to-result";
 import {TypingCodeTimer} from "@features/typing";
 import {searchParamsEnum} from "@shared/constants";
 
@@ -20,11 +21,15 @@ export const TypingCodePanel = () => {
                 <Text fontSize="large" textDecoration="underline" mr={5}>{languageName ?? "Random"}</Text>
 
                 <NewCodeButton/>
-                <RepeatCodeButton />
+                <RepeatCodeButton/>
 
                 <Box ml={10}>
                     <TypingCodeTimer/>
                 </Box>
+
+                <ButtonScrollToResult ml={10}>
+                    Result
+                </ButtonScrollToResult>
             </Flex>
 
             <Flex gap="20px" align="center">

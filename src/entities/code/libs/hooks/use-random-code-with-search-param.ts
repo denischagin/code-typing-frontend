@@ -6,14 +6,34 @@ import {defaultTexts, useGetCodeExamples, useGetCodeExamplesByName} from "@entit
 import {searchParamsEnum} from "@shared/constants";
 import {useRandom} from "@shared/libs/hooks/random";
 
-export const useRandomCodeWithSearchParam = (): [textContent: string | undefined, newText: () => void, id?: string] => {
+export type UseRandomCodeWithSearchReturn = [
+    textContent: string | undefined,
+    options: UseRandomCodeWithSearchReturnOptions
+]
+
+export interface UseRandomCodeWithSearchReturnOptions {
+    isPending: boolean,
+    newText: () => void,
+    id: string | undefined
+}
+
+export const useRandomCodeWithSearchParam = (): UseRandomCodeWithSearchReturn => {
     const [searchParams] = useSearchParams()
     const languageName = searchParams.get(searchParamsEnum.languageName)
 
     const toast = useToast()
 
-    const {data: codesByName, isError: isErrorByName} = useGetCodeExamplesByName(languageName!, !!languageName)
-    const {data: codes, isError: isErrorAll} = useGetCodeExamples(!languageName)
+    const {
+        data: codesByName,
+        isError: isErrorByName,
+        isLoading: isLoadingByName
+    } = useGetCodeExamplesByName(languageName!, !!languageName)
+
+    const {
+        data: codes,
+        isError: isErrorAll,
+        isLoading: isLoadingAll
+    } = useGetCodeExamples(!languageName)
 
     const codesForRandom = codesByName ? codesByName : codes
 
@@ -29,8 +49,19 @@ export const useRandomCodeWithSearchParam = (): [textContent: string | undefined
         newDefaultRandomText()
     }
 
+    const isLoading = isLoadingByName || isLoadingAll
+
     if (isErrorByName || isErrorAll) {
-        return [defaultRandomText, handleNewTextWithoutNetwork]
+        return [defaultRandomText, {
+            isPending: isLoading,
+            newText: handleNewTextWithoutNetwork,
+            id: undefined
+        }]
     }
-    return [randomText?.content, newText, randomText?.UUID]
+    return [
+        randomText?.content, {
+            isPending: isLoading,
+            newText,
+            id: randomText?.UUID
+        }]
 }

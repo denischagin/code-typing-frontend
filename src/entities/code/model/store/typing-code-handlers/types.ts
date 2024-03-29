@@ -12,4 +12,6 @@ export interface TypingCodeHandlersContextState extends UseTypingActionState {
     startTyping: () => void
     endTyping: () => void
     resetTyping: () => void
+    scrollToResult: (behavior?: ScrollBehavior) => void
+    inputRef?: RefObject<HTMLInputElement>
 }

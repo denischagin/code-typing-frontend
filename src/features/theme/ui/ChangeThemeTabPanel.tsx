@@ -23,6 +23,7 @@ export const ChangeThemeTabPanel = () => {
             <Flex direction="column" gap={2} mt={5} alignItems={"center"} overflow="auto">
                 {themes.map((theme) => (
                     <ThemeItem
+                        key={theme.id}
                         onChangeTheme={changeTheme}
                         currentTheme={currentTheme}
                         {...theme}

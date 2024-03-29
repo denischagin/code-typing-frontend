@@ -1,6 +1,6 @@
 import {Flex, Stack, Text} from '@chakra-ui/react'
 
-import {useChangeFontFamily, useChangeFontSize, useCurrentFont} from '@entities/font'
+import {FontSizeItem, useChangeFontFamily, useChangeFontSize, useCurrentFont} from '@entities/font'
 import {FontFamilies, settingTabs, typingFontSizes} from '@shared/constants'
 import {AsideButtons, AsideCloseButton, AsideTabPanel} from '@shared/ui/aside'
 import {Tile, TileText} from '@shared/ui/tile'
@@ -10,26 +10,17 @@ export const ChangeFontTabPanel = () => {
     const changeFontFamily = useChangeFontFamily()
     const changeFontSize = useChangeFontSize()
 
-
     const handleChangeFont = (fontFamily: FontFamilies) => () => {
         changeFontFamily(fontFamily)
     }
 
-    const handleChangeFontSize = (fontSize: number) => () => {
-        changeFontSize(fontSize)
-    };
     return (
         <AsideTabPanel name={settingTabs.font}>
             <AsideButtons>
                 <AsideCloseButton>—</AsideCloseButton>
             </AsideButtons>
 
-            <Text
-                fontSize="xl"
-                fontWeight="bold"
-                mt={7}
-                mb={2}
-            >
+            <Text fontSize="xl" mt={7} mb={2}>
                 Font families
             </Text>
 
@@ -46,25 +37,17 @@ export const ChangeFontTabPanel = () => {
             </Stack>
 
 
-            <Text
-                fontSize="xl"
-                fontWeight="bold"
-                mt={7}
-                mb={2}
-            >
-                Font sizes (px)
+            <Text fontSize="xl" mt={7} mb={2}>
+                Font sizes
             </Text>
 
-            <Flex gap={2} wrap="wrap" justifyContent="space-evenly" alignItems="center">
+            <Flex gap={2} wrap="wrap" justifyContent="space-evenly" alignItems="end">
                 {typingFontSizes.map((fontSize) => (
-                    <Tile
-                        key={fontSize}
-                        onClick={handleChangeFontSize(fontSize)}
-                        isActive={font.typingFontSize === fontSize}
-                        py={1}
-                    >
-                        <Text fontSize={fontSize}>{fontSize}</Text>
-                    </Tile>
+                    <FontSizeItem
+                        isActive={font.typingFontSize === fontSize.fontSize}
+                        onChangeFontSize={changeFontSize}
+                        {...fontSize}
+                    />
                 ))}
             </Flex>
         </AsideTabPanel>

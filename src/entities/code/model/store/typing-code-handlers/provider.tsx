@@ -1,4 +1,4 @@
-import {ChangeEventHandler, KeyboardEvent, ReactNode, useEffect} from "react";
+import {ChangeEventHandler, KeyboardEvent, ReactNode, useEffect, useRef} from "react";
 
 import {
     TypingCodeHandlersContext,
@@ -20,6 +20,7 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         containerRef,
         {scrollIntoView: scrollToResult, scrollTo}
     ] = useScrollIntoView<HTMLDivElement>(-50)
+    const inputRef = useRef<HTMLInputElement>(null)
 
     const {
         randomText,
@@ -169,6 +170,8 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
             resetTyping: handleResetAll,
             endTyping: handleEnd,
             startTyping: handleStart,
+            scrollToResult,
+            inputRef
         }}>
             {children}
         </TypingCodeHandlersContext.Provider>

@@ -1,29 +1,12 @@
-import {createEvent, createStore} from 'effector/compat'
+import {createEvent, createStore} from 'effector'
 import {useUnit} from 'effector-react'
 
+import {loadStateFromLocalStorage} from "./load-state-from-local-storage.ts";
 import {FontState} from '@entities/font/model'
-import {FontFamilies, storageKeysEnum, typingFontSizes} from '@shared/constants'
+import {FontFamilies, storageKeysEnum} from '@shared/constants'
 
 const eventChangeFont = createEvent<FontFamilies>()
 const eventChangeFontSize = createEvent<number>()
-
-const loadStateFromLocalStorage = (): FontState => {
-    const fontFamily = localStorage.getItem(storageKeysEnum.fontFamily)
-    const fontSize = localStorage.getItem(storageKeysEnum.typingFontSize)
-
-    const result: FontState = {
-        fontFamily: FontFamilies.cascadiaCode,
-        typingFontSize: typingFontSizes[1]
-    }
-
-    if (Object.values(FontFamilies).includes(fontFamily as FontFamilies))
-        result.fontFamily = fontFamily as FontFamilies
-
-    if (fontSize && typingFontSizes.includes(Number(fontSize)))
-        result.typingFontSize = Number(fontSize)
-
-    return result
-}
 
 export const $font = createStore<FontState>(loadStateFromLocalStorage())
     .on(

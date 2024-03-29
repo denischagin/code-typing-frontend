@@ -14,6 +14,7 @@ import {
 } from "@entities/code";
 import {useCurrentFont} from "@entities/font";
 import {TypingCodeResultRows} from "@features/result";
+import {CodeLoading} from "@shared/ui/loading";
 
 export const TypingCode = () => {
     const endIndent = 2
@@ -24,9 +25,10 @@ export const TypingCode = () => {
         isEnded,
         containerRef,
         resultRef,
+        inputRef
     } = useTypingCodeHandlers()
 
-    const {rows, randomText} = useRandomCode()
+    const {rows, randomText, isPending} = useRandomCode()
 
     const {currentRowIndex, typingValue} = useCurrentRow()
     const {typingFontSize} = useCurrentFont()
@@ -44,6 +46,7 @@ export const TypingCode = () => {
             typingValue: isActive ? typingValue : null,
             printingInput: status === 'active' && !isEnded ? (
                 <PrintingInput
+                    ref={inputRef}
                     typingValue={typingValue}
                     isRightRow={row.startsWith(typingValue)}
                     handleKeyDown={handleKeyDown}
@@ -54,9 +57,13 @@ export const TypingCode = () => {
         }
     }
 
+    if (isPending) {
+       return <CodeLoading title="Loading typing code..."/>
+    }
+
     return (
         <Box overflowX="hidden" overflowY="auto" ref={containerRef} mr="4px" pr="4px">
-            {!randomText && (
+            {randomText === undefined && (
                 <Text>
                     Пока еще нет текстов
                 </Text>

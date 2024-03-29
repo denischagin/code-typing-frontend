@@ -4,15 +4,20 @@ import {useTypingCodeHandlers} from "@entities/code";
 import {NextIcon} from "@shared/ui/icons";
 
 export const NewCodeButton = () => {
-    const {scrollTo, handleNewText, containerRef} = useTypingCodeHandlers()
+    const {scrollTo, handleNewText, containerRef, inputRef} = useTypingCodeHandlers()
+
+    const handleNewCode = () => {
+        handleNewText()
+        inputRef?.current?.focus()
+    }
 
     const handleRepeatText = () => {
         if (containerRef.current?.scrollTop === 0) {
-            return handleNewText()
+            return handleNewCode()
         }
 
         scrollTo({top: 0, behavior: "smooth"}, () => {
-            handleNewText()
+            handleNewCode()
         })
     }
 

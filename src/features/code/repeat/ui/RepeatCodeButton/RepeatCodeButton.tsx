@@ -4,15 +4,19 @@ import {useTypingCodeHandlers} from "@entities/code";
 import {RefreshIcon} from "@shared/ui/icons";
 
 export const RepeatCodeButton = () => {
-    const {scrollTo, containerRef, resetTyping} = useTypingCodeHandlers()
+    const {scrollTo, containerRef, resetTyping, inputRef } = useTypingCodeHandlers()
 
+    const handleRepeat = () => {
+        resetTyping()
+        inputRef?.current?.focus()
+    }
     const handleRepeatText = () => {
         if (containerRef.current?.scrollTop === 0) {
-            return resetTyping()
+            return handleRepeat()
         }
 
         scrollTo({top: 0, behavior: "smooth"}, () => {
-            resetTyping()
+            handleRepeat()
         })
     }
 

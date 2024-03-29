@@ -16,6 +16,8 @@ export const TypingCodeHandlersContext = createContext<TypingCodeHandlersContext
     endTyping: () => null,
     startTyping: () => null,
     resetTyping: () => null,
+    scrollToResult: () => null,
+    inputRef: undefined,
 })
 
 export const useTypingCodeHandlers = () => useContext(TypingCodeHandlersContext)

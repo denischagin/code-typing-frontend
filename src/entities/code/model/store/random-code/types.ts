@@ -3,4 +3,5 @@ export interface RandomCodeState {
     rows?: string[]
     newRandomText: () => void
     randomTextUUID?: string
+    isPending: boolean
 }
