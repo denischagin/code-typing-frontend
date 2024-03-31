@@ -1,9 +1,5 @@
-import {ChangeEventHandler, KeyboardEvent} from "react";
+import {InputProps} from "@chakra-ui/react";
 
-export interface PrintingInputProps {
-    typingValue: string
+export interface PrintingInputProps extends InputProps {
     isRightRow: boolean
-    handleKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void
-    onChange: ChangeEventHandler<HTMLInputElement>
-    maxLength: number
 }

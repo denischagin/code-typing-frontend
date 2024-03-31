@@ -7,7 +7,7 @@ export const makeObjectCodeRows = <Fields extends string>(fields: Record<Fields,
                 rows: fields[key as keyof typeof fields],
                 name: key,
                 placeholder: `Please enter ${key}`,
-                inputType: key.toLowerCase().includes('password') ? 'password' : 'text',
+                inputType: key === 'password' ? 'password' : 'text',
             }
         };
     }, {}) as Record<Fields, CodeFormRow>;

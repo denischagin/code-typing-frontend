@@ -1,4 +1,4 @@
-import {ReactElement, ReactNode, RefObject} from "react";
+import {ReactElement, RefObject} from "react";
 
 import {TextProps} from "@chakra-ui/react";
 
@@ -12,7 +12,6 @@ export interface PrintingRowProps {
     printingInput?: ReactElement | null
     typingValue?: string | null
     textProps?: TextProps
-    textRowElement?: ReactNode
 }
 
 

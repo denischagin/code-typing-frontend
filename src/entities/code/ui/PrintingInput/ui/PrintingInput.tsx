@@ -7,9 +7,9 @@ import {useCurrentFont} from "@entities/font";
 
 const PrintingInput = forwardRef<HTMLInputElement, PrintingInputProps>((props, ref) => {
     const {
-        typingValue,
+        value,
         isRightRow,
-        handleKeyDown,
+        onKeyDown,
         onChange,
         maxLength,
     } = props
@@ -29,8 +29,8 @@ const PrintingInput = forwardRef<HTMLInputElement, PrintingInputProps>((props, r
             opacity={isRightRow ? "1" : "0.8"}
             autoFocus
             variant="unstyled"
-            onKeyDown={handleKeyDown}
-            value={typingValue}
+            onKeyDown={onKeyDown}
+            value={value}
             onChange={onChange}
             ref={ref}
         />

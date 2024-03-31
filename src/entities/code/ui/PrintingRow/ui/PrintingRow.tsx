@@ -13,7 +13,6 @@ const PrintingRow = (props: PrintingRowProps) => {
         typingValue,
         status,
         textProps,
-        textRowElement,
     } = props
 
     const isActive = status === 'active'
@@ -22,7 +21,7 @@ const PrintingRow = (props: PrintingRowProps) => {
     const containerRef = useRef<HTMLDivElement>(null)
     const rowRef = useRef<HTMLDivElement>(null)
 
-    const { typingFontSize } = useCurrentFont()
+    const {typingFontSize} = useCurrentFont()
 
     useEffect(() => {
         rowRef.current?.scroll({
@@ -56,19 +55,16 @@ const PrintingRow = (props: PrintingRowProps) => {
                     w="max-content"
                 >
                     {isActive && printingInput}
-                    {textRowElement !== undefined ? (
-                        textRowElement
-                    ) : (
-                        <Text
-                            w="max-content"
-                            fontSize={typingFontSize + 'px'}
-                            whiteSpace="pre"
-                            color={isPrinted ? 'printingTextActive' : 'printingTextDisabled'}
-                            {...textProps}
-                        >
-                            {text + ' '.repeat(endIndent ?? 0)}
-                        </Text>
-                    )}
+
+                    <Text
+                        w="max-content"
+                        fontSize={typingFontSize + 'px'}
+                        whiteSpace="pre"
+                        color={isPrinted ? 'printingTextActive' : 'printingTextDisabled'}
+                        {...textProps}
+                    >
+                        {text + ' '.repeat(endIndent ?? 0)}
+                    </Text>
                 </Box>
             </Box>
         </Grid>

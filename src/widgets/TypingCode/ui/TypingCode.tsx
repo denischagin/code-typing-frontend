@@ -16,7 +16,7 @@ import {useCurrentFont} from "@entities/font";
 import {useNewCodeMouseDown} from "@features/code/new";
 import {useRepeatCodeMouseDown} from "@features/code/repeat";
 import {TypingCodeResultRows} from "@features/result";
-import {CodeLoading} from "@shared/ui/loading";
+import {CodeLoading, CodeLoadingProgress, CodeLoadingTitle} from "@shared/ui/loading";
 
 export const TypingCode = () => {
     const endIndent = 2
@@ -52,9 +52,9 @@ export const TypingCode = () => {
             printingInput: status === 'active' && !isEnded ? (
                 <PrintingInput
                     ref={inputRef}
-                    typingValue={typingValue}
+                    value={typingValue}
                     isRightRow={row.startsWith(typingValue)}
-                    handleKeyDown={handleKeyDown}
+                    onKeyDown={handleKeyDown}
                     onChange={handleChangePrintingInput}
                     maxLength={row.length + 1}
                 />
@@ -63,7 +63,12 @@ export const TypingCode = () => {
     }
 
     if (isPending) {
-       return <CodeLoading title="Loading typing code..."/>
+        return (
+            <CodeLoading>
+                <CodeLoadingTitle title="Loading typing code..."/>
+                <CodeLoadingProgress/>
+            </CodeLoading>
+        )
     }
 
     return (

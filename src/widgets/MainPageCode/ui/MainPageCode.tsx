@@ -1,12 +1,11 @@
 import {ChangeEvent, FormEventHandler, useState} from 'react';
 
-import {Flex, Input, Link, Text} from "@chakra-ui/react";
-
-import {NavLink} from "react-router-dom";
+import {Flex, Input, Text} from "@chakra-ui/react";
 
 import {pages} from "./MainPageCode.constants.ts";
-import {CodeContainer, CodeIndexesRange, CodeRow, CodeRows} from "@entities/code";
-import {CodeLoading} from "@shared/ui/loading";
+import {MainPageCodeDevelopers} from "./MainPageCodeDevelopers.tsx";
+import {CodeContainer, CodeIndexesRange, CodeRow, CodeRows, LinkCode} from "@entities/code";
+import {CodeLoading, CodeLoadingProgress, CodeLoadingTitle} from "@shared/ui/loading";
 
 
 export const MainPageCode = () => {
@@ -74,7 +73,10 @@ export const MainPageCode = () => {
 
                 {isLoading ? (
                     <CodeRow>
-                        <CodeLoading title={'Loading...'} px={0} onSuccess={handleStopLoading} delay={80}/>
+                        <CodeLoading>
+                            <CodeLoadingTitle/>
+                            <CodeLoadingProgress px={0} onSuccess={handleStopLoading} delay={80}/>
+                        </CodeLoading>
                     </CodeRow>
                 ) : (
                     <>
@@ -94,54 +96,14 @@ export const MainPageCode = () => {
 
                         {pages.map((page) => (
                             <CodeRow key={page.path}>
-                                <Text fontSize="xl" color="main.800">
-                                    <Text as="span" color="primary.400" mr={1}>
-                                        {`>`}
-                                    </Text>
-
-                                    <Text as="span" mr={4}>
-                                        {page.title}:
-                                    </Text>
-
-                                    <Link
-                                        textDecoration="underline"
-                                        color="primary.100"
-                                        _hover={{color: 'primary.400'}}
-                                    >
-                                        <NavLink to={page.path}>
-                                            {page.path}
-                                        </NavLink>
-                                    </Link>
-                                </Text>
+                                <LinkCode {...page} />
                             </CodeRow>
                         ))}
                     </>
                 )}
 
                 {isOpen && (
-                    <>
-                        <CodeRow/>
-
-                        <CodeRow>
-                            <Text fontSize="xl" color="primary.400" ml={6}>
-                                You found easter egg! Code Typing developers:
-                            </Text>
-                        </CodeRow>
-
-                        <CodeRow>
-                            <Link fontSize="xl" color="primary.100" href="https://github.com/denischagin"
-                                  textDecoration="underline">
-                                Frontn't developer
-                            </Link>
-                        </CodeRow>
-
-                        <CodeRow>
-                            <Link fontSize="xl" color="primary.100" href="https://github.com/ttodoshi"
-                                  textDecoration="underline">
-                                Backn't developer
-                            </Link>
-                        </CodeRow>
-                    </>
+                    <MainPageCodeDevelopers/>
                 )}
             </CodeRows>
         </CodeContainer>

@@ -1,4 +1,4 @@
-import {Box,Container, Flex, Text} from "@chakra-ui/react";
+import {Box, Container, Flex, Link} from "@chakra-ui/react";
 
 import {NavLink} from "react-router-dom";
 
@@ -10,11 +10,18 @@ export const Header = () => {
         <Flex as="header" bgColor="headerBg" borderBottom="1px solid" borderBottomColor="main.100">
             <Container maxW="100%" display="flex">
                 <Box p={2}>
-                    <NavLink to={paths.mainPage}>
-                        <Text fontSize="large" fontWeight="bold" color="main.900">
-                            Code-typing
-                        </Text>
-                    </NavLink>
+                    <Link
+                        as={NavLink}
+                        to={paths.mainPage}
+                        fontSize="large"
+                        fontWeight="bold"
+                        color="main.900"
+                        _hover={{
+                            color: "main.800",
+                        }}
+                    >
+                        Code-typing
+                    </Link>
                 </Box>
 
                 <Navigation/>

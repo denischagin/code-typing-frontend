@@ -5,3 +5,7 @@ export interface CodeFormProps<Fields> {
     fields: Record<keyof Fields, CodeFormRow>;
     onSuccess: (result: Record<keyof Fields, string>) => void;
 }
+
+export interface CodeFormRowsProps {
+    rows: string[]
+}

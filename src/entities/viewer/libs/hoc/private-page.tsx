@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 
 import {useRefresh, useViewer} from "@entities/viewer";
 import {paths} from "@pages/routes";
-import {CodeLoading} from "@shared/ui/loading";
+import {CodeLoading, CodeLoadingProgress, CodeLoadingTitle} from "@shared/ui/loading";
 
 export const privatePage = (children: ReactNode) => {
     return (
@@ -31,7 +31,12 @@ const PrivatePage = ({children}: { children: ReactNode }) => {
     }, []);
 
     if (isPending)
-        return <CodeLoading/>
+        return (
+            <CodeLoading>
+                <CodeLoadingTitle/>
+                <CodeLoadingProgress/>
+            </CodeLoading>
+        )
 
     return (isAuthenticated ? children : null);
 }

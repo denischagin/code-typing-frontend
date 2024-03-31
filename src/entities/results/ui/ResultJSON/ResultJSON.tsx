@@ -1,37 +1,33 @@
 import {useState} from "react";
 
-import {BoxProps, Button, Text} from "@chakra-ui/react";
+import {Text} from "@chakra-ui/react";
 
-import {CodeContainer, CodeRow, CodeRows, transformCodeToRows, useGetCodeExampleByUuid} from "@entities/code";
-import {ResultJSONKey, ResultsItemProps, SymbolsPerSecondChart, symbolsPerSecondToChart} from "@entities/results";
+import {DetailsCode} from "./DetailsCode.tsx";
+import {DetailsKey} from "./DetailsKey.tsx";
+import {detailsKeys, fields} from "./ResultJSON.constants.ts";
+import {CodeContainer, CodeRow, CodeRows} from "@entities/code";
+import {
+    ResultDetails,
+    ResultKey,
+    ResultsItemProps,
+    SymbolsPerSecondChart,
+    symbolsPerSecondToChart
+} from "@entities/results";
 
 export const ResultJSON = (props: ResultsItemProps) => {
-    const {resultIndex, symbolsPerSecond, codeExampleUUID, ...restResult} = props
-    const [openDetails, setOpenDetails] = useState<undefined | 'code' | 'chart'>()
+    const {
+        resultIndex,
+        symbolsPerSecond,
+        codeExampleUUID,
+        ...restResult
+    } = props
+    const [openDetails, setOpenDetails] = useState<undefined | ResultDetails>()
 
     const chartData = symbolsPerSecondToChart(symbolsPerSecond)
-    const {
-        data: codeExample,
-    } = useGetCodeExampleByUuid(codeExampleUUID, !!codeExampleUUID && openDetails === 'code')
 
-    const fields: Record<string, BoxProps & { details?: string }> = {
-        accuracy: {color: 'green.100', details: "Accuracy"},
-        errorsCount: {color: 'red.100', details: "Errors count"},
-        symbolsPerMinute: {color: 'primary.100', details: "Symbols per minute (spm)"},
-        startTime: {color: 'main.400', details: "Start time"},
-        endTime: {color: 'main.400', details: "End time"},
-        // text: {},
+    const handleToggleDetails = (details: ResultDetails) => () => {
+        setOpenDetails(prev => prev === details ? undefined : details)
     }
-
-    const handleToggleChart = () => {
-        setOpenDetails(prev => prev === 'chart' ? undefined : 'chart')
-    }
-
-    const handleToggleCode = () => {
-        setOpenDetails(prev => prev === 'code' ? undefined : 'code')
-    }
-
-    const rows = transformCodeToRows(codeExample?.content ?? null)
 
     return (
         <>
@@ -47,39 +43,22 @@ export const ResultJSON = (props: ResultsItemProps) => {
                         {`{`}
                     </CodeRow>
                     {Object.entries(fields).map(([key, props]) => (
-                        <ResultJSONKey
+                        <ResultKey
                             key={key}
                             jsonKey={key}
                             value={JSON.stringify(restResult[key as keyof typeof restResult])}
                             {...props}
                         />
                     ))}
-                    <ResultJSONKey
-                        jsonKey={"symbolsPerSecond"}
-                        value={
-                            <Button
-                                variant='outline'
-                                size='sm'
-                                onClick={handleToggleChart}
-                            >
-                                {openDetails === 'chart' ? 'Hide chart' : 'Show chart'}
-                            </Button>
-                        }
-                        details="Chart with symbols per second"
-                    />
-                    <ResultJSONKey
-                        jsonKey={"text"}
-                        value={
-                            <Button
-                                variant='outline'
-                                size='sm'
-                                onClick={handleToggleCode}
-                            >
-                                {openDetails === 'code' ? 'Hide code' : 'Show code'}
-                            </Button>
-                        }
-                        details="Show typing code"
-                    />
+                    {detailsKeys.map(({jsonKey, name}) => (
+                        <DetailsKey
+                            key={jsonKey}
+                            name={name}
+                            onShowDetails={handleToggleDetails(name)}
+                            jsonKey={jsonKey}
+                            openDetails={openDetails}
+                        />
+                    ))}
                     <CodeRow>{`}`}</CodeRow>
                 </CodeRows>
             </CodeContainer>
@@ -87,16 +66,8 @@ export const ResultJSON = (props: ResultsItemProps) => {
             {openDetails === 'chart' && (
                 <SymbolsPerSecondChart data={chartData}/>
             )}
-            {openDetails === 'code' && (
-                <CodeContainer ml={5} overflowX="auto">
-                    <CodeRows autoRows="20px">
-                        {rows?.map((line, index) => (
-                            <CodeRow>
-                                <Text fontSize="sm" color="main.500" whiteSpace="pre" key={index}>{line}</Text>
-                            </CodeRow>
-                        ))}
-                    </CodeRows>
-                </CodeContainer>
+            {openDetails === 'code' && !!codeExampleUUID && (
+                <DetailsCode uuid={codeExampleUUID}/>
             )}
         </>
     )

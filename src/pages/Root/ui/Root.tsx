@@ -5,7 +5,7 @@ import {Flex} from "@chakra-ui/react";
 import {Outlet, useLocation} from "react-router-dom";
 
 import {paths} from "@pages/routes";
-import {CodeLoading} from "@shared/ui/loading";
+import {CodeLoading, CodeLoadingProgress, CodeLoadingTitle} from "@shared/ui/loading";
 import {Footer} from "@widgets/Footer";
 import {Header} from "@widgets/Header";
 
@@ -17,7 +17,12 @@ const Root = () => {
             <Header/>
 
             <Flex as="main" flex="1" overflow="hidden" py="1px">
-                <Suspense fallback={<CodeLoading/>}>
+                <Suspense fallback={(
+                    <CodeLoading>
+                        <CodeLoadingTitle/>
+                        <CodeLoadingProgress/>
+                    </CodeLoading>
+                )}>
                     <Outlet/>
                 </Suspense>
             </Flex>

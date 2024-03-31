@@ -5,7 +5,7 @@ import {Box, Text} from '@chakra-ui/react'
 import {CodeRow} from "@entities/code";
 import {ResultJSONProps} from "@entities/results";
 
-export const ResultJSONKey = (props: ResultJSONProps) => {
+export const ResultKey = (props: ResultJSONProps) => {
     const {jsonKey, value, details, ...boxProps} = props
     const [isShowDetail, setIsShowDetail] = useState(false)
 
