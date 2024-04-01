@@ -3,7 +3,7 @@ import {ViewerService} from "@entities/viewer";
 import axios, {AxiosRequestConfig} from "axios";
 
 export const baseQueryV1Instance = axios.create({
-    baseURL: "http://localhost:8443/api/v1",
+    baseURL: import.meta.env.VITE_API_URL,
     withCredentials: true,
 })
 
