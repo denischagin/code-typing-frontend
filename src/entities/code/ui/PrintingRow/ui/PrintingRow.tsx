@@ -51,7 +51,6 @@ const PrintingRow = (props: PrintingRowProps) => {
             >
                 <Box
                     pos="relative"
-                    zIndex={1000}
                     w="max-content"
                 >
                     {isActive && printingInput}
