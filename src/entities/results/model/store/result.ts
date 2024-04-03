@@ -1,13 +1,16 @@
-import {createEvent, createStore} from "effector";
+import { createEvent, createStore } from "effector"
 
-import {IResultCode} from "@entities/results";
+import { IResultCode } from "@entities/results"
 
-export const eventEndResult = createEvent<{ textSymbolCount: number, endTime: Date, errorsCount: number }>()
-export const eventStartResult = createEvent<{ text: string, startTime: Date }>()
-export const eventTick = createEvent<{ symbols: number, date: Date }>()
+export const eventEndResult = createEvent<{
+    textSymbolCount: number
+    endTime: Date
+    errorsCount: number
+}>()
+export const eventStartResult = createEvent<{ text: string; startTime: Date }>()
+export const eventTick = createEvent<{ symbols: number; date: Date }>()
 
 export const eventClearResult = createEvent()
-
 
 export const $resultStore = createStore<IResultCode>({
     text: null,
@@ -21,15 +24,19 @@ export const $resultStore = createStore<IResultCode>({
 })
 
 $resultStore
-    .on(eventTick, (state, {symbols, date}) => {
+    .on(eventTick, (state, { symbols, date }) => {
         if (!state.startTime) return
 
         const tick = symbols / ((date.valueOf() - state.startTime.valueOf()) / 1000 / 60)
 
-        return ({...state, symbolsPerSecond: [...state.symbolsPerSecond, tick]});
+        return { ...state, symbolsPerSecond: [...state.symbolsPerSecond, tick] }
     })
-    .on(eventStartResult, (state, {startTime, text}) => ({...state, startTime: startTime, text}))
-    .on(eventEndResult, (state, {endTime, textSymbolCount, errorsCount}) => {
+    .on(eventStartResult, (state, { startTime, text }) => ({
+        ...state,
+        startTime: startTime,
+        text
+    }))
+    .on(eventEndResult, (state, { endTime, textSymbolCount, errorsCount }) => {
         const countSymbols = textSymbolCount
         const resultTimeMs = Math.abs(endTime.valueOf() - (state.startTime?.valueOf() ?? 0))
 
@@ -38,8 +45,7 @@ $resultStore
         const symbolPerMinute = countSymbols / resultMinutes
         // const symbolsTick = [...state.symbolsTick, countSymbols]
 
-        return {...state, endTime, resultTime, symbolsPerMinute: symbolPerMinute, errorsCount}
-
+        return { ...state, endTime, resultTime, symbolsPerMinute: symbolPerMinute, errorsCount }
     })
     .on(eventClearResult, () => ({
         text: null,
@@ -52,10 +58,6 @@ $resultStore
         accuracy: null
     }))
 
-
 // $resultStore.watch((state) => {
 //     console.log(state)
 // })
-
-
-

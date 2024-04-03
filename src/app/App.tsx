@@ -1,11 +1,9 @@
-import './styles/global.scss'
+import "./styles/global.scss"
 
-import {Providers} from "./providers";
+import { Providers } from "./providers"
 
 function App() {
-    return (
-        <Providers/>
-    )
+    return <Providers />
 }
 
 export default App

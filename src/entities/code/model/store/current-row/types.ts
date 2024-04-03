@@ -1,7 +1,7 @@
 export interface CurrentRowState {
-    currentRowIndex: number,
-    typingValue: string,
-    prevRowsRightSymbols: number,
+    currentRowIndex: number
+    typingValue: string
+    prevRowsRightSymbols: number
     currentRowRightSymbols: number
     errorsCount: number
     isError: boolean

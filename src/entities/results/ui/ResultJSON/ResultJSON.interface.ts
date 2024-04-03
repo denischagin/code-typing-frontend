@@ -1,14 +1,14 @@
-import {ReactNode} from "react";
+import { ReactNode } from "react"
 
-import {BoxProps} from "@chakra-ui/react";
+import { BoxProps } from "@chakra-ui/react"
 
 export interface ResultJSONProps extends BoxProps {
-    jsonKey: string;
+    jsonKey: string
     value: ReactNode
     details?: string
 }
 
-export type ResultDetails = 'code' | 'chart'
+export type ResultDetails = "code" | "chart"
 
 export interface DetailsKeyProps extends Omit<ResultJSONProps, "value"> {
     name: ResultDetails

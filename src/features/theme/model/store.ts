@@ -1,27 +1,34 @@
-import {createEvent, createStore} from "effector";
+import { createEvent, createStore } from "effector"
 
-import {AppTheme} from "@features/theme";
+import { AppTheme } from "@features/theme"
 import {
     blueDarkTheme,
     blueTheme,
-    deepDarkTheme, extraDarkTheme, greenDarkTheme, greenTheme,
+    deepDarkTheme,
+    extraDarkTheme,
+    greenDarkTheme,
+    greenTheme,
     mainTheme,
     violetDarkTheme,
-    violetTheme, yellowDarkTheme, yellowTheme
-} from "@features/theme/model/themes";
-import {storageKeysEnum} from "@shared/constants";
-
+    violetTheme,
+    yellowDarkTheme,
+    yellowTheme
+} from "@features/theme/model/themes"
+import { storageKeysEnum } from "@shared/constants"
 
 export const themes = [
     mainTheme,
     deepDarkTheme,
-    violetTheme, violetDarkTheme,
-    blueTheme, blueDarkTheme,
-    greenTheme, greenDarkTheme,
-    yellowTheme, yellowDarkTheme,
-    extraDarkTheme,
+    violetTheme,
+    violetDarkTheme,
+    blueTheme,
+    blueDarkTheme,
+    greenTheme,
+    greenDarkTheme,
+    yellowTheme,
+    yellowDarkTheme,
+    extraDarkTheme
 ]
-
 
 const loadThemeFromStorage = () => {
     const id = localStorage.getItem(storageKeysEnum.theme)
@@ -34,10 +41,12 @@ const loadThemeFromStorage = () => {
     return themes[0]
 }
 
-export const eventChangeTheme = createEvent<AppTheme>();
+export const eventChangeTheme = createEvent<AppTheme>()
 
-export const $currentTheme = createStore<AppTheme>(loadThemeFromStorage())
-    .on(eventChangeTheme, (_, newTheme) => newTheme);
+export const $currentTheme = createStore<AppTheme>(loadThemeFromStorage()).on(
+    eventChangeTheme,
+    (_, newTheme) => newTheme
+)
 
 $currentTheme.watch(theme => {
     localStorage.setItem(storageKeysEnum.theme, theme.id)

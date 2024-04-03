@@ -1,5 +1,3 @@
-export * from "./RefreshIcon";
-export * from "./Icons.interface.ts";
-export * from "./NextIcon.tsx";
-
-
+export * from "./RefreshIcon"
+export * from "./Icons.interface.ts"
+export * from "./NextIcon.tsx"

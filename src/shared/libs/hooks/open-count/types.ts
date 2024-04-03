@@ -1,4 +1,4 @@
 export type UseOpenCountReturn<T> = [
     items: T[],
-    { handleOpenCount: () => void, openCount: number, isLastItem: boolean }
+    { handleOpenCount: () => void; openCount: number; isLastItem: boolean }
 ]

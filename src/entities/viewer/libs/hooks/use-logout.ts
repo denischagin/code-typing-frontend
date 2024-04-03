@@ -1,12 +1,12 @@
-import {useToast} from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react"
 
-import {useViewer, ViewerService} from "@entities/viewer";
-import {useMutation} from "@tanstack/react-query";
+import { useViewer, ViewerService } from "@entities/viewer"
+import { useMutation } from "@tanstack/react-query"
 
 export const useLogout = () => {
-    const toast = useToast();
+    const toast = useToast()
 
-    const {logoutViewer} = useViewer()
+    const { logoutViewer } = useViewer()
     return useMutation({
         mutationFn: () => ViewerService.logout(),
         onSettled: async () => {
@@ -15,7 +15,7 @@ export const useLogout = () => {
         onSuccess: () => {
             toast({
                 title: "Logout successful",
-                status: "success",
+                status: "success"
             })
         }
     })

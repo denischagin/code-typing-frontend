@@ -1,1 +1,1 @@
-export {default as TokenService} from './token-service.ts';
+export { default as TokenService } from "./token-service.ts"

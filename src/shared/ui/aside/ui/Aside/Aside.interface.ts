@@ -1,6 +1,6 @@
-import {FlexProps} from "@chakra-ui/react";
+import { FlexProps } from "@chakra-ui/react"
 
-export type AsideTabName = number | string;
+export type AsideTabName = number | string
 
 export interface AsideProps extends FlexProps {
     currentTabName: AsideTabName | null

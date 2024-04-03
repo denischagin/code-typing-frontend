@@ -1,8 +1,8 @@
-import {ReactElement, RefObject} from "react";
+import { ReactElement, RefObject } from "react"
 
-import {TextProps} from "@chakra-ui/react";
+import { TextProps } from "@chakra-ui/react"
 
-export type PrintingRowStatus = 'default' | 'active' | 'printed'
+export type PrintingRowStatus = "default" | "active" | "printed"
 
 export interface PrintingRowProps {
     index: number
@@ -14,9 +14,8 @@ export interface PrintingRowProps {
     textProps?: TextProps
 }
 
-
 export interface UsePrintingRowScrollOptions {
-    rowRef: RefObject<HTMLDivElement>,
-    text: string,
-    typingValue?: string | null,
+    rowRef: RefObject<HTMLDivElement>
+    text: string
+    typingValue?: string | null
 }

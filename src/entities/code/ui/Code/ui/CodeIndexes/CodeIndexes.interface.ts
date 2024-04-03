@@ -1,4 +1,3 @@
-import {GridProps} from "@chakra-ui/react";
+import { GridProps } from "@chakra-ui/react"
 
-export interface CodeIndexesProps extends GridProps {
-}
+export interface CodeIndexesProps extends GridProps {}

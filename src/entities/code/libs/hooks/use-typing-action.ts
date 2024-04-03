@@ -1,9 +1,9 @@
-import {useMethods} from "@shared/libs";
+import { useMethods } from "@shared/libs"
 
-export type TTypingStatus = 'printing' | 'not-started' | 'ended'
+export type TTypingStatus = "printing" | "not-started" | "ended"
 
 export interface UseTypingActionState {
-    status: TTypingStatus,
+    status: TTypingStatus
     isPrinting: boolean
     isNotStarted: boolean
     isEnded: boolean
@@ -18,28 +18,26 @@ export const useTypingAction = () => {
             isPrinting: false
         } as UseTypingActionState,
         methods: {
-            startTyping: (state) => {
+            startTyping: state => {
                 state.status = "printing"
                 state.isNotStarted = false
                 state.isEnded = false
                 state.isPrinting = true
-
             },
-            endTyping: (state) => {
+            endTyping: state => {
                 state.status = "ended"
                 state.isNotStarted = false
                 state.isEnded = true
                 state.isPrinting = false
-
             },
-            resetTyping: (state) => {
+            resetTyping: state => {
                 state.status = "not-started"
                 state.isEnded = false
                 state.isNotStarted = true
                 state.isPrinting = false
             }
         }
-    });
+    })
 
-    return {...state, ...methods}
+    return { ...state, ...methods }
 }

@@ -1,5 +1,5 @@
-import {BoxProps} from "@chakra-ui/react";
+import { BoxProps } from "@chakra-ui/react"
 
-export interface ColorCircleProps extends BoxProps{
+export interface ColorCircleProps extends BoxProps {
     color: string
 }

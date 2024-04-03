@@ -1,6 +1,12 @@
-import {useUnit} from "effector-react";
+import { useUnit } from "effector-react"
 
-import {$resultStore, eventClearResult, eventEndResult, eventStartResult, eventTick} from "@entities/results";
+import {
+    $resultStore,
+    eventClearResult,
+    eventEndResult,
+    eventStartResult,
+    eventTick
+} from "@entities/results"
 
 export const useResult = () => {
     return useUnit({
@@ -10,5 +16,4 @@ export const useResult = () => {
         tickResult: eventTick,
         clearResult: eventClearResult
     })
-
 }

@@ -1,2 +1,2 @@
-export * from "./ChangeThemeTabPanel.tsx";
-export * from './ChangeThemeTab.tsx';
+export * from "./ChangeThemeTabPanel.tsx"
+export * from "./ChangeThemeTab.tsx"

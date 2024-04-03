@@ -1,7 +1,7 @@
-import {ResultsService, SaveResultBody} from "@entities/results";
-import {queryKeysEnum} from "@shared/constants";
-import {useAxiosErrorToast} from "@shared/libs/hooks/axios-error-toast";
-import {useMutation, useQueryClient} from "@tanstack/react-query";
+import { ResultsService, SaveResultBody } from "@entities/results"
+import { queryKeysEnum } from "@shared/constants"
+import { useAxiosErrorToast } from "@shared/libs/hooks/axios-error-toast"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 export const useSaveResult = () => {
     const errorHandler = useAxiosErrorToast()
@@ -12,7 +12,7 @@ export const useSaveResult = () => {
         onError: errorHandler,
         onSuccess: async () => {
             await queryClient.invalidateQueries({
-                queryKey: [queryKeysEnum.savedResults],
+                queryKey: [queryKeysEnum.savedResults]
             })
         }
     })

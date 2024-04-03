@@ -1,3 +1,2 @@
-export * from "./SymbolsPerSecondChart.tsx";
-export * from "./SymbolsPerSecondChart.interface.ts";
-
+export * from "./SymbolsPerSecondChart.tsx"
+export * from "./SymbolsPerSecondChart.interface.ts"

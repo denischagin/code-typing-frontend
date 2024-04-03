@@ -1,4 +1,4 @@
-import {AppTheme} from "@features/theme";
+import { AppTheme } from "@features/theme"
 
 export const yellowDarkTheme: AppTheme = {
     id: "Yellow dark",
@@ -29,16 +29,16 @@ export const yellowDarkTheme: AppTheme = {
             900: "rgba(255,178,70,0.49)"
         },
         contrast: {
-            50: 'rgba(0, 0, 0, 0.1)',
-            100: 'rgba(0, 0, 0, 0.2)',
-            200: 'rgba(0, 0, 0, 0.4)',
-            300: 'rgba(0, 0, 0, 0.5)',
-            400: 'rgba(0, 0, 0, 0.6)',
-            500: 'rgba(0, 0, 0, 0.65)',
-            600: 'rgba(0, 0, 0, 0.7)',
-            700: 'rgba(0, 0, 0, 0.8)',
-            800: 'rgba(0, 0, 0, 0.9)',
-            900: 'rgba(0, 0, 0, 1)',
-        },
-    },
-};
+            50: "rgba(0, 0, 0, 0.1)",
+            100: "rgba(0, 0, 0, 0.2)",
+            200: "rgba(0, 0, 0, 0.4)",
+            300: "rgba(0, 0, 0, 0.5)",
+            400: "rgba(0, 0, 0, 0.6)",
+            500: "rgba(0, 0, 0, 0.65)",
+            600: "rgba(0, 0, 0, 0.7)",
+            700: "rgba(0, 0, 0, 0.8)",
+            800: "rgba(0, 0, 0, 0.9)",
+            900: "rgba(0, 0, 0, 1)"
+        }
+    }
+}

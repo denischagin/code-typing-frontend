@@ -1,10 +1,10 @@
-import {IconButton, Tooltip} from "@chakra-ui/react";
+import { IconButton, Tooltip } from "@chakra-ui/react"
 
-import {useTypingCodeHandlers} from "@entities/code";
-import {NextIcon} from "@shared/ui/icons";
+import { useTypingCodeHandlers } from "@entities/code"
+import { NextIcon } from "@shared/ui/icons"
 
 export const NewCodeButton = () => {
-    const {scrollTo, handleNewText, containerRef, inputRef} = useTypingCodeHandlers()
+    const { scrollTo, handleNewText, containerRef, inputRef } = useTypingCodeHandlers()
 
     const handleNewCode = () => {
         handleNewText()
@@ -16,20 +16,18 @@ export const NewCodeButton = () => {
             return handleNewCode()
         }
 
-        scrollTo({top: 0, behavior: "smooth"}, () => {
+        scrollTo({ top: 0, behavior: "smooth" }, () => {
             handleNewCode()
         })
     }
 
     return (
-        <Tooltip label="New text (Alt+Enter)" >
+        <Tooltip label="New text (Alt+Enter)">
             <IconButton
                 aria-label={"refresh code"}
-                icon={<NextIcon/>}
+                icon={<NextIcon />}
                 onClick={handleRepeatText}
             />
         </Tooltip>
-
     )
-
 }

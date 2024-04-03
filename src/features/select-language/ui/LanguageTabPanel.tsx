@@ -1,30 +1,26 @@
-import {ChangeEventHandler, useState} from "react";
+import { ChangeEventHandler, useState } from "react"
 
-import {Input, Stack} from "@chakra-ui/react";
+import { Input, Stack } from "@chakra-ui/react"
 
-import {Link, useSearchParams} from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom"
 
-import {useGetProgrammingLanguages} from "@entities/code";
-import {ProgrammingLanguagesList} from "@entities/programming-language";
-import {searchParamsEnum, settingTabs} from "@shared/constants";
-import {useSearch} from "@shared/libs/hooks/search";
-import {AsideButtons, AsideCloseButton, AsideTabPanel} from "@shared/ui/aside";
-import {Tile, TileImage, TileText} from "@shared/ui/tile";
+import { useGetProgrammingLanguages } from "@entities/code"
+import { ProgrammingLanguagesList } from "@entities/programming-language"
+import { searchParamsEnum, settingTabs } from "@shared/constants"
+import { useSearch } from "@shared/libs/hooks/search"
+import { AsideButtons, AsideCloseButton, AsideTabPanel } from "@shared/ui/aside"
+import { Tile, TileImage, TileText } from "@shared/ui/tile"
 
 export const LanguageTabPanel = () => {
     const [searchValue, setSearchValue] = useState("")
     const [searchParams] = useSearchParams()
     const languageName = searchParams.get(searchParamsEnum.languageName)
 
-    const {
-        data: programmingLanguages,
-    } = useGetProgrammingLanguages()
+    const { data: programmingLanguages } = useGetProgrammingLanguages()
 
-    const searchList = useSearch(
-        programmingLanguages, searchValue, (item) => item.name
-    )
+    const searchList = useSearch(programmingLanguages, searchValue, item => item.name)
 
-    const handleChangeSearch: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const handleChangeSearch: ChangeEventHandler<HTMLInputElement> = e => {
         setSearchValue(e.target.value)
     }
 
@@ -32,13 +28,11 @@ export const LanguageTabPanel = () => {
         <AsideTabPanel overflow="hidden" display="flex" name={settingTabs.language}>
             <Stack overflow="hidden">
                 <AsideButtons>
-                    <AsideCloseButton>
-                        —
-                    </AsideCloseButton>
+                    <AsideCloseButton>—</AsideCloseButton>
                 </AsideButtons>
 
                 <Input
-                    variant='flushed'
+                    variant="flushed"
                     placeholder="Search.."
                     value={searchValue}
                     onChange={handleChangeSearch}
@@ -46,11 +40,16 @@ export const LanguageTabPanel = () => {
 
                 <ProgrammingLanguagesList
                     programmingLanguages={searchList}
-                    renderItem={(item) => (
+                    renderItem={item => (
                         <Link to={item.to} key={item.key}>
-                            <Tile isActive={item.name === languageName || item.name === "Random" && !languageName}>
+                            <Tile
+                                isActive={
+                                    item.name === languageName ||
+                                    (item.name === "Random" && !languageName)
+                                }
+                            >
                                 <TileText>{item.name}</TileText>
-                                <TileImage src={item.logo}/>
+                                <TileImage src={item.logo} />
                             </Tile>
                         </Link>
                     )}

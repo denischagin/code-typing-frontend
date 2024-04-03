@@ -1,12 +1,15 @@
-import {Text} from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react"
 
-import {TimerItemProps} from "@shared/ui/timer";
+import { TimerItemProps } from "@shared/ui/timer"
 
-export const TimerItem = ({time, postfix, required = true}: TimerItemProps) => {
+export const TimerItem = ({ time, postfix, required = true }: TimerItemProps) => {
     return (
         (!!time || required) && (
             <Text fontSize="x-large">
-                {time}<Text as="span" fontSize="large" color="primary.300">{postfix}</Text>
+                {time}
+                <Text as="span" fontSize="large" color="primary.300">
+                    {postfix}
+                </Text>
             </Text>
         )
     )

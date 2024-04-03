@@ -1,7 +1,7 @@
-import {useUnit} from "effector-react";
+import { useUnit } from "effector-react"
 
-import {eventChangeTheme} from "@features/theme";
+import { eventChangeTheme } from "@features/theme"
 
 export const useChangeTheme = () => {
-    return useUnit({changeTheme: eventChangeTheme})
+    return useUnit({ changeTheme: eventChangeTheme })
 }

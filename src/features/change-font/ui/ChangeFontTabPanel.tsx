@@ -1,9 +1,14 @@
-import {Flex, Stack, Text} from '@chakra-ui/react'
+import { Flex, Stack, Text } from "@chakra-ui/react"
 
-import {FontSizeItem, useChangeFontFamily, useChangeFontSize, useCurrentFont} from '@entities/font'
-import {FontFamilies, settingTabs, typingFontSizes} from '@shared/constants'
-import {AsideButtons, AsideCloseButton, AsideTabPanel} from '@shared/ui/aside'
-import {Tile, TileText} from '@shared/ui/tile'
+import {
+    FontSizeItem,
+    useChangeFontFamily,
+    useChangeFontSize,
+    useCurrentFont
+} from "@entities/font"
+import { FontFamilies, settingTabs, typingFontSizes } from "@shared/constants"
+import { AsideButtons, AsideCloseButton, AsideTabPanel } from "@shared/ui/aside"
+import { Tile, TileText } from "@shared/ui/tile"
 
 export const ChangeFontTabPanel = () => {
     const font = useCurrentFont()
@@ -36,13 +41,12 @@ export const ChangeFontTabPanel = () => {
                 ))}
             </Stack>
 
-
             <Text fontSize="xl" mt={7} mb={2}>
                 Font sizes
             </Text>
 
             <Flex gap={2} wrap="wrap" justifyContent="space-evenly" alignItems="end">
-                {typingFontSizes.map((fontSize) => (
+                {typingFontSizes.map(fontSize => (
                     <FontSizeItem
                         key={fontSize.fontSize}
                         isActive={font.typingFontSize === fontSize.fontSize}

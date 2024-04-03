@@ -1,17 +1,13 @@
-import {Flex, Input, InputProps, Text} from "@chakra-ui/react";
+import { Flex, Input, InputProps, Text } from "@chakra-ui/react"
 
-import {CodeRow} from "@entities/code";
+import { CodeRow } from "@entities/code"
 
 export const CodeFormField = (props: InputProps) => {
     return (
         <>
             <CodeRow>
                 <Flex gap={2} alignItems="center" width="100%">
-                    <Text
-                        fontSize="25px"
-                        color="main.800"
-                        variant="unstyled"
-                    >
+                    <Text fontSize="25px" color="main.800" variant="unstyled">
                         {`>>`}
                     </Text>
 

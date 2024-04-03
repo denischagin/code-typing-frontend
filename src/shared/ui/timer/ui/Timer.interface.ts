@@ -1,9 +1,9 @@
 export interface TimerProps {
-    time: number;
+    time: number
 }
 
 export interface TimerItemProps {
-    time: number;
-    postfix: string;
-    required?: boolean;
+    time: number
+    postfix: string
+    required?: boolean
 }

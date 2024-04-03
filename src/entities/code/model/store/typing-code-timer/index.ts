@@ -1,1 +1,1 @@
-export * from "./typing-code-timer.ts";
+export * from "./typing-code-timer.ts"

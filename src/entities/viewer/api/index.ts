@@ -1,1 +1,1 @@
-export { default as ViewerService }  from "./viewer-service.ts";
+export { default as ViewerService } from "./viewer-service.ts"

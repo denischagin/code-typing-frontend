@@ -1,1 +1,1 @@
-export {useMethods} from "./useMethods.ts";
+export { useMethods } from "./useMethods.ts"

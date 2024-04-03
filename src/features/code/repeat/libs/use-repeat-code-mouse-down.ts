@@ -1,9 +1,9 @@
-import {useEffect} from "react";
+import { useEffect } from "react"
 
-import {useTypingCodeHandlers} from "@entities/code";
+import { useTypingCodeHandlers } from "@entities/code"
 
 export const useRepeatCodeMouseDown = () => {
-    const {resetTyping, inputRef} = useTypingCodeHandlers()
+    const { resetTyping, inputRef } = useTypingCodeHandlers()
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -15,5 +15,5 @@ export const useRepeatCodeMouseDown = () => {
         window.addEventListener("keydown", handleKeyDown)
 
         return () => window.removeEventListener("keydown", handleKeyDown)
-    }, [inputRef, resetTyping]);
+    }, [inputRef, resetTyping])
 }

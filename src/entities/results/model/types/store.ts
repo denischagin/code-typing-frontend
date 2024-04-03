@@ -4,16 +4,16 @@ export interface IResult {
     timeStartMilliseconds: number
     timeEndMilliseconds: number
     text: string
-    charactersPerMinuteString: string,
-    wordsPerMinuteString: string,
+    charactersPerMinuteString: string
+    wordsPerMinuteString: string
 }
 
 export interface IResultCode {
-    symbolsPerMinute: null | number,
-    startTime: Date | null,
-    endTime: Date | null,
+    symbolsPerMinute: null | number
+    startTime: Date | null
+    endTime: Date | null
     symbolsPerSecond: number[]
-    text: string | null;
+    text: string | null
     resultTime: Date | null
     errorsCount: number | null
     accuracy: number | null

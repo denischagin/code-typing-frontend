@@ -1,12 +1,22 @@
-import {useEffect} from "react";
+import { useEffect } from "react"
 
-import {Divider, Flex, Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs, Text} from "@chakra-ui/react";
+import {
+    Divider,
+    Flex,
+    Tab,
+    TabIndicator,
+    TabList,
+    TabPanel,
+    TabPanels,
+    Tabs,
+    Text
+} from "@chakra-ui/react"
 
-import {useSearchParams} from "react-router-dom";
+import { useSearchParams } from "react-router-dom"
 
-import {getResultStats,useFindResultById} from "@entities/results";
-import {searchParamsEnum} from "@shared/constants";
-import {convertMillisecondsAndDateToTime} from "@shared/libs";
+import { getResultStats, useFindResultById } from "@entities/results"
+import { searchParamsEnum } from "@shared/constants"
+import { convertMillisecondsAndDateToTime } from "@shared/libs"
 
 export const ResultSpeed = () => {
     const [searchParams, setSearchParams] = useSearchParams()
@@ -18,22 +28,19 @@ export const ResultSpeed = () => {
 
     useEffect(() => {
         if (resultById?.resultIndex === -1) setSearchParams({})
-    }, [resultById?.resultIndex, setSearchParams]);
+    }, [resultById?.resultIndex, setSearchParams])
 
-    if (!resultId || !resultById?.result || !resultStats)
-        return null
+    if (!resultId || !resultById?.result || !resultStats) return null
 
-    const {timeResultMilliseconds} = resultById.result
-    const {wordsPerMinuteString, charactersPerMinuteString} = resultStats
+    const { timeResultMilliseconds } = resultById.result
+    const { wordsPerMinuteString, charactersPerMinuteString } = resultStats
 
     return (
         <>
-            <Divider my={4}/>
+            <Divider my={4} />
 
             <Flex direction="column" align="center">
-                <Text fontSize="xx-large">
-                    Result: {(resultById.resultIndex) + 1}
-                </Text>
+                <Text fontSize="xx-large">Result: {resultById.resultIndex + 1}</Text>
                 <Text fontSize="xxx-large">
                     {convertMillisecondsAndDateToTime(timeResultMilliseconds)}
                 </Text>
@@ -43,18 +50,17 @@ export const ResultSpeed = () => {
                         <Tab>Symbols / minute</Tab>
                         <Tab>Words / minute</Tab>
                     </TabList>
-                    <TabIndicator
-                        mt="-1.5px"
-                        height="2px"
-                        bg="primary.500"
-                        borderRadius="1px"
-                    />
+                    <TabIndicator mt="-1.5px" height="2px" bg="primary.500" borderRadius="1px" />
                     <TabPanels>
                         <TabPanel>
-                            <Text fontSize="x-large" align="center">{charactersPerMinuteString} sym./m.</Text>
+                            <Text fontSize="x-large" align="center">
+                                {charactersPerMinuteString} sym./m.
+                            </Text>
                         </TabPanel>
                         <TabPanel>
-                            <Text fontSize="x-large" align="center">{wordsPerMinuteString} words /m.</Text>
+                            <Text fontSize="x-large" align="center">
+                                {wordsPerMinuteString} words /m.
+                            </Text>
                         </TabPanel>
                     </TabPanels>
                 </Tabs>
@@ -62,7 +68,6 @@ export const ResultSpeed = () => {
                 {/*    <Text as="strong">Text:</Text> {text}*/}
                 {/*</Text>*/}
             </Flex>
-
         </>
     )
 }

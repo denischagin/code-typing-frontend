@@ -1,18 +1,12 @@
-import {Text, Tooltip} from "@chakra-ui/react";
+import { Text, Tooltip } from "@chakra-ui/react"
 
-import {FontSizeItemProps} from "@entities/font";
+import { FontSizeItemProps } from "@entities/font"
 
 export const FontSizeItem = (props: FontSizeItemProps) => {
-    const {
-        fontSize,
-        name,
-        fullName,
-        onChangeFontSize,
-        isActive
-    } = props;
+    const { fontSize, name, fullName, onChangeFontSize, isActive } = props
 
     const handleChangeFontSize = (fontSize: number) => () => {
-        onChangeFontSize(fontSize);
+        onChangeFontSize(fontSize)
     }
 
     return (
@@ -21,11 +15,11 @@ export const FontSizeItem = (props: FontSizeItemProps) => {
                 as={"button"}
                 fontSize={fontSize}
                 transition="all 0.2s"
-                borderBottom={'2px solid'}
+                borderBottom={"2px solid"}
                 color="main.800"
-                borderColor={isActive ? 'primary.500' : 'transparent'}
+                borderColor={isActive ? "primary.500" : "transparent"}
                 _hover={{
-                    borderColor: 'primary.500',
+                    borderColor: "primary.500"
                 }}
                 onClick={handleChangeFontSize(fontSize)}
                 lineHeight="1.3em"

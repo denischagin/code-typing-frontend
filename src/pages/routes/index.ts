@@ -1,2 +1,2 @@
-export * from "./paths.ts";
-export * from "./routes-with-hoc.ts";
+export * from "./paths.ts"
+export * from "./routes-with-hoc.ts"

@@ -1,15 +1,13 @@
-import {Box} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react"
 
-import {AsideTabPanelProps, useAside} from "@shared/ui/aside";
+import { AsideTabPanelProps, useAside } from "@shared/ui/aside"
 
 export const AsideTabPanel = (props: AsideTabPanelProps) => {
-    const {name, ...restProps} = props
+    const { name, ...restProps } = props
 
-    const {currentTabName} = useAside()
+    const { currentTabName } = useAside()
 
     if (name !== currentTabName) return null
 
-    return (
-        <Box w="200px"  p="10px" {...restProps} />
-    )
+    return <Box w="200px" p="10px" {...restProps} />
 }

@@ -1,1 +1,1 @@
-export {default} from "./TypingCodePage.tsx";
+export { default } from "./TypingCodePage.tsx"

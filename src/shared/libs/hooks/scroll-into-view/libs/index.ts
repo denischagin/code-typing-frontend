@@ -1,1 +1,1 @@
-export {useScrollIntoView} from ".//hook.ts";
+export { useScrollIntoView } from ".//hook.ts"

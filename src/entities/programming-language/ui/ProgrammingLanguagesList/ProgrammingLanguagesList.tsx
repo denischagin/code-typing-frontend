@@ -1,36 +1,33 @@
-import {Stack} from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react"
 
-import {ProgrammingLanguagesListProps} from "@entities/programming-language";
-import programmingLanguageIcon from '@shared/assets/programming-language.svg'
-import {searchParamsEnum} from "@shared/constants";
+import { ProgrammingLanguagesListProps } from "@entities/programming-language"
+import programmingLanguageIcon from "@shared/assets/programming-language.svg"
+import { searchParamsEnum } from "@shared/constants"
 
 export const ProgrammingLanguagesList = (props: ProgrammingLanguagesListProps) => {
-    const {
-        programmingLanguages,
-        renderItem
-    } = props
+    const { programmingLanguages, renderItem } = props
 
     if (!programmingLanguages) return null
 
-    const getLinkByName = (name: string) => `?${searchParamsEnum.languageName}=${encodeURIComponent(name)}`
+    const getLinkByName = (name: string) =>
+        `?${searchParamsEnum.languageName}=${encodeURIComponent(name)}`
 
     return (
         <Stack overflowY="scroll" pr="10px">
             {renderItem({
-                to: '',
+                to: "",
                 name: "Random",
                 logo: programmingLanguageIcon,
                 UUID: "Random"
             })}
-            {programmingLanguages.length !== 0 && (
-                programmingLanguages?.map((programmingLanguage) => (
+            {programmingLanguages.length !== 0 &&
+                programmingLanguages?.map(programmingLanguage =>
                     renderItem({
                         to: getLinkByName(programmingLanguage.name),
                         key: programmingLanguage.UUID,
-                        ...programmingLanguage,
+                        ...programmingLanguage
                     })
-                ))
-            )}
+                )}
         </Stack>
     )
 }

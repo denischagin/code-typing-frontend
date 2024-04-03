@@ -1,17 +1,17 @@
-import {localStorageItems} from "@shared/constants";
+import { localStorageItems } from "@shared/constants"
 
 class TokenService {
     public setAccessToken(accessToken: string) {
-        localStorage.setItem(localStorageItems.accessToken, accessToken);
+        localStorage.setItem(localStorageItems.accessToken, accessToken)
     }
 
     public deleteAccessToken() {
-        localStorage.removeItem(localStorageItems.accessToken);
+        localStorage.removeItem(localStorageItems.accessToken)
     }
 
     public getAccessToken() {
-        return localStorage.getItem(localStorageItems.accessToken);
+        return localStorage.getItem(localStorageItems.accessToken)
     }
 }
 
-export default new TokenService();
+export default new TokenService()

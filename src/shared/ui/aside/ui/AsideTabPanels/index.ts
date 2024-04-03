@@ -1,3 +1,2 @@
-export {AsideTabPanels} from "./AsideTabPanels.tsx";
-export * from "./AsideTabPanels.interface.ts";
-
+export { AsideTabPanels } from "./AsideTabPanels.tsx"
+export * from "./AsideTabPanels.interface.ts"

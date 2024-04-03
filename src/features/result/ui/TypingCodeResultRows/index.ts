@@ -1,3 +1,2 @@
-export * from "./TypingCodeResultRows.tsx";
-export * from "./TypingCodeResultRows.interface.ts";
-
+export * from "./TypingCodeResultRows.tsx"
+export * from "./TypingCodeResultRows.interface.ts"

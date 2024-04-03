@@ -1,5 +1,5 @@
-import {FontState} from "@entities/font";
-import {FontFamilies, storageKeysEnum, typingFontSizes} from "@shared/constants";
+import { FontState } from "@entities/font"
+import { FontFamilies, storageKeysEnum, typingFontSizes } from "@shared/constants"
 
 export const loadStateFromLocalStorage = (): FontState => {
     const fontFamily = localStorage.getItem(storageKeysEnum.fontFamily)
@@ -13,11 +13,9 @@ export const loadStateFromLocalStorage = (): FontState => {
     if (Object.values(FontFamilies).includes(fontFamily as FontFamilies))
         result.fontFamily = fontFamily as FontFamilies
 
-    const inFontSizes =
-        typingFontSizes.some((item) => Number(fontSize) === item.fontSize)
+    const inFontSizes = typingFontSizes.some(item => Number(fontSize) === item.fontSize)
 
-    if (fontSize && inFontSizes)
-        result.typingFontSize = Number(fontSize)
+    if (fontSize && inFontSizes) result.typingFontSize = Number(fontSize)
 
     return result
 }

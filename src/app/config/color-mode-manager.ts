@@ -1,11 +1,11 @@
-import {ColorModeProviderProps} from "@chakra-ui/system";
+import { ColorModeProviderProps } from "@chakra-ui/system"
 
 export const colorModeManager: ColorModeProviderProps["colorModeManager"] = {
     get() {
-        return 'dark'
+        return "dark"
     },
     set() {
         return "dark"
     },
-    type: 'localStorage'
+    type: "localStorage"
 }

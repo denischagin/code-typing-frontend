@@ -1,8 +1,9 @@
-import {IResultCode, SaveResultBody} from "@entities/results";
-import {roundToFixed} from "@shared/libs";
+import { IResultCode, SaveResultBody } from "@entities/results"
+import { roundToFixed } from "@shared/libs"
 
-
-export const mapResultToApiBody = (result: IResultCode & { codeExampleUUID?: string }): SaveResultBody => {
+export const mapResultToApiBody = (
+    result: IResultCode & { codeExampleUUID?: string }
+): SaveResultBody => {
     const {
         endTime,
         startTime,
@@ -25,6 +26,6 @@ export const mapResultToApiBody = (result: IResultCode & { codeExampleUUID?: str
         text,
         errorsCount,
         symbolsPerMinute,
-        codeExampleUUID,
+        codeExampleUUID
     }
 }

@@ -1,3 +1,2 @@
-export * from "./AsideCloseButton.tsx";
-export * from "./AsideCloseButton.interface.ts";
-
+export * from "./AsideCloseButton.tsx"
+export * from "./AsideCloseButton.interface.ts"

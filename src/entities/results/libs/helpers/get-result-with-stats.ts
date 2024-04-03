@@ -1,4 +1,4 @@
-import {getResultId, getResultStats, IResult} from "@entities/results";
+import { getResultId, getResultStats, IResult } from "@entities/results"
 
 export interface GetResultWithStatsArgs {
     stopTimeMilliseconds: number
@@ -7,10 +7,10 @@ export interface GetResultWithStatsArgs {
 }
 
 export const getResultWithStats = ({
-                                       timeMillisecondsStart,
-                                       stopTimeMilliseconds,
-                                       text
-                                   }: GetResultWithStatsArgs): IResult => {
+    timeMillisecondsStart,
+    stopTimeMilliseconds,
+    text
+}: GetResultWithStatsArgs): IResult => {
     const resultId = getResultId({
         timeEndMilliseconds: stopTimeMilliseconds,
         timeStartMilliseconds: timeMillisecondsStart
@@ -21,7 +21,7 @@ export const getResultWithStats = ({
         text,
         timeEndMilliseconds: stopTimeMilliseconds,
         timeStartMilliseconds: timeMillisecondsStart,
-        timeResultMilliseconds: stopTimeMilliseconds - timeMillisecondsStart,
+        timeResultMilliseconds: stopTimeMilliseconds - timeMillisecondsStart
     }
 
     return {

@@ -1,11 +1,7 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react"
 
-import { AsideContentProps } from "@shared/ui/aside";
+import { AsideContentProps } from "@shared/ui/aside"
 
 export const AsideContent = (props: AsideContentProps) => {
-    return (
-        <Flex
-            {...props}
-        />
-    )
+    return <Flex {...props} />
 }

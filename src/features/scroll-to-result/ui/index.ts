@@ -1,1 +1,1 @@
-export * from "./ButtonScrollToResult.tsx";
+export * from "./ButtonScrollToResult.tsx"

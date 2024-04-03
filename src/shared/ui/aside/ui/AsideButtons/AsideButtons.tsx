@@ -1,7 +1,5 @@
-import {Box, BoxProps} from "@chakra-ui/react";
+import { Box, BoxProps } from "@chakra-ui/react"
 
 export const AsideButtons = (props: BoxProps) => {
-    return (
-        <Box display="flex" w="100%" justifyContent="end" {...props} />
-    )
+    return <Box display="flex" w="100%" justifyContent="end" {...props} />
 }

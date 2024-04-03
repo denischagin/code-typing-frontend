@@ -1,3 +1,3 @@
-import {GridProps} from "@chakra-ui/react";
+import { GridProps } from "@chakra-ui/react"
 
 export interface CodeRowsProps extends GridProps {}

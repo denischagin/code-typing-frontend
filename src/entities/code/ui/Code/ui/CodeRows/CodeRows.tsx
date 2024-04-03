@@ -1,11 +1,11 @@
-import {memo} from "react";
+import { memo } from "react"
 
-import {Grid} from "@chakra-ui/react";
+import { Grid } from "@chakra-ui/react"
 
-import {CodeRowsProps} from "@entities/code";
+import { CodeRowsProps } from "@entities/code"
 
 const CodeRows = (props: CodeRowsProps) => {
     return <Grid autoRows="40px" {...props} />
-};
+}
 
-export default memo(CodeRows);
+export default memo(CodeRows)

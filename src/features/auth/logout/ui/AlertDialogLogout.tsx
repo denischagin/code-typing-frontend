@@ -1,4 +1,4 @@
-import {useRef} from "react";
+import { useRef } from "react"
 
 import {
     AlertDialog,
@@ -8,25 +8,25 @@ import {
     AlertDialogHeader,
     AlertDialogOverlay,
     Button
-} from "@chakra-ui/react";
+} from "@chakra-ui/react"
 
-import {useLogout} from "@entities/viewer";
+import { useLogout } from "@entities/viewer"
 
 export interface AlertDialogLogoutProps {
-    isOpen: boolean;
-    onClose: () => void;
+    isOpen: boolean
+    onClose: () => void
 }
 
 export const AlertDialogLogout = (props: AlertDialogLogoutProps) => {
-    const {isOpen, onClose} = props;
+    const { isOpen, onClose } = props
 
-    const {mutate: logoutMutate} = useLogout();
+    const { mutate: logoutMutate } = useLogout()
 
-    const cancelRef = useRef<HTMLButtonElement>(null);
+    const cancelRef = useRef<HTMLButtonElement>(null)
 
     const handleLogout = () => {
-        logoutMutate();
-        onClose();
+        logoutMutate()
+        onClose()
     }
 
     return (
@@ -36,9 +36,7 @@ export const AlertDialogLogout = (props: AlertDialogLogoutProps) => {
                     <AlertDialogHeader fontSize="lg" fontWeight="bold">
                         Logout
                     </AlertDialogHeader>
-                    <AlertDialogBody>
-                        Are you sure you want to logout?
-                    </AlertDialogBody>
+                    <AlertDialogBody>Are you sure you want to logout?</AlertDialogBody>
                     <AlertDialogFooter>
                         <Button ref={cancelRef} onClick={onClose}>
                             Cancel

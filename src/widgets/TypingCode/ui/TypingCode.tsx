@@ -1,4 +1,4 @@
-import {Box, Text} from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react"
 
 import {
     CodeContainer,
@@ -11,12 +11,12 @@ import {
     useCurrentRow,
     useRandomCode,
     useTypingCodeHandlers
-} from "@entities/code";
-import {useCurrentFont} from "@entities/font";
-import {useNewCodeMouseDown} from "@features/code/new";
-import {useRepeatCodeMouseDown} from "@features/code/repeat";
-import {TypingCodeResultRows} from "@features/result";
-import {CodeLoading, CodeLoadingProgress, CodeLoadingTitle} from "@shared/ui/loading";
+} from "@entities/code"
+import { useCurrentFont } from "@entities/font"
+import { useNewCodeMouseDown } from "@features/code/new"
+import { useRepeatCodeMouseDown } from "@features/code/repeat"
+import { TypingCodeResultRows } from "@features/result"
+import { CodeLoading, CodeLoadingProgress, CodeLoadingTitle } from "@shared/ui/loading"
 
 export const TypingCode = () => {
     const endIndent = 2
@@ -24,20 +24,14 @@ export const TypingCode = () => {
     useNewCodeMouseDown()
     useRepeatCodeMouseDown()
 
-    const {
-        handleChangePrintingInput,
-        handleKeyDown,
-        isEnded,
-        containerRef,
-        resultRef,
-        inputRef
-    } = useTypingCodeHandlers()
+    const { handleChangePrintingInput, handleKeyDown, isEnded, containerRef, resultRef, inputRef } =
+        useTypingCodeHandlers()
 
-    const {rows, randomText, isPending} = useRandomCode()
+    const { rows, randomText, isPending } = useRandomCode()
 
-    const {currentRowIndex, typingValue} = useCurrentRow()
-    const {typingFontSize} = useCurrentFont()
-    const autoRows = (typingFontSize + typingFontSize * 0.6) + 'px'
+    const { currentRowIndex, typingValue } = useCurrentRow()
+    const { typingFontSize } = useCurrentFont()
+    const autoRows = typingFontSize + typingFontSize * 0.6 + "px"
 
     const getPrintingRowProps = (row: string, rowIndex: number): PrintingRowProps => {
         const status = getPrintingRowStatus(rowIndex, currentRowIndex)
@@ -49,38 +43,35 @@ export const TypingCode = () => {
             endIndent: endIndent,
             status,
             typingValue: isActive ? typingValue : null,
-            printingInput: status === 'active' && !isEnded ? (
-                <PrintingInput
-                    ref={inputRef}
-                    value={typingValue}
-                    isRightRow={row.startsWith(typingValue)}
-                    onKeyDown={handleKeyDown}
-                    onChange={handleChangePrintingInput}
-                    maxLength={row.length + 1}
-                />
-            ) : null
+            printingInput:
+                status === "active" && !isEnded ? (
+                    <PrintingInput
+                        ref={inputRef}
+                        value={typingValue}
+                        isRightRow={row.startsWith(typingValue)}
+                        onKeyDown={handleKeyDown}
+                        onChange={handleChangePrintingInput}
+                        maxLength={row.length + 1}
+                    />
+                ) : null
         }
     }
 
     if (isPending) {
         return (
             <CodeLoading>
-                <CodeLoadingTitle title="Loading typing code..."/>
-                <CodeLoadingProgress/>
+                <CodeLoadingTitle title="Loading typing code..." />
+                <CodeLoadingProgress />
             </CodeLoading>
         )
     }
 
     return (
         <Box overflowX="hidden" overflowY="auto" ref={containerRef} mr="4px" pr="4px">
-            {randomText === undefined && (
-                <Text>
-                    Пока еще нет текстов
-                </Text>
-            )}
+            {randomText === undefined && <Text>Пока еще нет текстов</Text>}
 
             <CodeContainer>
-                <CodeIndexesRange startIndex={1} length={rows?.length ?? 0} autoRows={autoRows}/>
+                <CodeIndexesRange startIndex={1} length={rows?.length ?? 0} autoRows={autoRows} />
 
                 <CodeRows autoRows={autoRows}>
                     {rows?.map((row, rowIndex) => (
@@ -89,9 +80,7 @@ export const TypingCode = () => {
                 </CodeRows>
             </CodeContainer>
 
-            {isEnded && (
-                <TypingCodeResultRows ref={resultRef} startIndex={rows?.length ?? 0}/>
-            )}
+            {isEnded && <TypingCodeResultRows ref={resultRef} startIndex={rows?.length ?? 0} />}
         </Box>
     )
 }

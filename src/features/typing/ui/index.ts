@@ -1,1 +1,1 @@
-export * from "./TypingCodeTimer";
+export * from "./TypingCodeTimer"

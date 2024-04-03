@@ -1,4 +1,4 @@
-import {ChangeEventHandler, KeyboardEvent, ReactNode, useEffect, useRef} from "react";
+import { ChangeEventHandler, KeyboardEvent, ReactNode, useEffect, useRef } from "react"
 
 import {
     TypingCodeHandlersContext,
@@ -8,67 +8,42 @@ import {
     useCurrentRowHandlers,
     useRandomCode,
     useTypingAction
-} from "@entities/code";
-import {useTypingCodeTimer} from "@entities/code/libs/hooks/use-typing-code-timer.ts";
-import {useResult} from "@entities/results";
-import {useScrollIntoView} from "@shared/libs/hooks/scroll-into-view";
-import {useTick} from "@shared/libs/hooks/tick";
+} from "@entities/code"
+import { useTypingCodeTimer } from "@entities/code/libs/hooks/use-typing-code-timer.ts"
+import { useResult } from "@entities/results"
+import { useScrollIntoView } from "@shared/libs/hooks/scroll-into-view"
+import { useTick } from "@shared/libs/hooks/tick"
 
-export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) => {
-    const [
-        resultRef,
-        containerRef,
-        {scrollIntoView: scrollToResult, scrollTo}
-    ] = useScrollIntoView<HTMLDivElement>(-50)
+export const TypingCodeHandlersProvider = ({ children }: { children: ReactNode }) => {
+    const [resultRef, containerRef, { scrollIntoView: scrollToResult, scrollTo }] =
+        useScrollIntoView<HTMLDivElement>(-50)
     const inputRef = useRef<HTMLInputElement>(null)
 
-    const {
-        randomText,
-        newRandomText,
-        rows
-    } = useRandomCode()
+    const { randomText, newRandomText, rows } = useRandomCode()
 
-    const {
-        typingValue,
-        currentRowRightSymbols,
-        prevRowsRightSymbols,
-        currentRowIndex,
-    } = useCurrentRow()
-    const {
-        setTypingValue,
-        nextRow,
-        setValueWithTab,
-        resetState,
-    } = useCurrentRowHandlers()
+    const { typingValue, currentRowRightSymbols, prevRowsRightSymbols, currentRowIndex } =
+        useCurrentRow()
+    const { setTypingValue, nextRow, setValueWithTab, resetState } = useCurrentRowHandlers()
 
-    const {isError, errorsCount} = useCodeErrors()
-    const {setErrorsCount, setIsError, incrementErrors} = useCodeErrorsHandlers()
+    const { isError, errorsCount } = useCodeErrors()
+    const { setErrorsCount, setIsError, incrementErrors } = useCodeErrorsHandlers()
 
-    const {startResult, tickResult, endResult, clearResult} = useResult()
+    const { startResult, tickResult, endResult, clearResult } = useResult()
 
-    const {startTick, endTick} = useTick(() => {
+    const { startTick, endTick } = useTick(() => {
         const date = new Date()
-        tickResult({symbols: prevRowsRightSymbols + currentRowRightSymbols, date})
+        tickResult({ symbols: prevRowsRightSymbols + currentRowRightSymbols, date })
     })
 
     const {
-        timer: {
-            timerStatus,
-        },
+        timer: { timerStatus },
         startTimer,
         stopTimer,
         resetTimer
     } = useTypingCodeTimer()
 
-
     const typingAction = useTypingAction()
-    const {
-        isNotStarted,
-        startTyping,
-        endTyping,
-        resetTyping,
-        isEnded,
-    } = typingAction
+    const { isNotStarted, startTyping, endTyping, resetTyping, isEnded } = typingAction
 
     const handleStart = () => {
         if (!randomText) return
@@ -77,7 +52,7 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         const dateStart = new Date()
         startTimer(dateStart.valueOf())
         startTick()
-        startResult({startTime: dateStart, text: randomText})
+        startResult({ startTime: dateStart, text: randomText })
     }
 
     const handleEnd = () => {
@@ -97,7 +72,7 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
         if (isEnded) {
             scrollToResult()
         }
-    }, [isEnded]);
+    }, [isEnded])
 
     const handleResetAll = () => {
         resetState()
@@ -116,7 +91,7 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
 
     useEffect(() => {
         return () => handleResetAll()
-    }, [randomText]);
+    }, [randomText])
 
     const handleKeyDown = (e: KeyboardEvent) => {
         if (!rows) return
@@ -129,12 +104,11 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
             case "Tab":
                 e.preventDefault()
                 setValueWithTab()
-
         }
     }
-    const handleChangePrintingInput: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const handleChangePrintingInput: ChangeEventHandler<HTMLInputElement> = e => {
         const currentTypingValue = e.target.value
-        setTypingValue({ value: currentTypingValue, rows})
+        setTypingValue({ value: currentTypingValue, rows })
         if (!rows) return
 
         if (!rows[currentRowIndex].startsWith(currentTypingValue)) {
@@ -144,35 +118,34 @@ export const TypingCodeHandlersProvider = ({children}: { children: ReactNode }) 
             }
         } else setIsError(false)
 
-
         const isFirstRow = currentRowIndex === 0
         const isTimerNotStarted = timerStatus !== "started"
 
-        if (isFirstRow && isTimerNotStarted && isNotStarted)
-            handleStart()
+        if (isFirstRow && isTimerNotStarted && isNotStarted) handleStart()
 
         const isTypingValueRight = currentTypingValue === rows[currentRowIndex]
         const isLastRow = currentRowIndex === rows.length - 1
 
-        if (isTypingValueRight && isLastRow)
-            handleEnd()
-    };
+        if (isTypingValueRight && isLastRow) handleEnd()
+    }
 
     return (
-        <TypingCodeHandlersContext.Provider value={{
-            ...typingAction,
-            handleKeyDown,
-            handleChangePrintingInput,
-            containerRef,
-            resultRef,
-            handleNewText,
-            scrollTo,
-            resetTyping: handleResetAll,
-            endTyping: handleEnd,
-            startTyping: handleStart,
-            scrollToResult,
-            inputRef
-        }}>
+        <TypingCodeHandlersContext.Provider
+            value={{
+                ...typingAction,
+                handleKeyDown,
+                handleChangePrintingInput,
+                containerRef,
+                resultRef,
+                handleNewText,
+                scrollTo,
+                resetTyping: handleResetAll,
+                endTyping: handleEnd,
+                startTyping: handleStart,
+                scrollToResult,
+                inputRef
+            }}
+        >
             {children}
         </TypingCodeHandlersContext.Provider>
     )

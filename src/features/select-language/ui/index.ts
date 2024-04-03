@@ -1,2 +1,2 @@
-export * from "./LanguageTabPanel";
-export * from "./LanguageTab";
+export * from "./LanguageTabPanel"
+export * from "./LanguageTab"

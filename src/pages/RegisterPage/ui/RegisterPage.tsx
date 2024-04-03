@@ -1,27 +1,24 @@
-import {useMemo} from "react";
+import { useMemo } from "react"
 
-import {Box} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react"
 
-import {IRegisterCredentials, useRegister} from "@entities/viewer";
-import {languagesRegisterForm} from "@pages/RegisterPage/constants";
-import {useRandom} from "@shared/libs";
-import {CodeForm, makeObjectCodeRows} from "@widgets/CodeForm";
+import { IRegisterCredentials, useRegister } from "@entities/viewer"
+import { languagesRegisterForm } from "@pages/RegisterPage/constants"
+import { useRandom } from "@shared/libs"
+import { CodeForm, makeObjectCodeRows } from "@widgets/CodeForm"
 
 const RegisterPage = () => {
     const languages = useMemo(() => Object.keys(languagesRegisterForm), [])
-    const [randomLanguageName] = useRandom(languages);
+    const [randomLanguageName] = useRandom(languages)
 
-
-    const {mutate: registerMutate} = useRegister();
+    const { mutate: registerMutate } = useRegister()
 
     const fields = randomLanguageName
-        ? makeObjectCodeRows(
-            languagesRegisterForm[randomLanguageName]
-        )
+        ? makeObjectCodeRows(languagesRegisterForm[randomLanguageName])
         : undefined
 
     const handleSubmit = (values: Record<keyof IRegisterCredentials, string>) => {
-        registerMutate(values);
+        registerMutate(values)
     }
 
     return (
@@ -33,7 +30,7 @@ const RegisterPage = () => {
                     fields={{
                         nickname: fields.nickname,
                         email: fields.email,
-                        password: fields.password,
+                        password: fields.password
                     }}
                 />
             )}
@@ -41,4 +38,4 @@ const RegisterPage = () => {
     )
 }
 
-export default RegisterPage;
+export default RegisterPage

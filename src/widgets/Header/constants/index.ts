@@ -1,16 +1,16 @@
-import {paths} from "@pages/routes";
+import { paths } from "@pages/routes"
 
 type CommonPath = {
-    name: string;
-    path?: string;
-    onClick?: () => void;
+    name: string
+    path?: string
+    onClick?: () => void
 }
 
 const getViewerNavigationItems = (logoutMutate: () => void) => {
     return [
         {
             name: "Logout",
-            onClick: logoutMutate,
+            onClick: logoutMutate
         }
     ]
 }
@@ -18,23 +18,25 @@ const getViewerNavigationItems = (logoutMutate: () => void) => {
 export const unauthenticatedNavigationItems = [
     {
         name: "Login",
-        path: paths.loginPage,
+        path: paths.loginPage
     },
     {
         name: "Register",
-        path: paths.registerPage,
-    },
+        path: paths.registerPage
+    }
 ]
 
-
-export const getNavigationItems = (isAuthenticated: boolean, logoutMutate: () => void): CommonPath[] => [
+export const getNavigationItems = (
+    isAuthenticated: boolean,
+    logoutMutate: () => void
+): CommonPath[] => [
     {
         name: "Results",
-        path: paths.resultsPage,
+        path: paths.resultsPage
     },
     {
-        name: 'Code Typing',
-        path: paths.typingCodePage,
+        name: "Code Typing",
+        path: paths.typingCodePage
     },
-    ...(isAuthenticated ? getViewerNavigationItems(logoutMutate) : unauthenticatedNavigationItems),
-];
+    ...(isAuthenticated ? getViewerNavigationItems(logoutMutate) : unauthenticatedNavigationItems)
+]

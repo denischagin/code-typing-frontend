@@ -1,8 +1,7 @@
-import {createEvent, createStore} from "effector";
+import { createEvent, createStore } from "effector"
 
-import {TypingCodeTimerStore, TypingTimerSettings} from "@entities/code";
-import {storageKeysEnum} from "@shared/constants";
-
+import { TypingCodeTimerStore, TypingTimerSettings } from "@entities/code"
+import { storageKeysEnum } from "@shared/constants"
 
 export const counterDownVariants = [15, 30, 60]
 export const eventStartTimer = createEvent<number>()
@@ -10,11 +9,9 @@ export const eventStopTimer = createEvent<number>()
 export const eventResetTimer = createEvent()
 export const eventChangeTimerSettings = createEvent<TypingTimerSettings>()
 
-
-
 const loadSettingsFromLocalStorage = (): TypingTimerSettings => {
-    const timerDirection = localStorage.getItem(storageKeysEnum.timerDirection);
-    const startSeconds = localStorage.getItem(storageKeysEnum.timerStartSeconds);
+    const timerDirection = localStorage.getItem(storageKeysEnum.timerDirection)
+    const startSeconds = localStorage.getItem(storageKeysEnum.timerStartSeconds)
 
     const initSettings: TypingTimerSettings = {
         direction: "down",
@@ -22,18 +19,20 @@ const loadSettingsFromLocalStorage = (): TypingTimerSettings => {
     }
 
     if (timerDirection && startSeconds) {
-        if (timerDirection === 'up') {
-            initSettings.direction = 'up'
+        if (timerDirection === "up") {
+            initSettings.direction = "up"
             initSettings.startSeconds = 0
-        } else if (timerDirection === 'down' && counterDownVariants.includes(Number(startSeconds))) {
-            initSettings.direction = 'down'
+        } else if (
+            timerDirection === "down" &&
+            counterDownVariants.includes(Number(startSeconds))
+        ) {
+            initSettings.direction = "down"
             initSettings.startSeconds = Number(startSeconds)
         }
     }
 
     return initSettings
 }
-
 
 export const $typingCodeTimerStore = createStore<TypingCodeTimerStore>({
     timerStatus: "stopped",
@@ -45,19 +44,19 @@ export const $typingCodeTimerStore = createStore<TypingCodeTimerStore>({
         ...store,
         timerStatus: "started",
         timeMillisecondsStart: startTimeMilliseconds,
-        timeMillisecondsEnd: null,
+        timeMillisecondsEnd: null
     }))
     .on(eventStopTimer, (store, stopTimeMilliseconds) => ({
         ...store,
         timerStatus: "stopped",
         timeMillisecondsStart: store.timeMillisecondsStart,
-        timeMillisecondsEnd: stopTimeMilliseconds,
+        timeMillisecondsEnd: stopTimeMilliseconds
     }))
-    .on(eventResetTimer, (store) => ({
+    .on(eventResetTimer, store => ({
         ...store,
         timerStatus: "stopped",
         timeMillisecondsStart: null,
-        timeMillisecondsEnd: null,
+        timeMillisecondsEnd: null
     }))
     .on(eventChangeTimerSettings, (store, settings) => ({
         ...store,
@@ -65,7 +64,9 @@ export const $typingCodeTimerStore = createStore<TypingCodeTimerStore>({
     }))
 
 $typingCodeTimerStore.watch(store => {
-    localStorage.setItem(storageKeysEnum.timerDirection, store.timerSettings.direction);
-    localStorage.setItem(storageKeysEnum.timerStartSeconds, store.timerSettings.startSeconds.toString());
-});
-
+    localStorage.setItem(storageKeysEnum.timerDirection, store.timerSettings.direction)
+    localStorage.setItem(
+        storageKeysEnum.timerStartSeconds,
+        store.timerSettings.startSeconds.toString()
+    )
+})

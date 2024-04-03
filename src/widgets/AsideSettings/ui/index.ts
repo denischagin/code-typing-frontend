@@ -1,4 +1,1 @@
-export * from "./AsideSettings";
-
-
-
+export * from "./AsideSettings"

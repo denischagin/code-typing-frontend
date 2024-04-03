@@ -1,2 +1,1 @@
-export * from "./TypingCode";
-
+export * from "./TypingCode"

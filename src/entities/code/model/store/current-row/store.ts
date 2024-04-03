@@ -1,8 +1,7 @@
-import {createEvent, createStore} from 'effector';
-import {useUnit} from "effector-react";
+import { createEvent, createStore } from "effector"
+import { useUnit } from "effector-react"
 
-import {CurrentRowState} from "@entities/code";
-
+import { CurrentRowState } from "@entities/code"
 
 const calculateRowStartIndent = (row?: string) => {
     if (!row) return 0
@@ -17,27 +16,25 @@ const calculateRowRightSymbols = (row: string, typingValue: string) => {
     const startIndexText = row.search(/\S/g)
 
     for (let i = startIndexText; i < typingValue.length; i++) {
-        if (typingValue[i] === row[i])
-            currentRowRightSymbols++
+        if (typingValue[i] === row[i]) currentRowRightSymbols++
     }
 
     return currentRowRightSymbols
 }
 
 const eventNextRow = createEvent<string[] | undefined>()
-const eventSetTypingValue = createEvent<{ value: string, rows?: string[] }>()
+const eventSetTypingValue = createEvent<{ value: string; rows?: string[] }>()
 const eventSetValueWithTab = createEvent()
 const eventResetState = createEvent()
 
-
 const initialState: CurrentRowState = {
     currentRowIndex: 0,
-    typingValue: '',
+    typingValue: "",
     prevRowsRightSymbols: 0,
     currentRowRightSymbols: 0,
     errorsCount: 0,
     isError: false
-};
+}
 
 const $currentRow = createStore<CurrentRowState>(initialState)
     .on(eventNextRow, (state, rows) => {
@@ -50,13 +47,13 @@ const $currentRow = createStore<CurrentRowState>(initialState)
         return {
             ...state,
             typingValue: " ".repeat(indent),
-            prevRowsRightSymbols: state.prevRowsRightSymbols + rows[state.currentRowIndex].trimStart().length,
+            prevRowsRightSymbols:
+                state.prevRowsRightSymbols + rows[state.currentRowIndex].trimStart().length,
             currentRowRightSymbols: 0,
             currentRowIndex: state.currentRowIndex + 1
-
         }
     })
-    .on(eventSetTypingValue, (state, {value, rows}) => {
+    .on(eventSetTypingValue, (state, { value, rows }) => {
         if (!rows)
             return {
                 ...state,
@@ -70,16 +67,16 @@ const $currentRow = createStore<CurrentRowState>(initialState)
             typingValue: value
         }
     })
-    .on(eventSetValueWithTab, (state) => {
+    .on(eventSetValueWithTab, state => {
         return {
             ...state,
             typingValue: " ".repeat(2) + state.typingValue
         }
     })
-    .on(eventResetState, (state) => {
+    .on(eventResetState, state => {
         return {
             ...state,
-            typingValue: '',
+            typingValue: "",
             currentRowIndex: 0,
             prevRowsRightSymbols: 0,
             currentRowRightSymbols: 0,
@@ -89,9 +86,10 @@ const $currentRow = createStore<CurrentRowState>(initialState)
     })
 
 export const useCurrentRow = () => useUnit($currentRow)
-export const useCurrentRowHandlers = () => useUnit({
-    nextRow: eventNextRow,
-    setTypingValue: eventSetTypingValue,
-    setValueWithTab: eventSetValueWithTab,
-    resetState: eventResetState
-})
+export const useCurrentRowHandlers = () =>
+    useUnit({
+        nextRow: eventNextRow,
+        setTypingValue: eventSetTypingValue,
+        setValueWithTab: eventSetValueWithTab,
+        resetState: eventResetState
+    })

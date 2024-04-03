@@ -1,2 +1,2 @@
-export * from "./CustomTextTabPanel.tsx";
-export * from "./CustomTextTab.tsx";
+export * from "./CustomTextTabPanel.tsx"
+export * from "./CustomTextTab.tsx"

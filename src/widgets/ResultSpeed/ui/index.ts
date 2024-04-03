@@ -1,1 +1,1 @@
-export {ResultSpeed} from "./ResultSpeed.tsx";
+export { ResultSpeed } from "./ResultSpeed.tsx"

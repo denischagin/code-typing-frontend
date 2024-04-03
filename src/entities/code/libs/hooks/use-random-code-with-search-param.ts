@@ -1,10 +1,10 @@
-import {useToast} from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react"
 
-import {useSearchParams} from "react-router-dom";
+import { useSearchParams } from "react-router-dom"
 
-import {defaultTexts, useGetCodeExamples, useGetCodeExamplesByName} from "@entities/code";
-import {searchParamsEnum} from "@shared/constants";
-import {useRandom} from "@shared/libs/hooks/random";
+import { defaultTexts, useGetCodeExamples, useGetCodeExamplesByName } from "@entities/code"
+import { searchParamsEnum } from "@shared/constants"
+import { useRandom } from "@shared/libs/hooks/random"
 
 export type UseRandomCodeWithSearchReturn = [
     textContent: string | undefined,
@@ -12,8 +12,8 @@ export type UseRandomCodeWithSearchReturn = [
 ]
 
 export interface UseRandomCodeWithSearchReturnOptions {
-    isPending: boolean,
-    newText: () => void,
+    isPending: boolean
+    newText: () => void
     id: string | undefined
 }
 
@@ -44,7 +44,7 @@ export const useRandomCodeWithSearchParam = (): UseRandomCodeWithSearchReturn =>
         toast({
             title: "No network",
             description: `Backend not found :(. Only ${defaultTexts.length} texts are available.`,
-            status: "warning",
+            status: "warning"
         })
         newDefaultRandomText()
     }
@@ -52,16 +52,21 @@ export const useRandomCodeWithSearchParam = (): UseRandomCodeWithSearchReturn =>
     const isLoading = isLoadingByName || isLoadingAll
 
     if (isErrorByName || isErrorAll) {
-        return [defaultRandomText, {
-            isPending: isLoading,
-            newText: handleNewTextWithoutNetwork,
-            id: undefined
-        }]
+        return [
+            defaultRandomText,
+            {
+                isPending: isLoading,
+                newText: handleNewTextWithoutNetwork,
+                id: undefined
+            }
+        ]
     }
     return [
-        randomText?.content, {
+        randomText?.content,
+        {
             isPending: isLoading,
             newText,
             id: randomText?.UUID
-        }]
+        }
+    ]
 }

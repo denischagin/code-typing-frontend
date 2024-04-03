@@ -1,7 +1,7 @@
-import {createEvent, createStore} from "effector";
-import {useUnit} from "effector-react/compat";
+import { createEvent, createStore } from "effector"
+import { useUnit } from "effector-react/compat"
 
-import {CodeErrorsContextState} from "@entities/code";
+import { CodeErrorsContextState } from "@entities/code"
 
 const eventIncrementErrors = createEvent()
 const eventSetErrorsCount = createEvent<number>()
@@ -9,9 +9,9 @@ const eventSetIsError = createEvent<boolean>()
 
 const $codeErrorsStore = createStore<CodeErrorsContextState>({
     isError: false,
-    errorsCount: 0,
+    errorsCount: 0
 })
-    .on(eventIncrementErrors, (state) => ({
+    .on(eventIncrementErrors, state => ({
         ...state,
         errorsCount: state.errorsCount + 1
     }))
@@ -25,8 +25,9 @@ const $codeErrorsStore = createStore<CodeErrorsContextState>({
     }))
 
 export const useCodeErrors = () => useUnit($codeErrorsStore)
-export const useCodeErrorsHandlers = () => useUnit({
-    incrementErrors: eventIncrementErrors,
-    setErrorsCount: eventSetErrorsCount,
-    setIsError: eventSetIsError,
-})
+export const useCodeErrorsHandlers = () =>
+    useUnit({
+        incrementErrors: eventIncrementErrors,
+        setErrorsCount: eventSetErrorsCount,
+        setIsError: eventSetIsError
+    })

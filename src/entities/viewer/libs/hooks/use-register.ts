@@ -1,29 +1,29 @@
-import {useToast} from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react"
 
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 
-import {IRegisterCredentials, useViewer, ViewerService} from "@entities/viewer";
-import {paths} from "@pages/routes";
-import {useAxiosErrorToast} from "@shared/libs/hooks/axios-error-toast";
-import {useMutation} from "@tanstack/react-query";
+import { IRegisterCredentials, useViewer, ViewerService } from "@entities/viewer"
+import { paths } from "@pages/routes"
+import { useAxiosErrorToast } from "@shared/libs/hooks/axios-error-toast"
+import { useMutation } from "@tanstack/react-query"
 
 export const useRegister = () => {
-    const {loginViewer} = useViewer();
+    const { loginViewer } = useViewer()
     const toast = useToast()
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const errorHandler = useAxiosErrorToast()
 
     return useMutation({
         mutationFn: (credentials: IRegisterCredentials) => ViewerService.register(credentials),
-        onSuccess: async ({access}) => {
-            loginViewer(access);
+        onSuccess: async ({ access }) => {
+            loginViewer(access)
             toast({
                 title: "Registration successful",
-                status: "success",
+                status: "success"
             })
-            navigate(paths.typingCodePage, {replace: true});
+            navigate(paths.typingCodePage, { replace: true })
         },
-        onError: errorHandler,
+        onError: errorHandler
     })
 }

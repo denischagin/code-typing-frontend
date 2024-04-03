@@ -1,1 +1,1 @@
-export * from "./TypingCodeResultRows";
+export * from "./TypingCodeResultRows"

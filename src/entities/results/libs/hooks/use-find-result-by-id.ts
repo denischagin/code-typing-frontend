@@ -1,8 +1,8 @@
-import {useMemo} from "react";
+import { useMemo } from "react"
 
-import {useUnit} from "effector-react";
+import { useUnit } from "effector-react"
 
-import {$resultsStore, IResult} from "@entities/results";
+import { $resultsStore, IResult } from "@entities/results"
 
 export interface UseFindResultByIdReturn {
     result: IResult
@@ -14,16 +14,14 @@ export const useFindResultById = (resultId: string | null): UseFindResultByIdRet
 
     const currentResultIndex = useMemo(() => {
         return resultId !== null
-            ? results?.findIndex((result) => result.resultId === resultId)
+            ? results?.findIndex(result => result.resultId === resultId)
             : undefined
     }, [results, resultId])
 
-
     return currentResultIndex !== undefined && results !== null
         ? {
-            result: results[currentResultIndex],
-            resultIndex: currentResultIndex
-        }
+              result: results[currentResultIndex],
+              resultIndex: currentResultIndex
+          }
         : null
 }
-

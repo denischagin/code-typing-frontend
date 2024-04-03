@@ -1,1 +1,1 @@
-export * from "./MainPageCode.tsx";
+export * from "./MainPageCode.tsx"

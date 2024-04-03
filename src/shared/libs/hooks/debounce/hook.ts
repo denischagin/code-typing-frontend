@@ -1,19 +1,18 @@
-import {useRef} from 'react';
+import { useRef } from "react"
 
-import {UnknownFunction, UseDebounceReturnFunction} from "./types.ts";
-
+import { UnknownFunction, UseDebounceReturnFunction } from "./types.ts"
 
 export const useDebounce = <FunctionType extends UnknownFunction>(
     debounceFunction: FunctionType,
-    ms: number = 400,
+    ms: number = 400
 ): UseDebounceReturnFunction<FunctionType> => {
-    const timeout = useRef<NodeJS.Timeout | undefined>(undefined);
+    const timeout = useRef<NodeJS.Timeout | undefined>(undefined)
 
     return (...args) => {
-        clearTimeout(timeout.current);
+        clearTimeout(timeout.current)
 
         timeout.current = setTimeout(() => {
-            debounceFunction(...args);
-        }, ms);
-    };
-};
+            debounceFunction(...args)
+        }, ms)
+    }
+}

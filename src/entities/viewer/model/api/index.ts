@@ -1,15 +1,15 @@
 export interface ILoginCredentials {
-    login: string,
+    login: string
     password: string
 }
 
 export interface IRegisterCredentials {
-    nickname: string,
-    password: string,
+    nickname: string
+    password: string
     email: string
 }
 
 export interface AuthResponse {
-    access: string,
+    access: string
     refresh: string
 }

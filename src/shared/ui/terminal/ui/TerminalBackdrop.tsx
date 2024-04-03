@@ -1,4 +1,4 @@
-import {Flex, FlexProps} from "@chakra-ui/react";
+import { Flex, FlexProps } from "@chakra-ui/react"
 
 export const TerminalBackdrop = (props: FlexProps) => {
     return (

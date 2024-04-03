@@ -34,7 +34,4 @@ public class Student {
 }
 `
 
-export const defaultTexts = [
-    scala, java
-]
-
+export const defaultTexts = [scala, java]

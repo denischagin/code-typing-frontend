@@ -1,1 +1,1 @@
-export * from "./TypingCodePanel.tsx";
+export * from "./TypingCodePanel.tsx"

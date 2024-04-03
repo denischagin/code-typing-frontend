@@ -1,7 +1,7 @@
 export enum queryKeysEnum {
-    text = 'text',
+    text = "text",
     programmingLanguages = "programmingLanguages",
-    codeExample = 'codeExample',
-    savedResults = 'savedResults',
-    githubUser = 'githubUser',
+    codeExample = "codeExample",
+    savedResults = "savedResults",
+    githubUser = "githubUser"
 }

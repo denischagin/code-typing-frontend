@@ -1,2 +1,2 @@
-export * from "./ColorCircle.tsx";
-export * from "./ColorCircle.interface.ts";
+export * from "./ColorCircle.tsx"
+export * from "./ColorCircle.interface.ts"

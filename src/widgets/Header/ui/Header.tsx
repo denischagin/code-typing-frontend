@@ -1,9 +1,9 @@
-import {Box, Container, Flex, Link} from "@chakra-ui/react";
+import { Box, Container, Flex, Link } from "@chakra-ui/react"
 
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom"
 
-import {paths} from "@pages/routes";
-import {Navigation} from "@widgets/Header";
+import { paths } from "@pages/routes"
+import { Navigation } from "@widgets/Header"
 
 export const Header = () => {
     return (
@@ -17,14 +17,14 @@ export const Header = () => {
                         fontWeight="bold"
                         color="main.900"
                         _hover={{
-                            color: "main.800",
+                            color: "main.800"
                         }}
                     >
                         Code-typing
                     </Link>
                 </Box>
 
-                <Navigation/>
+                <Navigation />
             </Container>
         </Flex>
     )

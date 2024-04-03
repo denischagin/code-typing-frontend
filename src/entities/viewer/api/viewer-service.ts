@@ -1,29 +1,28 @@
-import {AuthResponse, ILoginCredentials, IRegisterCredentials} from "@entities/viewer";
-import {baseQueryV1, baseQueryV1WithoutAuth} from "@shared/api";
-
+import { AuthResponse, ILoginCredentials, IRegisterCredentials } from "@entities/viewer"
+import { baseQueryV1, baseQueryV1WithoutAuth } from "@shared/api"
 
 class ViewerService {
-    public async login({login, password}: ILoginCredentials) {
+    public async login({ login, password }: ILoginCredentials) {
         const response = await baseQueryV1WithoutAuth<AuthResponse>({
             url: `/auth/login`,
-            method: 'POST',
+            method: "POST",
             data: {
                 login,
                 password
-            },
+            }
         })
         return response.data
     }
 
-    public async register({nickname, email, password}: IRegisterCredentials) {
+    public async register({ nickname, email, password }: IRegisterCredentials) {
         const response = await baseQueryV1WithoutAuth<AuthResponse>({
             url: `/auth/registration`,
-            method: 'POST',
+            method: "POST",
             data: {
                 nickname,
                 email,
                 password
-            },
+            }
         })
         return response.data
     }
@@ -31,7 +30,7 @@ class ViewerService {
     public async logout() {
         const response = await baseQueryV1<AuthResponse>({
             url: `/auth/logout`,
-            method: 'DELETE'
+            method: "DELETE"
         })
         return response.data
     }
@@ -39,7 +38,7 @@ class ViewerService {
     public async refresh() {
         const response = await baseQueryV1WithoutAuth<AuthResponse>({
             url: `/auth/refresh`,
-            method: 'GET'
+            method: "GET"
         })
         return response.data
     }

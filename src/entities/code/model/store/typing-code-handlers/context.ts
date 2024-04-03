@@ -1,6 +1,6 @@
-import {createContext, RefObject, useContext} from "react";
+import { createContext, RefObject, useContext } from "react"
 
-import {TypingCodeHandlersContextState} from "@entities/code";
+import { TypingCodeHandlersContextState } from "@entities/code"
 
 export const TypingCodeHandlersContext = createContext<TypingCodeHandlersContextState>({
     handleNewText: () => null,
@@ -17,7 +17,7 @@ export const TypingCodeHandlersContext = createContext<TypingCodeHandlersContext
     startTyping: () => null,
     resetTyping: () => null,
     scrollToResult: () => null,
-    inputRef: undefined,
+    inputRef: undefined
 })
 
 export const useTypingCodeHandlers = () => useContext(TypingCodeHandlersContext)

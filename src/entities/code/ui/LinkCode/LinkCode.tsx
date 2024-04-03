@@ -1,12 +1,11 @@
-import {Link, Text} from "@chakra-ui/react";
+import { Link, Text } from "@chakra-ui/react"
 
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom"
 
-import {LinkCodeProps} from "./LinkCode.interface.ts";
-
+import { LinkCodeProps } from "./LinkCode.interface.ts"
 
 export const LinkCode = (props: LinkCodeProps) => {
-    const {title, path, ...textProps} = props
+    const { title, path, ...textProps } = props
 
     return (
         <Text fontSize="xl" color="main.800" {...textProps}>
@@ -23,7 +22,7 @@ export const LinkCode = (props: LinkCodeProps) => {
                 to={path}
                 textDecoration="underline"
                 color="primary.100"
-                _hover={{color: 'primary.400'}}
+                _hover={{ color: "primary.400" }}
             >
                 {path}
             </Link>

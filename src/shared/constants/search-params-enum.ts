@@ -1,4 +1,4 @@
 export enum searchParamsEnum {
-    resultId = 'result-id',
+    resultId = "result-id",
     languageName = "language-name"
 }

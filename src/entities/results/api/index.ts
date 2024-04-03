@@ -1,1 +1,1 @@
-export {default as ResultsService} from "./results-service.ts";
+export { default as ResultsService } from "./results-service.ts"

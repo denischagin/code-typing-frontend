@@ -1,2 +1,2 @@
-export * from './ChangeFontTab'
-export * from './ChangeFontTabPanel'
+export * from "./ChangeFontTab"
+export * from "./ChangeFontTabPanel"

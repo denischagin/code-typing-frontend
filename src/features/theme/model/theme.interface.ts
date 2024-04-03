@@ -1,17 +1,17 @@
-import {ColorHues} from "@chakra-ui/react";
+import { ColorHues } from "@chakra-ui/react"
 
-import {ColorTokens} from "@shared/constants";
+import { ColorTokens } from "@shared/constants"
 
 export interface AppTheme {
-    name: string;
-    id: string;
+    name: string
+    id: string
     colors: {
-        primary: ColorHues;
-        contrast: ColorHues;
-        main: ColorHues;
-    };
+        primary: ColorHues
+        contrast: ColorHues
+        main: ColorHues
+    }
     semanticTokens?: {
-        colors: Partial<Record<ColorTokens, string>>;
-    },
+        colors: Partial<Record<ColorTokens, string>>
+    }
     body?: string
 }

@@ -1,5 +1,3 @@
-import {ButtonProps} from "@chakra-ui/react";
+import { ButtonProps } from "@chakra-ui/react"
 
-export interface AsideCloseButtonProps extends ButtonProps{
-
-}
+export interface AsideCloseButtonProps extends ButtonProps {}

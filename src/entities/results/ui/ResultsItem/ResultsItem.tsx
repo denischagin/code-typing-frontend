@@ -1,24 +1,19 @@
-import {MouseEventHandler, useState} from "react";
+import { MouseEventHandler, useState } from "react"
 
-import {Button, Flex, Text, Tooltip,} from "@chakra-ui/react";
+import { Button, Flex, Text, Tooltip } from "@chakra-ui/react"
 
-import {ResultJSON, ResultsItemProps} from "@entities/results";
-import {formatterDate} from "@shared/constants";
+import { ResultJSON, ResultsItemProps } from "@entities/results"
+import { formatterDate } from "@shared/constants"
 
 export const ResultsItem = (props: ResultsItemProps) => {
-    const {
-        resultIndex,
-        endTime,
-        symbolsPerMinute
-    } = props;
+    const { resultIndex, endTime, symbolsPerMinute } = props
 
-    const [isOpenJson, setIsOpenJson] = useState(false);
+    const [isOpenJson, setIsOpenJson] = useState(false)
 
+    const handleToggleJson: MouseEventHandler = e => {
+        e.stopPropagation()
 
-    const handleToggleJson: MouseEventHandler = (e) => {
-        e.stopPropagation();
-
-        setIsOpenJson(prev => !prev);
+        setIsOpenJson(prev => !prev)
     }
 
     // TODO add prop to json result
@@ -31,7 +26,8 @@ export const ResultsItem = (props: ResultsItemProps) => {
                 gap="10px"
                 align="center"
                 bg={"main.100"}
-                px="10px" py="5px"
+                px="10px"
+                py="5px"
                 borderRadius="10px"
                 onClick={handleToggleJson}
                 cursor="pointer"
@@ -40,13 +36,9 @@ export const ResultsItem = (props: ResultsItemProps) => {
                     {resultIndex + 1}.
                 </Text>
 
-
                 <Text fontSize="medium">spm: {symbolsPerMinute}</Text>
 
-                <Text
-                    fontSize="medium"
-                    ml="auto"
-                >
+                <Text fontSize="medium" ml="auto">
                     {formatterDate.format(Date.parse(endTime))}
                 </Text>
 
@@ -55,14 +47,9 @@ export const ResultsItem = (props: ResultsItemProps) => {
                         {isOpenJson ? "-" : ">"}
                     </Button>
                 </Tooltip>
-
-
             </Flex>
 
-            {isOpenJson && (
-                <ResultJSON {...props} />
-            )}
-
+            {isOpenJson && <ResultJSON {...props} />}
         </>
     )
 }

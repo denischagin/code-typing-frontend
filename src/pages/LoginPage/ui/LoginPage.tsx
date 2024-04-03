@@ -1,27 +1,25 @@
-import {useMemo} from "react";
+import { useMemo } from "react"
 
-import {Box} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react"
 
-import {ILoginCredentials, useLogin} from "@entities/viewer";
-import {languagesAuthForm} from "@pages/LoginPage/constants";
-import {languagesRegisterForm} from "@pages/RegisterPage";
-import {useRandom} from "@shared/libs/hooks";
-import {CodeForm, makeObjectCodeRows} from "@widgets/CodeForm";
-
+import { ILoginCredentials, useLogin } from "@entities/viewer"
+import { languagesAuthForm } from "@pages/LoginPage/constants"
+import { languagesRegisterForm } from "@pages/RegisterPage"
+import { useRandom } from "@shared/libs/hooks"
+import { CodeForm, makeObjectCodeRows } from "@widgets/CodeForm"
 
 const LoginPage = () => {
     const languages = useMemo(() => Object.keys(languagesRegisterForm), [])
-    const [randomLanguageName] = useRandom(languages);
+    const [randomLanguageName] = useRandom(languages)
 
-    const {mutate: loginMutate} = useLogin();
+    const { mutate: loginMutate } = useLogin()
 
     const fields = randomLanguageName
-        ? makeObjectCodeRows(
-            languagesAuthForm[randomLanguageName]
-        ) : undefined;
+        ? makeObjectCodeRows(languagesAuthForm[randomLanguageName])
+        : undefined
 
     const handleSubmit = (values: Record<keyof ILoginCredentials, string>) => {
-        loginMutate(values);
+        loginMutate(values)
     }
 
     return (
@@ -32,7 +30,7 @@ const LoginPage = () => {
                     onSuccess={handleSubmit}
                     fields={{
                         login: fields.login,
-                        password: fields.password,
+                        password: fields.password
                     }}
                 />
             )}
@@ -40,4 +38,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage;
+export default LoginPage

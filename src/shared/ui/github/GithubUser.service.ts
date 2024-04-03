@@ -1,5 +1,5 @@
-import {GithubUser} from "./GithubUser.interface.ts";
-import axios from "axios";
+import { GithubUser } from "./GithubUser.interface.ts"
+import axios from "axios"
 
 class GithubUserService {
     public async getUserByUsername(username: string): Promise<GithubUser> {

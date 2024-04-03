@@ -1,21 +1,15 @@
-import {useEffect} from "react";
+import { useEffect } from "react"
 
-import {TimerStatus, useTypingCodeHandlers, useTypingCodeTimer} from "@entities/code";
-import {Timer, useTimer} from "@shared/ui/timer";
+import { TimerStatus, useTypingCodeHandlers, useTypingCodeTimer } from "@entities/code"
+import { Timer, useTimer } from "@shared/ui/timer"
 
 export const TypingCodeTimer = () => {
     const {
-        timer: {
-            timerStatus,
-            timerSettings
-        },
+        timer: { timerStatus, timerSettings }
     } = useTypingCodeTimer()
-    const {
-        endTyping,
-        resetTyping
-    } = useTypingCodeHandlers()
+    const { endTyping, resetTyping } = useTypingCodeHandlers()
 
-    const {start, time, reset} = useTimer({
+    const { start, time, reset } = useTimer({
         onEnd: () => endTyping(),
         startSeconds: timerSettings.direction === "down" ? timerSettings.startSeconds : 0,
         direction: timerSettings.direction
@@ -29,12 +23,10 @@ export const TypingCodeTimer = () => {
     useEffect(() => {
         const handlerByTimerStatus: Record<TimerStatus, () => void> = {
             started: () => start(),
-            stopped: () => reset(),
+            stopped: () => reset()
         }
         handlerByTimerStatus[timerStatus]()
     }, [timerStatus])
 
-    return (
-        <Timer time={time}/>
-    )
+    return <Timer time={time} />
 }

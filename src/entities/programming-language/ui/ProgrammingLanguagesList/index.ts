@@ -1,2 +1,2 @@
-export * from "./ProgrammingLanguagesList.tsx";
-export * from "./ProgrammingLanguagesList.interface.ts";
+export * from "./ProgrammingLanguagesList.tsx"
+export * from "./ProgrammingLanguagesList.interface.ts"

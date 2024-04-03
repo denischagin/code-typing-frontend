@@ -1,9 +1,9 @@
-import {Box} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react"
 
-import {AsideTabListProps} from "@shared/ui/aside";
+import { AsideTabListProps } from "@shared/ui/aside"
 
 export const AsideTabList = (props: AsideTabListProps) => {
-    const {children, ...restProps} = props
+    const { children, ...restProps } = props
 
     return (
         <Box

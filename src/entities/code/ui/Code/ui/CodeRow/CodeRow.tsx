@@ -1,12 +1,9 @@
-import {Flex} from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react"
 
-import {CodeRowProps} from "@entities/code";
-
+import { CodeRowProps } from "@entities/code"
 
 const CodeRow = (props: CodeRowProps) => {
-    return (
-        <Flex align="center" w="100%" {...props}/>
-    );
-};
+    return <Flex align="center" w="100%" {...props} />
+}
 
-export default CodeRow;
+export default CodeRow

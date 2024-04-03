@@ -1,10 +1,10 @@
-import {AsideTabProps, useAside} from "@shared/ui/aside";
-import {Tile} from "@shared/ui/tile";
+import { AsideTabProps, useAside } from "@shared/ui/aside"
+import { Tile } from "@shared/ui/tile"
 
 export const AsideTab = (props: AsideTabProps) => {
-    const {name, ...restProps} = props
+    const { name, ...restProps } = props
 
-    const {currentTabName, onChangeTabName} = useAside()
+    const { currentTabName, onChangeTabName } = useAside()
 
     const handleTabClick = () => {
         onChangeTabName && onChangeTabName(currentTabName === name ? null : name)
@@ -16,14 +16,14 @@ export const AsideTab = (props: AsideTabProps) => {
         <Tile
             isActive={isActive}
             justifyContent="center"
-            backgroundColor={'transparent'}
+            backgroundColor={"transparent"}
             borderRadius="md"
             borderWidth="1px"
-            borderColor={isActive ? 'main.500' : 'main.200'}
+            borderColor={isActive ? "main.500" : "main.200"}
             p="5px"
             onClick={handleTabClick}
             _hover={{
-                backgroundColor: 'main.100',
+                backgroundColor: "main.100"
             }}
             {...restProps}
         />

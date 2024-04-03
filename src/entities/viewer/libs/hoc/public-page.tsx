@@ -1,35 +1,30 @@
-import {ReactNode, useEffect, useState} from "react";
+import { ReactNode, useEffect, useState } from "react"
 
-import {Progress} from "@chakra-ui/react";
+import { Progress } from "@chakra-ui/react"
 
-import {useRefresh, useViewer} from "@entities/viewer";
+import { useRefresh, useViewer } from "@entities/viewer"
 
 export const publicPage = (children: ReactNode) => {
-    return (
-        <PublicPage>
-            {children}
-        </PublicPage>
-    );
+    return <PublicPage>{children}</PublicPage>
 }
 
-const PublicPage = ({children}: { children: ReactNode }) => {
-    const {mutate: refreshMutate, isPending} = useRefresh();
-    const {loginViewer} = useViewer()
-    const [isAccess, setAccess] = useState(false);
+const PublicPage = ({ children }: { children: ReactNode }) => {
+    const { mutate: refreshMutate, isPending } = useRefresh()
+    const { loginViewer } = useViewer()
+    const [isAccess, setAccess] = useState(false)
 
     useEffect(() => {
         refreshMutate(undefined, {
-            onSuccess: ({access}) => {
-                loginViewer(access);
+            onSuccess: ({ access }) => {
+                loginViewer(access)
             },
             onSettled: () => {
-                setAccess(true);
+                setAccess(true)
             }
-        });
-    }, []);
+        })
+    }, [])
 
-    if (isPending)
-        return <Progress isIndeterminate/>;
+    if (isPending) return <Progress isIndeterminate />
 
-    return (isAccess ? children : null);
+    return isAccess ? children : null
 }

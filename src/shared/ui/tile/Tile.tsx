@@ -1,10 +1,9 @@
-import {Flex} from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react"
 
-import {TileProps} from "./Tile.interface.ts";
-
+import { TileProps } from "./Tile.interface.ts"
 
 export const Tile = (props: TileProps) => {
-    const {isActive, ...flexProps} = props;
+    const { isActive, ...flexProps } = props
 
     return (
         <Flex
