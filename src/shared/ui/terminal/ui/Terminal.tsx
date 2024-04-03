@@ -2,30 +2,52 @@ import {ChangeEventHandler, Fragment, KeyboardEventHandler, useEffect, useRef, u
 
 import {Stack, Text} from '@chakra-ui/react'
 
-import {commands} from "./Terminal.constants.ts";
-import {TerminalAnswer, TerminalBackdrop, TerminalContent, TerminalInput, TerminalItem} from "@shared/ui/terminal";
+import {CommandsEnum} from "./Terminal.constants.ts";
+import {
+    AnswersKeys,
+    TerminalAnswer,
+    TerminalBackdrop,
+    TerminalContent,
+    TerminalInput,
+    TerminalItem,
+    TerminalProps
+} from "@shared/ui/terminal";
+import {answersWithFunction} from "@shared/ui/terminal/ui/answers";
 
-export const Terminal = () => {
+export const Terminal = (props: TerminalProps) => {
+    const {onClose} = props
+
     const [value, setValue] = useState('')
-    const [terminalValues, setTerminalValues] = useState<string[]>([])
+    const [terminalValues, setTerminalValues] = useState<string[]>([CommandsEnum.help])
     const containerRef = useRef<HTMLDivElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
+
+    const handleScrollBottom = () => {
+        containerRef.current?.scroll({top: containerRef.current?.scrollHeight})
+    }
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         setValue(e.target.value)
     }
 
     useEffect(() => {
-        containerRef.current?.scroll({top: containerRef.current?.scrollHeight})
+        handleScrollBottom()
     }, [terminalValues]);
 
     const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
         if (e.key === 'Enter') {
             setTerminalValues([...terminalValues, value])
             setValue('')
-            if (value === commands.clear) {
-                setTerminalValues([])
-            }
+
+            const answerFunction = answersWithFunction[value as AnswersKeys]
+
+            answerFunction && answerFunction({
+                setTerminalValues,
+                terminalValues,
+                setValue,
+                value,
+                closeTerminal: onClose,
+            })
         }
     }
 
@@ -36,17 +58,18 @@ export const Terminal = () => {
                     {terminalValues.map((terminalValue, index) => (
                         <Fragment key={terminalValue + index}>
                             <TerminalItem>
-                                <Text color={terminalValue in commands ? 'green.500' : 'red.500'}>{terminalValue}</Text>
+                                <Text
+                                    color={terminalValue in CommandsEnum ? 'green.500' : 'red.500'}>{terminalValue}</Text>
                             </TerminalItem>
 
-                            <TerminalAnswer terminalValue={terminalValue} terminalValues={terminalValues}/>
+                            <TerminalAnswer terminalValue={terminalValue} setTerminalValues={setTerminalValues}/>
                         </Fragment>
                     ))}
 
                     <TerminalItem>
                         <TerminalInput
-                            isSuccess={value in commands}
-                            isError={!(value in commands) && value !== ''}
+                            isSuccess={value in CommandsEnum}
+                            isError={!(value in CommandsEnum) && value !== ''}
                             value={value}
                             onChange={handleChange}
                             onKeyDown={handleKeyDown}

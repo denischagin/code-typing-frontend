@@ -10,14 +10,14 @@ import {TypingCodePanel} from "@widgets/TypingCodePanel";
 
 const TypingCodePage = () => {
     const [isOpenTerminal, setIsOpenTerminal] = useState(false);
-    const toggleTerminal = () => {
+    const handleToggleTerminal = () => {
         setIsOpenTerminal(prev => !prev);
     }
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === "`" && e.ctrlKey || e.altKey && e.key === "F12") {
-                toggleTerminal()
+                handleToggleTerminal()
             }
         }
 
@@ -37,7 +37,7 @@ const TypingCodePage = () => {
                 </Flex>
             </Flex>
             {isOpenTerminal && (
-                <Terminal/>
+                <Terminal onClose={handleToggleTerminal}/>
             )}
         </TypingCodeProviders>
     )

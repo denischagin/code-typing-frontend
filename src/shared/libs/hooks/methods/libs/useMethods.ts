@@ -1,6 +1,6 @@
 import {Reducer, useMemo, useReducer} from "react";
 
-import {AnyAction, AnyMethodsMap, BoundMethods, UseMethodsInit} from "@shared/libs";
+import {AnyAction, AnyMethodsMap, BoundMethods, UseMethodsInit} from "@shared/libs/hooks/methods";
 import {produce} from "immer";
 
 /**

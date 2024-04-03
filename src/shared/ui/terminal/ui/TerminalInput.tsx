@@ -1,12 +1,4 @@
-import {
-    ChangeEventHandler,
-    forwardRef,
-    KeyboardEventHandler,
-    MouseEventHandler,
-    useImperativeHandle,
-    useRef,
-    useState
-} from "react";
+import {ChangeEventHandler, forwardRef, KeyboardEventHandler, useImperativeHandle, useRef, useState} from "react";
 
 import {Box, Input, Text} from "@chakra-ui/react";
 
@@ -16,7 +8,6 @@ export const TerminalInput = forwardRef<HTMLInputElement, TerminalInputProps>((p
     const {
         onChange,
         onKeyDown,
-        onClick,
         value,
         isError = false,
         isSuccess = false,
@@ -41,12 +32,6 @@ export const TerminalInput = forwardRef<HTMLInputElement, TerminalInputProps>((p
         onKeyDown && onKeyDown(e)
     }
 
-    const handleClick: MouseEventHandler<HTMLInputElement> = (e) => {
-        e.preventDefault()
-        setCursorPosition(inputRef.current?.selectionStart)
-        onClick && onClick(e)
-    }
-
     useImperativeHandle(ref, () => inputRef.current!)
 
     const valueBeforeCursor = cursorPosition
@@ -62,23 +47,20 @@ export const TerminalInput = forwardRef<HTMLInputElement, TerminalInputProps>((p
             ? value.slice(cursorPosition + 1)
             : value
 
-    const maxLength = 50
+    const maxLength = 200
 
     const color = isSuccess ? 'green.500' : isError ? 'red.500' : 'white'
 
     return (
         <Box
             pos="relative"
-            w="70%"
         >
             <Text
-                pos="absolute"
-                top={0}
-                left={0}
                 whiteSpace="pre-wrap"
                 maxW={`${maxLength}ch`}
-                w="100%"
                 color={color}
+                overflow="hidden"
+                wordBreak="break-all"
             >
                 {valueBeforeCursor}
                 <Text
@@ -106,7 +88,8 @@ export const TerminalInput = forwardRef<HTMLInputElement, TerminalInputProps>((p
                 pos="absolute"
                 top={0}
                 left={0}
-                w={`${maxLength}ch`}
+                w={0}
+                h={0}
                 maxLength={maxLength - 1}
                 type="text"
                 opacity={0}
@@ -114,7 +97,6 @@ export const TerminalInput = forwardRef<HTMLInputElement, TerminalInputProps>((p
                 variant="unstyled"
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
-                onClick={handleClick}
                 ref={inputRef}
                 {...restProps}
             />
