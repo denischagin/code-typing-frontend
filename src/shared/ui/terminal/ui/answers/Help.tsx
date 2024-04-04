@@ -1,6 +1,7 @@
 import { Box, Text } from "@chakra-ui/react"
 
 import { CommandsEnum } from "@shared/ui/terminal/types"
+import { motion } from "framer-motion"
 
 export const Help = () => {
     const commandsDescription: Record<CommandsEnum, string> = {
@@ -15,12 +16,18 @@ export const Help = () => {
     return (
         <Box>
             {[...Object.keys(CommandsEnum)].map((value, index) => (
-                <Text key={index} fontSize="medium">
-                    <Text as="strong" textDecoration="underline">
-                        {value}
+                <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.2, duration: 0.5 }}
+                >
+                    <Text key={index} fontSize="medium">
+                        <Text as="strong" textDecoration="underline">
+                            {value}
+                        </Text>
+                        : {commandsDescription[value as CommandsEnum]}
                     </Text>
-                    : {commandsDescription[value as CommandsEnum]}
-                </Text>
+                </motion.div>
             ))}
         </Box>
     )

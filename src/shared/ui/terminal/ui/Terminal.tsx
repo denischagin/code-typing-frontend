@@ -2,6 +2,7 @@ import {
     ChangeEventHandler,
     Fragment,
     KeyboardEventHandler,
+    MouseEventHandler,
     useEffect,
     useRef,
     useState
@@ -14,7 +15,8 @@ import {
     TerminalBackdrop,
     TerminalContent,
     TerminalInput,
-    TerminalItem
+    TerminalItem,
+    useTerminalHistory
 } from "@shared/ui/terminal"
 import { AnswersKeys, CommandsEnum, TerminalProps } from "@shared/ui/terminal/types"
 import { answersWithFunction } from "@shared/ui/terminal/ui/answers"
@@ -24,8 +26,11 @@ export const Terminal = (props: TerminalProps) => {
 
     const [value, setValue] = useState("")
     const [terminalCommands, setTerminalCommands] = useState<string[]>([CommandsEnum.help])
-    const [terminalHistory, setTerminalHistory] = useState<string[]>([CommandsEnum.help])
-    const [historyIndex, setHistoryIndex] = useState<number>(terminalCommands.length)
+
+    const { handleAddHistory, handleHistoryDown, handleHistoryUp } = useTerminalHistory(
+        terminalCommands,
+        setValue
+    )
 
     const containerRef = useRef<HTMLDivElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
@@ -43,13 +48,12 @@ export const Terminal = (props: TerminalProps) => {
     }, [terminalCommands])
 
     const handleAddCommand = () => {
-        setTerminalCommands(prev => [...prev, value])
-        setTerminalHistory(prev => [...prev, value])
-
+        handleAddHistory(value)
         setValue("")
 
-        const answerFunction = answersWithFunction[value as AnswersKeys]
+        setTerminalCommands(prev => [...prev, value])
 
+        const answerFunction = answersWithFunction[value as AnswersKeys]
         answerFunction &&
             answerFunction({
                 setTerminalValues: setTerminalCommands,
@@ -58,10 +62,6 @@ export const Terminal = (props: TerminalProps) => {
             })
     }
 
-    useEffect(() => {
-        setHistoryIndex(terminalHistory.length)
-    }, [terminalHistory])
-
     const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = e => {
         if (e.key === "Enter") {
             handleAddCommand()
@@ -69,31 +69,26 @@ export const Terminal = (props: TerminalProps) => {
 
         if (e.key === "ArrowUp") {
             e.preventDefault()
-
-            if (historyIndex <= 0) return
-
-            setValue(terminalHistory[historyIndex - 1])
-            setHistoryIndex(prev => prev - 1)
+            handleHistoryUp()
         }
+
         if (e.key === "ArrowDown") {
             e.preventDefault()
-
-            if (historyIndex >= terminalHistory.length - 1) {
-                setValue("")
-                return setHistoryIndex(terminalHistory.length)
-            }
-
-            setValue(terminalHistory[historyIndex + 1])
-            setHistoryIndex(prev => prev + 1)
+            handleHistoryDown()
         }
     }
 
+    const handleInputFocus: MouseEventHandler<HTMLDivElement> = e => {
+        e.stopPropagation()
+        inputRef.current?.focus()
+    }
+
     return (
-        <TerminalBackdrop>
-            <TerminalContent onClick={() => inputRef.current?.focus()}>
+        <TerminalBackdrop onClick={onClose}>
+            <TerminalContent onClick={handleInputFocus}>
                 <Stack h="100%" w="100%" overflow="auto" ref={containerRef}>
                     {terminalCommands.map((terminalValue, index) => (
-                        <Fragment key={terminalValue + index}>
+                        <Fragment key={index}>
                             <TerminalItem>
                                 <Text
                                     color={terminalValue in CommandsEnum ? "green.500" : "red.500"}
