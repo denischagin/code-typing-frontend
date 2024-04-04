@@ -1,6 +1,6 @@
 import { TokenService } from "@entities/token"
 import { ViewerService } from "@entities/viewer"
-import { makeBaseQuery } from "@shared/api"
+import { makeBaseQuery } from "@shared/api/make-base-query"
 import axios from "axios"
 
 export const baseQueryV1Instance = axios.create({

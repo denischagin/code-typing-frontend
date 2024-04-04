@@ -1,4 +1,4 @@
-import { makeBaseQuery } from "@shared/api"
+import { makeBaseQuery } from "@shared/api/make-base-query"
 import axios from "axios"
 
 export const githubInstance = axios.create({

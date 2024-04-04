@@ -9,6 +9,8 @@ export const TerminalContent = (props: FlexProps) => {
         <Flex
             as={motion.div}
             direction="column"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             maxW="80%"
             w="100%"
             h="80%"
@@ -16,10 +18,6 @@ export const TerminalContent = (props: FlexProps) => {
             bg="contrast.800"
             borderRadius="10px"
             zIndex={400}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transitionDuration="0.3s"
-            transitionTimingFunction="ease-out"
             {...restProps}
         >
             {children}
