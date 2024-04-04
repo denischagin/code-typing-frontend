@@ -1,13 +1,13 @@
 import { Flex, Image, Link, Text } from "@chakra-ui/react"
 
-import { GithubUserItemProps, GithubUserItemSkeleton, useGetGithubUser } from "@shared/ui/github"
+import { GithubUserItemProps, GithubUserSkeleton, useGetGithubUser } from "@shared/ui/github"
 import { motion } from "framer-motion"
 
 export const GithubUserItem = (props: GithubUserItemProps) => {
     const { username } = props
     const { data: user, isSuccess, isLoading } = useGetGithubUser(username)
 
-    if (isLoading) return <GithubUserItemSkeleton />
+    if (isLoading) return <GithubUserSkeleton />
 
     return (
         isSuccess && (
@@ -19,7 +19,7 @@ export const GithubUserItem = (props: GithubUserItemProps) => {
                 >
                     <Image h="100px" w="100px" borderRadius="50%" src={user.avatar_url} />
                 </motion.div>
-                <Flex flexDirection="column" gap={2}>
+                <Flex flexDirection="column">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -37,7 +37,7 @@ export const GithubUserItem = (props: GithubUserItemProps) => {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
+                        transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
                     >
                         <Text color="main.500">{user?.bio}</Text>
                     </motion.div>

@@ -1,6 +1,6 @@
 import { Flex, Skeleton } from "@chakra-ui/react"
 
-export const GithubUserItemSkeleton = () => {
+export const GithubUserSkeleton = () => {
     return (
         <Flex gap={2} maxW="300px" w="100%">
             <Skeleton minH="100px" minW="100px" borderRadius="50%" flexGrow={1} />

@@ -1,6 +1,7 @@
 import { TokenService } from "@entities/token"
 import { ViewerService } from "@entities/viewer"
-import axios, { AxiosRequestConfig } from "axios"
+import { makeBaseQuery } from "@shared/api"
+import axios from "axios"
 
 export const baseQueryV1Instance = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
@@ -46,10 +47,4 @@ baseQueryV1Instance.interceptors.response.use(
     }
 )
 
-export const baseQueryV1 = <R>(config: AxiosRequestConfig | string) => {
-    if (typeof config === "string")
-        return baseQueryV1Instance<R>({
-            url: config
-        })
-    return baseQueryV1Instance<R>(config)
-}
+export const baseQueryV1 = makeBaseQuery(baseQueryV1Instance)
