@@ -1,12 +1,14 @@
 import { useState } from "react"
 
-import { Flex, List, ListItem, Text } from "@chakra-ui/react"
+import { Flex, List, Text } from "@chakra-ui/react"
 
 import { Link, useLocation } from "react-router-dom"
 
 import { useViewer } from "@entities/viewer"
 import { AlertDialogLogout } from "@features/auth/logout"
 import { paths } from "@pages/routes"
+import { ReactIcon } from "@shared/ui/icons"
+import { TabItem, TabList } from "@shared/ui/tabs"
 
 export type CommonPath = {
     name: string
@@ -58,36 +60,21 @@ export const Navigation = () => {
     return (
         <>
             <Flex as="nav" align="end" ml="auto" h="100%">
-                <List display="flex" h="100%">
-                    {navigationItems.map(item => (
-                        <ListItem
-                            key={item.name}
-                            display="inline-flex"
-                            alignItems="center"
-                            h="100%"
-                            px={5}
-                            py={2}
-                            borderBottom="2px solid"
-                            color="main.900"
-                            borderBottomColor={
-                                location.pathname === item.path ? "primary.500" : "transparent"
-                            }
-                            _hover={{
-                                borderBottomColor:
-                                    location.pathname === item.path ? "primary.400" : "primary.900"
-                            }}
-                            transition="all 300ms"
-                        >
-                            {item.path ? (
-                                <Link to={item.path}>{item.name}</Link>
+                <TabList>
+                    {navigationItems.map(({ name, path, onClick }) => (
+                        <TabItem key={name} isActive={location.pathname === path}>
+                            <ReactIcon mr={2} w="15px" h="15px" />
+                            {path ? (
+                                <Link to={path}>{name}</Link>
                             ) : (
-                                <Text onClick={item.onClick} cursor="pointer">
-                                    {item.name}
+                                <Text onClick={onClick} cursor="pointer">
+                                    {name}
                                 </Text>
                             )}
-                        </ListItem>
+                        </TabItem>
                     ))}
-                </List>
+                </TabList>
+                <List display="flex" h="100%"></List>
             </Flex>
 
             <AlertDialogLogout isOpen={isOpenLogout} onClose={handleCloseLogout} />

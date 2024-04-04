@@ -1,38 +1,29 @@
-import { Flex, Link } from "@chakra-ui/react"
+import { Flex } from "@chakra-ui/react"
 
+import { GithubRepoItem } from "@shared/ui/github"
+import { GithubRepoItemProps } from "@shared/ui/github/types"
 import { motion } from "framer-motion"
 
 export const Repos = () => {
-    const reposLinks = [
-        { link: "https://github.com/denischagin/code-typing", title: "Frontend" },
-        {
-            link: "https://github.com/ttodoshi/code-typing-backend",
-            title: "Backend"
-        }
+    const reposLinks: GithubRepoItemProps[] = [
+        { owner: "denischagin", repo: "code-typing" },
+        { owner: "ttodoshi", repo: "code-typing-backend" }
     ]
+
     return (
-        <Flex gap={2} direction="column" w="auto">
-            {reposLinks.map(({ link, title }, index) => (
-                <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                        duration: 1,
-                        delay: (reposLinks.length - index) * 0.2,
-                        ease: "easeOut"
-                    }}
-                >
-                    <Link
-                        textDecoration="underline"
-                        color="primary.200"
-                        _hover={{ color: "primary.300" }}
-                        href={link}
-                        target="_blank"
-                    >
-                        {title}
-                    </Link>
-                </motion.div>
-            ))}
-        </Flex>
+        <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+                duration: 1,
+                ease: "easeOut"
+            }}
+        >
+            <Flex gap={2}>
+                {reposLinks.map(props => (
+                    <GithubRepoItem {...props} />
+                ))}
+            </Flex>
+        </motion.div>
     )
 }

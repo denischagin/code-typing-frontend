@@ -3,5 +3,6 @@ export enum queryKeysEnum {
     programmingLanguages = "programmingLanguages",
     codeExample = "codeExample",
     savedResults = "savedResults",
-    githubUser = "githubUser"
+    githubUser = "githubUser",
+    githubRepo = "githubRepo"
 }

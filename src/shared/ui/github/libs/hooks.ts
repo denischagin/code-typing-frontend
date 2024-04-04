@@ -8,3 +8,10 @@ export const useGetGithubUser = (username: string) => {
         queryFn: () => GithubService.getUserByUsername(username)
     })
 }
+
+export const useGetGithubRepo = (owner: string, repoName: string) => {
+    return useQuery({
+        queryKey: [queryKeysEnum.githubRepo, owner, repoName],
+        queryFn: () => GithubService.getReposByOwnerAndRepoName(owner, repoName)
+    })
+}

@@ -1,6 +1,7 @@
 import { Flex, Image, Link, Text } from "@chakra-ui/react"
 
-import { GithubUserItemProps, GithubUserSkeleton, useGetGithubUser } from "@shared/ui/github"
+import { GithubUserSkeleton, useGetGithubUser } from "@shared/ui/github"
+import { GithubUserItemProps } from "@shared/ui/github/types"
 import { motion } from "framer-motion"
 
 export const GithubUserItem = (props: GithubUserItemProps) => {
