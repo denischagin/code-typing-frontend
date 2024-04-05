@@ -1,16 +1,16 @@
-export interface IProgrammingLanguage {
+export interface ProgrammingLanguage {
     UUID: string
     name: string
     logo: string
 }
 
-export type TProgrammingLanguageResponse = IProgrammingLanguage[]
+export type ProgrammingLanguageResponse = ProgrammingLanguage[]
 
-export interface ICodeExample {
+export interface CodeExample {
     UUID: string
     content: string
 }
 
-export type TCodeExampleByUUID = ICodeExample
-export type TCodeExamplesByNameResponse = ICodeExample[]
-export type TCodeExamplesResponse = ICodeExample[]
+export type CodeExampleByUUID = CodeExample
+export type CodeExamplesByNameResponse = CodeExample[]
+export type CodeExamplesResponse = CodeExample[]

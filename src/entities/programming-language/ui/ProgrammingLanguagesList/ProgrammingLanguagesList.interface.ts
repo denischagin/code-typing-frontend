@@ -1,13 +1,13 @@
 import { ReactElement } from "react"
 
-import { IProgrammingLanguage } from "@entities/code"
+import { ProgrammingLanguage } from "@entities/code"
 
 export interface ProgrammingLanguagesListProps {
-    programmingLanguages: IProgrammingLanguage[] | undefined
+    programmingLanguages: ProgrammingLanguage[] | undefined
     renderItem: (props: RenderProgrammingLanguageProps) => ReactElement
 }
 
-export interface RenderProgrammingLanguageProps extends IProgrammingLanguage {
+export interface RenderProgrammingLanguageProps extends ProgrammingLanguage {
     to: string
     onClick?: () => void
     key?: string

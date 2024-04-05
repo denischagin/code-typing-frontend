@@ -1,26 +1,26 @@
 import {
-    TCodeExampleByUUID,
-    TCodeExamplesByNameResponse,
-    TCodeExamplesResponse,
-    TProgrammingLanguageResponse
+    CodeExampleByUUID,
+    CodeExamplesByNameResponse,
+    CodeExamplesResponse,
+    ProgrammingLanguageResponse
 } from "@entities/code"
 import { baseQueryV1 } from "@shared/api"
 
 class CodeService {
     async fetchProgrammingLanguages() {
-        const response = await baseQueryV1<TProgrammingLanguageResponse>(
+        const response = await baseQueryV1<ProgrammingLanguageResponse>(
             "texts/programming-languages/"
         )
         return response.data
     }
 
     async fetchCodeExamples() {
-        const response = await baseQueryV1<TCodeExamplesResponse>("texts/code-examples/")
+        const response = await baseQueryV1<CodeExamplesResponse>("texts/code-examples/")
         return response.data
     }
 
     async fetchCodeExamplesByName(name: string) {
-        const response = await baseQueryV1<TCodeExamplesByNameResponse>({
+        const response = await baseQueryV1<CodeExamplesByNameResponse>({
             url: "texts/code-examples/",
             params: {
                 "programming-language-name": name
@@ -30,7 +30,7 @@ class CodeService {
     }
 
     async fetchCodeExamplesByUUID(uuid: string) {
-        const response = await baseQueryV1<TCodeExampleByUUID>({
+        const response = await baseQueryV1<CodeExampleByUUID>({
             url: `texts/code-examples/${uuid}`
         })
         return response.data

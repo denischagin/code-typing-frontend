@@ -19,7 +19,7 @@ export const Repos = () => {
                 ease: "easeOut"
             }}
         >
-            <Flex gap={2}>
+            <Flex direction="column" align="start">
                 {reposLinks.map(props => (
                     <GithubRepoItem {...props} />
                 ))}
