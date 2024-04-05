@@ -60,7 +60,7 @@ export const TypingCode = () => {
     if (isPending) {
         return (
             <CodeLoading>
-                <CodeLoadingTitle title="Loading typing code..." />
+                <CodeLoadingTitle title="Loading typing content..." />
                 <CodeLoadingProgress />
             </CodeLoading>
         )

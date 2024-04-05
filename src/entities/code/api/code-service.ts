@@ -2,6 +2,7 @@ import {
     CodeExampleByUUID,
     CodeExamplesByNameResponse,
     CodeExamplesResponse,
+    CustomCodeExampleBody,
     ProgrammingLanguageResponse
 } from "@entities/code"
 import { baseQueryV1 } from "@shared/api"
@@ -32,6 +33,15 @@ class CodeService {
     async fetchCodeExamplesByUUID(uuid: string) {
         const response = await baseQueryV1<CodeExampleByUUID>({
             url: `texts/code-examples/${uuid}`
+        })
+        return response.data
+    }
+
+    async addCustomCodeExample(body: CustomCodeExampleBody) {
+        const response = await baseQueryV1<CodeExampleByUUID>({
+            url: `texts/code-examples`,
+            method: "POST",
+            data: body
         })
         return response.data
     }

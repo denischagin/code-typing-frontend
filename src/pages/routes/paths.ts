@@ -1,6 +1,6 @@
 export const paths = {
     typingPage: "/typing",
-    typingCodePage: "/typing-code",
+    typingCodePage: "/typing-content",
     resultsPage: "/results",
     loginPage: "/login",
     registerPage: "/register",

@@ -5,7 +5,7 @@ services:
 
     image: code-typing
 
-    container_name: code-typing-frontend
+    container_name: content-typing-frontend
 
     restart: always
 

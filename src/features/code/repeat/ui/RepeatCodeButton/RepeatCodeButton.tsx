@@ -23,7 +23,7 @@ export const RepeatCodeButton = () => {
     return (
         <Tooltip label="Repeat text (Ctrl+Alt+Enter)">
             <IconButton
-                aria-label={"refresh code"}
+                aria-label={"refresh content"}
                 icon={<RefreshIcon />}
                 onClick={handleRepeatText}
             />

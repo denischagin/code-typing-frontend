@@ -52,7 +52,7 @@ export const MainPageCode = () => {
 
                 <CodeRow />
 
-                {["code-typing@1.0.0 dev", "vite"].map((text, index) => (
+                {["content-typing@1.0.0 dev", "vite"].map((text, index) => (
                     <CodeRow key={index}>
                         <Text fontSize="2xl" color="main.800" mr={3}>
                             {`> ${text}`}

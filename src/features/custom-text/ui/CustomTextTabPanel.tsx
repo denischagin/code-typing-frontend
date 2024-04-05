@@ -1,12 +1,33 @@
-import { Box, Button, Flex, Select, Stack, Tooltip } from "@chakra-ui/react"
+import { ChangeEventHandler, FormEventHandler, useState } from "react"
 
-import { defaultTexts, useGetProgrammingLanguages } from "@entities/code"
+import { Button, Flex, Select, Textarea } from "@chakra-ui/react"
+
+import {
+    CustomCodeExampleBody,
+    useAddCustomCodeExample,
+    useGetProgrammingLanguages
+} from "@entities/code"
 import { settingTabs } from "@shared/constants"
 import { AsideButtons, AsideCloseButton, AsideTabPanel } from "@shared/ui/aside"
-import { Tile, TileText } from "@shared/ui/tile"
+import { CodeLoadingProgress } from "@shared/ui/loading"
 
 export const CustomTextTabPanel = () => {
     const { data: languages } = useGetProgrammingLanguages()
+    const { mutate: addCustomCodeExample, isPending } = useAddCustomCodeExample()
+    const [newCodeExample, setNewCodeExample] = useState<CustomCodeExampleBody>({
+        programmingLanguageUUID: "",
+        content: ""
+    })
+
+    const handleSubmit: FormEventHandler = e => {
+        e.preventDefault()
+        addCustomCodeExample(newCodeExample)
+    }
+    const handleChangeLanguage: ChangeEventHandler<HTMLSelectElement> = e =>
+        setNewCodeExample(prev => ({ ...prev, programmingLanguageUUID: e.target.value }))
+
+    const handleChangeCode: ChangeEventHandler<HTMLTextAreaElement> = e =>
+        setNewCodeExample(prev => ({ ...prev, content: e.target.value }))
 
     return (
         <AsideTabPanel name={settingTabs.customText}>
@@ -14,11 +35,16 @@ export const CustomTextTabPanel = () => {
                 <AsideCloseButton>—</AsideCloseButton>
             </AsideButtons>
 
-            <Flex direction="column" gap={2} mt={5}>
-                <Button>Add Text</Button>
+            <Flex as={"form"} direction="column" gap={2} mt={5} onSubmit={handleSubmit}>
+                <Button onSubmit={handleSubmit} type="submit">
+                    {" "}
+                    Add Text
+                </Button>
 
-                <Select>
-                    <option value="default">--Language--</option>
+                <Select
+                    onChange={handleChangeLanguage}
+                    value={newCodeExample.programmingLanguageUUID}
+                >
                     {languages?.map(language => (
                         <option key={language.UUID} value={language.UUID}>
                             {language.name}
@@ -26,18 +52,10 @@ export const CustomTextTabPanel = () => {
                     ))}
                 </Select>
 
-                <Stack mt={7}>
-                    {defaultTexts.map(text => (
-                        <Tooltip key={text} label={text}>
-                            <Box>
-                                <Tile _hover={{ bgColor: "primary.800" }}>
-                                    <TileText>{text.trim().slice(0, 30)}...</TileText>
-                                </Tile>
-                            </Box>
-                        </Tooltip>
-                    ))}
-                </Stack>
+                <Textarea value={newCodeExample.content} onChange={handleChangeCode} />
             </Flex>
+
+            {isPending && <CodeLoadingProgress maxLoadingCount={10} />}
         </AsideTabPanel>
     )
 }

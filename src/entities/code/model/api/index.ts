@@ -14,3 +14,8 @@ export interface CodeExample {
 export type CodeExampleByUUID = CodeExample
 export type CodeExamplesByNameResponse = CodeExample[]
 export type CodeExamplesResponse = CodeExample[]
+
+export interface CustomCodeExampleBody {
+    programmingLanguageUUID: string
+    content: string
+}

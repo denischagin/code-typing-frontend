@@ -19,7 +19,7 @@ docker compose up -d
 
 ## Deploy
 
-[code typing versel](https://code-typing-frontend.vercel.app/)
+[content typing versel](https://code-typing-frontend.vercel.app/)
 
 ## Preview
 
