@@ -1,4 +1,12 @@
-import { ComponentType, Dispatch, SetStateAction } from "react"
+import {
+    ChangeEventHandler,
+    ComponentType,
+    Dispatch,
+    KeyboardEventHandler,
+    MouseEventHandler,
+    RefObject,
+    SetStateAction
+} from "react"
 
 import { InputProps } from "@chakra-ui/react"
 
@@ -16,18 +24,11 @@ export interface TerminalAnswerProps {
 export type AnswersKeys = keyof typeof CommandsEnum
 
 export type AnswersWithComponent = Partial<Record<AnswersKeys, ComponentType<TerminalAnswerProps>>>
-export type AnswersWithFunction = Partial<
-    Record<AnswersKeys, (args: AnswersWithFunctionArgs) => void>
->
-
-export interface AnswersWithFunctionArgs {
-    setValue: (value: string) => void
-    setTerminalValues: (value: string[]) => void
-    closeTerminal: () => void
-}
+export type AnswersWithFunction = Partial<Record<AnswersKeys, () => void>>
 
 export interface TerminalProps {
     onClose: () => void
+    isOpen: boolean
 }
 
 export enum CommandsEnum {
@@ -37,4 +38,16 @@ export enum CommandsEnum {
     exit = "exit",
     clear = "clear",
     help = "help"
+}
+
+export interface UseTerminalReturn {
+    terminalValue: string
+    handleChange: ChangeEventHandler<HTMLInputElement>
+    containerRef: RefObject<HTMLDivElement>
+    inputRef: RefObject<HTMLInputElement>
+    handleInputFocus: MouseEventHandler<HTMLDivElement>
+    handleKeyDown: KeyboardEventHandler<HTMLInputElement>
+    handleAddCommand: () => void
+    terminalCommands: string[]
+    setTerminalCommands: Dispatch<SetStateAction<string[]>>
 }

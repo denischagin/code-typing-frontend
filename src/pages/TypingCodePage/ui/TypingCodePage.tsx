@@ -24,7 +24,8 @@ const TypingCodePage = () => {
                     <TypingCode />
                 </Flex>
             </Flex>
-            {isOpenTerminal && <Terminal onClose={closeTerminal} />}
+
+            <Terminal onClose={closeTerminal} isOpen={isOpenTerminal} />
         </TypingCodeProviders>
     )
 }
