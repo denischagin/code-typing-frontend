@@ -1,15 +1,17 @@
 import { useEffect } from "react"
 
 import { useTerminalHandlers } from "@entities/terminal"
+import { keyboardShortcuts } from "@shared/libs"
 
 export const useTerminalKeyDown = () => {
     const { toggleTerminal } = useTerminalHandlers()
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if ((e.key === "`" && e.ctrlKey) || (e.altKey && e.key === "F12")) {
-                toggleTerminal()
-            }
+            keyboardShortcuts({
+                "`+Ctrl": toggleTerminal,
+                "F12+Alt": toggleTerminal
+            })(e)
         }
 
         document.addEventListener("keydown", handleKeyDown)

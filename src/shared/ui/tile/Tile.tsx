@@ -1,12 +1,15 @@
+import { forwardRef } from "react"
+
 import { Flex } from "@chakra-ui/react"
 
 import { TileProps } from "./Tile.interface.ts"
 
-export const Tile = (props: TileProps) => {
+export const Tile = forwardRef<HTMLDivElement, TileProps>((props, ref) => {
     const { isActive, ...flexProps } = props
 
     return (
         <Flex
+            ref={ref}
             justifyContent="space-between"
             alignContent="center"
             bg={isActive ? "main.300" : "main.100"}
@@ -20,4 +23,4 @@ export const Tile = (props: TileProps) => {
             {...flexProps}
         />
     )
-}
+})

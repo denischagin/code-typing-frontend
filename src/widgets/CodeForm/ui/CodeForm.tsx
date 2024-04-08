@@ -3,6 +3,7 @@ import { ChangeEventHandler, Fragment, KeyboardEventHandler, useState } from "re
 import { Box, Text } from "@chakra-ui/react"
 
 import { CodeContainer, CodeIndexesRange, CodeRow, CodeRows } from "@entities/code"
+import { keyboardShortcuts } from "@shared/libs"
 import { useOpenCount } from "@shared/libs/hooks/open-count"
 import { CodeFormField, CodeFormProps, CodeFormRows } from "@widgets/CodeForm"
 
@@ -16,10 +17,12 @@ export const CodeForm = <Fields extends Record<string, unknown>>(props: CodeForm
     const [slicedFields, { handleOpenCount, isLastItem }] = useOpenCount(Object.entries(fields))
 
     const handleSubmitIncrement: KeyboardEventHandler = e => {
-        if (e.key === "Enter") {
-            if (isLastItem) return onSuccess(values)
-            handleOpenCount()
-        }
+        keyboardShortcuts({
+            Enter: () => {
+                if (isLastItem) return onSuccess(values)
+                handleOpenCount()
+            }
+        })(e)
     }
 
     const handleInputChange =

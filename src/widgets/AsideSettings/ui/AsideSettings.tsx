@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Stack } from "@chakra-ui/react"
 
 import { TerminalTab } from "@entities/terminal"
+import { useViewer } from "@entities/viewer"
 import { ChangeFontTab, ChangeFontTabPanel } from "@features/change-font"
 import { CustomTextTab, CustomTextTabPanel } from "@features/custom-text"
 import { LanguageTab, LanguageTabPanel } from "@features/select-language"
@@ -15,6 +16,7 @@ import { motion } from "framer-motion"
 export const AsideSettings = () => {
     const [currentTab, setCurrentTab] = useState<string | number | null>(null)
     const [isOpenSettings, setIsOpenSettings] = useState(false)
+    const { isAuthenticated } = useViewer()
 
     const handleToggleSettings = () => {
         setIsOpenSettings(prev => !prev)
@@ -26,7 +28,7 @@ export const AsideSettings = () => {
                 <AsideTabList>
                     <Stack flexGrow="1">
                         <LanguageTab />
-                        <CustomTextTab />
+                        {isAuthenticated && <CustomTextTab />}
                     </Stack>
 
                     <motion.div
@@ -49,7 +51,7 @@ export const AsideSettings = () => {
                 <AsideTabPanels overflow="hidden" display="flex" flexGrow={1}>
                     <LanguageTabPanel />
                     <TypingModeTabPanel />
-                    <CustomTextTabPanel />
+                    {isAuthenticated && <CustomTextTabPanel />}
                     <ChangeThemeTabPanel />
                     <ChangeFontTabPanel />
                 </AsideTabPanels>

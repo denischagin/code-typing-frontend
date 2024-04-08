@@ -1,16 +1,19 @@
 import { useEffect } from "react"
 
 import { useTypingCodeHandlers } from "@entities/code"
+import { keyboardShortcuts } from "@shared/libs"
 
 export const useNewCodeMouseDown = () => {
     const { handleNewText, inputRef } = useTypingCodeHandlers()
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.code === "Enter" && e.altKey && !e.ctrlKey) {
-                handleNewText()
-                inputRef?.current?.focus()
-            }
+            keyboardShortcuts<KeyboardEvent>({
+                "!Ctrl+Alt+Enter": () => {
+                    handleNewText()
+                    inputRef?.current?.focus()
+                }
+            })(e)
         }
 
         window.addEventListener("keydown", handleKeyDown)

@@ -11,6 +11,7 @@ import {
 } from "@entities/code"
 import { useTypingCodeTimer } from "@entities/code/libs/hooks/use-typing-code-timer.ts"
 import { useResult } from "@entities/results"
+import { keyboardShortcuts } from "@shared/libs"
 import { useScrollIntoView } from "@shared/libs/hooks/scroll-into-view"
 import { useTick } from "@shared/libs/hooks/tick"
 
@@ -97,14 +98,16 @@ export const TypingCodeHandlersProvider = ({ children }: { children: ReactNode }
         if (!rows) return
         const row = rows[currentRowIndex]
 
-        switch (e.key) {
-            case "Enter":
+        keyboardShortcuts<KeyboardEvent>({
+            Enter: () => {
                 if (row !== typingValue) return incrementErrors()
                 return nextRow(rows)
-            case "Tab":
+            },
+            Tab: e => {
                 e.preventDefault()
                 setValueWithTab()
-        }
+            }
+        })(e)
     }
     const handleChangePrintingInput: ChangeEventHandler<HTMLInputElement> = e => {
         const currentTypingValue = e.target.value

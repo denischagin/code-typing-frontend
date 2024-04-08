@@ -1,12 +1,13 @@
 import {
     ChangeEventHandler,
-    KeyboardEventHandler,
+    KeyboardEvent,
     MouseEventHandler,
     useEffect,
     useRef,
     useState
 } from "react"
 
+import { keyboardShortcuts } from "@shared/libs"
 import { useTerminalHistory } from "@shared/ui/terminal"
 import {
     AnswersKeys,
@@ -61,20 +62,18 @@ export const useTerminal = (props: TerminalProps): UseTerminalReturn => {
         answerFunction && answerFunction()
     }
 
-    const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = e => {
-        if (e.key === "Enter") {
-            handleAddCommand()
-        }
-
-        if (e.key === "ArrowUp") {
-            e.preventDefault()
-            handleHistoryUp()
-        }
-
-        if (e.key === "ArrowDown") {
-            e.preventDefault()
-            handleHistoryDown()
-        }
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        keyboardShortcuts<KeyboardEvent>({
+            Enter: handleAddCommand,
+            ArrowUp: e => {
+                e.preventDefault()
+                handleHistoryUp()
+            },
+            ArrowDown: e => {
+                e.preventDefault()
+                handleHistoryDown()
+            }
+        })(e)
     }
 
     const handleInputFocus: MouseEventHandler<HTMLDivElement> = e => {
