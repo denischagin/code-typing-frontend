@@ -17,13 +17,7 @@ export const LinkCode = (props: LinkCodeProps) => {
                 {title}:
             </Text>
 
-            <Link
-                as={NavLink}
-                to={path}
-                textDecoration="underline"
-                color="primary.100"
-                _hover={{ color: "primary.400" }}
-            >
+            <Link as={NavLink} to={path} textDecoration="underline" variant="primary200">
                 {path}
             </Link>
         </Text>

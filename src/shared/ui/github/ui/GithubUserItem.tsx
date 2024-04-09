@@ -26,11 +26,7 @@ export const GithubUserItem = (props: GithubUserItemProps) => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
                     >
-                        <Link
-                            href={user?.html_url}
-                            color="primary.200"
-                            _hover={{ color: "primary.400" }}
-                        >
+                        <Link href={user?.html_url} variant="primary200" target="_blank">
                             {user.login}
                         </Link>
                     </motion.div>

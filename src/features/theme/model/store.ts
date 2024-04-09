@@ -1,6 +1,7 @@
 import { createEvent, createStore } from "effector"
 
 import { AppTheme } from "@features/theme"
+import { storageKeysEnum } from "@shared/constants"
 import {
     blueDarkTheme,
     blueTheme,
@@ -13,8 +14,7 @@ import {
     violetTheme,
     yellowDarkTheme,
     yellowTheme
-} from "@features/theme/model/themes"
-import { storageKeysEnum } from "@shared/constants"
+} from "@shared/model/theme/themes"
 
 export const themes = [
     mainTheme,

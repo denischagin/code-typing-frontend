@@ -5,6 +5,7 @@ import { useUnit } from "effector-react"
 import { useCurrentFont } from "@entities/font"
 import { $currentTheme } from "@features/theme"
 import { ColorTokens } from "@shared/constants"
+import { components } from "@shared/model/theme"
 
 export const useCurrentTheme = () => {
     const theme = useUnit($currentTheme)
@@ -37,40 +38,7 @@ export const useCurrentTheme = () => {
                 }
             }
         },
-        components: {
-            Button: {
-                baseStyle: {
-                    fontWeight: "bold"
-                },
-                variants: {
-                    solid: {
-                        bg: "main.100",
-                        color: "main.900",
-                        _hover: {
-                            bg: "main.300"
-                        }
-                    }
-                }
-            },
-            Link: {
-                baseStyle: {
-                    color: "main.100",
-                    _hover: {
-                        color: "main.300"
-                    }
-                }
-            },
-            Text: {
-                baseStyle: {
-                    color: "main.900"
-                }
-            },
-            Select: {
-                baseStyle: {
-                    color: "main.900"
-                }
-            }
-        }
+        components: components
     }
 
     return extendTheme(themeConfig, { colors: theme.colors })
