@@ -33,7 +33,6 @@ export const keyboardShortcuts =
     }
 
 export const getIsCurrentSymbol = (e: KeyboardShortcutsEvent, key: string) => {
-    console.log(e.key, e.ctrlKey, e.altKey, key)
     if (key === "Ctrl") return e.ctrlKey
     if (key === "Shift") return e.shiftKey
     if (key === "Alt") return e.altKey

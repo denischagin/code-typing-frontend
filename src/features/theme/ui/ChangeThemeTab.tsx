@@ -6,7 +6,7 @@ import { AsideTab } from "@shared/ui/aside"
 
 export const ChangeThemeTab = () => {
     return (
-        <Tooltip label="Change theme">
+        <Tooltip label="Change theme (Alt+4)">
             <Box>
                 <AsideTab name={settingTabs.theme} cursor="pointer">
                     <Image src={themeIcon} />

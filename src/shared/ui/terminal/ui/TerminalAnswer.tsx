@@ -1,10 +1,9 @@
 import { Box, Text } from "@chakra-ui/react"
 
-import { answersWithComponent } from "./answers"
 import { AnswersKeys, CommandsEnum, TerminalAnswerProps } from "@shared/ui/terminal/types"
 
 export const TerminalAnswer = (props: TerminalAnswerProps) => {
-    const { terminalValue } = props
+    const { terminalValue, answersWithComponent } = props
     const Component =
         terminalValue in answersWithComponent
             ? answersWithComponent[terminalValue as AnswersKeys]

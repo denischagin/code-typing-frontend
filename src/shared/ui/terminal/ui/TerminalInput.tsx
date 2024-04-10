@@ -47,13 +47,7 @@ export const TerminalInput = forwardRef<HTMLInputElement, TerminalInputProps>((p
 
     return (
         <Box pos="relative">
-            <Text
-                whiteSpace="pre-wrap"
-                maxW={`${maxLength}ch`}
-                color={color}
-                overflow="hidden"
-                wordBreak="break-all"
-            >
+            <Text whiteSpace="pre-wrap" maxW={`${maxLength}ch`} color={color} wordBreak="break-all">
                 {valueBeforeCursor}
                 <Text as="span" background={color} color="black">
                     {cursorValue}
@@ -69,7 +63,7 @@ export const TerminalInput = forwardRef<HTMLInputElement, TerminalInputProps>((p
             <Input
                 autoFocus
                 pos="absolute"
-                top={0}
+                bottom={-2}
                 left={0}
                 w={0}
                 h={0}

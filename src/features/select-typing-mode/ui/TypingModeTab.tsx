@@ -6,7 +6,7 @@ import { AsideTab } from "@shared/ui/aside"
 
 export const TypingModeTab = () => {
     return (
-        <Tooltip label="Select typing mode">
+        <Tooltip label="Select typing mode (Alt+3)">
             <Box>
                 <AsideTab name={settingTabs.typingMode}>
                     <Image w="50px" src={timerIcon} />

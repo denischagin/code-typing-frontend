@@ -18,7 +18,11 @@ export const LanguageTab = () => {
     )?.logo
 
     return (
-        <Tooltip label={languageName ? `Current language: ${languageName}` : "Select language"}>
+        <Tooltip
+            label={
+                (languageName ? `Current language: ${languageName}` : "Select language") + "(Alt+1)"
+            }
+        >
             <Box>
                 <AsideTab name={settingTabs.language} cursor="pointer">
                     <Image

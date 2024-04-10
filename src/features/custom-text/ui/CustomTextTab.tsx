@@ -6,7 +6,7 @@ import { AsideTab } from "@shared/ui/aside"
 
 export const CustomTextTab = () => {
     return (
-        <Tooltip label="Custom Texts">
+        <Tooltip label="Custom Texts (Alt+2)">
             <Box>
                 <AsideTab name={settingTabs.customText} cursor="pointer">
                     <Image src={customText} />

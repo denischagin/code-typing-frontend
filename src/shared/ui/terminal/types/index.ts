@@ -19,6 +19,7 @@ export interface TerminalInputProps extends InputProps {
 export interface TerminalAnswerProps {
     terminalValue: string
     setTerminalValues: Dispatch<SetStateAction<string[]>>
+    answersWithComponent: AnswersWithComponent
 }
 
 export type AnswersKeys = keyof typeof CommandsEnum
@@ -32,6 +33,7 @@ export interface TerminalProps {
 }
 
 export enum CommandsEnum {
+    info = "info",
     devs = "devs",
     stack = "stack",
     repos = "repos",

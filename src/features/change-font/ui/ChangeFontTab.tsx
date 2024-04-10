@@ -5,7 +5,7 @@ import { settingTabs } from "@shared/constants"
 import { AsideTab } from "@shared/ui/aside"
 
 export const ChangeFontTab = () => (
-    <Tooltip label="Font Settings">
+    <Tooltip label="Font Settings (Alt+5)">
         <Box>
             <AsideTab name={settingTabs.font}>
                 <Image w="50px" src={fontIcon} />

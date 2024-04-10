@@ -9,7 +9,7 @@ export const TerminalTab = () => {
     const { toggleTerminal } = useTerminalHandlers()
 
     return (
-        <Tooltip label="Info Ctrl + `, Alt + F12">
+        <Tooltip label="Project Info (Alt + F12)">
             <div>
                 <AsideTab isActive={isOpenTerminal} onClick={toggleTerminal}>
                     <TerminalIcon />
