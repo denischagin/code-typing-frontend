@@ -23,17 +23,23 @@ export const useRandomCodeWithSearchParam = (): UseRandomCodeWithSearchReturn =>
 
     const toast = useToast()
 
+    const isGetAllCodes = !languageName || languageName === "Random"
+
     const {
         data: codesByName,
         isError: isErrorByName,
         isLoading: isLoadingByName
-    } = useGetCodeExamplesByName(languageName!, !!languageName)
+    } = useGetCodeExamplesByName(languageName!, {
+        enabled: !isGetAllCodes
+    })
 
     const {
         data: codes,
         isError: isErrorAll,
         isLoading: isLoadingAll
-    } = useGetCodeExamples(!languageName)
+    } = useGetCodeExamples({
+        enabled: isGetAllCodes
+    })
 
     const codesForRandom = codesByName ? codesByName : codes
 

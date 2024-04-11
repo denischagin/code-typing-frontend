@@ -1,11 +1,13 @@
-import { CodeService } from "@entities/code"
+import { CodeExamplesResponse, CodeService } from "@entities/code"
 import { queryKeysEnum } from "@shared/constants"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, UseQueryOptions } from "@tanstack/react-query"
 
-export const useGetCodeExamples = (enabled: boolean = true) => {
+export const useGetCodeExamples = (
+    options?: Omit<UseQueryOptions<CodeExamplesResponse>, "queryKey">
+) => {
     return useQuery({
         queryFn: () => CodeService.fetchCodeExamples(),
         queryKey: [queryKeysEnum.codeExample],
-        enabled
+        ...options
     })
 }
