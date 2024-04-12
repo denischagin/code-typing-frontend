@@ -1,4 +1,4 @@
-import { IRegisterCredentials } from "@entities/viewer"
+import { RegisterCredentials } from "@entities/viewer"
 import {
     cPassword,
     FormType,
@@ -42,7 +42,7 @@ const rustEmail = ["let mut email = String::new()", "std::io::stdin().read_line(
 
 const cEmail = ["char email[100];", "fgets(email, 100, stdin);"]
 
-export const languagesRegisterForm: FormType<IRegisterCredentials> = {
+export const languagesRegisterForm: FormType<RegisterCredentials> = {
     java: {
         nickname: javaNickname,
         email: javaEmail,

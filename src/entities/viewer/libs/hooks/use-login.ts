@@ -2,7 +2,7 @@ import { useToast } from "@chakra-ui/react"
 
 import { useNavigate } from "react-router-dom"
 
-import { ILoginCredentials, useViewer, ViewerService } from "@entities/viewer"
+import { LoginCredentials, useViewer, ViewerService } from "@entities/viewer"
 import { paths } from "@pages/routes"
 import { queryKeysEnum } from "@shared/constants"
 import { useAxiosErrorToast } from "@shared/libs/hooks/axios-error-toast"
@@ -16,8 +16,8 @@ export const useLogin = () => {
     const queryClient = useQueryClient()
 
     return useMutation({
-        mutationFn: (credentials: ILoginCredentials) => ViewerService.login(credentials),
-        onSuccess: async ({ access }) => {
+        mutationFn: (credentials: LoginCredentials) => ViewerService.login(credentials),
+        onSuccess: async access => {
             loginViewer(access)
             toast({
                 title: "Login successful",

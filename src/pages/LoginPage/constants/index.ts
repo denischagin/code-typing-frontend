@@ -1,4 +1,4 @@
-import { ILoginCredentials } from "@entities/viewer"
+import { LoginCredentials } from "@entities/viewer"
 
 export type FormType<Credentials> = Record<string, Record<keyof Credentials, string[]>>
 
@@ -35,7 +35,7 @@ export const rustPassword = [
 ]
 
 export const cPassword = ["char password[100];", "fgets(password, 100, stdin);"]
-export const languagesAuthForm: FormType<ILoginCredentials> = {
+export const languagesAuthForm: FormType<LoginCredentials> = {
     java: {
         login: javaLogin,
         password: javaPassword

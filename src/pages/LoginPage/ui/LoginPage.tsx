@@ -2,7 +2,7 @@ import { useMemo } from "react"
 
 import { Box } from "@chakra-ui/react"
 
-import { ILoginCredentials, useLogin } from "@entities/viewer"
+import { LoginCredentials, useLogin } from "@entities/viewer"
 import { languagesAuthForm } from "@pages/LoginPage/constants"
 import { languagesRegisterForm } from "@pages/RegisterPage"
 import { useRandom } from "@shared/libs/hooks"
@@ -18,7 +18,7 @@ const LoginPage = () => {
         ? makeObjectCodeRows(languagesAuthForm[randomLanguageName])
         : undefined
 
-    const handleSubmit = (values: Record<keyof ILoginCredentials, string>) => {
+    const handleSubmit = (values: Record<keyof LoginCredentials, string>) => {
         loginMutate(values)
     }
 

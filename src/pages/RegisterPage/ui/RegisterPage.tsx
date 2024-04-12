@@ -2,7 +2,7 @@ import { useMemo } from "react"
 
 import { Box } from "@chakra-ui/react"
 
-import { IRegisterCredentials, useRegister } from "@entities/viewer"
+import { RegisterCredentials, useRegister } from "@entities/viewer"
 import { languagesRegisterForm } from "@pages/RegisterPage/constants"
 import { useRandom } from "@shared/libs"
 import { CodeForm, makeObjectCodeRows } from "@widgets/CodeForm"
@@ -17,7 +17,7 @@ const RegisterPage = () => {
         ? makeObjectCodeRows(languagesRegisterForm[randomLanguageName])
         : undefined
 
-    const handleSubmit = (values: Record<keyof IRegisterCredentials, string>) => {
+    const handleSubmit = (values: Record<keyof RegisterCredentials, string>) => {
         registerMutate(values)
     }
 

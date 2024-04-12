@@ -1,15 +1,12 @@
-export interface ILoginCredentials {
+export interface LoginCredentials {
     login: string
     password: string
 }
 
-export interface IRegisterCredentials {
+export interface RegisterCredentials {
     nickname: string
     password: string
     email: string
 }
 
-export interface AuthResponse {
-    access: string
-    refresh: string
-}
+export type AuthResponse = string

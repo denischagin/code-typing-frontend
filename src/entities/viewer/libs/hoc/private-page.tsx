@@ -17,7 +17,7 @@ const PrivatePage = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         refreshMutate(undefined, {
-            onSuccess: ({ access }) => {
+            onSuccess: access => {
                 loginViewer(access)
             },
             onError: () => {
