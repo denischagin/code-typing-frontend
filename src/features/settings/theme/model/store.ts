@@ -1,6 +1,6 @@
 import { createEvent, createStore } from "effector"
 
-import { AppTheme } from "@features/theme"
+import { AppTheme } from "@features/settings/theme"
 import { storageKeysEnum } from "@shared/constants"
 import {
     blueDarkTheme,

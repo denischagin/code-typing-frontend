@@ -3,14 +3,8 @@ import { Fragment, KeyboardEventHandler } from "react"
 import { Stack, Text } from "@chakra-ui/react"
 
 import { keyboardShortcuts } from "@shared/libs"
-import {
-    TerminalAnswer,
-    TerminalBackdrop,
-    TerminalContent,
-    TerminalInput,
-    TerminalItem,
-    useTerminal
-} from "@shared/ui/terminal"
+import { CustomModalBackdrop, CustomModalContent } from "@shared/ui/modal"
+import { TerminalAnswer, TerminalInput, TerminalItem, useTerminal } from "@shared/ui/terminal"
 import { CommandsEnum, TerminalProps } from "@shared/ui/terminal/types"
 import { answersWithComponent } from "@shared/ui/terminal/ui/answers"
 
@@ -38,8 +32,8 @@ export const Terminal = (props: TerminalProps) => {
 
     return (
         isOpen && (
-            <TerminalBackdrop onClick={onClose}>
-                <TerminalContent onClick={handleInputFocus} onKeyDown={handleTerminalKeyDown}>
+            <CustomModalBackdrop onClick={onClose}>
+                <CustomModalContent onClick={handleInputFocus} onKeyDown={handleTerminalKeyDown}>
                     <Stack h="100%" w="100%" overflow="auto" ref={containerRef}>
                         {terminalCommands.map((terminalValue, index) => (
                             <Fragment key={index}>
@@ -72,8 +66,8 @@ export const Terminal = (props: TerminalProps) => {
                             />
                         </TerminalItem>
                     </Stack>
-                </TerminalContent>
-            </TerminalBackdrop>
+                </CustomModalContent>
+            </CustomModalBackdrop>
         )
     )
 }

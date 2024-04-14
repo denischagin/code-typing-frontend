@@ -1,4 +1,4 @@
-import { AppTheme } from "@features/theme"
+import { AppTheme } from "@features/settings/theme"
 
 export const extraDarkTheme: AppTheme = {
     id: "Extra dark",

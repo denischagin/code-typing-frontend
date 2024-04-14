@@ -2,18 +2,19 @@ import { Fragment } from "react"
 
 import { Flex } from "@chakra-ui/react"
 
-import { AppTheme } from "@features/theme"
+import { AppTheme } from "@features/settings/theme"
 import { ColorCircle } from "@shared/ui/color"
-import { Tile, TileText } from "@shared/ui/tile"
+import { Tile, TileProps, TileText } from "@shared/ui/tile"
 
-export interface ThemeItemProps extends AppTheme {
+export interface ThemeItemProps extends TileProps {
     onChangeTheme: (theme: AppTheme) => void
     currentTheme: AppTheme
+    theme: AppTheme
 }
 
 export const ThemeItem = (props: ThemeItemProps) => {
-    const { currentTheme, onChangeTheme, ...theme } = props
-    const { id, colors, name } = theme
+    const { currentTheme, onChangeTheme, theme, ...tileProps } = props
+    const { name, colors, id } = theme
 
     const handleChangeThemeClick = (theme: AppTheme) => () => {
         onChangeTheme(theme)
@@ -28,6 +29,7 @@ export const ThemeItem = (props: ThemeItemProps) => {
             gap={1}
             isActive={currentTheme.id === id}
             onClick={handleChangeThemeClick(theme)}
+            {...tileProps}
         >
             <TileText>{name}</TileText>
 

@@ -4,16 +4,14 @@ import { Stack } from "@chakra-ui/react"
 
 import { TerminalTab } from "@entities/terminal"
 import { useViewer } from "@entities/viewer"
-import { ChangeFontTab, ChangeFontTabPanel } from "@features/change-font"
-import { CustomTextTab, CustomTextTabPanel } from "@features/custom-text"
-import { LanguageTab, LanguageTabPanel } from "@features/select-language"
-import { TypingModeTab, TypingModeTabPanel } from "@features/select-typing-mode"
-import { ChangeThemeTab, ChangeThemeTabPanel } from "@features/theme"
+import { Settings } from "@features/settings"
+import { CustomTextTab, CustomTextTabPanel } from "@features/settings/custom-text"
+import { LanguageTab, LanguageTabPanel } from "@features/settings/select-language"
+import { TypingModeTab, TypingModeTabPanel } from "@features/settings/select-typing-mode"
 import { settingTabs } from "@shared/constants"
 import { keyboardShortcuts } from "@shared/libs"
 import { Aside, AsideContent, AsideTab, AsideTabList, AsideTabPanels } from "@shared/ui/aside"
 import { SettingsIcon } from "@shared/ui/icons"
-import { motion } from "framer-motion"
 
 export const AsideSettings = () => {
     const [currentTab, setCurrentTab] = useState<string | number | null>(null)
@@ -22,6 +20,10 @@ export const AsideSettings = () => {
 
     const handleToggleSettings = () => {
         setIsOpenSettings(prev => !prev)
+    }
+
+    const handleCloseSettings = () => {
+        setIsOpenSettings(false)
     }
 
     const handleChangeCurrentTab = (tab: string | number) => {
@@ -53,39 +55,33 @@ export const AsideSettings = () => {
     }, [])
 
     return (
-        <Aside currentTabName={currentTab} onChangeTabName={setCurrentTab}>
-            <AsideContent height="100%" overflow="hidden">
-                <AsideTabList>
-                    <Stack flexGrow="1">
-                        <LanguageTab />
-                        {isAuthenticated && <CustomTextTab />}
-                    </Stack>
-
-                    <motion.div
-                        animate={isOpenSettings ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }}
-                    >
-                        <Stack>
+        <>
+            <Settings isOpen={isOpenSettings} onClose={handleCloseSettings} />
+            <Aside currentTabName={currentTab} onChangeTabName={setCurrentTab}>
+                <AsideContent height="100%" overflow="hidden">
+                    <AsideTabList>
+                        <Stack flexGrow="1">
+                            <LanguageTab />
                             <TypingModeTab />
-                            <ChangeThemeTab />
-                            <ChangeFontTab />
+                            {isAuthenticated && <CustomTextTab />}
                         </Stack>
-                    </motion.div>
 
-                    <AsideTab mt={7} onClick={handleToggleSettings}>
-                        <SettingsIcon />
-                    </AsideTab>
+                        <AsideTab mt={7} onClick={handleToggleSettings}>
+                            <SettingsIcon />
+                        </AsideTab>
 
-                    <TerminalTab />
-                </AsideTabList>
+                        <TerminalTab />
+                    </AsideTabList>
 
-                <AsideTabPanels overflow="hidden" display="flex" flexGrow={1}>
-                    <LanguageTabPanel />
-                    <TypingModeTabPanel />
-                    {isAuthenticated && <CustomTextTabPanel />}
-                    <ChangeThemeTabPanel />
-                    <ChangeFontTabPanel />
-                </AsideTabPanels>
-            </AsideContent>
-        </Aside>
+                    <AsideTabPanels overflow="hidden" display="flex" flexGrow={1}>
+                        <LanguageTabPanel />
+                        <TypingModeTabPanel />
+                        {isAuthenticated && <CustomTextTabPanel />}
+                        {/*<ChangeThemeTabPanel />*/}
+                        {/*<ChangeFontTabPanel />*/}
+                    </AsideTabPanels>
+                </AsideContent>
+            </Aside>
+        </>
     )
 }

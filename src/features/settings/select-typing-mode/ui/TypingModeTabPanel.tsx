@@ -4,7 +4,7 @@ import { Flex, Stack, Text } from "@chakra-ui/react"
 
 import { ModeSmallItem } from "./ModeSmallItem.tsx"
 import { counterDownVariants, useTypingCodeTimer } from "@entities/code"
-import { ModeItem } from "@features/select-typing-mode"
+import { ModeItem } from "@features/settings/select-typing-mode"
 import { settingTabs } from "@shared/constants"
 import { AsideButtons, AsideCloseButton, AsideTabPanel } from "@shared/ui/aside"
 import { TileText } from "@shared/ui/tile"

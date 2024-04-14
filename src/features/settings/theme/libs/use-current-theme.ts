@@ -3,7 +3,7 @@ import { extendTheme } from "@chakra-ui/react"
 import { useUnit } from "effector-react"
 
 import { useCurrentFont } from "@entities/font"
-import { $currentTheme } from "@features/theme"
+import { $currentTheme } from "@features/settings/theme"
 import { ColorTokens } from "@shared/constants"
 import { components } from "@shared/model/theme"
 

@@ -6,7 +6,7 @@ import { RouterProvider } from "react-router-dom"
 
 import { colorModeManager, queryClient } from "@app/config"
 import { ViewerProvider } from "@entities/viewer"
-import { useCurrentTheme } from "@features/theme"
+import { useCurrentTheme } from "@features/settings/theme"
 import { router } from "@pages/index.tsx"
 import { QueryClientProvider } from "@tanstack/react-query"
 

@@ -1,5 +1,7 @@
 import { ThemeComponents } from "@chakra-ui/react"
 
+import { tabsTheme } from "./tabs.ts"
+
 export const components: ThemeComponents = {
     Button: {
         baseStyle: {
@@ -55,5 +57,6 @@ export const components: ThemeComponents = {
         baseStyle: {
             color: "main.900"
         }
-    }
+    },
+    Tabs: tabsTheme
 }

@@ -1,4 +1,4 @@
-import { ModeSmallItemProps } from "@features/select-typing-mode"
+import { ModeSmallItemProps } from "@features/settings/select-typing-mode"
 import { Tile } from "@shared/ui/tile"
 
 export const ModeSmallItem = (props: ModeSmallItemProps) => {

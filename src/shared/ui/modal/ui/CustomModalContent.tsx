@@ -2,7 +2,7 @@ import { Flex, FlexProps } from "@chakra-ui/react"
 
 import { motion } from "framer-motion"
 
-export const TerminalContent = (props: FlexProps) => {
+export const CustomModalContent = (props: FlexProps) => {
     const { children, ...restProps } = props
 
     return (
