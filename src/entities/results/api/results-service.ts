@@ -1,9 +1,12 @@
-import { GetSavedResultsResponse, SaveResultBody } from "@entities/results"
+import { GetSavedResultsResponse, ResultParams, SaveResultBody } from "@entities/results"
 import { baseQueryV1 } from "@shared/api"
 
 class ResultsService {
-    async fetchSavedResults() {
-        const response = await baseQueryV1<GetSavedResultsResponse>("/results/")
+    async fetchSavedResults(params: ResultParams) {
+        const response = await baseQueryV1<GetSavedResultsResponse>({
+            url: "/results/",
+            params: params
+        })
         return response.data
     }
 

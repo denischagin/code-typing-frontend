@@ -1,6 +1,12 @@
 import { Flex, FlexProps } from "@chakra-ui/react"
 
-export const PaginationItem = (props: FlexProps) => {
+export const PaginationItem = (props: { isActive?: boolean } & FlexProps) => {
+    const { isActive, ...restProps } = props
+
+    const activeStyles: FlexProps = {
+        bgColor: "primary.700"
+    }
+
     return (
         <Flex
             as={"button"}
@@ -10,9 +16,10 @@ export const PaginationItem = (props: FlexProps) => {
             px="10px"
             minW="50px"
             borderRadius="30px"
-            _hover={{ bgColor: "primary.700" }}
+            _hover={{ bgColor: "primary.900" }}
             transition="all 300ms"
-            {...props}
+            {...(isActive && activeStyles)}
+            {...restProps}
         />
     )
 }

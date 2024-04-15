@@ -1,4 +1,4 @@
-export type UnknownFunction = (...args: unknown[]) => void
+export type UnknownFunction = (...args: never[]) => void
 
 export type UseDebounceReturnFunction<FunctionType extends UnknownFunction> = (
     ...args: Parameters<FunctionType>

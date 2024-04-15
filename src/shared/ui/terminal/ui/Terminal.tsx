@@ -30,6 +30,9 @@ export const Terminal = (props: TerminalProps) => {
         })(e)
     }
 
+    const isSuccessTerminal = (value: string) => value in CommandsEnum
+    const getTerminalColor = (value: string) => (isSuccessTerminal(value) ? "green.500" : "red.500")
+
     return (
         isOpen && (
             <CustomModalBackdrop onClick={onClose}>
@@ -38,11 +41,7 @@ export const Terminal = (props: TerminalProps) => {
                         {terminalCommands.map((terminalValue, index) => (
                             <Fragment key={index}>
                                 <TerminalItem>
-                                    <Text
-                                        color={
-                                            terminalValue in CommandsEnum ? "green.500" : "red.500"
-                                        }
-                                    >
+                                    <Text color={getTerminalColor(terminalValue)}>
                                         {terminalValue}
                                     </Text>
                                 </TerminalItem>
@@ -57,8 +56,8 @@ export const Terminal = (props: TerminalProps) => {
 
                         <TerminalItem>
                             <TerminalInput
-                                isSuccess={terminalValue in CommandsEnum}
-                                isError={!(terminalValue in CommandsEnum)}
+                                isSuccess={isSuccessTerminal(terminalValue)}
+                                isError={!isSuccessTerminal(terminalValue)}
                                 value={terminalValue}
                                 onChange={handleChange}
                                 onKeyDown={handleKeyDown}
