@@ -6,7 +6,7 @@ import { ResultJSON, ResultsItemProps } from "@entities/results"
 import { formatterDate } from "@shared/constants"
 
 export const ResultsItem = (props: ResultsItemProps) => {
-    const { resultIndex, endTime, symbolsPerMinute } = props
+    const { endTime, symbolsPerMinute } = props
 
     const [isOpenJson, setIsOpenJson] = useState(false)
 
@@ -32,10 +32,6 @@ export const ResultsItem = (props: ResultsItemProps) => {
                 onClick={handleToggleJson}
                 cursor="pointer"
             >
-                <Text fontSize="large" as="strong">
-                    {resultIndex + 1}.
-                </Text>
-
                 <Text fontSize="medium">spm: {symbolsPerMinute}</Text>
 
                 <Text fontSize="medium" ml="auto">

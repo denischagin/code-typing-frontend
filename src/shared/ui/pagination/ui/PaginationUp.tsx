@@ -1,7 +1,7 @@
-import { PaginationItem, PaginationPanel, PaginationUpProps } from "@shared/ui/pagination"
+import { PaginationItem, PaginationPanel, usePagination } from "@shared/ui/pagination"
 
-export const PaginationUp = (props: PaginationUpProps) => {
-    const { onChangePage, page, totalPages } = props
+export const PaginationUp = () => {
+    const { onChangePage, page, totalPages } = usePagination()
 
     const disabledItems = page === totalPages - 1
 
@@ -28,6 +28,7 @@ export const PaginationUp = (props: PaginationUpProps) => {
                     borderLeft={"1px solid"}
                     borderColor={index !== 0 ? "main.500" : "transparent"}
                     onClick={handler}
+                    isDisabled={disabledItems}
                 >
                     {text}
                 </PaginationItem>

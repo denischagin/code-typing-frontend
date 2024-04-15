@@ -10,16 +10,11 @@ export interface ResultFromApi extends Omit<IResultCode, "startTime" | "endTime"
 
 export interface ResultWithoutId extends Omit<ResultFromApi, "id" | "codeExampleUUID" | "userID"> {}
 
-export enum ResultDirectionEnum {
-    ASC = "asc",
-    DESC = "desc"
-}
-
 export type ResultsSortBy = keyof Pick<ResultFromApi, "endTime" | "symbolsPerMinute" | "accuracy">
 
 export interface ResultParams {
     page: number
     size: number
-    direction: ResultDirectionEnum
+    direction: string
     sortBy: ResultsSortBy
 }
