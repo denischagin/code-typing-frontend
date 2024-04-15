@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import { Flex, List, Text } from "@chakra-ui/react"
+import { Flex, Text } from "@chakra-ui/react"
 
 import { Link, useLocation } from "react-router-dom"
 
@@ -67,14 +67,13 @@ export const Navigation = () => {
                             {path ? (
                                 <Link to={path}>{name}</Link>
                             ) : (
-                                <Text onClick={onClick} cursor="pointer">
+                                <Text as="button" onClick={onClick} cursor="pointer">
                                     {name}
                                 </Text>
                             )}
                         </TabItem>
                     ))}
                 </TabList>
-                <List display="flex" h="100%"></List>
             </Flex>
 
             <AlertDialogLogout isOpen={isOpenLogout} onClose={handleCloseLogout} />

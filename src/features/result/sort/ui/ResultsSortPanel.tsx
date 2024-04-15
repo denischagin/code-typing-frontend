@@ -7,7 +7,7 @@ export const ResultsSortPanel = (props: ResultsSortPanelProps) => {
     const { resultParams, onChangeResults } = props
 
     return (
-        <Flex gap={2} align="center" mb={4} justify="center">
+        <Flex as="section" gap={2} align="center" mb={4} justify="center">
             <Text>
                 SELECT * FROM Results{" "}
                 <Text as="span" color="primary.200">

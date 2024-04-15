@@ -16,6 +16,8 @@ export const AsideTab = (props: AsideTabProps) => {
 
     return (
         <Tile
+            as="button"
+            width="100%"
             isActive={isActive}
             justifyContent="center"
             alignItems="center"

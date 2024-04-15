@@ -34,7 +34,11 @@ export const TypingModeTabPanel = () => {
             </AsideButtons>
 
             <Stack spacing={4} mt={4}>
-                <ModeItem onClick={handleChangeTimerSetting("up")} isActive={direction === "up"}>
+                <ModeItem
+                    as="button"
+                    onClick={handleChangeTimerSetting("up")}
+                    isActive={direction === "up"}
+                >
                     Counter up
                 </ModeItem>
 
@@ -47,6 +51,7 @@ export const TypingModeTabPanel = () => {
                     <Flex flexWrap="wrap" gap={1} justifyContent="center">
                         {counterDownVariants.map(variant => (
                             <ModeSmallItem
+                                as="button"
                                 key={variant}
                                 onClick={handleChangeTimerSetting("down", variant)}
                                 isActive={startSeconds === variant}

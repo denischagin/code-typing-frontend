@@ -33,9 +33,8 @@ export const AsideSettings = () => {
         })
     }
 
-    const handleChangeCurrentTabSettings = (tab: string | number) => {
+    const handleOpenSettings = () => {
         setIsOpenSettings(true)
-        handleChangeCurrentTab(tab)
     }
 
     useEffect(() => {
@@ -43,10 +42,9 @@ export const AsideSettings = () => {
             keyboardShortcuts({
                 "Alt+1": () => handleChangeCurrentTab(settingTabs.language),
                 "Ctrl+Shift+E": () => handleChangeCurrentTab(settingTabs.language),
-                "Alt+2": () => isAuthenticated && handleChangeCurrentTab(settingTabs.customText),
-                "Alt+3": () => handleChangeCurrentTabSettings(settingTabs.typingMode),
-                "Alt+4": () => handleChangeCurrentTabSettings(settingTabs.theme),
-                "Alt+5": () => handleChangeCurrentTabSettings(settingTabs.font)
+                "Alt+2": () => handleChangeCurrentTab(settingTabs.typingMode),
+                "Alt+3": () => isAuthenticated && handleChangeCurrentTab(settingTabs.customText),
+                "Ctrl+Shift+S": handleOpenSettings
             })(e)
         }
         document.addEventListener("keydown", handleKeyDown)
@@ -77,8 +75,6 @@ export const AsideSettings = () => {
                         <LanguageTabPanel />
                         <TypingModeTabPanel />
                         {isAuthenticated && <CustomTextTabPanel />}
-                        {/*<ChangeThemeTabPanel />*/}
-                        {/*<ChangeFontTabPanel />*/}
                     </AsideTabPanels>
                 </AsideContent>
             </Aside>

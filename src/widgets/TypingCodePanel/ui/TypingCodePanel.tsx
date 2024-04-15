@@ -16,7 +16,7 @@ export const TypingCodePanel = () => {
     const { errorsCount } = useCodeErrors()
 
     return (
-        <Flex justify="space-between" align="center" px="10px" mb="4px">
+        <Flex as="section" justify="space-between" align="center" px="10px" mb="4px">
             <Flex align="center" gap="10px">
                 <Text fontSize="large" textDecoration="underline" mr={5}>
                     {languageName ?? "Random"}

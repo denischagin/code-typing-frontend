@@ -67,7 +67,7 @@ export const TypingCode = () => {
     }
 
     return (
-        <Box overflowX="hidden" overflowY="auto" ref={containerRef} mr="4px" pr="4px">
+        <Box as="section" overflowX="hidden" overflowY="auto" ref={containerRef} mr="4px" pr="4px">
             {randomText === undefined && <Text>Пока еще нет текстов</Text>}
 
             <CodeContainer>

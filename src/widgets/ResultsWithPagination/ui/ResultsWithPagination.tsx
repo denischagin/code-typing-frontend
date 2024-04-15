@@ -53,7 +53,7 @@ export const ResultsWithPagination = () => {
         <>
             <ResultsSortPanel onChangeResults={handleChangeResults} resultParams={resultParams} />
 
-            <Box flexGrow="1">
+            <Box as="section" flexGrow="1">
                 {isFetching && <ResultListSkeleton />}
 
                 {resultsResponse?.content.length !== 0 ? (
@@ -70,6 +70,7 @@ export const ResultsWithPagination = () => {
             </Box>
 
             <Pagination
+                as="section"
                 mt={5}
                 onChangePage={handleChangePage}
                 page={resultParams.page}
