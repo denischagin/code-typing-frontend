@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useEffect } from "react"
+import { useEffect } from "react"
 
 import { Box, Text } from "@chakra-ui/react"
 
@@ -25,7 +25,8 @@ export const ResultsWithPagination = () => {
         data: resultsResponse,
         totalPages,
         isFetching,
-        isError
+        isError,
+        isSuccess
     } = useGetSavedResultsByPage(resultParams)
 
     useEffect(() => {
@@ -40,12 +41,9 @@ export const ResultsWithPagination = () => {
         handleSetSearchParams({ ...resultParams, page })
     }
 
-    const handleChangeResults =
-        (field: keyof ResultParams): ChangeEventHandler<HTMLSelectElement> =>
-        e => {
-            const value = e.target.value
-            handleSetSearchParams({ ...resultParams, [field]: value })
-        }
+    const handleChangeResults = (field: keyof ResultParams, value: string) => {
+        handleSetSearchParams({ ...resultParams, [field]: value })
+    }
 
     const paginationItems = getPaginationItems(totalPages, resultParams.page)
 
@@ -76,6 +74,7 @@ export const ResultsWithPagination = () => {
                 page={resultParams.page}
                 totalPages={resultsResponse?.totalPages ?? 0}
                 alignSelf="center"
+                isDisabled={!isSuccess}
             >
                 <PaginationDown />
                 <PaginationItems items={paginationItems} />

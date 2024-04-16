@@ -8,6 +8,7 @@ export interface PaginationState {
     page: number
     onChangePage: (page: number) => void
     totalPages: number
+    isDisabled?: boolean
 }
 
 const PaginationContext = createContext<PaginationState | null>(null)
@@ -19,10 +20,10 @@ export const usePagination = () => {
 }
 
 export const Pagination = (props: PaginationProps) => {
-    const { page, onChangePage, totalPages, ...flexProps } = props
+    const { page, onChangePage, totalPages, isDisabled, ...flexProps } = props
 
     return (
-        <PaginationContext.Provider value={{ page, onChangePage, totalPages }}>
+        <PaginationContext.Provider value={{ page, onChangePage, totalPages, isDisabled }}>
             <Flex justifyContent="center" overflow="hidden" gap={4} wrap="wrap" {...flexProps} />
         </PaginationContext.Provider>
     )

@@ -4,6 +4,7 @@ export interface PaginationProps extends FlexProps {
     page: number
     onChangePage: (page: number) => void
     totalPages: number
+    isDisabled?: boolean
 }
 
 export interface PaginationItemProps extends FlexProps {
