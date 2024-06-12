@@ -25,6 +25,7 @@ export const Terminal = (props: TerminalProps) => {
     const handleTerminalKeyDown: KeyboardEventHandler = e => {
         keyboardShortcuts({
             Escape: () => {
+                e.stopPropagation()
                 onClose()
             }
         })(e)

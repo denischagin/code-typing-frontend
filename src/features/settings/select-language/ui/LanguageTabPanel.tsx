@@ -42,7 +42,7 @@ export const LanguageTabPanel = () => {
         handleArrowUp,
         handleArrowDown,
         handleEnter
-    } = useListArrows(searchListWithRandom.length)
+    } = useListArrows<HTMLAnchorElement, HTMLDivElement>(searchListWithRandom.length)
 
     const handleChangeSearch: ChangeEventHandler<HTMLInputElement> = e => {
         setSearchValue(e.target.value)

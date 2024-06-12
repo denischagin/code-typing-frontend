@@ -4,9 +4,9 @@ export const useSearch = <Item extends object, Value>(
     items: Item[] | undefined,
     value: Value,
     valueSelector: (item: Item) => Value
-): Item[] | undefined => {
+): Item[] => {
     return useMemo(() => {
-        if (!items) return undefined
+        if (!items) return []
 
         return items.filter(item => {
             const valueBySelector = String(valueSelector(item))

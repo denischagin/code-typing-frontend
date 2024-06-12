@@ -2,9 +2,14 @@ import { KeyboardEventHandler, useEffect, useRef, useState } from "react"
 
 import { UseListArrowsReturn } from "@shared/libs/hooks/list-arrows"
 
-export const useListArrows = (itemsLength: number): UseListArrowsReturn => {
-    const itemFocusedRef = useRef<HTMLAnchorElement>(null)
-    const containerRef = useRef<HTMLDivElement>(null)
+export const useListArrows = <
+    TItemElement extends HTMLElement,
+    TContainerElement extends HTMLElement
+>(
+    itemsLength: number
+): UseListArrowsReturn<TItemElement, TContainerElement> => {
+    const itemFocusedRef = useRef<TItemElement>(null)
+    const containerRef = useRef<TContainerElement>(null)
 
     const [itemFocused, setItemFocused] = useState(-1)
 
