@@ -1,8 +1,13 @@
-import { ChangeEventHandler, FC, KeyboardEventHandler, MouseEventHandler, useState } from "react"
+import { ChangeEventHandler, FC, KeyboardEventHandler, useEffect, useState } from "react"
 
 import { Box, Input, Text } from "@chakra-ui/react"
 
-import { keyboardShortcuts, useItemsRecursiveList, useListArrows, useSearch } from "@shared/libs"
+import {
+    keyboardShortcuts,
+    useItemsRecursiveList,
+    useListArrows,
+    useRecursiveListSearch
+} from "@shared/libs"
 import { CustomModalBackdrop, CustomModalContent } from "@shared/ui/modal"
 import { RecursiveList } from "@shared/ui/recursiveList"
 import { useGenerateHelpList } from "@widgets/HelpModal"
@@ -15,13 +20,13 @@ export type HelpModalProps = {
 export const HelpModal: FC<HelpModalProps> = props => {
     const { onClose, isOpen } = props
 
-    const itemList = useGenerateHelpList()
+    const itemList = useGenerateHelpList(onClose)
 
     const [openItemNames, setOpenItemNames] = useState<string[]>([])
     const [searchValue, setSearchValue] = useState("")
 
     const openItems = useItemsRecursiveList(openItemNames, itemList)
-    const openItemsWithSearch = useSearch(openItems, searchValue, item => item.name)
+    const openItemsWithSearch = useRecursiveListSearch(openItems, searchValue)
 
     const {
         containerRef,
@@ -31,15 +36,22 @@ export const HelpModal: FC<HelpModalProps> = props => {
         handleResetFocused,
         itemFocused,
         itemFocusedRef
-    } = useListArrows<HTMLDivElement, HTMLDivElement>(openItems.length)
+    } = useListArrows<HTMLDivElement, HTMLDivElement>(openItemsWithSearch.length)
+
+    useEffect(() => {
+        handleResetFocused()
+    }, [openItemsWithSearch.length])
 
     const handleChangeSearch: ChangeEventHandler<HTMLInputElement> = e => {
         setSearchValue(e.target.value)
         handleResetFocused()
     }
 
-    const handleCloseClick: MouseEventHandler = () => {
+    const handleClose = () => {
         onClose()
+        setSearchValue("")
+        handleResetFocused()
+        setOpenItemNames([])
     }
 
     const handleKeyDownSearch: KeyboardEventHandler = e => {
@@ -49,10 +61,14 @@ export const HelpModal: FC<HelpModalProps> = props => {
             ArrowUp: handleArrowUp,
             Enter: e => {
                 handleEnter(e)
+                if (searchValue === ":q") {
+                    handleClose()
+                }
             },
             Tab: handleArrowDown,
             Escape: () => {
                 handleResetFocused()
+                setSearchValue("")
                 if (openItemNames.length === 0) onClose()
                 setOpenItemNames(prev => prev.slice(0, -1))
             }
@@ -63,9 +79,14 @@ export const HelpModal: FC<HelpModalProps> = props => {
         setOpenItemNames(prev => [...prev.slice(0, index + 1)])
     }
 
+    const handleOpenNew = () => {
+        handleResetFocused()
+        setSearchValue("")
+    }
+
     return (
         isOpen && (
-            <CustomModalBackdrop onClick={handleCloseClick}>
+            <CustomModalBackdrop onClick={handleClose}>
                 <CustomModalContent onClick={e => e.stopPropagation()}>
                     <Box display="flex" flexDirection="column" onKeyDown={handleKeyDownSearch}>
                         <Text>
@@ -89,7 +110,10 @@ export const HelpModal: FC<HelpModalProps> = props => {
                             autoFocus
                             onKeyDown={handleKeyDownSearch}
                             onFocus={handleResetFocused}
-                            onBlur={handleResetFocused}
+                            onBlur={e => {
+                                handleResetFocused()
+                                e.target.focus()
+                            }}
                             mb={3}
                         />
                         <RecursiveList
@@ -98,7 +122,7 @@ export const HelpModal: FC<HelpModalProps> = props => {
                             itemFocusedRef={itemFocusedRef}
                             openItems={openItemsWithSearch}
                             setOpenItemNames={setOpenItemNames}
-                            onOpenNew={handleResetFocused}
+                            onOpenNew={handleOpenNew}
                         />
                     </Box>
                 </CustomModalContent>

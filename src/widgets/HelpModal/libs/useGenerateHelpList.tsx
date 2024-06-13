@@ -1,99 +1,62 @@
-import { RefObject, useMemo } from "react"
+import { useMemo } from "react"
 
-import { useUnit } from "effector-react"
+import { useNavigate } from "react-router-dom"
 
-import { useCurrentFont } from "@entities/font"
-import { $currentTheme, themes, useChangeTheme } from "@features/settings/theme"
-import { FontFamilies } from "@shared/constants"
-import { RecursiveListItemType } from "@shared/types"
-import { Tile } from "@shared/ui/tile"
+import { useGenerateFontList } from "./useGenerateFontList"
+import { useGenerateLanguageList } from "./useGenerateLanguageList"
+import { useGenerateTerminalItem } from "./useGenerateTerminalItem"
+import { useGenerateThemeList } from "./useGenerateThemeList"
+import { useGenerateTimerModeList } from "./useGenerateTimerModeList"
+import { paths } from "@pages/routes"
 
-export const useGenerateHelpList = () => {
-    const currentTheme = useUnit($currentTheme)
-    const { changeTheme } = useChangeTheme()
+export const useGenerateHelpList = (onClose: () => void) => {
+    const languageList = useGenerateLanguageList()
+    const timerModeList = useGenerateTimerModeList()
+    const themeList = useGenerateThemeList()
+    const fontList = useGenerateFontList()
+    const terminalItem = useGenerateTerminalItem(onClose)
 
-    const font = useCurrentFont()
+    const navigate = useNavigate()
 
-    const helpTabs: RecursiveListItemType[] = useMemo(
-        () => [
+    const helpTabs = useMemo(() => {
+        return [
+            {
+                name: "Language",
+                children: languageList
+            },
+            {
+                name: "Timer mode",
+                children: timerModeList
+            },
             {
                 name: "Themes",
-                children: themes.map(theme => ({
-                    name: theme.name,
-                    action: () => {
-                        changeTheme(theme)
-                    },
-                    renderItem: ({ isFocus, item, ref }) => {
-                        return (
-                            <Tile
-                                ref={ref as RefObject<HTMLDivElement>}
-                                onClick={item.action}
-                                border="1px solid transparent"
-                                borderColor={isFocus ? "primary.800" : "transparent"}
-                                {...(currentTheme.name === item.name
-                                    ? {
-                                          background: "primary.600"
-                                      }
-                                    : {})}
-                            >
-                                {item.name}
-                            </Tile>
-                        )
-                    }
-                }))
+                children: themeList
             },
             {
                 name: "Font",
-                children: [
-                    {
-                        name: "Sizes",
-                        children: [
-                            {
-                                name: "Lg",
-                                action: () => {
-                                    console.log("font lg")
-                                }
-                            },
-                            {
-                                name: "Md",
-                                action: () => {
-                                    console.log("font md")
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        name: "Font Families",
-                        children: Object.keys(FontFamilies).map(fontFamily => ({
-                            name: fontFamily,
-                            action: () => {
-                                // console.log(fontFamily)
-                                // changeFontFamily(fontFamily as FontFamilies)
-                            },
-                            renderItem: ({ isFocus, item, ref }) => {
-                                return (
-                                    <Tile
-                                        ref={ref as RefObject<HTMLDivElement>}
-                                        onClick={item.action}
-                                        border="1px solid transparent"
-                                        borderColor={isFocus ? "primary.800" : "transparent"}
-                                        {...(font.fontFamily === item.name
-                                            ? {
-                                                  background: "primary.600"
-                                              }
-                                            : {})}
-                                    >
-                                        {item.name}
-                                    </Tile>
-                                )
-                            }
-                        }))
-                    }
-                ]
+                children: fontList
+            },
+            terminalItem,
+            {
+                name: "Results Page",
+                action: () => {
+                    navigate(paths.resultsPage)
+                }
+            },
+            {
+                name: "Login Page",
+                action: () => {
+                    navigate(paths.loginPage)
+                }
+            },
+            {
+                name: "Registration Page",
+                action: () => {
+                    navigate(paths.registerPage)
+                }
             }
-        ],
-        [currentTheme]
-    )
+        ]
+    }, [languageList, timerModeList, themeList, fontList, terminalItem])
 
     return helpTabs
 }

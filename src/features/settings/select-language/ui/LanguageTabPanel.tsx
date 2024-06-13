@@ -2,12 +2,12 @@ import { ChangeEventHandler, KeyboardEventHandler, useMemo, useState } from "rea
 
 import { Input, Link, Stack } from "@chakra-ui/react"
 
-import { NavLink, useSearchParams } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 import { ProgrammingLanguage, useGetProgrammingLanguages } from "@entities/code"
-import { ProgrammingLanguagesList } from "@entities/programming-language"
+import { ProgrammingLanguagesList, useLanguageNameSearch } from "@entities/programming-language"
 import programmingLanguageIcon from "@shared/assets/programming-language.svg"
-import { searchParamsEnum, settingTabs } from "@shared/constants"
+import { settingTabs } from "@shared/constants"
 import { keyboardShortcuts, useListArrows } from "@shared/libs"
 import { useSearch } from "@shared/libs/hooks/search"
 import { AsideButtons, AsideCloseButton, AsideTabPanel } from "@shared/ui/aside"
@@ -15,9 +15,8 @@ import { Tile, TileImage, TileText } from "@shared/ui/tile"
 
 export const LanguageTabPanel = () => {
     const [searchValue, setSearchValue] = useState("")
-    const [searchParams] = useSearchParams()
 
-    const languageName = searchParams.get(searchParamsEnum.languageName)
+    const languageName = useLanguageNameSearch()
 
     const { data: programmingLanguages } = useGetProgrammingLanguages()
 

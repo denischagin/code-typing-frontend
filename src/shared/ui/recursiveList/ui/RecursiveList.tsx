@@ -31,7 +31,7 @@ export const RecursiveList = (props: RecursiveListProps) => {
     }
 
     return (
-        <Box display="flex" flexDir="column" gap="5px" ref={containerRef}>
+        <Box display="flex" flexDir="column" gap="5px" ref={containerRef} overflow="auto">
             {openItems && openItems.length ? (
                 openItems?.map((item, index) => (
                     <Fragment key={item.name}>

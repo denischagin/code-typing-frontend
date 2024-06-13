@@ -3,7 +3,7 @@ import { ReactNode, RefObject } from "react"
 export type RenderItemProps = {
     onClick: () => void
     item: RecursiveListItemType
-    ref: RefObject<HTMLElement> | undefined
+    ref: RefObject<HTMLDivElement> | undefined
     isFocus: boolean
 }
 
