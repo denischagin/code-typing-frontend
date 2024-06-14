@@ -105,7 +105,7 @@ export const HelpModal: FC<HelpModalProps> = props => {
     return (
         isOpen && (
             <CustomModalBackdrop onClick={handleClose}>
-                <CustomModalContent onClick={e => e.stopPropagation()}>
+                <CustomModalContent onClick={e => e.stopPropagation()} maxW="600px">
                     <Box
                         display="flex"
                         flexDirection="column"
