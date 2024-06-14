@@ -12,6 +12,7 @@ export type RecursiveListProps = {
     itemFocusedRef: RefObject<HTMLDivElement>
     containerRef: RefObject<HTMLDivElement>
     onOpenNew?: () => void
+    searchValue: string
 }
 
 export const RecursiveList = (props: RecursiveListProps) => {
@@ -21,7 +22,8 @@ export const RecursiveList = (props: RecursiveListProps) => {
         itemFocusedIndex,
         itemFocusedRef,
         containerRef,
-        onOpenNew
+        onOpenNew,
+        searchValue
     } = props
 
     const handleOpenNew = (newOpen: RecursiveListItemType) => {
@@ -70,6 +72,8 @@ export const RecursiveList = (props: RecursiveListProps) => {
                         )}
                     </Fragment>
                 ))
+            ) : searchValue === ":q" ? (
+                <Text>Press enter to close</Text>
             ) : (
                 <Text>Not found item</Text>
             )}

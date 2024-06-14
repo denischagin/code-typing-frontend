@@ -13,7 +13,7 @@ export const useGenerateFontList = () => {
     const fontList = useMemo(() => {
         return [
             {
-                name: "Font Sizes",
+                name: "Font Size",
                 children: typingFontSizes.map(fontSize => {
                     return {
                         name: fontSize.fullName,
@@ -39,7 +39,7 @@ export const useGenerateFontList = () => {
                 }) as RecursiveListItemType[]
             },
             {
-                name: "Font Families",
+                name: "Font Family",
                 children: Object.entries(FontFamilies).map(([fontFamily, fontFamilyValue]) => ({
                     name: fontFamily,
                     action: () => {

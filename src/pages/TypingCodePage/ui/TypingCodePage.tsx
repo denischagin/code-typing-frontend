@@ -1,8 +1,8 @@
 import { Flex } from "@chakra-ui/react"
 
-import { useOpenHelpModal } from "./TypingCodePage.hooks"
 import { TypingCodeProviders } from "@entities/code"
 import { useTerminalHandlers, useTerminalIsOpen, useTerminalKeyDown } from "@entities/terminal"
+import { useOpenHelpModal } from "@pages/Root/ui/Root.hooks"
 import { Terminal } from "@shared/ui/terminal"
 import { AsideSettings } from "@widgets/AsideSettings"
 import { HelpModal } from "@widgets/HelpModal"
@@ -12,7 +12,6 @@ import { TypingCodePanel } from "@widgets/TypingCodePanel"
 const TypingCodePage = () => {
     const isOpenTerminal = useTerminalIsOpen()
     const { closeTerminal } = useTerminalHandlers()
-
     const { handleCloseHelpModal, isOpenHelpModal } = useOpenHelpModal()
 
     useTerminalKeyDown()
@@ -30,7 +29,8 @@ const TypingCodePage = () => {
             </Flex>
 
             <Terminal onClose={closeTerminal} isOpen={isOpenTerminal} />
-            <HelpModal isOpen={isOpenHelpModal} onClose={handleCloseHelpModal} />
+
+            <HelpModal isOpen={isOpenHelpModal} onClose={handleCloseHelpModal} isTypingCodePage />
         </TypingCodeProviders>
     )
 }

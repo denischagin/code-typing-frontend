@@ -4,14 +4,17 @@ import { Box } from "@chakra-ui/react"
 
 import { RegisterCredentials, useRegister } from "@entities/viewer"
 import { languagesRegisterForm } from "@pages/RegisterPage/constants"
+import { useOpenHelpModal } from "@pages/Root/ui/Root.hooks"
 import { useRandom } from "@shared/libs"
 import { CodeForm, makeObjectCodeRows } from "@widgets/CodeForm"
+import { HelpModal } from "@widgets/HelpModal"
 
 const RegisterPage = () => {
     const languages = useMemo(() => Object.keys(languagesRegisterForm), [])
     const [randomLanguageName] = useRandom(languages)
 
     const { mutate: registerMutate } = useRegister()
+    const { handleCloseHelpModal, isOpenHelpModal } = useOpenHelpModal()
 
     const fields = randomLanguageName
         ? makeObjectCodeRows(languagesRegisterForm[randomLanguageName])
@@ -34,6 +37,7 @@ const RegisterPage = () => {
                     }}
                 />
             )}
+            <HelpModal isOpen={isOpenHelpModal} onClose={handleCloseHelpModal} />
         </Box>
     )
 }

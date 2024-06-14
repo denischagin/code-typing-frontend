@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, Fragment } from "react"
 
 import { Box, Text } from "@chakra-ui/react"
 
@@ -16,12 +16,12 @@ export const BreadCrumbs: FC<BreadCrumbsProps> = props => {
                 Menu
             </Text>
             {crumbs.map((openItem, index) => (
-                <>
+                <Fragment key={openItem}>
                     {" > "}
                     <Text as="button" onClick={() => onCrumbClick(index, openItem)}>
                         {openItem}
                     </Text>
-                </>
+                </Fragment>
             ))}
         </Box>
     )

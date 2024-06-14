@@ -1,4 +1,4 @@
-import { MouseEventHandler } from "react"
+import { MouseEventHandler, useEffect } from "react"
 
 import { Image, Tab, TabList, TabPanels, Tabs } from "@chakra-ui/react"
 
@@ -6,6 +6,7 @@ import { ChangeFontTabPanel } from "@features/settings/change-font"
 import { ChangeThemeTabPanel } from "@features/settings/theme"
 import fontIcon from "@shared/assets/font.svg"
 import themeIcon from "@shared/assets/theme.svg"
+import { keyboardShortcuts } from "@shared/libs"
 import { CustomModalBackdrop, CustomModalContent } from "@shared/ui/modal"
 
 export interface SettingsProps {
@@ -24,6 +25,17 @@ export const Settings = (props: SettingsProps) => {
     const handleContentClick: MouseEventHandler = e => {
         e.stopPropagation()
     }
+
+    useEffect(() => {
+        document.addEventListener("keydown", e => {
+            keyboardShortcuts({
+                Escape: () => {
+                    e.stopPropagation()
+                    onClose()
+                }
+            })(e)
+        })
+    }, [])
 
     return (
         isOpen && (

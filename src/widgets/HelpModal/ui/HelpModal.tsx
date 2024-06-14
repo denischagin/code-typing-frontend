@@ -18,10 +18,11 @@ import { useGenerateHelpList, useHelpModalSearch } from "@widgets/HelpModal"
 export type HelpModalProps = {
     onClose: () => void
     isOpen: boolean
+    isTypingCodePage?: boolean
 }
 
 export const HelpModal: FC<HelpModalProps> = props => {
-    const { onClose, isOpen } = props
+    const { onClose, isOpen, isTypingCodePage } = props
 
     const [isAllSearch, setIsAllSearch] = useLocalStorage<boolean>(
         localStorageItems.isSmartSearch,
@@ -30,7 +31,7 @@ export const HelpModal: FC<HelpModalProps> = props => {
         item => String(item)
     )
 
-    const itemList = useGenerateHelpList(onClose)
+    const itemList = useGenerateHelpList(onClose, !!isTypingCodePage)
 
     const [openItemNames, setOpenItemNames] = useState<string[]>([])
     const [searchValue, setSearchValue] = useState("")
@@ -151,6 +152,7 @@ export const HelpModal: FC<HelpModalProps> = props => {
                             openItems={openItemsWithSearch}
                             setOpenItemNames={setOpenItemNames}
                             onOpenNew={handleOpenNew}
+                            searchValue={searchValue}
                         />
                     </Box>
                 </CustomModalContent>

@@ -9,8 +9,6 @@ export type TileItemHelplistProps = {
 export const TileItemHelplist = forwardRef<HTMLDivElement, TileItemHelplistProps>((props, ref) => {
     const { isFocus, isActive, ...restProps } = props
 
-    if (isFocus) console.log(isFocus)
-
     return (
         <Tile
             ref={ref}
