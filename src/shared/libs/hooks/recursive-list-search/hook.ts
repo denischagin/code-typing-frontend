@@ -11,7 +11,7 @@ export const useRecursiveListSearch = (
             return items
         }
         const searchItems = recursiveListSearchFunction(items, value)
-        return searchItems.sort((a, b) => (a.parentName?.length ?? 0) - (b.parentName?.length ?? 0))
+        return searchItems.sort((a, b) => (a.parents?.length ?? 0) - (b.parents?.length ?? 0))
     }, [items, value])
 }
 
@@ -22,20 +22,25 @@ const getIsIncludes = (value1: string, value2: string) => {
 export const recursiveListSearchFunction = (
     items: RecursiveListItemType[],
     value: string,
-    parentName?: string
+    parents: string[] = []
 ): RecursiveListItemType[] => {
     return items.flatMap(item => {
-        const isIncludes = getIsIncludes(item.name, value) || getIsIncludes(parentName ?? "", value)
+        const isIncludes =
+            getIsIncludes(item.name, value) ||
+            parents?.some(parent => getIsIncludes(parent ?? "", value))
         let childrenList = [] as RecursiveListItemType[]
 
         if (item.children) {
-            childrenList = recursiveListSearchFunction(item.children, value, item.name)
+            childrenList = recursiveListSearchFunction(item.children, value, [
+                ...(parents ? parents : []),
+                item.name
+            ])
         }
 
         if (!isIncludes) {
             return [...childrenList]
         }
 
-        return [{ ...item, parentName }, ...childrenList]
+        return [{ ...item, parents }, ...childrenList]
     })
 }

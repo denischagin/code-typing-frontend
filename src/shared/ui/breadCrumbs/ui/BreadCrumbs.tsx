@@ -11,7 +11,7 @@ export const BreadCrumbs: FC<BreadCrumbsProps> = props => {
     const { crumbs, onCrumbClick } = props
 
     return (
-        <Box display="flex">
+        <Box display="flex" gap={2}>
             <Text as="button" onClick={() => onCrumbClick(-1, "Menu")}>
                 Menu
             </Text>

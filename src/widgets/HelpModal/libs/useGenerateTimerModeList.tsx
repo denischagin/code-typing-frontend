@@ -26,8 +26,8 @@ export const useGenerateTimerModeList = () => {
                             isFocus={isFocus}
                         >
                             <TileText>
-                                {` ${item.name} ${item.parentName ? "-" : ""} `}
-                                <em>{item.parentName}</em>
+                                {` ${item.name} ${item.parents?.length ? "-" : ""} `}
+                                <em>{item.parents?.join(" > ")}</em>
                             </TileText>
                         </TileItemHelplist>
                     )
@@ -54,8 +54,8 @@ export const useGenerateTimerModeList = () => {
                                 isFocus={isFocus}
                             >
                                 <TileText>
-                                    {` ${item.name} ${item.parentName ? "-" : ""} `}
-                                    <em>{item.parentName}</em>
+                                    {` ${item.name} ${item.parents?.length ? "-" : ""} `}
+                                    <em>{item.parents?.join(" > ")}</em>
                                 </TileText>
                             </TileItemHelplist>
                         )
