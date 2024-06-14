@@ -45,7 +45,6 @@ export const Settings = (props: SettingsProps) => {
                                 Font
                                 <Image src={fontIcon} alt="font icon" w="20px" h="20px" />
                             </Tab>
-                            <Tab>Shortcuts</Tab>
                         </TabList>
                         <TabPanels flexGrow={1} h="100%">
                             <ChangeThemeTabPanel />

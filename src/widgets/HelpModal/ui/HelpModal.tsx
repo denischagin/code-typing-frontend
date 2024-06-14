@@ -1,7 +1,8 @@
 import { ChangeEventHandler, FC, KeyboardEventHandler, useEffect, useState } from "react"
 
-import { Box, Button, Input, InputGroup, InputRightElement, Text, Tooltip } from "@chakra-ui/react"
+import { Box, Button, Input, InputGroup, InputRightElement, Tooltip } from "@chakra-ui/react"
 
+import { localStorageItems } from "@shared/constants"
 import {
     keyboardShortcuts,
     parseBoolean,
@@ -9,6 +10,7 @@ import {
     useListArrows,
     useLocalStorage
 } from "@shared/libs"
+import { BreadCrumbs } from "@shared/ui/breadCrumbs"
 import { CustomModalBackdrop, CustomModalContent } from "@shared/ui/modal"
 import { RecursiveList } from "@shared/ui/recursiveList"
 import { useGenerateHelpList, useHelpModalSearch } from "@widgets/HelpModal"
@@ -22,7 +24,7 @@ export const HelpModal: FC<HelpModalProps> = props => {
     const { onClose, isOpen } = props
 
     const [isAllSearch, setIsAllSearch] = useLocalStorage<boolean>(
-        "all-search",
+        localStorageItems.isSmartSearch,
         true,
         parseBoolean,
         item => String(item)
@@ -110,19 +112,7 @@ export const HelpModal: FC<HelpModalProps> = props => {
                         onKeyDown={handleKeyDownSearch}
                         overflow="hidden"
                     >
-                        <Text>
-                            <Text as="button" onClick={() => handleNavigateOpenItem(-1)}>
-                                Menu
-                            </Text>
-                            {openItemNames.map((openItem, index) => (
-                                <>
-                                    {" > "}
-                                    <Text as="button" onClick={() => handleNavigateOpenItem(index)}>
-                                        {openItem}
-                                    </Text>
-                                </>
-                            ))}
-                        </Text>
+                        <BreadCrumbs crumbs={openItemNames} onCrumbClick={handleNavigateOpenItem} />
                         <Box>
                             <InputGroup>
                                 <Input

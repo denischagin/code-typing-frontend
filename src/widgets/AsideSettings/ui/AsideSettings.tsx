@@ -26,9 +26,9 @@ export const AsideSettings = () => {
         setIsOpenSettings(false)
     }
 
-    const handleChangeCurrentTab = (tab: string | number) => {
+    const handleChangeCurrentTab = (tab: string | number, e: KeyboardEvent) => {
+        e.preventDefault()
         setCurrentTab(prev => {
-            console.log(prev, tab)
             return prev === tab ? null : tab
         })
     }
@@ -40,10 +40,10 @@ export const AsideSettings = () => {
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             keyboardShortcuts({
-                "Alt+1": () => handleChangeCurrentTab(settingTabs.language),
-                "Ctrl+Shift+E": () => handleChangeCurrentTab(settingTabs.language),
-                "Alt+2": () => handleChangeCurrentTab(settingTabs.typingMode),
-                "Alt+3": () => isAuthenticated && handleChangeCurrentTab(settingTabs.customText),
+                "Alt+1": () => handleChangeCurrentTab(settingTabs.language, e),
+                "Ctrl+Shift+E": () => handleChangeCurrentTab(settingTabs.language, e),
+                "Alt+2": () => handleChangeCurrentTab(settingTabs.typingMode, e),
+                "Alt+3": () => isAuthenticated && handleChangeCurrentTab(settingTabs.customText, e),
                 "Ctrl+Shift+S": handleOpenSettings
             })(e)
         }
