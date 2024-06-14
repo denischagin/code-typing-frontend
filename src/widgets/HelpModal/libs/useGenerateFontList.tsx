@@ -1,11 +1,9 @@
 import { RefObject, useMemo } from "react"
 
-import { Text } from "@chakra-ui/react"
-
 import { useChangeFontFamily, useChangeFontSize, useCurrentFont } from "@entities/font"
 import { FontFamilies, typingFontSizes } from "@shared/constants"
 import { RecursiveListItemType } from "@shared/types"
-import { TileItemHelplist } from "@shared/ui/tile"
+import { TileItemHelplist, TileText } from "@shared/ui/tile"
 
 export const useGenerateFontList = () => {
     const font = useCurrentFont()
@@ -30,7 +28,10 @@ export const useGenerateFontList = () => {
                                     ref={ref}
                                     onClick={item.action}
                                 >
-                                    <Text>{fontSize.fullName}</Text>
+                                    <TileText>
+                                        {`${item.name} ${item.parentName ? "-" : ""} `}
+                                        <em>{item.parentName}</em>
+                                    </TileText>
                                 </TileItemHelplist>
                             )
                         }
@@ -52,7 +53,10 @@ export const useGenerateFontList = () => {
                                 ref={ref as RefObject<HTMLDivElement>}
                                 onClick={item.action}
                             >
-                                <Text>{fontFamily}</Text>
+                                <TileText>
+                                    {` ${item.name} ${item.parentName ? "-" : ""} `}
+                                    <em>{item.parentName}</em>
+                                </TileText>
                             </TileItemHelplist>
                         )
                     }

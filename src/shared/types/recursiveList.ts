@@ -11,5 +11,6 @@ export type RecursiveListItemType = {
     name: string
     action?: () => void
     children?: RecursiveListItemType[]
+    parentName?: string
     renderItem?: (props: RenderItemProps) => ReactNode
 }

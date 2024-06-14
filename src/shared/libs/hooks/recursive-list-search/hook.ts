@@ -6,18 +6,29 @@ export const useRecursiveListSearch = (
     items: RecursiveListItemType[],
     value: string
 ): RecursiveListItemType[] => {
-    return useMemo(() => recursiveListSearch(items, value), [items, value])
+    return useMemo(() => {
+        if (value === "") {
+            return items
+        }
+        const searchItems = recursiveListSearch(items, value)
+        return searchItems.sort((a, b) => (a.parentName?.length ?? 0) - (b.parentName?.length ?? 0))
+    }, [items, value])
 }
 
 const recursiveListSearch = (
     items: RecursiveListItemType[],
-    value: string
+    value: string,
+    parentName?: string
 ): RecursiveListItemType[] => {
-    return items.filter(item => {
+    const filterItems = items.flatMap(item => {
         const isIncludes = item.name.toLowerCase().includes(value.toLowerCase())
+        let childrenList = [] as RecursiveListItemType[]
         if (item.children) {
-            return !!recursiveListSearch(item.children, value).length || isIncludes
+            childrenList = recursiveListSearch(item.children, value, item.name)
         }
-        return isIncludes
+        if (!isIncludes) return [...childrenList]
+        return [{ ...item, parentName }, ...childrenList]
     })
+    if (value !== "") return filterItems
+    return filterItems
 }

@@ -33,7 +33,10 @@ export const useGenerateLanguageList = () => {
                                         (language.name === "Random" && !languageName)
                                     }
                                 >
-                                    <TileText>{item.name}</TileText>
+                                    <TileText>
+                                        {`${item.name} ${item.parentName ? "-" : ""} `}
+                                        <em>{item.parentName}</em>
+                                    </TileText>
                                 </TileItemHelplist>
                             </Link>
                         )

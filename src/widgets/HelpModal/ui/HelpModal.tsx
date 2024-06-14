@@ -88,7 +88,12 @@ export const HelpModal: FC<HelpModalProps> = props => {
         isOpen && (
             <CustomModalBackdrop onClick={handleClose}>
                 <CustomModalContent onClick={e => e.stopPropagation()}>
-                    <Box display="flex" flexDirection="column" onKeyDown={handleKeyDownSearch}>
+                    <Box
+                        display="flex"
+                        flexDirection="column"
+                        onKeyDown={handleKeyDownSearch}
+                        overflow="hidden"
+                    >
                         <Text>
                             <Text as="button" onClick={() => handleNavigateOpenItem(-1)}>
                                 Menu

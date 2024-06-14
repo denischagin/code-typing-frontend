@@ -3,7 +3,7 @@ import { Dispatch, Fragment, RefObject, SetStateAction } from "react"
 import { Box, Text } from "@chakra-ui/react"
 
 import { RecursiveListItemType } from "@shared/types"
-import { Tile } from "@shared/ui/tile"
+import { TileItemHelplist } from "@shared/ui/tile"
 
 export type RecursiveListProps = {
     openItems: RecursiveListItemType[]
@@ -44,15 +44,14 @@ export const RecursiveList = (props: RecursiveListProps) => {
                                 isFocus: index === itemFocusedIndex
                             })
                         ) : (
-                            <Tile
+                            <TileItemHelplist
                                 as="button"
                                 onClick={() => (item.action ? item.action() : handleOpenNew(item))}
-                                border="1px solid transparent"
-                                borderColor={index === itemFocusedIndex ? "primary.800" : undefined}
+                                isFocus={index === itemFocusedIndex}
                                 ref={index === itemFocusedIndex ? itemFocusedRef : undefined}
                             >
                                 {item.name}
-                            </Tile>
+                            </TileItemHelplist>
                         )}
                     </Fragment>
                 ))

@@ -8,8 +8,9 @@ import { useGenerateTerminalItem } from "./useGenerateTerminalItem"
 import { useGenerateThemeList } from "./useGenerateThemeList"
 import { useGenerateTimerModeList } from "./useGenerateTimerModeList"
 import { paths } from "@pages/routes"
+import { RecursiveListItemType } from "@shared/types"
 
-export const useGenerateHelpList = (onClose: () => void) => {
+export const useGenerateHelpList = (onClose: () => void): RecursiveListItemType[] => {
     const languageList = useGenerateLanguageList()
     const timerModeList = useGenerateTimerModeList()
     const themeList = useGenerateThemeList()

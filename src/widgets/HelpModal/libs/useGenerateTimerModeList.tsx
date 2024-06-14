@@ -1,10 +1,8 @@
 import { useMemo } from "react"
 
-import { Text } from "@chakra-ui/react"
-
 import { counterDownVariants, useTypingCodeTimer } from "@entities/code"
 import { RecursiveListItemType } from "@shared/types"
-import { TileItemHelplist } from "@shared/ui/tile"
+import { TileItemHelplist, TileText } from "@shared/ui/tile"
 
 export const useGenerateTimerModeList = () => {
     const { changeTimerSetting, timer } = useTypingCodeTimer()
@@ -27,7 +25,10 @@ export const useGenerateTimerModeList = () => {
                             isActive={timer.timerSettings.direction === "up"}
                             isFocus={isFocus}
                         >
-                            <Text>{item.name}</Text>
+                            <TileText>
+                                {` ${item.name} ${item.parentName ? "-" : ""} `}
+                                <em>{item.parentName}</em>
+                            </TileText>
                         </TileItemHelplist>
                     )
                 }
@@ -52,7 +53,10 @@ export const useGenerateTimerModeList = () => {
                                 }
                                 isFocus={isFocus}
                             >
-                                <Text>{item.name}</Text>
+                                <TileText>
+                                    {` ${item.name} ${item.parentName ? "-" : ""} `}
+                                    <em>{item.parentName}</em>
+                                </TileText>
                             </TileItemHelplist>
                         )
                     }
