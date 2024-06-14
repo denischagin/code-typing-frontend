@@ -1,16 +1,17 @@
 import { ChangeEventHandler, FC, KeyboardEventHandler, useEffect, useState } from "react"
 
-import { Box, Input, Text } from "@chakra-ui/react"
+import { Box, Button, Input, InputGroup, InputRightElement, Text, Tooltip } from "@chakra-ui/react"
 
 import {
     keyboardShortcuts,
+    parseBoolean,
     useItemsRecursiveList,
     useListArrows,
-    useRecursiveListSearch
+    useLocalStorage
 } from "@shared/libs"
 import { CustomModalBackdrop, CustomModalContent } from "@shared/ui/modal"
 import { RecursiveList } from "@shared/ui/recursiveList"
-import { useGenerateHelpList } from "@widgets/HelpModal"
+import { useGenerateHelpList, useHelpModalSearch } from "@widgets/HelpModal"
 
 export type HelpModalProps = {
     onClose: () => void
@@ -20,13 +21,24 @@ export type HelpModalProps = {
 export const HelpModal: FC<HelpModalProps> = props => {
     const { onClose, isOpen } = props
 
+    const [isAllSearch, setIsAllSearch] = useLocalStorage<boolean>(
+        "all-search",
+        true,
+        parseBoolean,
+        item => String(item)
+    )
+
     const itemList = useGenerateHelpList(onClose)
 
     const [openItemNames, setOpenItemNames] = useState<string[]>([])
     const [searchValue, setSearchValue] = useState("")
 
     const openItems = useItemsRecursiveList(openItemNames, itemList)
-    const openItemsWithSearch = useRecursiveListSearch(openItems, searchValue)
+    const openItemsWithSearch = useHelpModalSearch(openItems, searchValue, !!isAllSearch)
+
+    const handleToggleAllSearch = () => {
+        setIsAllSearch(prev => !prev)
+    }
 
     const {
         containerRef,
@@ -71,6 +83,10 @@ export const HelpModal: FC<HelpModalProps> = props => {
                 setSearchValue("")
                 if (openItemNames.length === 0) onClose()
                 setOpenItemNames(prev => prev.slice(0, -1))
+            },
+            "Ctrl+s": () => {
+                e.preventDefault()
+                handleToggleAllSearch()
             }
         })(e)
     }
@@ -108,19 +124,35 @@ export const HelpModal: FC<HelpModalProps> = props => {
                             ))}
                         </Text>
                         <Box>
-                            <Input
-                                variant="flushed"
-                                placeholder="Search.."
-                                value={searchValue}
-                                onChange={handleChangeSearch}
-                                autoFocus
-                                onKeyDown={handleKeyDownSearch}
-                                onFocus={handleResetFocused}
-                                onBlur={e => {
-                                    handleResetFocused()
-                                    e.target.focus()
-                                }}
-                            />
+                            <InputGroup>
+                                <Input
+                                    variant="flushed"
+                                    placeholder="Search.."
+                                    value={searchValue}
+                                    onChange={handleChangeSearch}
+                                    autoFocus
+                                    onKeyDown={handleKeyDownSearch}
+                                    onFocus={handleResetFocused}
+                                    onBlur={e => {
+                                        handleResetFocused()
+                                        e.target.focus()
+                                    }}
+                                />
+                                <InputRightElement w="fit-content">
+                                    <Tooltip
+                                        label={`Smart search - search with nested items (${isAllSearch ? "Enabled" : "Disabled"}) Ctrl+S`}
+                                    >
+                                        <Button
+                                            size="sm"
+                                            variant={isAllSearch ? "solid" : "ghost"}
+                                            onClick={handleToggleAllSearch}
+                                            fontWeight="normal"
+                                        >
+                                            Smart
+                                        </Button>
+                                    </Tooltip>
+                                </InputRightElement>
+                            </InputGroup>
                         </Box>
                         <RecursiveList
                             containerRef={containerRef}

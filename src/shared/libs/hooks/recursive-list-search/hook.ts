@@ -10,7 +10,7 @@ export const useRecursiveListSearch = (
         if (value === "") {
             return items
         }
-        const searchItems = recursiveListSearch(items, value)
+        const searchItems = recursiveListSearchFunction(items, value)
         return searchItems.sort((a, b) => (a.parentName?.length ?? 0) - (b.parentName?.length ?? 0))
     }, [items, value])
 }
@@ -19,7 +19,7 @@ const getIsIncludes = (value1: string, value2: string) => {
     return value1.toLowerCase().includes(value2.toLowerCase())
 }
 
-const recursiveListSearch = (
+export const recursiveListSearchFunction = (
     items: RecursiveListItemType[],
     value: string,
     parentName?: string
@@ -29,7 +29,7 @@ const recursiveListSearch = (
         let childrenList = [] as RecursiveListItemType[]
 
         if (item.children) {
-            childrenList = recursiveListSearch(item.children, value, item.name)
+            childrenList = recursiveListSearchFunction(item.children, value, item.name)
         }
 
         if (!isIncludes) {

@@ -1,3 +1,4 @@
 export const localStorageItems = {
-    accessToken: "accessToken"
+    accessToken: "accessToken",
+    searchAll: "searchAll"
 }
