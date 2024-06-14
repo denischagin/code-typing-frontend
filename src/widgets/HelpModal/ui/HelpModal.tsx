@@ -107,20 +107,21 @@ export const HelpModal: FC<HelpModalProps> = props => {
                                 </>
                             ))}
                         </Text>
-                        <Input
-                            variant="flushed"
-                            placeholder="Search.."
-                            value={searchValue}
-                            onChange={handleChangeSearch}
-                            autoFocus
-                            onKeyDown={handleKeyDownSearch}
-                            onFocus={handleResetFocused}
-                            onBlur={e => {
-                                handleResetFocused()
-                                e.target.focus()
-                            }}
-                            mb={3}
-                        />
+                        <Box>
+                            <Input
+                                variant="flushed"
+                                placeholder="Search.."
+                                value={searchValue}
+                                onChange={handleChangeSearch}
+                                autoFocus
+                                onKeyDown={handleKeyDownSearch}
+                                onFocus={handleResetFocused}
+                                onBlur={e => {
+                                    handleResetFocused()
+                                    e.target.focus()
+                                }}
+                            />
+                        </Box>
                         <RecursiveList
                             containerRef={containerRef}
                             itemFocusedIndex={itemFocused}

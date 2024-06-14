@@ -15,20 +15,27 @@ export const useRecursiveListSearch = (
     }, [items, value])
 }
 
+const getIsIncludes = (value1: string, value2: string) => {
+    return value1.toLowerCase().includes(value2.toLowerCase())
+}
+
 const recursiveListSearch = (
     items: RecursiveListItemType[],
     value: string,
     parentName?: string
 ): RecursiveListItemType[] => {
-    const filterItems = items.flatMap(item => {
-        const isIncludes = item.name.toLowerCase().includes(value.toLowerCase())
+    return items.flatMap(item => {
+        const isIncludes = getIsIncludes(item.name, value) || getIsIncludes(parentName ?? "", value)
         let childrenList = [] as RecursiveListItemType[]
+
         if (item.children) {
             childrenList = recursiveListSearch(item.children, value, item.name)
         }
-        if (!isIncludes) return [...childrenList]
+
+        if (!isIncludes) {
+            return [...childrenList]
+        }
+
         return [{ ...item, parentName }, ...childrenList]
     })
-    if (value !== "") return filterItems
-    return filterItems
 }

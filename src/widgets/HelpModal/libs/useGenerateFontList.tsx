@@ -13,7 +13,7 @@ export const useGenerateFontList = () => {
     const fontList = useMemo(() => {
         return [
             {
-                name: "Sizes",
+                name: "Font Sizes",
                 children: typingFontSizes.map(fontSize => {
                     return {
                         name: fontSize.fullName,

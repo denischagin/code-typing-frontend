@@ -34,7 +34,7 @@ export const useListArrows = <
 
     const handleScrollToItem = () => {
         containerRef.current?.scrollTo({
-            top: (itemFocusedRef.current?.offsetTop ?? 0) - containerRef.current?.offsetTop,
+            top: (itemFocusedRef.current?.offsetTop ?? 0) - containerRef.current?.offsetTop - 80,
             behavior: "smooth"
         })
     }
