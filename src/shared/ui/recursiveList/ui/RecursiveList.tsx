@@ -3,7 +3,7 @@ import { Dispatch, Fragment, RefObject, SetStateAction } from "react"
 import { Box, Text } from "@chakra-ui/react"
 
 import { RecursiveListItemType } from "@shared/types"
-import { TileItemHelplist } from "@shared/ui/tile"
+import { TileItemHelplist, TileText } from "@shared/ui/tile"
 
 export type RecursiveListProps = {
     openItems: RecursiveListItemType[]
@@ -26,7 +26,11 @@ export const RecursiveList = (props: RecursiveListProps) => {
 
     const handleOpenNew = (newOpen: RecursiveListItemType) => {
         if (!newOpen.children) return
-        setOpenItemNames(prev => [...prev, newOpen.name])
+        if (newOpen.parents) {
+            setOpenItemNames([...newOpen.parents, newOpen.name])
+        } else {
+            setOpenItemNames(prev => [...prev, newOpen.name])
+        }
         onOpenNew && onOpenNew()
     }
 
@@ -58,7 +62,10 @@ export const RecursiveList = (props: RecursiveListProps) => {
                                 isFocus={index === itemFocusedIndex}
                                 ref={index === itemFocusedIndex ? itemFocusedRef : undefined}
                             >
-                                {item.name}
+                                <TileText>
+                                    {` ${item.name} ${item.parents?.length ? "-" : ""} `}
+                                    <em>{item.parents?.join(" > ")}</em>
+                                </TileText>
                             </TileItemHelplist>
                         )}
                     </Fragment>

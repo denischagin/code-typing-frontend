@@ -15,7 +15,10 @@ export const useHelpModalSearch = (
         }
         if (isAllSearch) {
             const searchItems = recursiveListSearchFunction(items, value)
-            return searchItems.sort((a, b) => (a.parents?.length ?? 0) - (b.parents?.length ?? 0))
+            searchItems.sort((a, b) => {
+                return (a.parents?.length ?? 0) - (b.parents?.length ?? 0)
+            })
+            return searchItems
         }
         return searchFunction(items, value, item => item.name)
     }, [isAllSearch, value, items])
