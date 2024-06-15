@@ -51,7 +51,7 @@ export const HelpModal: FC<HelpModalProps> = props => {
         handleResetFocused,
         itemFocused,
         itemFocusedRef
-    } = useListArrows<HTMLDivElement, HTMLDivElement>(openItemsWithSearch.length)
+    } = useListArrows<HTMLDivElement, HTMLDivElement>(openItemsWithSearch.length, 0)
 
     useEffect(() => {
         handleResetFocused()

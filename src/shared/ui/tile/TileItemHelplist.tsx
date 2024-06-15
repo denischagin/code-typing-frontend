@@ -13,6 +13,7 @@ export const TileItemHelplist = forwardRef<HTMLDivElement, TileItemHelplistProps
         <Tile
             ref={ref}
             border="2px solid transparent"
+            transition="background 200ms"
             borderColor={isFocus ? "main.500" : "transparent"}
             {...(isActive
                 ? {

@@ -6,7 +6,8 @@ export const useListArrows = <
     TItemElement extends HTMLElement,
     TContainerElement extends HTMLElement
 >(
-    itemsLength: number
+    itemsLength: number,
+    defaultFocusedIndex: number = -1
 ): UseListArrowsReturn<TItemElement, TContainerElement> => {
     const itemFocusedRef = useRef<TItemElement>(null)
     const containerRef = useRef<TContainerElement>(null)
@@ -14,7 +15,7 @@ export const useListArrows = <
     const [itemFocused, setItemFocused] = useState(-1)
 
     const handleResetFocused = () => {
-        setItemFocused(-1)
+        setItemFocused(defaultFocusedIndex)
     }
 
     const handleArrowDown: KeyboardEventHandler = e => {
@@ -24,7 +25,7 @@ export const useListArrows = <
 
     const handleArrowUp: KeyboardEventHandler = e => {
         e.preventDefault()
-        setItemFocused(prev => (prev <= 0 ? -1 : prev - 1))
+        setItemFocused(prev => (prev <= 0 ? defaultFocusedIndex : prev - 1))
     }
 
     const handleEnter: KeyboardEventHandler = e => {
