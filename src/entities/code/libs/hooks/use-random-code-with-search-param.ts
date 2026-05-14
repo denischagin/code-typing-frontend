@@ -15,6 +15,7 @@ export interface UseRandomCodeWithSearchReturnOptions {
     isPending: boolean
     newText: () => void
     id: string | undefined
+    languageName: string | undefined
 }
 
 export const useRandomCodeWithSearchParam = (): UseRandomCodeWithSearchReturn => {
@@ -59,11 +60,12 @@ export const useRandomCodeWithSearchParam = (): UseRandomCodeWithSearchReturn =>
 
     if (isErrorByName || isErrorAll) {
         return [
-            defaultRandomText,
+            defaultRandomText?.content,
             {
                 isPending: isLoading,
                 newText: handleNewTextWithoutNetwork,
-                id: undefined
+                id: undefined,
+                languageName: defaultRandomText?.languageName
             }
         ]
     }
@@ -72,7 +74,8 @@ export const useRandomCodeWithSearchParam = (): UseRandomCodeWithSearchReturn =>
         {
             isPending: isLoading,
             newText,
-            id: randomText?.UUID
+            id: randomText?.UUID,
+            languageName: randomText?.languageName ?? languageName ?? undefined
         }
     ]
 }
