@@ -13,7 +13,7 @@ export const useGenerateHelpList = (
     onClose: () => void,
     isTypingCodePage: boolean
 ): RecursiveListItemType[] => {
-    const languageList = useGenerateLanguageList()
+    const languageList = useGenerateLanguageList(isTypingCodePage)
     const timerModeList = useGenerateTimerModeList()
     const themeList = useGenerateThemeList()
     const fontList = useGenerateFontList()

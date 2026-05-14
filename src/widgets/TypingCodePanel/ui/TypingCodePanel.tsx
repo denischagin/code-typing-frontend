@@ -2,7 +2,7 @@ import { Box, Flex, Text, Tooltip } from "@chakra-ui/react"
 
 import { useSearchParams } from "react-router-dom"
 
-import { useCodeErrors } from "@entities/code"
+import { useCodeErrors, useRandomCode } from "@entities/code"
 import { NewCodeButton } from "@features/code/new"
 import { RepeatCodeButton } from "@features/code/repeat"
 import { ButtonScrollToResult } from "@features/scroll-to-result"
@@ -14,12 +14,15 @@ export const TypingCodePanel = () => {
     const languageName = searchParams.get(searchParamsEnum.languageName)
 
     const { errorsCount } = useCodeErrors()
+    const { randomTextLanguage } = useRandomCode()
+
+    const currentLanguageName = randomTextLanguage ?? languageName ?? "Random"
 
     return (
         <Flex as="section" justify="space-between" align="center" px="10px" mb="4px">
             <Flex align="center" gap="10px">
                 <Text fontSize="large" textDecoration="underline" mr={5}>
-                    {languageName ?? "Random"}
+                    {currentLanguageName}
                 </Text>
 
                 <NewCodeButton />

@@ -9,11 +9,13 @@ import { getProgrammingLanguageLink, useLanguageNameSearch } from "@entities/pro
 import { RecursiveListItemType } from "@shared/types"
 import { TileItemHelplist, TileText } from "@shared/ui/tile"
 
-export const useGenerateLanguageList = () => {
+export const useGenerateLanguageList = (enabled = true) => {
     const languageName = useLanguageNameSearch()
-    const { data: programmingLanguages } = useGetProgrammingLanguages()
+    const { data: programmingLanguages } = useGetProgrammingLanguages({ enabled })
 
     const languageList = useMemo(() => {
+        if (!enabled) return []
+
         return [{ name: "Random" }, ...(programmingLanguages ? programmingLanguages : [])].map(
             language => {
                 return {
@@ -44,7 +46,7 @@ export const useGenerateLanguageList = () => {
                 }
             }
         ) as RecursiveListItemType[]
-    }, [languageName, programmingLanguages])
+    }, [enabled, languageName, programmingLanguages])
 
     return languageList
 }

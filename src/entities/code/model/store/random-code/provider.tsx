@@ -7,7 +7,7 @@ import {
 } from "@entities/code"
 
 export const RandomCodeProvider = ({ children }: { children: ReactNode }) => {
-    const [randomText, { newText, isPending, id }] = useRandomCodeWithSearchParam()
+    const [randomText, { newText, isPending, id, languageName }] = useRandomCodeWithSearchParam()
 
     const rows = useMemo(() => transformCodeToRows(randomText?.trim() ?? null), [randomText])
 
@@ -18,6 +18,7 @@ export const RandomCodeProvider = ({ children }: { children: ReactNode }) => {
                 newRandomText: newText,
                 rows,
                 randomTextUUID: id,
+                randomTextLanguage: languageName,
                 isPending
             }}
         >

@@ -3,5 +3,6 @@ export interface RandomCodeState {
     rows?: string[]
     newRandomText: () => void
     randomTextUUID?: string
+    randomTextLanguage?: string
     isPending: boolean
 }

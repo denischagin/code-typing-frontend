@@ -9,6 +9,7 @@ export type ProgrammingLanguageResponse = ProgrammingLanguage[]
 export interface CodeExample {
     UUID: string
     content: string
+    languageName?: string
 }
 
 export type CodeExampleByUUID = CodeExample
